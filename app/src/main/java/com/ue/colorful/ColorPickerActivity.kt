@@ -17,15 +17,10 @@ package com.ue.colorful
  */
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPickerActivity : AppCompatActivity() {
-
-    private var FLAG_PALETTE = false
-    private var FLAG_SELECTOR = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,53 +28,9 @@ class ColorPickerActivity : AppCompatActivity() {
 
         colorPickerView!!.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
-                setLayoutColor(color)
+                textView.text = "#" + colorPickerView!!.colorHtml
+                linearLayout.setBackgroundColor(color)
             }
         })
-    }
-
-    /**
-     * set layout color & textView html code
-     * @param color
-     */
-    private fun setLayoutColor(color: Int) {
-        textView.text = "#" + colorPickerView!!.colorHtml
-        linearLayout.setBackgroundColor(color)
-    }
-
-    /**
-     * change palette drawable resource
-     * you must initialize at first in xml
-     * @param v
-     */
-    fun palette(v: View) {
-        if (FLAG_PALETTE)
-            colorPickerView!!.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette))
-        else
-            colorPickerView!!.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar))
-        FLAG_PALETTE = !FLAG_PALETTE
-    }
-
-    /**
-     * change selector drawable resource
-     * you must initialize at first in xml
-     * @param v
-     */
-    fun selector(v: View) {
-        if (FLAG_SELECTOR)
-            colorPickerView!!.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel))
-        else
-            colorPickerView!!.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel_dark))
-        FLAG_SELECTOR = !FLAG_SELECTOR
-    }
-
-    /**
-     * moving selector's points (x, y)
-     * @param v
-     */
-    fun points(v: View) {
-        val x = (Math.random() * 600).toInt() + 100
-        val y = (Math.random() * 400).toInt() + 150
-        colorPickerView!!.setSelectorPoint(x, y)
     }
 }

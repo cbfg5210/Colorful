@@ -17,7 +17,6 @@
 package com.ue.colorful
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Point
@@ -53,15 +52,9 @@ class ColorPickerView : FrameLayout {
     val colorHtml: String
         get() = String.format("%06X", 0xFFFFFF and color)
 
-    constructor(context: Context) : super(context) {}
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
-        getAttrs(attrs)
-        onCreate()
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context?) : this(context, null)
+    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init()
         getAttrs(attrs)
         onCreate()
@@ -70,11 +63,9 @@ class ColorPickerView : FrameLayout {
     private fun init() {
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                    viewTreeObserver.removeGlobalOnLayoutListener(this)
-                } else {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
+                if (Build.VERSION.SDK_INT < 16) viewTreeObserver.removeGlobalOnLayoutListener(this)
+                else viewTreeObserver.removeOnGlobalLayoutListener(this)
+
                 onFirstLayout()
             }
         })
@@ -85,23 +76,24 @@ class ColorPickerView : FrameLayout {
         loadListeners()
     }
 
-    private fun getAttrs(attrs: AttributeSet) {
+    private fun getAttrs(attrs: AttributeSet?) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
-        try {
-            if (a.hasValue(R.styleable.ColorPickerView_palette))
-                paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
-            if (a.hasValue(R.styleable.ColorPickerView_selector))
-                selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector)
-        } finally {
-            a.recycle()
+
+        if (a.hasValue(R.styleable.ColorPickerView_palette)) {
+            paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
         }
+        if (a.hasValue(R.styleable.ColorPickerView_selector)) {
+            selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector)
+        }
+        a.recycle()
     }
 
     private fun onCreate() {
         setPadding(0, 0, 0, 0)
         palette = ImageView(context)
-        if (paletteDrawable != null)
+        if (paletteDrawable != null) {
             palette!!.setImageDrawable(paletteDrawable)
+        }
 
         val wheelParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         wheelParams.gravity = Gravity.CENTER
@@ -124,10 +116,7 @@ class ColorPickerView : FrameLayout {
                     selector!!.isPressed = true
                     return@OnTouchListener onTouchReceived(event)
                 }
-                MotionEvent.ACTION_DOWN -> if (!ACTON_UP) {
-                    selector!!.isPressed = true
-                    return@OnTouchListener onTouchReceived(event)
-                }
+                MotionEvent.ACTION_DOWN,
                 MotionEvent.ACTION_MOVE -> if (!ACTON_UP) {
                     selector!!.isPressed = true
                     return@OnTouchListener onTouchReceived(event)
@@ -145,18 +134,18 @@ class ColorPickerView : FrameLayout {
         val snapPoint = Point(event.x.toInt(), event.y.toInt())
         color = getColorFromBitmap(snapPoint.x.toFloat(), snapPoint.y.toFloat())
 
-        if (color != Color.TRANSPARENT) {
-            selector!!.x = (snapPoint.x - selector!!.measuredWidth / 2).toFloat()
-            selector!!.y = (snapPoint.y - selector!!.measuredHeight / 2).toFloat()
-            selectedPoint = Point(snapPoint.x, snapPoint.y)
-            fireColorListener(color)
-            return true
-        } else
-            return false
+        if (color == Color.TRANSPARENT) false
+
+        selector!!.x = (snapPoint.x - selector!!.measuredWidth / 2).toFloat()
+        selector!!.y = (snapPoint.y - selector!!.measuredHeight / 2).toFloat()
+        selectedPoint = Point(snapPoint.x, snapPoint.y)
+        mColorListener?.onColorSelected(color)
+
+        return true
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
-        if (paletteDrawable == null) return 0
+        if (paletteDrawable == null) 0
 
         val invertMatrix = Matrix()
         palette!!.imageMatrix.invert(invertMatrix)
@@ -174,16 +163,6 @@ class ColorPickerView : FrameLayout {
         return 0
     }
 
-    override fun dispatchDraw(canvas: Canvas) {
-        super.dispatchDraw(canvas)
-    }
-
-    private fun fireColorListener(color: Int) {
-        if (mColorListener != null) {
-            mColorListener!!.onColorSelected(color)
-        }
-    }
-
     fun setColorListener(colorListener: ColorListener) {
         mColorListener = colorListener
     }
@@ -193,7 +172,7 @@ class ColorPickerView : FrameLayout {
         selector!!.y = y.toFloat()
         selectedPoint = Point(x, y)
         color = getColorFromBitmap(x.toFloat(), y.toFloat())
-        fireColorListener(color)
+        mColorListener?.onColorSelected(color)
     }
 
     fun setPaletteDrawable(drawable: Drawable) {
@@ -216,9 +195,5 @@ class ColorPickerView : FrameLayout {
 
     fun selectCenter() {
         setSelectorPoint(measuredWidth / 2 - selector!!.width / 2, measuredHeight / 2 - selector!!.height / 2)
-    }
-
-    fun setACTON_UP(value: Boolean) {
-        this.ACTON_UP = value
     }
 }

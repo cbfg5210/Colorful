@@ -119,8 +119,9 @@ class MultiColorPickerView : FrameLayout {
     private fun onCreate() {
         setPadding(0, 0, 0, 0)
         palette = ImageView(context)
-        if (paletteDrawable != null)
+        if (paletteDrawable != null){
             palette!!.setImageDrawable(paletteDrawable)
+        }
 
         val wheelParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         wheelParams.gravity = Gravity.CENTER
@@ -129,23 +130,19 @@ class MultiColorPickerView : FrameLayout {
 
     private fun loadListeners() {
         setOnTouchListener { v, event ->
-            if (mainSelector != null) {
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        mainSelector!!.selector.isPressed = true
-                        onTouchReceived(event)
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        mainSelector!!.selector.isPressed = true
-                        onTouchReceived(event)
-                    }
-                    else -> {
-                        mainSelector!!.selector.isPressed = false
-                        false
-                    }
+            if (mainSelector == null) false
+
+            when (event.action) {
+                MotionEvent.ACTION_DOWN,
+                MotionEvent.ACTION_MOVE -> {
+                    mainSelector!!.selector.isPressed = true
+                    onTouchReceived(event)
                 }
-            } else
-                false
+                else -> {
+                    mainSelector!!.selector.isPressed = false
+                    false
+                }
+            }
         }
     }
 
@@ -153,19 +150,18 @@ class MultiColorPickerView : FrameLayout {
         val snapPoint = Point(event.x.toInt(), event.y.toInt())
         color = getColorFromBitmap(snapPoint.x.toFloat(), snapPoint.y.toFloat())
 
+        if (color == Color.TRANSPARENT) false
+
         // check validation
-        if (color != Color.TRANSPARENT) {
-            mainSelector!!.selector.x = (snapPoint.x - mainSelector!!.selector.measuredWidth / 2).toFloat()
-            mainSelector!!.selector.y = (snapPoint.y - mainSelector!!.selector.measuredHeight / 2).toFloat()
-            selectedPoint = Point(snapPoint.x, snapPoint.y)
-            fireColorListener(color)
-            return true
-        } else
-            return false
+        mainSelector!!.selector.x = (snapPoint.x - mainSelector!!.selector.measuredWidth / 2).toFloat()
+        mainSelector!!.selector.y = (snapPoint.y - mainSelector!!.selector.measuredHeight / 2).toFloat()
+        selectedPoint = Point(snapPoint.x, snapPoint.y)
+        fireColorListener(color)
+        return true
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
-        if (paletteDrawable == null) return 0
+        if (paletteDrawable == null) 0
 
         val invertMatrix = Matrix()
         palette!!.imageMatrix.invert(invertMatrix)
