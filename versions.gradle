@@ -14,7 +14,8 @@ versions.picasso = "2.5.2"
 versions.gson = "2.8.2"
 versions.recyclerAdapterDelegate = "v0.7"
 versions.androidGradlePlugin = "3.0.1"
-versions.kotlin="1.1.51"
+versions.kotlin = "1.1.51"
+versions.anko = "0.10.3"
 versions.androidMavenPlugin = "1.5"
 versions.butterknife = "8.5.1"
 versions.eventbus = "3.0.0"
@@ -76,8 +77,11 @@ deps.gson = "com.google.code.gson:gson:$versions.gson"
 deps.recyclerAdapterDelegate = "com.github.cbfg5210:RecyclerAdapterDelegate:$versions.recyclerAdapterDelegate"
 deps.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
 //kotlin
-deps.kotlinGradlePlugin="org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-deps.kotlinJre="org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+deps.kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlinJre = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+// Anko Layouts
+deps.ankoSdk="org.jetbrains.anko:anko-sdk25:$versions.anko" // sdk15, sdk19, sdk21, sdk23 are also available
+deps.ankoAppcompatV7="org.jetbrains.anko:anko-appcompat-v7:$versions.anko"
 //
 deps.androidMavenPlugin = "com.github.dcendents:android-maven-gradle-plugin:$versions.androidMavenPlugin"
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"

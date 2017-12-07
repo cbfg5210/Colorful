@@ -20,12 +20,9 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPickerActivity : AppCompatActivity() {
-
-    private var colorPickerView: ColorPickerView? = null
 
     private var FLAG_PALETTE = false
     private var FLAG_SELECTOR = false
@@ -34,7 +31,6 @@ class ColorPickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
 
-        colorPickerView = findViewById(R.id.colorPickerView)
         colorPickerView!!.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
                 setLayoutColor(color)
@@ -47,10 +43,7 @@ class ColorPickerActivity : AppCompatActivity() {
      * @param color
      */
     private fun setLayoutColor(color: Int) {
-        val textView = findViewById<TextView>(R.id.textView)
         textView.text = "#" + colorPickerView!!.colorHtml
-
-        val linearLayout = findViewById<LinearLayout>(R.id.linearLayout)
         linearLayout.setBackgroundColor(color)
     }
 

@@ -16,7 +16,6 @@
 
 package com.ue.colorful
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -63,13 +62,6 @@ class ColorPickerView : FrameLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init()
-        getAttrs(attrs)
-        onCreate()
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
         init()
         getAttrs(attrs)
         onCreate()
@@ -126,7 +118,7 @@ class ColorPickerView : FrameLayout {
     }
 
     private fun loadListeners() {
-        setOnTouchListener(OnTouchListener { v, event ->
+        setOnTouchListener(OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> if (ACTON_UP) {
                     selector!!.isPressed = true
