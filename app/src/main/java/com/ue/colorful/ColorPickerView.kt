@@ -23,6 +23,7 @@ import android.graphics.Point
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
@@ -36,8 +37,7 @@ class ColorPickerView : FrameLayout {
 
     var color: Int = 0
         private set//设值方法的可见度为 private, 并使用默认实现
-    var selectedPoint: Point? = null
-        private set
+    private var selectedPoint: Point? = null
 
     private var palette: ImageView? = null
     private var selector: ImageView? = null
@@ -45,7 +45,7 @@ class ColorPickerView : FrameLayout {
     private var paletteDrawable: Drawable? = null
     private var selectorDrawable: Drawable? = null
 
-    protected var mColorListener: ColorListener? = null
+    private var mColorListener: ColorListener? = null
 
     private var ACTON_UP = false
 
@@ -55,12 +55,18 @@ class ColorPickerView : FrameLayout {
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init()
-        getAttrs(attrs)
-        onCreate()
+        init(context, attrs)
     }
 
-    private fun init() {
+    private fun init(context: Context?, attrs: AttributeSet?) {
+        val a = context!!.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
+        paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
+
+        if (a.hasValue(R.styleable.ColorPickerView_selector)) selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector)
+        else selectorDrawable = ContextCompat.getDrawable(getContext(), R.drawable.wheel)
+
+        a.recycle()
+
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < 16) viewTreeObserver.removeGlobalOnLayoutListener(this)
@@ -69,26 +75,7 @@ class ColorPickerView : FrameLayout {
                 onFirstLayout()
             }
         })
-    }
 
-    private fun onFirstLayout() {
-        selectCenter()
-        loadListeners()
-    }
-
-    private fun getAttrs(attrs: AttributeSet?) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
-
-        if (a.hasValue(R.styleable.ColorPickerView_palette)) {
-            paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
-        }
-        if (a.hasValue(R.styleable.ColorPickerView_selector)) {
-            selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector)
-        }
-        a.recycle()
-    }
-
-    private fun onCreate() {
         setPadding(0, 0, 0, 0)
         palette = ImageView(context)
         if (paletteDrawable != null) {
@@ -109,7 +96,16 @@ class ColorPickerView : FrameLayout {
         }
     }
 
-    private fun loadListeners() {
+    private fun onFirstLayout() {
+        val x=measuredWidth / 2 - selector!!.width / 2
+        val y=measuredHeight / 2 - selector!!.height / 2
+
+        selector!!.x = x.toFloat()
+        selector!!.y = y.toFloat()
+        selectedPoint = Point(x, y)
+        color = getColorFromBitmap(x.toFloat(), y.toFloat())
+        mColorListener?.onColorSelected(color)
+
         setOnTouchListener(OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> if (ACTON_UP) {
@@ -167,14 +163,6 @@ class ColorPickerView : FrameLayout {
         mColorListener = colorListener
     }
 
-    fun setSelectorPoint(x: Int, y: Int) {
-        selector!!.x = x.toFloat()
-        selector!!.y = y.toFloat()
-        selectedPoint = Point(x, y)
-        color = getColorFromBitmap(x.toFloat(), y.toFloat())
-        mColorListener?.onColorSelected(color)
-    }
-
     fun setPaletteDrawable(drawable: Drawable) {
         removeView(palette)
         palette = ImageView(context)
@@ -191,9 +179,5 @@ class ColorPickerView : FrameLayout {
 
     fun setSelectorDrawable(drawable: Drawable) {
         selector!!.setImageDrawable(drawable)
-    }
-
-    fun selectCenter() {
-        setSelectorPoint(measuredWidth / 2 - selector!!.width / 2, measuredHeight / 2 - selector!!.height / 2)
     }
 }

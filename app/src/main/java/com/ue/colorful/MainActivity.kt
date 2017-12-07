@@ -13,10 +13,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onBtnClick(v: View) {
-        if (v.id == R.id.ivColorPicker) {
-            startActivity(Intent(this, ColorPickerActivity::class.java));
-        } else {
-            startActivity(Intent(this, MultiColorPickerActivity::class.java));
-        }
+        startActivity(Intent(this, ColorPickerActivity::class.java));
     }
 }
