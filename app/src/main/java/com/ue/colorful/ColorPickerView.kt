@@ -49,6 +49,8 @@ class ColorPickerView : FrameLayout {
         super.onFinishInflate()
 
         palette = ImageView(context)
+        palette!!.adjustViewBounds = true
+        palette!!.setBackgroundColor(Color.WHITE)
         val paletteParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         paletteParams.gravity = Gravity.CENTER
         addView(palette, paletteParams)
@@ -90,7 +92,7 @@ class ColorPickerView : FrameLayout {
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
-        if (paletteDrawable == null) 0
+        if (paletteDrawable == null) Color.WHITE
 
         val invertMatrix = Matrix()
         palette!!.imageMatrix.invert(invertMatrix)
@@ -105,7 +107,7 @@ class ColorPickerView : FrameLayout {
             invalidate()
             return (palette!!.drawable as BitmapDrawable).bitmap.getPixel(mappedPoints[0].toInt(), mappedPoints[1].toInt())
         }
-        return 0
+        return Color.WHITE
     }
 
     fun setColorListener(colorListener: ColorListener) {
