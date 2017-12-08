@@ -26,6 +26,10 @@ class ColorPickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
 
+        textView.setOnClickListener {
+            colorPickerView.toggleThumbColor()
+        }
+
         colorPickerView!!.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
                 textView.text = "#" + colorPickerView!!.colorHtml

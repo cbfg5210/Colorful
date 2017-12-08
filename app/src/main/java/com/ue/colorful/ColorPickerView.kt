@@ -3,7 +3,6 @@ package com.ue.colorful
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Matrix
-import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -26,7 +25,6 @@ class ColorPickerView : FrameLayout {
     private var selector: ImageView? = null
 
     private var paletteDrawable: Drawable? = null
-    private var thumbDrawable: Drawable? = null
     private var thumbSize: Float = 0F;
     private var thumbColor: Int = 0
 
@@ -41,18 +39,8 @@ class ColorPickerView : FrameLayout {
         val a = context!!.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
 
         paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
-        thumbColor = a.getColor(R.styleable.ColorPickerView_thumbColor, 0)
+        thumbColor = a.getColor(R.styleable.ColorPickerView_thumbColor, Color.BLACK)
         thumbSize = a.getDimension(R.styleable.ColorPickerView_thumbSize, 30F)
-
-        if (a.hasValue(R.styleable.ColorPickerView_thumbSrc)) {
-            thumbDrawable = a.getDrawable(R.styleable.ColorPickerView_thumbSrc)
-        } else {
-            val shapeRing = GradientDrawable()
-            shapeRing.shape = GradientDrawable.OVAL
-            shapeRing.setStroke((thumbSize * 0.2F).toInt(), Color.WHITE)
-
-            thumbDrawable = shapeRing
-        }
 
         a.recycle()
     }
@@ -70,7 +58,7 @@ class ColorPickerView : FrameLayout {
         val thumbParams = FrameLayout.LayoutParams(thumbSize.toInt(), thumbSize.toInt())
         thumbParams.gravity = Gravity.CENTER
         addView(selector, thumbParams)
-        setThumbDrawable(thumbDrawable)
+        toggleThumbColor()
 
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -129,10 +117,16 @@ class ColorPickerView : FrameLayout {
         palette?.setImageDrawable(paletteDrawable)
     }
 
-    fun setThumbDrawable(drawable: Drawable?) {
-        selector?.setImageDrawable(drawable)
-        if (thumbColor != 0) {
-            selector!!.drawable.setColorFilter(thumbColor, PorterDuff.Mode.SRC_ATOP)
+    fun toggleThumbColor() {
+        thumbColor = if (thumbColor == Color.WHITE) Color.BLACK else Color.WHITE
+
+        if (selector?.drawable == null) {
+            val shapeRing = GradientDrawable()
+            shapeRing.shape = GradientDrawable.OVAL
+            shapeRing.setStroke((thumbSize * 0.2F).toInt(), thumbColor)
+            selector?.setImageDrawable(shapeRing)
+        } else {
+            (selector?.drawable as GradientDrawable).setStroke((thumbSize * 0.2F).toInt(), thumbColor)
         }
     }
 }
