@@ -29,7 +29,7 @@ class ColorPickerActivity : AppCompatActivity() {
 
         colorPickerView.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
-                textView.text = "#" + colorPickerView!!.colorHtml
+                textView.text = "#" + String.format("%06X", 0xFFFFFF and color)
                 linearLayout.setBackgroundColor(color)
             }
         })

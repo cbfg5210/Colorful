@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.ViewGroup
@@ -30,9 +29,6 @@ class ColorPickerView : FrameLayout {
     private var thumbColor: Int = 0
 
     private var mColorListener: ColorListener? = null
-
-    val colorHtml: String
-        get() = String.format("%06X", 0xFFFFFF and color)
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -83,15 +79,14 @@ class ColorPickerView : FrameLayout {
     }
 
     fun offsetXY(offsetX: Float, offsetY: Float) {
-        Log.e("ColorPickerView", "offsetXY: x=" + selector!!.x + ",y=" + selector!!.y);
         selector!!.x += offsetX
         selector!!.y += offsetY
-        Log.e("ColorPickerView", "**offsetXY: x=" + selector!!.x + ",y=" + selector!!.y);
-        color = getColorFromBitmap(selector!!.x - thumbSize / 2, selector!!.y - thumbSize / 2)
+        //(selector!!.x + thumbSize / 2, selector!!.y + thumbSize / 2)才是中心点坐标
+        color = getColorFromBitmap(selector!!.x + thumbSize / 2, selector!!.y + thumbSize / 2)
         mColorListener?.onColorSelected(color)
     }
 
-    private fun onTouchReceived(mX: Float, mY: Float): Boolean {
+    fun onTouchReceived(mX: Float, mY: Float): Boolean {
         selector!!.x = mX - thumbSize / 2
         selector!!.y = mY - thumbSize / 2
 
