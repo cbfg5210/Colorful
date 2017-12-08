@@ -1,53 +1,36 @@
-/*
- * Copyright (C) 2017 skydoves
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.ue.colorful
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Matrix
-import android.graphics.Point
+import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
 
+
 class ColorPickerView : FrameLayout {
 
     var color: Int = 0
         private set//设值方法的可见度为 private, 并使用默认实现
-    private var selectedPoint: Point? = null
 
     private var palette: ImageView? = null
     private var selector: ImageView? = null
 
     private var paletteDrawable: Drawable? = null
-    private var selectorDrawable: Drawable? = null
+    private var thumbDrawable: Drawable? = null
+    private var thumbSize: Float = 0F;
+    private var thumbColor: Int = 0
 
     private var mColorListener: ColorListener? = null
-
-    private var ACTON_UP = false
 
     val colorHtml: String
         get() = String.format("%06X", 0xFFFFFF and color)
@@ -61,9 +44,18 @@ class ColorPickerView : FrameLayout {
     private fun init(context: Context?, attrs: AttributeSet?) {
         val a = context!!.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
         paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
+        thumbColor = a.getColor(R.styleable.ColorPickerView_thumbColor, 0)
+        thumbSize = a.getDimension(R.styleable.ColorPickerView_thumbSize, 30F)
 
-        if (a.hasValue(R.styleable.ColorPickerView_selector)) selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector)
-        else selectorDrawable = ContextCompat.getDrawable(getContext(), R.drawable.wheel)
+        if (a.hasValue(R.styleable.ColorPickerView_thumbSrc)) {
+            thumbDrawable = a.getDrawable(R.styleable.ColorPickerView_thumbSrc)
+        } else {
+            val shapeRing = GradientDrawable()
+            shapeRing.shape = GradientDrawable.OVAL
+            shapeRing.setStroke((thumbSize * 0.2F).toInt(), Color.WHITE)
+
+            thumbDrawable = shapeRing
+        }
 
         a.recycle()
 
@@ -76,65 +68,54 @@ class ColorPickerView : FrameLayout {
             }
         })
 
-        setPadding(0, 0, 0, 0)
         palette = ImageView(context)
-        if (paletteDrawable != null) {
-            palette!!.setImageDrawable(paletteDrawable)
-        }
-
-        val wheelParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        wheelParams.gravity = Gravity.CENTER
-        addView(palette, wheelParams)
+        val paletteParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        paletteParams.gravity = Gravity.CENTER
+        addView(palette, paletteParams)
+        setPaletteDrawable(paletteDrawable)
 
         selector = ImageView(context)
-        if (selectorDrawable != null) {
-            selector!!.setImageDrawable(selectorDrawable)
-
-            val thumbParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            thumbParams.gravity = Gravity.CENTER
-            addView(selector, thumbParams)
-        }
+        val thumbParams = FrameLayout.LayoutParams(thumbSize.toInt(), thumbSize.toInt())
+        thumbParams.gravity = Gravity.CENTER
+        addView(selector, thumbParams)
+        setThumbDrawable(thumbDrawable)
     }
 
     private fun onFirstLayout() {
-        val x=measuredWidth / 2 - selector!!.width / 2
-        val y=measuredHeight / 2 - selector!!.height / 2
+        selector!!.x = measuredWidth / 2 - thumbSize / 2
+        selector!!.y = measuredHeight / 2 - thumbSize / 2
 
-        selector!!.x = x.toFloat()
-        selector!!.y = y.toFloat()
-        selectedPoint = Point(x, y)
-        color = getColorFromBitmap(x.toFloat(), y.toFloat())
+        color = getColorFromBitmap(selector!!.x, selector!!.y)
         mColorListener?.onColorSelected(color)
 
-        setOnTouchListener(OnTouchListener { _, event ->
+        setOnTouchListener({ _, event ->
             when (event.action) {
-                MotionEvent.ACTION_UP -> if (ACTON_UP) {
-                    selector!!.isPressed = true
-                    return@OnTouchListener onTouchReceived(event)
-                }
+                MotionEvent.ACTION_UP,
                 MotionEvent.ACTION_DOWN,
-                MotionEvent.ACTION_MOVE -> if (!ACTON_UP) {
-                    selector!!.isPressed = true
-                    return@OnTouchListener onTouchReceived(event)
-                }
-                else -> {
-                    selector!!.isPressed = false
-                    return@OnTouchListener false
-                }
+                MotionEvent.ACTION_MOVE -> onTouchReceived(event.x, event.y)
             }
             true
         })
     }
 
-    private fun onTouchReceived(event: MotionEvent): Boolean {
-        val snapPoint = Point(event.x.toInt(), event.y.toInt())
-        color = getColorFromBitmap(snapPoint.x.toFloat(), snapPoint.y.toFloat())
+    private fun onTouchReceived(mX: Float, mY: Float): Boolean {
+        if (mX < palette!!.x) {
+            selector!!.x = palette!!.x - thumbSize / 2 + 1
+        } else if (mX > palette!!.x + palette!!.measuredWidth) {
+            selector!!.x = palette!!.x + palette!!.measuredWidth - thumbSize / 2
+        } else {
+            selector!!.x = mX - thumbSize / 2
+        }
 
-        if (color == Color.TRANSPARENT) false
+        if (mY < palette!!.y) {
+            selector!!.y = palette!!.y - thumbSize / 2 + 1
+        } else if (mY > palette!!.y + palette!!.measuredHeight) {
+            selector!!.y = palette!!.y + palette!!.measuredHeight - thumbSize / 2
+        } else {
+            selector!!.y = mY - thumbSize / 2
+        }
 
-        selector!!.x = (snapPoint.x - selector!!.measuredWidth / 2).toFloat()
-        selector!!.y = (snapPoint.y - selector!!.measuredHeight / 2).toFloat()
-        selectedPoint = Point(snapPoint.x, snapPoint.y)
+        color = getColorFromBitmap(mX, mY)
         mColorListener?.onColorSelected(color)
 
         return true
@@ -163,21 +144,15 @@ class ColorPickerView : FrameLayout {
         mColorListener = colorListener
     }
 
-    fun setPaletteDrawable(drawable: Drawable) {
-        removeView(palette)
-        palette = ImageView(context)
+    fun setPaletteDrawable(drawable: Drawable?) {
         paletteDrawable = drawable
-        palette!!.setImageDrawable(paletteDrawable)
-        addView(palette)
-
-        removeView(selector)
-        addView(selector)
-
-        selector!!.x = (measuredWidth / 2 - selector!!.width / 2).toFloat()
-        selector!!.y = (measuredHeight / 2 - selector!!.height / 2).toFloat()
+        palette?.setImageDrawable(paletteDrawable)
     }
 
-    fun setSelectorDrawable(drawable: Drawable) {
-        selector!!.setImageDrawable(drawable)
+    fun setThumbDrawable(drawable: Drawable?) {
+        selector?.setImageDrawable(drawable)
+        if (thumbColor != 0) {
+            selector!!.drawable.setColorFilter(thumbColor, PorterDuff.Mode.SRC_ATOP)
+        }
     }
 }
