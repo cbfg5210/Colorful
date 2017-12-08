@@ -81,6 +81,14 @@ class ColorPickerView : FrameLayout {
         })
     }
 
+    fun offsetXY(offsetX: Float, offsetY: Float) {
+        selector!!.x += offsetX
+        selector!!.y += offsetY
+
+        color = getColorFromBitmap(selector!!.x - thumbSize / 2, selector!!.y - thumbSize / 2)
+        mColorListener?.onColorSelected(color)
+    }
+
     private fun onTouchReceived(mX: Float, mY: Float): Boolean {
         selector!!.x = mX - thumbSize / 2
         selector!!.y = mY - thumbSize / 2

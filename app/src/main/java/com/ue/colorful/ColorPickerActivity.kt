@@ -18,6 +18,7 @@ package com.ue.colorful
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPickerActivity : AppCompatActivity() {
@@ -26,15 +27,21 @@ class ColorPickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
 
-        textView.setOnClickListener {
-            colorPickerView.toggleThumbColor()
-        }
-
-        colorPickerView!!.setColorListener(object : ColorListener {
+        colorPickerView.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
                 textView.text = "#" + colorPickerView!!.colorHtml
                 linearLayout.setBackgroundColor(color)
             }
         })
+    }
+
+    fun onViewClick(v: View) {
+        when (v.id) {
+            R.id.textView -> colorPickerView.toggleThumbColor()
+            R.id.btnUp -> colorPickerView.offsetXY(0F, -3F)
+            R.id.btnDown -> colorPickerView.offsetXY(0F, 3F)
+            R.id.btnLeft -> colorPickerView.offsetXY(-3F, 0F)
+            R.id.btnRight -> colorPickerView.offsetXY(3F, 0F)
+        }
     }
 }

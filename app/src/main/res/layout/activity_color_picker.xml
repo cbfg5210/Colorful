@@ -34,6 +34,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onViewClick"
             android:text="@android:color/white"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
@@ -45,5 +46,38 @@
             android:layout_height="55dp"
             android:layout_marginTop="10dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onViewClick"
+                android:text="Up"/>
+
+            <Button
+                android:id="@+id/btnDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onViewClick"
+                android:text="Down"/>
+
+            <Button
+                android:id="@+id/btnLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onViewClick"
+                android:text="Left"/>
+
+            <Button
+                android:id="@+id/btnRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onViewClick"
+                android:text="Right"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
