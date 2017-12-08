@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.ViewGroup
@@ -82,9 +83,10 @@ class ColorPickerView : FrameLayout {
     }
 
     fun offsetXY(offsetX: Float, offsetY: Float) {
+        Log.e("ColorPickerView", "offsetXY: x=" + selector!!.x + ",y=" + selector!!.y);
         selector!!.x += offsetX
         selector!!.y += offsetY
-
+        Log.e("ColorPickerView", "**offsetXY: x=" + selector!!.x + ",y=" + selector!!.y);
         color = getColorFromBitmap(selector!!.x - thumbSize / 2, selector!!.y - thumbSize / 2)
         mColorListener?.onColorSelected(color)
     }
@@ -108,11 +110,10 @@ class ColorPickerView : FrameLayout {
         val mappedPoints = floatArrayOf(x, y)
         invertMatrix.mapPoints(mappedPoints)
 
-        if (palette!!.drawable != null && palette!!.drawable is BitmapDrawable &&
-                mappedPoints[0] > 0 && mappedPoints[1] > 0 &&
-                mappedPoints[0] < palette!!.drawable.intrinsicWidth && mappedPoints[1] < palette!!.drawable.intrinsicHeight) {
-
-            invalidate()
+        if (palette!!.drawable != null && palette!!.drawable is BitmapDrawable
+                && mappedPoints[0] > 0 && mappedPoints[1] > 0
+                && mappedPoints[0] < palette!!.drawable.intrinsicWidth
+                && mappedPoints[1] < palette!!.drawable.intrinsicHeight) {
             return (palette!!.drawable as BitmapDrawable).bitmap.getPixel(mappedPoints[0].toInt(), mappedPoints[1].toInt())
         }
         return Color.WHITE

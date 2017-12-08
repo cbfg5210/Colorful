@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -22,19 +23,18 @@
             app:palette="@drawable/watercolor"/>
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onViewClick"
+            android:layout_marginLeft="10dp"
             android:text="@android:color/white"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
@@ -44,40 +44,59 @@
             android:id="@+id/linearLayout"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:layout_below="@+id/textView"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ivMoveRight"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/sel_arrow_right"
+            android:onClick="onViewClick"/>
 
-            <Button
-                android:id="@+id/btnUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onViewClick"
-                android:text="Up"/>
+        <ImageView
+            android:id="@+id/ivMoveUp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/ivMoveRight"
+            android:background="@drawable/sel_arrow_up"
+            android:onClick="onViewClick"/>
 
-            <Button
-                android:id="@+id/btnDown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onViewClick"
-                android:text="Down"/>
+        <ImageView
+            android:id="@+id/ivThumbToggle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/ivMoveUp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/ivMoveRight"
+            android:background="@drawable/sel_thumb_toggle"
+            android:onClick="onViewClick"/>
 
-            <Button
-                android:id="@+id/btnLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onViewClick"
-                android:text="Left"/>
+        <ImageView
+            android:id="@+id/ivMoveLeft"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/ivThumbToggle"
+            android:background="@drawable/sel_arrow_left"
+            android:onClick="onViewClick"/>
 
-            <Button
-                android:id="@+id/btnRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onViewClick"
-                android:text="Right"/>
-        </LinearLayout>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/ivMoveDown"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignLeft="@+id/ivMoveUp"
+            android:layout_below="@+id/ivThumbToggle"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sel_arrow_down"
+            android:onClick="onViewClick"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -37,11 +37,14 @@ class ColorPickerActivity : AppCompatActivity() {
 
     fun onViewClick(v: View) {
         when (v.id) {
-            R.id.textView -> colorPickerView.toggleThumbColor()
-            R.id.btnUp -> colorPickerView.offsetXY(0F, -3F)
-            R.id.btnDown -> colorPickerView.offsetXY(0F, 3F)
-            R.id.btnLeft -> colorPickerView.offsetXY(-3F, 0F)
-            R.id.btnRight -> colorPickerView.offsetXY(3F, 0F)
+            R.id.ivThumbToggle -> {
+                ivThumbToggle.isSelected = !ivThumbToggle.isSelected
+                colorPickerView.toggleThumbColor()
+            }
+            R.id.ivMoveUp -> colorPickerView.offsetXY(0F, -3F)
+            R.id.ivMoveDown -> colorPickerView.offsetXY(0F, 3F)
+            R.id.ivMoveLeft -> colorPickerView.offsetXY(-3F, 0F)
+            R.id.ivMoveRight -> colorPickerView.offsetXY(3F, 0F)
         }
     }
 }
