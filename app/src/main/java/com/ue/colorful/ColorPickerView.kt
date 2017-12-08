@@ -69,6 +69,8 @@ class ColorPickerView : FrameLayout {
         })
 
         setOnTouchListener({ _, event ->
+            //通知父控件勿拦截本控件touch,不然滑动会有卡顿等问题
+            parent.requestDisallowInterceptTouchEvent(true)
             when (event.action) {
                 MotionEvent.ACTION_UP,
                 MotionEvent.ACTION_DOWN,

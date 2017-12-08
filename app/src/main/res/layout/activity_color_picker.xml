@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <com.ue.colorful.ColorPickerView
             android:id="@+id/colorPickerView"
@@ -20,83 +18,84 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/colorPrimaryDark"
+            android:padding="10dp"
             app:palette="@drawable/watercolor"/>
-    </FrameLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@android:color/white"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <View
-            android:id="@+id/linearLayout"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_below="@+id/textView"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"/>
-
-        <ImageView
-            android:id="@+id/ivMoveRight"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/sel_arrow_right"
-            android:onClick="onViewClick"/>
-
-        <ImageView
-            android:id="@+id/ivMoveUp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/ivMoveRight"
-            android:background="@drawable/sel_arrow_up"
-            android:onClick="onViewClick"/>
-
-        <ImageView
-            android:id="@+id/ivThumbToggle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/ivMoveUp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@+id/ivMoveRight"
-            android:background="@drawable/sel_thumb_toggle"
-            android:onClick="onViewClick"/>
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivMoveLeft"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/ivThumbToggle"
-            android:background="@drawable/sel_arrow_left"
-            android:onClick="onViewClick"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@android:color/white"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-        <ImageView
-            android:id="@+id/ivMoveDown"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignLeft="@+id/ivMoveUp"
-            android:layout_below="@+id/ivThumbToggle"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/sel_arrow_down"
-            android:onClick="onViewClick"/>
-    </RelativeLayout>
-</LinearLayout>
+            <View
+                android:id="@+id/linearLayout"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/textView"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivMoveRight"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/sel_arrow_right"
+                android:onClick="onViewClick"/>
+
+            <ImageView
+                android:id="@+id/ivMoveUp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivMoveRight"
+                android:background="@drawable/sel_arrow_up"
+                android:onClick="onViewClick"/>
+
+            <ImageView
+                android:id="@+id/ivThumbToggle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/ivMoveUp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/ivMoveRight"
+                android:background="@drawable/sel_thumb_toggle"
+                android:onClick="onViewClick"/>
+
+            <ImageView
+                android:id="@+id/ivMoveLeft"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivThumbToggle"
+                android:background="@drawable/sel_arrow_left"
+                android:onClick="onViewClick"/>
+
+            <ImageView
+                android:id="@+id/ivMoveDown"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/ivMoveUp"
+                android:layout_below="@+id/ivThumbToggle"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_arrow_down"
+                android:onClick="onViewClick"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
