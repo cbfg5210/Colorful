@@ -38,11 +38,8 @@ class ColorPickerView : FrameLayout {
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context, attrs)
-    }
-
-    private fun init(context: Context?, attrs: AttributeSet?) {
         val a = context!!.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
+
         paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
         thumbColor = a.getColor(R.styleable.ColorPickerView_thumbColor, 0)
         thumbSize = a.getDimension(R.styleable.ColorPickerView_thumbSize, 30F)
@@ -58,15 +55,10 @@ class ColorPickerView : FrameLayout {
         }
 
         a.recycle()
+    }
 
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) viewTreeObserver.removeGlobalOnLayoutListener(this)
-                else viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                onFirstLayout()
-            }
-        })
+    override fun onFinishInflate() {
+        super.onFinishInflate()
 
         palette = ImageView(context)
         val paletteParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -79,14 +71,15 @@ class ColorPickerView : FrameLayout {
         thumbParams.gravity = Gravity.CENTER
         addView(selector, thumbParams)
         setThumbDrawable(thumbDrawable)
-    }
 
-    private fun onFirstLayout() {
-        selector!!.x = measuredWidth / 2 - thumbSize / 2
-        selector!!.y = measuredHeight / 2 - thumbSize / 2
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < 16) viewTreeObserver.removeGlobalOnLayoutListener(this)
+                else viewTreeObserver.removeOnGlobalLayoutListener(this)
 
-        color = getColorFromBitmap(selector!!.x, selector!!.y)
-        mColorListener?.onColorSelected(color)
+                onTouchReceived((measuredWidth / 2).toFloat(), (measuredHeight / 2).toFloat())
+            }
+        })
 
         setOnTouchListener({ _, event ->
             when (event.action) {
@@ -99,21 +92,8 @@ class ColorPickerView : FrameLayout {
     }
 
     private fun onTouchReceived(mX: Float, mY: Float): Boolean {
-        if (mX < palette!!.x) {
-            selector!!.x = palette!!.x - thumbSize / 2 + 1
-        } else if (mX > palette!!.x + palette!!.measuredWidth) {
-            selector!!.x = palette!!.x + palette!!.measuredWidth - thumbSize / 2
-        } else {
-            selector!!.x = mX - thumbSize / 2
-        }
-
-        if (mY < palette!!.y) {
-            selector!!.y = palette!!.y - thumbSize / 2 + 1
-        } else if (mY > palette!!.y + palette!!.measuredHeight) {
-            selector!!.y = palette!!.y + palette!!.measuredHeight - thumbSize / 2
-        } else {
-            selector!!.y = mY - thumbSize / 2
-        }
+        selector!!.x = mX - thumbSize / 2
+        selector!!.y = mY - thumbSize / 2
 
         color = getColorFromBitmap(mX, mY)
         mColorListener?.onColorSelected(color)
