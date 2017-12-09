@@ -1,0 +1,31 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+
+    <dimen name="color_icon_image_size">20dp</dimen>
+
+    <dimen name="color_content_text">16sp</dimen>
+    <dimen name="color_content_margin">16dp</dimen>
+
+    <dimen name="list_color_padding_left">8dp</dimen>
+    <dimen name="list_color_padding_right">8dp</dimen>
+    <dimen name="list_color_padding_top">4dp</dimen>
+    <dimen name="list_color_padding_bottom">4dp</dimen>
+
+    <dimen name="color_card_content_padding">16dp</dimen>
+    <dimen name="color_card_margin_top">4dp</dimen>
+    <dimen name="color_card_margin_bottom">4dp</dimen>
+    <dimen name="color_card_height">125dp</dimen>
+    <dimen name="color_card_color_height">77dp</dimen>
+    <!--<dimen name="color_card_text_height">35dp</dimen>-->
+    <dimen name="color_card_actions_height">48dp</dimen>
+    <dimen name="color_card_corner_radius">0dp</dimen>
+
+    <dimen name="card_color_action_width">48dp</dimen>
+    <dimen name="card_color_action_height">48dp</dimen>
+</resources>

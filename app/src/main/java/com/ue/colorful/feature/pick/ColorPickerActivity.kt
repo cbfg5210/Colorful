@@ -1,4 +1,4 @@
-package com.ue.colorful
+package com.ue.colorful.feature.pick
 
 /*
  * Copyright (C) 2017 skydoves
@@ -19,6 +19,8 @@ package com.ue.colorful
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.ue.colorful.R
+import com.ue.colorful.event.ColorListener
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPickerActivity : AppCompatActivity() {

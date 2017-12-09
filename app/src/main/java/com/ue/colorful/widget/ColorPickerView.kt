@@ -1,4 +1,4 @@
-package com.ue.colorful
+package com.ue.colorful.widget
 
 import android.content.Context
 import android.graphics.Color
@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.ue.colorful.R
+import com.ue.colorful.event.ColorListener
 
 
 class ColorPickerView : FrameLayout {

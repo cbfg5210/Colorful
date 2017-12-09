@@ -1,3 +1,194 @@
 <resources>
     <string name="app_name">ColorPickerViewDemo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- menu -->
+    <string name="menu_go_to_preview">Go to preview</string>
+
+    <string name="card_menu_actionbar_color_preview">Use as actionbar color preview</string>
+    <string name="card_menu_color_preview">Use as color preview</string>
+    <string name="card_menu_remove_actionbar_color_preview">Do not use as actionbar color preview</string>
+    <string name="card_menu_remove_color_preview">Do not use as color preview</string>
+    <string name="card_menu_copy_color">Copy color to clipboard</string>
+    <string name="color_copied">Color %s copied to clipboard</string>
+    <string name="color_clipboard">Color %1$s %2$s</string>
+
+    <!-- navigation drawer sections 19-->
+    <string-array name="color_sections_names">
+        <item>@string/red</item>
+        <item>@string/pink</item>
+        <item>@string/purple</item>
+        <item>@string/deep_purple</item>
+        <item>@string/indigo</item>
+        <item>@string/blue</item>
+        <item>@string/light_blue</item>
+        <item>@string/cyan</item>
+        <item>@string/teal</item>
+        <item>@string/green</item>
+        <item>@string/light_green</item>
+        <item>@string/lime</item>
+        <item>@string/yellow</item>
+        <item>@string/amber</item>
+        <item>@string/orange</item>
+        <item>@string/deep_orange</item>
+        <item>@string/brown</item>
+        <item>@string/grey</item>
+        <item>@string/blue_grey</item>
+    </string-array>
+
+    <array name="all_color_names">
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/full_base_color_list</item>
+        <item>@array/base_color_list_to_900</item>
+        <item>@array/base_color_list_greys</item>
+        <item>@array/base_color_list_to_900</item>
+    </array>
+
+    <array name="all_color_list">
+        <item>@array/reds</item>
+        <item>@array/pinks</item>
+        <item>@array/purples</item>
+        <item>@array/deep_purples</item>
+        <item>@array/indigos</item>
+        <item>@array/blues</item>
+        <item>@array/light_blues</item>
+        <item>@array/cyans</item>
+        <item>@array/teals</item>
+        <item>@array/greens</item>
+        <item>@array/light_greens</item>
+        <item>@array/limes</item>
+        <item>@array/yellows</item>
+        <item>@array/ambers</item>
+        <item>@array/oranges</item>
+        <item>@array/deep_oranges</item>
+        <item>@array/browns</item>
+        <item>@array/greys</item>
+        <item>@array/blue_greys</item>
+    </array>
+
+    <!-- section colors 19-->
+    <array name="color_sections_colors">
+        <item>@color/md_red_500</item>
+        <item>@color/md_pink_500</item>
+        <item>@color/md_purple_500</item>
+        <item>@color/md_deep_purple_500</item>
+        <item>@color/md_indigo_500</item>
+        <item>@color/md_blue_500</item>
+        <item>@color/md_light_blue_500</item>
+        <item>@color/md_cyan_500</item>
+        <item>@color/md_teal_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_light_green_500</item>
+        <item>@color/md_lime_500</item>
+        <item>@color/md_yellow_500</item>
+        <item>@color/md_amber_500</item>
+        <item>@color/md_orange_500</item>
+        <item>@color/md_deep_orange_500</item>
+        <item>@color/md_brown_500</item>
+        <item>@color/md_grey_500</item>
+        <item>@color/md_blue_grey_500</item>
+    </array>
+
+    <!-- section colors 19-->
+    <array name="dark_color_sections_colors">
+        <item>@color/md_red_700</item>
+        <item>@color/md_pink_700</item>
+        <item>@color/md_purple_700</item>
+        <item>@color/md_deep_purple_700</item>
+        <item>@color/md_indigo_700</item>
+        <item>@color/md_blue_700</item>
+        <item>@color/md_light_blue_700</item>
+        <item>@color/md_cyan_700</item>
+        <item>@color/md_teal_700</item>
+        <item>@color/md_green_700</item>
+        <item>@color/md_light_green_700</item>
+        <item>@color/md_lime_700</item>
+        <item>@color/md_yellow_700</item>
+        <item>@color/md_amber_700</item>
+        <item>@color/md_orange_700</item>
+        <item>@color/md_deep_orange_700</item>
+        <item>@color/md_brown_700</item>
+        <item>@color/md_grey_700</item>
+        <item>@color/md_blue_grey_700</item>
+    </array>
+
+    <string name="red">Red</string>
+    <string name="pink">Pink</string>
+    <string name="purple">Purple</string>
+    <string name="deep_purple">Deep purple</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Blue</string>
+    <string name="light_blue">Light blue</string>
+    <string name="cyan">Cyan</string>
+    <string name="teal">Teal</string>
+    <string name="green">Green</string>
+    <string name="light_green">Light green</string>
+    <string name="lime">Lime</string>
+    <string name="yellow">Yellow</string>
+    <string name="amber">Amber</string>
+    <string name="orange">Orange</string>
+    <string name="deep_orange">Deep orange</string>
+    <string name="brown">Brown</string>
+    <string name="grey">Grey</string>
+    <string name="blue_grey">Blue grey</string>
+
+    <string-array name="full_base_color_list">
+        <item>500</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>A100</item>
+        <item>A200</item>
+        <item>A400</item>
+        <item>A700</item>
+    </string-array>
+
+    <string-array name="base_color_list_to_900">
+        <item>500</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+    </string-array>
+
+    <string-array name="base_color_list_greys">
+        <item>500</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>1000</item>
+        <item>1000</item>
+    </string-array>
 </resources>
