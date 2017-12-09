@@ -4,16 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnPickPhotoCol"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvColorOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="onBtnClick"
-        android:text="Pick photo color"/>
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvColorList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
 </LinearLayout>

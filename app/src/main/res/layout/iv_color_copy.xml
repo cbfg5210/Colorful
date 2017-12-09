@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/color_copy"
+    android:id="@+id/colorCopy"
     android:layout_width="@dimen/card_color_action_width"
     android:layout_height="@dimen/card_color_action_height"
     android:layout_alignParentBottom="true"
