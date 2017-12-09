@@ -1,6 +1,6 @@
 package com.ue.colorful.model
 
-class PaletteColor(val colorSectionName: String, val hex: Int, val baseName: String) {
+class PaletteColor(val colorSectionName: String, val hex: Int, val baseName: String){
     val hexString: String
 
     init {
