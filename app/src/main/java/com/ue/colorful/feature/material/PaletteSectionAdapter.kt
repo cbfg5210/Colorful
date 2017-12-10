@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.main
+package com.ue.colorful.feature.material
 
 import android.app.Activity
 import android.graphics.drawable.ColorDrawable
