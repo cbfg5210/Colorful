@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2017 Jared Rummler
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.ue.colorful.widget
 
 import android.content.Context
@@ -33,7 +17,7 @@ import com.ue.colorful.R
  * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also available.
  * Enable it by setting setAlphaSliderVisible(boolean) to true.
  */
-class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : View(context, attrs, defStyle) {
+class PaletteColorPickerView : View {
 
     /**
      * The width in px of the hue panel.
@@ -63,13 +47,13 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
      */
     private val sliderTrackerSizePx: Int
 
-    private var satValPaint: Paint? = null
-    private var satValTrackerPaint: Paint? = null
+    private lateinit var satValPaint: Paint
+    private lateinit var satValTrackerPaint: Paint
 
-    private var alphaPaint: Paint? = null
-    private var hueAlphaTrackerPaint: Paint? = null
+    private lateinit var alphaPaint: Paint
+    private lateinit var hueAlphaTrackerPaint: Paint
 
-    private var borderPaint: Paint? = null
+    private lateinit var borderPaint: Paint
 
     private var valShader: Shader? = null
     private var satShader: Shader? = null
@@ -128,14 +112,17 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         get() = Color.HSVToColor(alpha, floatArrayOf(hue, sat, value))
         set(color) = setColor(color, false)
 
-    init {
+    constructor(context: Context?) : this(context, null)
+    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-        huePanelWidthPx = dpToPx(getContext(), HUE_PANEL_WDITH_DP.toFloat())
-        alphaPanelHeightPx = dpToPx(getContext(), ALPHA_PANEL_HEIGH_DP.toFloat())
-        panelSpacingPx = dpToPx(getContext(), PANEL_SPACING_DP.toFloat())
-        circleTrackerRadiusPx = dpToPx(getContext(), CIRCLE_TRACKER_RADIUS_DP.toFloat())
-        sliderTrackerSizePx = dpToPx(getContext(), SLIDER_TRACKER_SIZE_DP.toFloat())
-        sliderTrackerOffsetPx = dpToPx(getContext(), SLIDER_TRACKER_OFFSET_DP.toFloat())
+    init {
+        huePanelWidthPx = dpToPx(context, HUE_PANEL_WDITH_DP.toFloat())
+        alphaPanelHeightPx = dpToPx(context, ALPHA_PANEL_HEIGH_DP.toFloat())
+        panelSpacingPx = dpToPx(context, PANEL_SPACING_DP.toFloat())
+        circleTrackerRadiusPx = dpToPx(context, CIRCLE_TRACKER_RADIUS_DP.toFloat())
+        sliderTrackerSizePx = dpToPx(context, SLIDER_TRACKER_SIZE_DP.toFloat())
+        sliderTrackerOffsetPx = dpToPx(context, SLIDER_TRACKER_OFFSET_DP.toFloat())
 
         mRequiredPadding = resources.getDimensionPixelSize(R.dimen.cpv_required_padding)
 
@@ -157,18 +144,15 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         return state
     }
 
-    public override fun onRestoreInstanceState(state: Parcelable?) {
-        var state = state
-
+    public override fun onRestoreInstanceState(state: Parcelable) {
         if (state is Bundle) {
-            val bundle = state as Bundle?
+            alpha = state.getInt("alpha")
+            hue = state.getFloat("hue")
+            sat = state.getFloat("sat")
+            value = state.getFloat("value")
+            super.onRestoreInstanceState(state.getParcelable("instanceState"))
 
-            alpha = bundle!!.getInt("alpha")
-            hue = bundle.getFloat("hue")
-            sat = bundle.getFloat("sat")
-            value = bundle.getFloat("value")
-
-            state = bundle.getParcelable("instanceState")
+            return
         }
         super.onRestoreInstanceState(state)
     }
@@ -180,14 +164,14 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         alphaPaint = Paint()
         borderPaint = Paint()
 
-        satValTrackerPaint!!.style = Style.STROKE
-        satValTrackerPaint!!.strokeWidth = dpToPx(context, 2f).toFloat()
-        satValTrackerPaint!!.isAntiAlias = true
+        satValTrackerPaint.style = Style.STROKE
+        satValTrackerPaint.strokeWidth = dpToPx(context, 2f).toFloat()
+        satValTrackerPaint.isAntiAlias = true
 
-        hueAlphaTrackerPaint!!.color = -0x1000000
-        hueAlphaTrackerPaint!!.style = Style.STROKE
-        hueAlphaTrackerPaint!!.strokeWidth = dpToPx(context, 2f).toFloat()
-        hueAlphaTrackerPaint!!.isAntiAlias = true
+        hueAlphaTrackerPaint.color = -0x1000000
+        hueAlphaTrackerPaint.style = Style.STROKE
+        hueAlphaTrackerPaint.strokeWidth = dpToPx(context, 2f).toFloat()
+        hueAlphaTrackerPaint.isAntiAlias = true
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -204,42 +188,32 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         val rect = satValRect
 
         if (BORDER_WIDTH_PX > 0) {
-            borderPaint!!.color = borderColor
+            borderPaint.color = borderColor
             canvas.drawRect(drawingRect!!.left.toFloat(), drawingRect!!.top.toFloat(),
                     (rect!!.right + BORDER_WIDTH_PX).toFloat(),
-                    (rect.bottom + BORDER_WIDTH_PX).toFloat(), borderPaint!!)
+                    (rect.bottom + BORDER_WIDTH_PX).toFloat(), borderPaint)
         }
 
-        if (valShader == null) {
-            //Black gradient has either not been created or the view has been resized.
-            valShader = LinearGradient(rect!!.left.toFloat(), rect.top.toFloat(), rect.left.toFloat(), rect.bottom.toFloat(), -0x1, -0x1000000, TileMode.CLAMP)
-        }
+        //Black gradient has either not been created or the view has been resized.
+        valShader = valShader ?: LinearGradient(rect!!.left.toFloat(), rect.top.toFloat(), rect.left.toFloat(), rect.bottom.toFloat(), -0x1, -0x1000000, TileMode.CLAMP)
 
         //If the hue has changed we need to recreate the cache.
         if (satValBackgroundCache == null || satValBackgroundCache!!.value != hue) {
 
-            if (satValBackgroundCache == null) {
-                satValBackgroundCache = BitmapCache()
-            }
+            satValBackgroundCache = satValBackgroundCache ?: BitmapCache()
 
             //We create our bitmap in the cache if it doesn't exist.
-            if (satValBackgroundCache!!.bitmap == null) {
-                satValBackgroundCache!!.bitmap = Bitmap
-                        .createBitmap(rect!!.width(), rect.height(), Config.ARGB_8888)
-            }
+            satValBackgroundCache!!.bitmap = satValBackgroundCache!!.bitmap ?: Bitmap.createBitmap(rect!!.width(), rect.height(), Config.ARGB_8888)
 
             //We create the canvas once so we can draw on our bitmap and the hold on to it.
-            if (satValBackgroundCache!!.canvas == null) {
-                satValBackgroundCache!!.canvas = Canvas(satValBackgroundCache!!.bitmap!!)
-            }
+            satValBackgroundCache!!.canvas = satValBackgroundCache!!.canvas ?: Canvas(satValBackgroundCache!!.bitmap!!)
 
             val rgb = Color.HSVToColor(floatArrayOf(hue, 1f, 1f))
 
             satShader = LinearGradient(rect!!.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.top.toFloat(), -0x1, rgb, TileMode.CLAMP)
 
-            val mShader = ComposeShader(
-                    valShader!!, satShader!!, PorterDuff.Mode.MULTIPLY)
-            satValPaint!!.shader = mShader
+            val mShader = ComposeShader(valShader!!, satShader!!, PorterDuff.Mode.MULTIPLY)
+            satValPaint.shader = mShader
 
             // Finally we draw on our canvas, the result will be
             // stored in our bitmap which is already in the cache.
@@ -252,7 +226,7 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
             satValBackgroundCache!!.canvas!!.drawRect(0f, 0f,
                     satValBackgroundCache!!.bitmap!!.width.toFloat(),
                     satValBackgroundCache!!.bitmap!!.height.toFloat(),
-                    satValPaint!!)
+                    satValPaint)
 
             //We set the hue value in our cache to which hue it was drawn with,
             //then we know that if it hasn't changed we can reuse our cached bitmap.
@@ -266,11 +240,11 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
 
         val p = satValToPoint(sat, value)
 
-        satValTrackerPaint!!.color = -0x1000000
-        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), (circleTrackerRadiusPx - dpToPx(context, 1f)).toFloat(), satValTrackerPaint!!)
+        satValTrackerPaint.color = -0x1000000
+        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), (circleTrackerRadiusPx - dpToPx(context, 1f)).toFloat(), satValTrackerPaint)
 
-        satValTrackerPaint!!.color = -0x222223
-        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), circleTrackerRadiusPx.toFloat(), satValTrackerPaint!!)
+        satValTrackerPaint.color = -0x222223
+        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), circleTrackerRadiusPx.toFloat(), satValTrackerPaint)
 
     }
 
@@ -278,13 +252,13 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         val rect = hueRect
 
         if (BORDER_WIDTH_PX > 0) {
-            borderPaint!!.color = borderColor
+            borderPaint.color = borderColor
 
             canvas.drawRect((rect!!.left - BORDER_WIDTH_PX).toFloat(),
                     (rect.top - BORDER_WIDTH_PX).toFloat(),
                     (rect.right + BORDER_WIDTH_PX).toFloat(),
                     (rect.bottom + BORDER_WIDTH_PX).toFloat(),
-                    borderPaint!!)
+                    borderPaint)
         }
 
         if (hueBackgroundCache == null) {
@@ -323,7 +297,7 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         r.top = (p.y - sliderTrackerSizePx / 2).toFloat()
         r.bottom = (p.y + sliderTrackerSizePx / 2).toFloat()
 
-        canvas.drawRoundRect(r, 2f, 2f, hueAlphaTrackerPaint!!)
+        canvas.drawRoundRect(r, 2f, 2f, hueAlphaTrackerPaint)
     }
 
     private fun drawAlphaPanel(canvas: Canvas) {
@@ -335,12 +309,12 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         val rect = alphaRect
 
         if (BORDER_WIDTH_PX > 0) {
-            borderPaint!!.color = borderColor
+            borderPaint.color = borderColor
             canvas.drawRect((rect!!.left - BORDER_WIDTH_PX).toFloat(),
                     (rect.top - BORDER_WIDTH_PX).toFloat(),
                     (rect.right + BORDER_WIDTH_PX).toFloat(),
                     (rect.bottom + BORDER_WIDTH_PX).toFloat(),
-                    borderPaint!!)
+                    borderPaint)
         }
 
         alphaPatternDrawable!!.draw(canvas)
@@ -352,9 +326,9 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         alphaShader = LinearGradient(rect!!.left.toFloat(), rect.top.toFloat(), rect.right.toFloat(), rect.top.toFloat(),
                 color, acolor, TileMode.CLAMP)
 
-        alphaPaint!!.shader = alphaShader
+        alphaPaint.shader = alphaShader
 
-        canvas.drawRect(rect, alphaPaint!!)
+        canvas.drawRect(rect, alphaPaint)
 
         val p = alphaToPoint(alpha)
 
@@ -364,7 +338,7 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         r.top = (rect.top - sliderTrackerOffsetPx).toFloat()
         r.bottom = (rect.bottom + sliderTrackerOffsetPx).toFloat()
 
-        canvas.drawRoundRect(r, 2f, 2f, hueAlphaTrackerPaint!!)
+        canvas.drawRoundRect(r, 2f, 2f, hueAlphaTrackerPaint)
     }
 
     private fun hueToPoint(hue: Float): Point {
@@ -395,7 +369,6 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
     }
 
     private fun alphaToPoint(alpha: Int): Point {
-
         val rect = alphaRect
         val width = rect!!.width().toFloat()
 
@@ -405,7 +378,6 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         p.y = rect.top
 
         return p
-
     }
 
     private fun pointToSatVal(x: Float, y: Float): FloatArray {
@@ -480,7 +452,6 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         var update = false
 
         when (event.action) {
-
             MotionEvent.ACTION_DOWN -> {
                 startTouchPoint = Point(event.x.toInt(), event.y.toInt())
                 update = moveTrackersIfNeeded(event)
@@ -493,9 +464,7 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         }
 
         if (update) {
-            if (onColorChangedListener != null) {
-                onColorChangedListener!!.onColorChanged(Color.HSVToColor(alpha, floatArrayOf(hue, sat, value)))
-            }
+            onColorChangedListener?.onColorChanged(Color.HSVToColor(alpha, floatArrayOf(hue, sat, value)))
             invalidate()
             return true
         }
@@ -504,9 +473,7 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
     }
 
     private fun moveTrackersIfNeeded(event: MotionEvent): Boolean {
-        if (startTouchPoint == null) {
-            return false
-        }
+        if (startTouchPoint == null) return false
 
         var update = false
 
@@ -584,7 +551,6 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
                 finalWidth = widthAllowed
                 finalHeight = heightAllowed
             }
-
         } else {
             //If no exact size has been set we try to make our view as big as possible
             //within the allowed space.
@@ -742,9 +708,8 @@ class PaletteColorPickerView @JvmOverloads constructor(context: Context, attrs: 
         sat = hsv[1]
         value = hsv[2]
 
-        if (callback && onColorChangedListener != null) {
-            onColorChangedListener!!
-                    .onColorChanged(Color.HSVToColor(this.alpha, floatArrayOf(hue, sat, value)))
+        if (callback) {
+            onColorChangedListener?.onColorChanged(Color.HSVToColor(this.alpha, floatArrayOf(hue, sat, value)))
         }
 
         invalidate()

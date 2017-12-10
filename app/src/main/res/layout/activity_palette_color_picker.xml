@@ -8,13 +8,13 @@
     android:orientation="vertical">
 
     <com.ue.colorful.widget.PaletteColorPickerView
-        android:id="@+id/cpv_color_picker_view"
+        android:id="@+id/paletteColorPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"/>
 
     <ImageView
-        android:id="@+id/cpv_color_panel_new"
+        android:id="@+id/ivColorEffect"
         android:layout_width="100dp"
         android:layout_height="40dp"/>
 

@@ -18,7 +18,7 @@ class MDPaletteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mdpalette)
 
-        val lastColorOption = SPUtils.getInt(SPKeys.LAST_COLOR_OPTION, 0)
+        val lastColorOption = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
         paletteSections = getPaletteSections(lastColorOption)
 
         rvColorList.setHasFixedSize(true)

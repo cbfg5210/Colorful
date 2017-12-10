@@ -8,9 +8,7 @@ import android.graphics.drawable.Drawable
  * This drawable will draw a simple white and gray chessboard pattern.
  * It's the pattern you will often see as a background behind a partly transparent image in many applications.
  */
-internal class AlphaPatternDrawable(rectangleSize: Int) : Drawable() {
-
-    private val rectangleSize = 10
+internal class AlphaPatternDrawable(private val rectangleSize: Int) : Drawable() {
 
     private val paint = Paint()
     private val paintWhite = Paint()
@@ -85,5 +83,4 @@ internal class AlphaPatternDrawable(rectangleSize: Int) : Drawable() {
             verticalStartWhite = !verticalStartWhite
         }
     }
-
 }

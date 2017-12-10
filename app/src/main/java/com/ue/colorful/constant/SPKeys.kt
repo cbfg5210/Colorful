@@ -5,6 +5,7 @@ package com.ue.colorful.constant
  */
 class SPKeys {
     companion object {
-        val LAST_COLOR_OPTION = "lastColorOption"
+        val LAST_MD_COLOR = "lastMDColor"
+        val LAST_PALETTE_COLOR = "lastPaletteColor"
     }
 }
