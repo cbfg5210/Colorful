@@ -10,17 +10,20 @@ import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
+import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.model.PaletteSection
+import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.item_palette_section.view.*
 
 /**
  * Created by hawk on 2017/12/9.
  */
 internal class PaletteSectionAdapter(private val activity: Activity, items: List<PaletteSection>?, private val onDelegateListener: OnDelegateClickListener?) : DelegationAdapter<PaletteSection>(), OnDelegateClickListener {
-    private var selection: Int = 0
+    private var selection: Int
 
     init {
         this.items = items ?: ArrayList()
+        selection = SPUtils.getInt(SPKeys.LAST_COLOR_OPTION, 0)
 
         val delegate = PaletteColorSectionDelegate(activity)
         delegate.setOnDelegateClickListener(this)
@@ -39,6 +42,7 @@ internal class PaletteSectionAdapter(private val activity: Activity, items: List
         notifyItemChanged(position)
 
         selection = position
+        SPUtils.putInt(SPKeys.LAST_COLOR_OPTION, selection)
         onDelegateListener?.onClick(view, position)
     }
 
