@@ -20,7 +20,9 @@ import kotlinx.android.synthetic.main.item_palette_color.view.*
  * Created by hawk on 2017/12/9.
  */
 internal class PaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
-    private var mClipboardManager: ClipboardManager? = null
+    private val mClipboardManager: ClipboardManager by lazy {
+        activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    }
 
     init {
         this.items = items ?: ArrayList()
@@ -35,11 +37,10 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
             return
         }
         if (view.id == R.id.colorCopy) {
-            mClipboardManager ?: activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val paletteColor = items[position]
             val clip = ClipData.newPlainText(activity.getString(R.string.color_clipboard, paletteColor.colorSectionName,
                     paletteColor.baseName), paletteColor.hexString)
-            mClipboardManager!!.primaryClip = clip
+            mClipboardManager.primaryClip = clip
 
             Toast.makeText(activity, activity.getString(R.string.color_copied, paletteColor.hexString), Toast.LENGTH_SHORT).show()
             return
@@ -80,8 +81,7 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
         private fun isColorLight(hex: Int): Boolean {
             val hsb = FloatArray(3)
             Color.colorToHSV(hex, hsb)
-
-            return hsb!![2] > 0.5
+            return hsb[2] > 0.5
         }
 
         private class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {

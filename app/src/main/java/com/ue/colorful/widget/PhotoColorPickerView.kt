@@ -101,7 +101,7 @@ class PhotoColorPickerView : FrameLayout {
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
-        if (paletteDrawable == null) Color.WHITE
+        if (paletteDrawable == null) return Color.WHITE
 
         val invertMatrix = Matrix()
         palette!!.imageMatrix.invert(invertMatrix)
