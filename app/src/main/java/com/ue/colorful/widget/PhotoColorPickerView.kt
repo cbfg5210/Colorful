@@ -18,7 +18,7 @@ import com.ue.colorful.R
 import com.ue.colorful.event.ColorListener
 
 
-class ColorPickerView : FrameLayout {
+class PhotoColorPickerView : FrameLayout {
 
     var color: Int = 0
         private set//设值方法的可见度为 private, 并使用默认实现
@@ -35,11 +35,11 @@ class ColorPickerView : FrameLayout {
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        val a = context!!.obtainStyledAttributes(attrs, R.styleable.ColorPickerView)
+        val a = context!!.obtainStyledAttributes(attrs, R.styleable.PhotoColorPickerView)
 
-        paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette)
-        thumbColor = a.getColor(R.styleable.ColorPickerView_thumbColor, Color.BLACK)
-        thumbSize = a.getDimension(R.styleable.ColorPickerView_thumbSize, 30F)
+        paletteDrawable = a.getDrawable(R.styleable.PhotoColorPickerView_palette)
+        thumbColor = a.getColor(R.styleable.PhotoColorPickerView_thumbColor, Color.BLACK)
+        thumbSize = a.getDimension(R.styleable.PhotoColorPickerView_thumbSize, 30F)
 
         a.recycle()
     }

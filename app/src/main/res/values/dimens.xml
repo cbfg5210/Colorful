@@ -28,4 +28,6 @@
 
     <dimen name="card_color_action_width">48dp</dimen>
     <dimen name="card_color_action_height">48dp</dimen>
+
+    <dimen name="cpv_required_padding">6dp</dimen>
 </resources>

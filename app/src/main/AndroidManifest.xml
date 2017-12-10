@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.material.MDPaletteActivity"/>
-        <activity android:name=".feature.pick.PhotoColorPickerActivity"/>
+        <activity android:name=".feature.pickphoto.PhotoColorPickerActivity"/>
+        <activity android:name=".feature.pickpalette.PaletteColorPickerActivity"/>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <com.ue.colorful.widget.ColorPickerView
+        <com.ue.colorful.widget.PhotoColorPickerView
             android:id="@+id/colorPickerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

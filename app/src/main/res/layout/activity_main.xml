@@ -23,4 +23,12 @@
         android:layout_marginTop="20dp"
         android:onClick="onBtnClick"
         android:text="PickColorFromPhoto"/>
+
+    <Button
+        android:id="@+id/btnPickFromPalette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="onBtnClick"
+        android:text="PickColorFromPalette"/>
 </LinearLayout>

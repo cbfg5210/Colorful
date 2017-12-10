@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ColorPickerView">
+    <declare-styleable name="PhotoColorPickerView">
         <attr name="palette" format="reference"/>
         <attr name="thumbColor" format="reference"/>
         <attr name="thumbSize" format="dimension"/>
