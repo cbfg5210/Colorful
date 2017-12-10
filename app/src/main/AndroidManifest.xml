@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -21,6 +20,8 @@
         <activity android:name=".feature.material.MDPaletteActivity"/>
         <activity android:name=".feature.pickphoto.PhotoColorPickerActivity"/>
         <activity android:name=".feature.pickpalette.PaletteColorPickerActivity"/>
+        <activity android:name=".feature.pickscreen.ScreenColorPickerActivity">
+        </activity>
     </application>
 
 </manifest>
