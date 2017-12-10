@@ -11,8 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- <activity android:name=".feature.pick.ColorPickerActivity"> -->
-        <!-- <activity android:name=".feature.material.ColorPaletteActivity"> -->
         <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -20,10 +18,8 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <!-- <activity android:name=".feature.main.MainActivity"/> -->
-        <!-- <activity android:name=".feature.material.ColorPaletteActivity"/> -->
-        <activity android:name=".feature.material.MDPaletteActivity">
-        </activity>
+        <activity android:name=".feature.material.MDPaletteActivity"/>
+        <activity android:name=".feature.pick.PhotoColorPickerActivity"/>
     </application>
 
 </manifest>

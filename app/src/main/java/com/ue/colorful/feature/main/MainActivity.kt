@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ue.colorful.R
 import com.ue.colorful.feature.material.MDPaletteActivity
+import com.ue.colorful.feature.pick.PhotoColorPickerActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     fun onBtnClick(v: View) {
         when (v.id) {
             R.id.btnMDPalette -> startActivity(Intent(this, MDPaletteActivity::class.java))
+            R.id.btnPickFromPhoto -> startActivity(Intent(this, PhotoColorPickerActivity::class.java))
         }
     }
 }

@@ -21,13 +21,13 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ue.colorful.R
 import com.ue.colorful.event.ColorListener
-import kotlinx.android.synthetic.main.activity_color_picker.*
+import kotlinx.android.synthetic.main.activity_photo_color_picker.*
 
-class ColorPickerActivity : AppCompatActivity() {
+class PhotoColorPickerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_color_picker)
+        setContentView(R.layout.activity_photo_color_picker)
 
         colorPickerView.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
