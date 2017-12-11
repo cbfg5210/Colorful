@@ -14,7 +14,7 @@ import android.view.View
 import com.ue.colorful.R
 
 /**
- * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also available.
+ * Displays a color bg_picker to the user and allow them to select a color. A slider for the alpha channel is also available.
  * Enable it by setting setAlphaSliderVisible(boolean) to true.
  */
 class PaletteColorPickerView : View {
@@ -61,7 +61,7 @@ class PaletteColorPickerView : View {
 
     /*
      * We cache a bitmap of the sat/value panel which is expensive to draw each time.
-     * We can reuse it when the user is sliding the circle picker as long as the hue isn't changed.
+     * We can reuse it when the user is sliding the circle bg_picker as long as the hue isn't changed.
      */
     private var satValBackgroundCache: BitmapCache? = null
     /* We cache the hue background to since its also very expensive now. */
