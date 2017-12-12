@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
-import com.ue.colorful.constant.Constants
+import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils
@@ -18,7 +18,7 @@ class MDPaletteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mdpalette)
 
-        val lastColorOption = SPUtils.getInt(Constants.LAST_MD_COLOR, 0)
+        val lastColorOption = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
         paletteSections = getPaletteSections(lastColorOption)
 
         rvColorList.setHasFixedSize(true)

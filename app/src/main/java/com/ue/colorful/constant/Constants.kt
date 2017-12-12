@@ -5,9 +5,6 @@ package com.ue.colorful.constant
  */
 class Constants {
     companion object {
-        val LAST_MD_COLOR = "lastMDColor"
-        val LAST_PALETTE_COLOR = "lastPaletteColor"
-
         val REQ_RESULT_DATA = "reqResultData";
     }
 }

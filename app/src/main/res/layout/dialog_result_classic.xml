@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_result_1"
+        android:id="@+id/tvResult1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
@@ -31,7 +31,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_result_3a"
+            android:id="@+id/tvResult3a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="levels!"
@@ -39,7 +39,7 @@
             android:textSize="22sp"/>
 
         <TextView
-            android:id="@+id/tv_result_3b"
+            android:id="@+id/tvResult3b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" (+2)"
@@ -49,7 +49,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_again"
+        android:id="@+id/btnAgain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"

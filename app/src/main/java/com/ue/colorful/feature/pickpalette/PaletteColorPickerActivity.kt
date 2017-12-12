@@ -5,7 +5,7 @@ import android.graphics.PixelFormat
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.ue.colorful.R
-import com.ue.colorful.constant.Constants
+import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.util.SPUtils
 import com.ue.colorful.widget.PaletteColorPickerView
 import kotlinx.android.synthetic.main.activity_palette_color_picker.*
@@ -18,7 +18,7 @@ class PaletteColorPickerActivity : AppCompatActivity(), PaletteColorPickerView.O
         window.setFormat(PixelFormat.RGBA_8888)
         setContentView(R.layout.activity_palette_color_picker)
 
-        val initialColor = SPUtils.getInt(Constants.LAST_PALETTE_COLOR, Color.BLACK)
+        val initialColor = SPUtils.getInt(SPKeys.LAST_PALETTE_COLOR, Color.BLACK)
 
         paletteColorPicker.setOnColorChangedListener(this)
         paletteColorPicker.setColor(initialColor, true)
@@ -32,7 +32,7 @@ class PaletteColorPickerActivity : AppCompatActivity(), PaletteColorPickerView.O
     }
 
     override fun onDestroy() {
-        SPUtils.putInt(Constants.LAST_PALETTE_COLOR, paletteColorPicker.color)
+        SPUtils.putInt(SPKeys.LAST_PALETTE_COLOR, paletteColorPicker.color)
         super.onDestroy()
     }
 }
