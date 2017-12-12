@@ -127,7 +127,7 @@ class CaptureService : Service() {
         floatLayout = LayoutInflater.from(this).inflate(R.layout.layout_float_view, null)
         txColorHex = floatLayout.findViewById(R.id.tvColorHex)
         ivCapture = floatLayout.findViewById(R.id.ivCapture)
-        ivCapture.setOnTouchListener { v, event -> mGestureDetector.onTouchEvent(event) }
+        ivCapture.setOnTouchListener { _, event -> mGestureDetector.onTouchEvent(event) }
         try {
             mWindowManager.addView(floatLayout, mLayoutParams)
         } catch (exp: Exception) {
@@ -194,18 +194,14 @@ class CaptureService : Service() {
         override fun onSingleTapUp(e: MotionEvent): Boolean {
             // 用户（轻触触摸屏后）松开，由一个1个MotionEvent ACTION_UP触发
             Log.e("CaptureService", "onSingleTapUp: is attached=" + ViewCompat.isAttachedToWindow(floatLayout))
-            if (floatLayout == null || !ViewCompat.isAttachedToWindow(floatLayout)) {
+            if (!ViewCompat.isAttachedToWindow(floatLayout)) {
                 return false
             }
 
             val tempBitmap = screenCapture
-            Log.e("CaputreService", "onSingleTapUp: bitmap=" + tempBitmap!!)
-            if (tempBitmap == null) {
-                return false
-            }
 
             val invertMatrix = Matrix()
-            floatLayout!!.rootView.matrix.invert(invertMatrix)
+            floatLayout.rootView.matrix.invert(invertMatrix)
 
             val touchPoint = floatArrayOf(e.rawX, e.rawY)
             invertMatrix.mapPoints(touchPoint)
@@ -213,7 +209,7 @@ class CaptureService : Service() {
             val xCoord = touchPoint[0].toInt()
             val yCoord = touchPoint[1].toInt()
 
-            val color = tempBitmap.getPixel(xCoord, yCoord)
+            val color = tempBitmap!!.getPixel(xCoord, yCoord)
             txColorHex.text = "#" + String.format("%06X", 0xFFFFFF and color)
 
             return true

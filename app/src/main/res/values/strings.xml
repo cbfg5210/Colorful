@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ColorPickerViewDemo</string>
+    <string name="app_name">Colorful</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -175,4 +175,13 @@
     <string name="newrecord">That\'s a new record!</string>
     <string name="almost">Almost</string>
     <string name="youcandobetterthanthat">You can do better than that!</string>
+
+    <string name="game_help">Tap the lighter color FAST!</string>
+    <string name="game_over">Game Over</string>
+    <string name="retry_game">Replay</string>
+    <string name="preference_file_key">com.example.prakharsriv.colorphun.PREFERENCES_FILE</string>
+    <string name="points_text">Points</string>
+    <string name="level_text">Level</string>
+    <string name="highscore">New High Score!</string>
+    <string name="best_label">Best</string>
 </resources>

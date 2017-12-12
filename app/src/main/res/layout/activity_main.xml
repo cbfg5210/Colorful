@@ -68,4 +68,24 @@
             android:onClick="onBtnClick"
             android:text="Game1"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnPhunGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClick"
+            android:text="PhunGame"/>
+
+        <Button
+            android:id="@+id/btnPhunGame1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClick"
+            android:text="PhunGame1"/>
+    </LinearLayout>
 </LinearLayout>

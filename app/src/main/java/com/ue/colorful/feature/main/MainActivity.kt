@@ -8,6 +8,8 @@ import com.ue.colorful.R
 import com.ue.colorful.feature.calculate.CalculateActivity
 import com.ue.colorful.feature.game.ClassicModeActivity
 import com.ue.colorful.feature.game.TimeTrialModeActivity
+import com.ue.colorful.feature.game_phun.EasyGameActivity
+import com.ue.colorful.feature.game_phun.HardGameActivity
 import com.ue.colorful.feature.material.MDPaletteActivity
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerActivity
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerActivity
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
             R.id.btnCalculate -> startActivity(Intent(this, CalculateActivity::class.java))
             R.id.btnGame -> startActivity(Intent(this, ClassicModeActivity::class.java))
             R.id.btnGame1 -> startActivity(Intent(this, TimeTrialModeActivity::class.java))
+            R.id.btnPhunGame -> startActivity(Intent(this, EasyGameActivity::class.java))
+            R.id.btnPhunGame1 -> startActivity(Intent(this, HardGameActivity::class.java))
         }
     }
 }

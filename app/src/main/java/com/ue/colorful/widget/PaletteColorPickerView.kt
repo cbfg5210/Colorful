@@ -381,8 +381,8 @@ class PaletteColorPickerView : View {
     }
 
     private fun pointToSatVal(x: Float, y: Float): FloatArray {
-        var x = x
-        var y = y
+        var nX = x
+        var nY = y
 
         val rect = satValRect
         val result = FloatArray(2)
@@ -390,61 +390,61 @@ class PaletteColorPickerView : View {
         val width = rect!!.width().toFloat()
         val height = rect.height().toFloat()
 
-        if (x < rect.left) {
-            x = 0f
-        } else if (x > rect.right) {
-            x = width
+        if (nX < rect.left) {
+            nX = 0f
+        } else if (nX > rect.right) {
+            nX = width
         } else {
-            x = x - rect.left
+            nX = nX - rect.left
         }
 
-        if (y < rect.top) {
-            y = 0f
-        } else if (y > rect.bottom) {
-            y = height
+        if (nY < rect.top) {
+            nY = 0f
+        } else if (nY > rect.bottom) {
+            nY = height
         } else {
-            y = y - rect.top
+            nY = nY - rect.top
         }
 
-        result[0] = 1f / width * x
-        result[1] = 1f - 1f / height * y
+        result[0] = 1f / width * nX
+        result[1] = 1f - 1f / height * nY
 
         return result
     }
 
     private fun pointToHue(y: Float): Float {
-        var y = y
+        var nY = y
 
         val rect = hueRect
 
         val height = rect!!.height().toFloat()
 
-        if (y < rect.top) {
-            y = 0f
-        } else if (y > rect.bottom) {
-            y = height
+        if (nY < rect.top) {
+            nY = 0f
+        } else if (nY > rect.bottom) {
+            nY = height
         } else {
-            y = y - rect.top
+            nY = nY - rect.top
         }
 
-        return 360f - y * 360f / height
+        return 360f - nY * 360f / height
     }
 
     private fun pointToAlpha(x: Int): Int {
-        var x = x
+        var nX = x
 
         val rect = alphaRect
         val width = rect!!.width()
 
-        if (x < rect.left) {
-            x = 0
-        } else if (x > rect.right) {
-            x = width
+        if (nX < rect.left) {
+            nX = 0
+        } else if (nX > rect.right) {
+            nX = width
         } else {
-            x = x - rect.left
+            nX = nX - rect.left
         }
 
-        return 0xff - x * 0xff / width
+        return 0xff - nX * 0xff / width
 
     }
 

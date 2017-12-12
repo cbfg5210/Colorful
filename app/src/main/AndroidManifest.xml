@@ -28,6 +28,9 @@
         <activity android:name=".feature.calculate.CalculateActivity"/>
         <activity android:name=".feature.game.ClassicModeActivity"/>
         <activity android:name=".feature.game.TimeTrialModeActivity"/>
+        <activity android:name=".feature.game_phun.EasyGameActivity"/>
+        <activity android:name=".feature.game_phun.HardGameActivity"/>
+        <activity android:name=".feature.game_phun.GameOverActivity"/>
     </application>
 
 </manifest>
