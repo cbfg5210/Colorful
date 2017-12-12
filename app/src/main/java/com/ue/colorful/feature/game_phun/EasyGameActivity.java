@@ -18,10 +18,10 @@ public class EasyGameActivity extends MainGameActivity {
         setContentView(R.layout.activity_easy_game);
         setupProgressView();
 
-        POINT_INCREMENT = 2;
-        TIMER_BUMP = 2;
+        setPOINT_INCREMENT(2);
+        setTIMER_BUMP(2);
 
-        gameMode = GameMode.EASY;
+        setGameMode(GameMode.EASY);
 
         topBtn = (Button) findViewById(R.id.top_button);
         bottomBtn = (Button) findViewById(R.id.bottom_button);
@@ -36,13 +36,13 @@ public class EasyGameActivity extends MainGameActivity {
 
     @Override
     public void onClick(View view) {
-        if (!gameStart) return;
+        if (!getGameStart()) return;
         calculatePoints(view);
         setColorsOnButtons();
     }
 
     protected void setColorsOnButtons() {
-        int color = Color.parseColor(BetterColor.getColor());
+        int color = Color.parseColor(BetterColor.INSTANCE.getColor());
         int red = Color.red(color);
         int green = Color.green(color);
         int blue = Color.blue(color);
