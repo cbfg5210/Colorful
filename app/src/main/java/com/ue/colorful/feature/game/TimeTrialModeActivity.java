@@ -71,11 +71,11 @@ public class TimeTrialModeActivity extends AppCompatActivity implements View.OnC
         random_button = (r.nextInt(buttons_in_row * buttons_in_row) + 1);
 
         if (level == MEDIUM) {
-            int random_color = r.nextInt(arrays.colors_medium.length);
+            int random_color = r.nextInt(arrays.getMediumColors().length);
             color0 = arrays.getMediumColor0(random_color);
             color1 = arrays.getMediumColor1(random_color);
         } else {
-            int random_color = r.nextInt(arrays.colors_hard.length);
+            int random_color = r.nextInt(arrays.getHardColors().length);
             color0 = arrays.getHardColor0(random_color);
             color1 = arrays.getHardColor1(random_color);
         }
@@ -170,7 +170,7 @@ public class TimeTrialModeActivity extends AppCompatActivity implements View.OnC
     public void gameOver() {
         if (chronometer != null) chronometer.stop();
 
-        TimeTrialResultDialog dialog = TimeTrialResultDialog.newInstance(chronometer.getText().toString());
+        TimeTrialResultDialog dialog = TimeTrialResultDialog.Companion.newInstance(chronometer.getText().toString());
         dialog.setPlayAgainListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

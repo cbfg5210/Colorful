@@ -106,19 +106,19 @@ public class ClassicModeActivity extends AppCompatActivity implements View.OnCli
         String color2;
 
         if (level == EASY) {
-            int random_color = r.nextInt(arrays.colors_easy.length);
+            int random_color = r.nextInt(arrays.getEasyColors().length);
             color1 = arrays.getEasyColor0(random_color);
             color2 = arrays.getEasyColor1(random_color);
         } else if (level == MEDIUM) {
-            int random_color = r.nextInt(arrays.colors_medium.length);
+            int random_color = r.nextInt(arrays.getMediumColors().length);
             color1 = arrays.getMediumColor0(random_color);
             color2 = arrays.getMediumColor1(random_color);
         } else if (level == HARD) {
-            int random_color = r.nextInt(arrays.colors_hard.length);
+            int random_color = r.nextInt(arrays.getHardColors().length);
             color1 = arrays.getHardColor0(random_color);
             color2 = arrays.getHardColor1(random_color);
         } else {
-            int random_color = r.nextInt(arrays.colors_veryhard.length);
+            int random_color = r.nextInt(arrays.getVeryHardColors().length);
             color1 = arrays.getVeryHardColor0(random_color);
             color2 = arrays.getVeryHardColor1(random_color);
         }
@@ -229,7 +229,7 @@ public class ClassicModeActivity extends AppCompatActivity implements View.OnCli
         level--;
         tv_time.setText("00:00");
 
-        ClassicResultDialog dialog = ClassicResultDialog.newInstance(level);
+        ClassicResultDialog dialog = ClassicResultDialog.Companion.newInstance(level);
         dialog.setPlayAgainListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
