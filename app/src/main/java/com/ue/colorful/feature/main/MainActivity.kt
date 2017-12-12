@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.ue.colorful.R
+import com.ue.colorful.feature.calculate.CalculateActivity
 import com.ue.colorful.feature.material.MDPaletteActivity
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerActivity
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerActivity
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             R.id.btnPickFromPhoto -> startActivity(Intent(this, PhotoColorPickerActivity::class.java))
             R.id.btnPickFromPalette -> startActivity(Intent(this, PaletteColorPickerActivity::class.java))
             R.id.btnPickFromScreen -> startActivity(Intent(this, ScreenColorPickerActivity::class.java))
+            R.id.btnCalculate -> startActivity(Intent(this, CalculateActivity::class.java))
         }
     }
 }

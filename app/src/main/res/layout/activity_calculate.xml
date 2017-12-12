@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="
+            颜色透明度计算:\n
+            题目：给出的颜色是#FFFFFF，透明度为20%，求结果。\n
+            换算过程：\n
+            1、将透明度转换成不透明度。不透明度=80%\n
+            2、不透明度乘以255=204\n
+            3、将计算结果转换成16进制(204/16商12余12,12(10)=C(16))，得到最终的不透明度=CC\n
+            4、将不透明度和颜色值拼接成ARGB格式，得到最终的颜色值= #CCFFFFFF\n\n
+            "/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAlphas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="
+            ARGB值计算:\n
+            说明:\n
+            6位（如:#000000）就是RGB值\n
+            8位（如:#1e000000）ARGB 头两位是透明度，00是完全透明，FF是完全不透明，后6位是RGB值，每两位分别属于R、G、B部分\n
+            (1)题目:给出的颜色是#EAEAEA，求结果。\n
+            计算过程:\n
+            #ECEFF1相当于#FFECEFF1\n
+            (A)=FF(16)=(15x16+15)(10)=255(10)\n
+            (R)=EC(16)=(14x16+12)(10)=236(10)\n
+            (G)=EF(16)=(14x16+15)(10)=239(10)\n
+            (B)=F1(16)=(15x16+1)(10)=241(10)
+            "/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
