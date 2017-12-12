@@ -168,4 +168,11 @@
         <item>1000</item>
         <item>1000</item>
     </string-array>
+
+    <string name="text_lvl">Lvl</string>
+    <string name="button_redraw">REDRAW</string>
+    <string name="button_half">HALF</string>
+    <string name="newrecord">That\'s a new record!</string>
+    <string name="almost">Almost</string>
+    <string name="youcandobetterthanthat">You can do better than that!</string>
 </resources>
