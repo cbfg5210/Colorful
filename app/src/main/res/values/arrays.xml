@@ -26,4 +26,31 @@
         <item>@string/answer23</item>
         <item>@string/answer24</item>
     </array>
+
+    <array name="colorVisionImgs">
+        <item>@mipmap/vst1</item>
+        <item>@mipmap/vst2</item>
+        <item>@mipmap/vst3</item>
+        <item>@mipmap/vst4</item>
+        <item>@mipmap/vst5</item>
+        <item>@mipmap/vst6</item>
+        <item>@mipmap/vst7</item>
+        <item>@mipmap/vst8</item>
+        <item>@mipmap/vst9</item>
+        <item>@mipmap/vst10</item>
+        <item>@mipmap/vst11</item>
+        <item>@mipmap/vst12</item>
+        <item>@mipmap/vst13</item>
+        <item>@mipmap/vst14</item>
+        <item>@mipmap/vst15</item>
+        <item>@mipmap/vst16</item>
+        <item>@mipmap/vst17</item>
+        <item>@mipmap/vst18</item>
+        <item>@mipmap/vst19</item>
+        <item>@mipmap/vst20</item>
+        <item>@mipmap/vst21</item>
+        <item>@mipmap/vst22</item>
+        <item>@mipmap/vst23</item>
+        <item>@mipmap/vst24</item>
+    </array>
 </resources>
