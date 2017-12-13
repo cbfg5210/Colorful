@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/top_button"
+            android:id="@+id/topButton"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/bottom_button"
+            android:id="@+id/bottomButton"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />

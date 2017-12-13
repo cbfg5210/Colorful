@@ -2,18 +2,18 @@ package com.ue.colorful.feature.game_phun
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ue.colorful.R
+import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.progress_area_layout.*
 
-abstract class MainGameActivity : Activity(), View.OnClickListener {
+abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
 
     protected lateinit var pointAnim: AnimatorSet
     protected lateinit var levelAnim: AnimatorSet
@@ -23,7 +23,7 @@ abstract class MainGameActivity : Activity(), View.OnClickListener {
     protected var gameStart = false
     protected lateinit var runnable: Runnable
     protected var timer: Int = 0
-    protected var gameMode: GameMode? = null
+    protected lateinit var gameMode: GameMode
 
     protected var POINT_INCREMENT: Int = 0
     protected var TIMER_BUMP: Int = 0
@@ -114,15 +114,10 @@ abstract class MainGameActivity : Activity(), View.OnClickListener {
     }
 
     private fun saveAndGetHighScore(): Int {
-        val preferences = this.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-
-        var highScore = preferences.getInt("HIGHSCORE", 0)
+        var highScore = SPUtils.getInt(SPKeys.HIGH_SCORE, 0)
 
         if (points > highScore) {
-            val editor = preferences.edit()
-            editor.putInt("HIGHSCORE", points)
-            editor.apply()
+            SPUtils.putInt(SPKeys.HIGH_SCORE, points)
             highScore = points
         }
         return highScore
@@ -130,13 +125,7 @@ abstract class MainGameActivity : Activity(), View.OnClickListener {
 
     private fun launchGameOver(highScore: Int) {
         // Send data to another activity
-        val intent = Intent(this, GameOverActivity::class.java)
-        intent.putExtra("points", points)
-        intent.putExtra("level", level)
-        intent.putExtra("best", highScore)
-        intent.putExtra("newScore", highScore == points)
-        intent.putExtra("gameMode", gameMode!!.name)
-        startActivity(intent)
+        GameOverActivity.start(this, points, level, highScore, highScore == points, gameMode.name)
     }
 
     // called on correct guess

@@ -1,11 +1,12 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_bg"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
-    <include layout="@layout/progress_area_layout" />
+    <include layout="@layout/progress_area_layout"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -14,30 +15,33 @@
         android:stretchColumns="0">
 
         <TableRow>
+
             <Button
                 android:id="@+id/button_1"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="260dp" />
+                android:layout_height="260dp"
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button_2"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </TableRow>
+
         <TableRow>
+
             <Button
                 android:id="@+id/button_3"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="260dp" />
+                android:layout_height="260dp"
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button_4"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </TableRow>
 
     </TableLayout>

@@ -99,8 +99,8 @@ object QMUIDrawableHelper {
      * @param filledColor  图片的填充色
      * @return 指定大小的纯色图片
      */
-    fun createDrawableWithSize(resources: Resources, width: Int, height: Int, cornerRadius: Int, @ColorInt filledColor: Int): BitmapDrawable {
-        var filledColor = filledColor
+    fun createDrawableWithSize(resources: Resources, width: Int, height: Int, cornerRadius: Int, @ColorInt pFilledColor: Int): BitmapDrawable {
+        var filledColor = pFilledColor
         val output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(output)
 

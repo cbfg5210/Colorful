@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.ue.colorful.R
+import kotlinx.android.synthetic.main.activity_hard_game.*
 import java.util.*
 
 
-class HardGameActivity : MainGameActivity() {
+class HardGameActivity : BasePhunActivity() {
 
-    private var buttonList: ArrayList<Button>? = null
+    private lateinit var buttonList: ArrayList<Button>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +22,7 @@ class HardGameActivity : MainGameActivity() {
         POINT_INCREMENT = 4
         TIMER_BUMP = 2
 
-        gameMode = MainGameActivity.GameMode.HARD
-
-        // buttons
-        val button_1 = findViewById<View>(R.id.button_1) as Button
-        val button_2 = findViewById<View>(R.id.button_2) as Button
-        val button_3 = findViewById<View>(R.id.button_3) as Button
-        val button_4 = findViewById<View>(R.id.button_4) as Button
+        gameMode = BasePhunActivity.GameMode.HARD
 
         button_1.setOnClickListener(this)
         button_2.setOnClickListener(this)
@@ -35,10 +30,10 @@ class HardGameActivity : MainGameActivity() {
         button_4.setOnClickListener(this)
 
         buttonList = ArrayList()
-        buttonList!!.add(button_1)
-        buttonList!!.add(button_2)
-        buttonList!!.add(button_3)
-        buttonList!!.add(button_4)
+        buttonList.add(button_1)
+        buttonList.add(button_2)
+        buttonList.add(button_3)
+        buttonList.add(button_4)
 
         // bootstrap game
         resetGame()
@@ -54,7 +49,7 @@ class HardGameActivity : MainGameActivity() {
         val alphas = shuffledColors()
 
         for (i in alphas.indices) {
-            val button = buttonList!![i]
+            val button = buttonList[i]
             button.setBackgroundColor(Color.argb(alphas[i], red, green, blue))
         }
     }
@@ -64,7 +59,7 @@ class HardGameActivity : MainGameActivity() {
         val clickedAlpha = Color.alpha(clickedColor.color)
 
         var lightestColor = clickedAlpha
-        for (button in buttonList!!) {
+        for (button in buttonList) {
             val color = button.background as ColorDrawable
             val alpha = Color.alpha(color.color)
             if (alpha < lightestColor) {
