@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.ue.colorful.R
-import com.ue.colorful.feature.calculate.CalculateActivity
+import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.game.ClassicModeActivity
 import com.ue.colorful.feature.game.TimeTrialModeActivity
 import com.ue.colorful.feature.game_phun.EasyGameActivity
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             R.id.btnPickFromPhoto -> startActivity(Intent(this, PhotoColorPickerActivity::class.java))
             R.id.btnPickFromPalette -> startActivity(Intent(this, PaletteColorPickerActivity::class.java))
             R.id.btnPickFromScreen -> startActivity(Intent(this, ScreenColorPickerActivity::class.java))
-            R.id.btnCalculate -> startActivity(Intent(this, CalculateActivity::class.java))
+            R.id.btnCalculate -> ContainerActivity.start(this, Constants.FRAG_CALCULATE)
             R.id.btnGame -> startActivity(Intent(this, ClassicModeActivity::class.java))
             R.id.btnGame1 -> startActivity(Intent(this, TimeTrialModeActivity::class.java))
             R.id.btnPhunGame -> startActivity(Intent(this, EasyGameActivity::class.java))
