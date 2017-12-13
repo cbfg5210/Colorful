@@ -31,4 +31,5 @@
     <color name="col_ff607d8b">#FF607D8B</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="col_80000000">#80000000</color>
 </resources>

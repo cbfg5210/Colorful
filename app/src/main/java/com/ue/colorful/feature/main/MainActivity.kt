@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
 import com.ue.colorful.R
 import com.ue.colorful.feature.calculate.CalculateActivity
 import com.ue.colorful.feature.game.ClassicModeActivity
@@ -11,6 +12,7 @@ import com.ue.colorful.feature.game.TimeTrialModeActivity
 import com.ue.colorful.feature.game_phun.EasyGameActivity
 import com.ue.colorful.feature.game_phun.HardGameActivity
 import com.ue.colorful.feature.material.MDPaletteActivity
+import com.ue.colorful.feature.pickargb.EditColorDialog
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerActivity
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerActivity
 import com.ue.colorful.feature.pickscreen.ScreenColorPickerActivity
@@ -35,6 +37,15 @@ class MainActivity : AppCompatActivity() {
             R.id.btnPhunGame -> startActivity(Intent(this, EasyGameActivity::class.java))
             R.id.btnPhunGame1 -> startActivity(Intent(this, HardGameActivity::class.java))
             R.id.btnTest -> startActivity(Intent(this, ColorVisionTestActivity::class.java))
+            R.id.btnPickFromARGB -> {
+                val dialog = EditColorDialog()
+                dialog.setOnAddColorListener(object : EditColorDialog.OnAddColorListener {
+                    override fun onAddColor(colorInt: Int) {
+                        Toast.makeText(this@MainActivity, "colorInt=" + colorInt, Toast.LENGTH_SHORT).show()
+                    }
+                })
+                dialog.show(supportFragmentManager, "")
+            }
         }
     }
 }

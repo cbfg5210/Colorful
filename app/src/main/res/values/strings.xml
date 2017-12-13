@@ -209,4 +209,7 @@
     <string name="answer22">普通人能看到蓝绿色/黄绿色的线条\n红绿色弱会看到蓝绿色和红色线条\n全色弱看不到任何线条</string>
     <string name="answer23">普通人能看到红色和橙色线条\n红绿色弱会看到红色和蓝绿色线条\n全色弱什么都看不到</string>
     <string name="answer24">所有人都能看到一条弯曲的线条</string>
+    <string name="pick_color">选择颜色</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
 </resources>
