@@ -25,14 +25,15 @@
             android:layout_height="match_parent">
 
             <com.ue.colorful.widget.RabbleView
-                android:id="@+id/answer"
+                android:id="@+id/ravAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:lineSpacingExtra="8dp"
                 android:padding="16dp"
-                android:text="@string/answer01"/>
+                tools:text="@string/answer01"/>
 
             <TextView
-                android:id="@+id/tips"
+                android:id="@+id/tvTips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

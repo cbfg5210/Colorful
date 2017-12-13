@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,22 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
+
         <android.support.v4.view.ViewPager
-            android:id = "@+id/ViewPager"
+            android:id="@+id/vpTestPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="16dp"
-            ></android.support.v4.view.ViewPager>
+            android:padding="16dp"/>
     </FrameLayout>
 
     <TextView
-        android:layout_height="wrap_content"
+        android:id="@+id/tvTags"
         android:layout_width="match_parent"
-        android:id="@+id/tags"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
         android:textAlignment="center"
-        android:textSize="20sp"
         android:textColor="#607D8B"
-        android:paddingBottom="24dp"/>
+        android:textSize="20sp"/>
 
 </LinearLayout>
