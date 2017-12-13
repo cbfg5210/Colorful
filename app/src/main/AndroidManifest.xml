@@ -31,6 +31,7 @@
         <activity android:name=".feature.game_phun.EasyGameActivity"/>
         <activity android:name=".feature.game_phun.HardGameActivity"/>
         <activity android:name=".feature.game_phun.GameOverActivity"/>
+        <activity android:name=".feature.test.ColorVisionTestActivity"/>
     </application>
 
 </manifest>

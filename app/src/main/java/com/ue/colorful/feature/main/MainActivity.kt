@@ -14,6 +14,7 @@ import com.ue.colorful.feature.material.MDPaletteActivity
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerActivity
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerActivity
 import com.ue.colorful.feature.pickscreen.ScreenColorPickerActivity
+import com.ue.colorful.feature.test.ColorVisionTestActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.btnGame1 -> startActivity(Intent(this, TimeTrialModeActivity::class.java))
             R.id.btnPhunGame -> startActivity(Intent(this, EasyGameActivity::class.java))
             R.id.btnPhunGame1 -> startActivity(Intent(this, HardGameActivity::class.java))
+            R.id.btnTest -> startActivity(Intent(this, ColorVisionTestActivity::class.java))
         }
     }
 }

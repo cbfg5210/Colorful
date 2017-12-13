@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="colorVisionAns">
+        <item>@string/answer01</item>
+        <item>@string/answer02</item>
+        <item>@string/answer03</item>
+        <item>@string/answer04</item>
+        <item>@string/answer05</item>
+        <item>@string/answer06</item>
+        <item>@string/answer07</item>
+        <item>@string/answer08</item>
+        <item>@string/answer09</item>
+        <item>@string/answer10</item>
+        <item>@string/answer11</item>
+        <item>@string/answer12</item>
+        <item>@string/answer13</item>
+        <item>@string/answer14</item>
+        <item>@string/answer15</item>
+        <item>@string/answer16</item>
+        <item>@string/answer17</item>
+        <item>@string/answer18</item>
+        <item>@string/answer19</item>
+        <item>@string/answer20</item>
+        <item>@string/answer21</item>
+        <item>@string/answer22</item>
+        <item>@string/answer23</item>
+        <item>@string/answer24</item>
+    </array>
+</resources>
