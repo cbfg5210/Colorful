@@ -1,31 +1,41 @@
 package com.ue.colorful.feature.material
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils
-import kotlinx.android.synthetic.main.activity_mdpalette.*
+import kotlinx.android.synthetic.main.fragment_mdpalette.*
+import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
 
-class MDPaletteActivity : AppCompatActivity() {
+/**
+ * Created by hawk on 2017/12/13.
+ */
+class MDPaletteFragment : Fragment() {
     private lateinit var paletteSections: List<PaletteSection>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mdpalette)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_mdpalette, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val lastColorOption = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
         paletteSections = getPaletteSections(lastColorOption)
 
-        rvColorList.setHasFixedSize(true)
-        rvColorList.adapter = PaletteColorAdapter(this, paletteSections[lastColorOption].paletteColors)
+        view.rvColorList.setHasFixedSize(true)
+        view.rvColorList.adapter = PaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors)
 
-        rvColorOptions.setHasFixedSize(true)
-        rvColorOptions.adapter = PaletteSectionAdapter(this, paletteSections,
+        view.rvColorOptions.setHasFixedSize(true)
+        view.rvColorOptions.adapter = PaletteSectionAdapter(activity, paletteSections,
                 OnDelegateClickListener { view, i ->
                     val adapter = rvColorList.adapter as PaletteColorAdapter
                     adapter.items.clear()
@@ -33,7 +43,7 @@ class MDPaletteActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                 })
         //移动到指定位置，可以置顶则置顶
-        (rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastColorOption, 0)
+        (view.rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastColorOption, 0)
     }
 
     private fun getPaletteSections(lastColorOption: Int): List<PaletteSection> {
@@ -43,7 +53,7 @@ class MDPaletteActivity : AppCompatActivity() {
         val baseColorNamesArray = resources.obtainTypedArray(R.array.all_color_names)
         val colorValuesArray = resources.obtainTypedArray(R.array.all_color_list)
 
-        val paletteSections = java.util.ArrayList<PaletteSection>()
+        val paletteSections = ArrayList<PaletteSection>()
         var i = 0
         while (i < colorSectionsNames.size) {
             val paletteColors = java.util.ArrayList<PaletteColor>()

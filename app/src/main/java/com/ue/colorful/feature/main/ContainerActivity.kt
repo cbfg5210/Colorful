@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.calculate.CalculateFragment
+import com.ue.colorful.feature.material.MDPaletteFragment
 
 class ContainerActivity : AppCompatActivity() {
 
@@ -30,6 +31,10 @@ class ContainerActivity : AppCompatActivity() {
         val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
         when (fragFlag) {
             Constants.FRAG_PICK_FROM_PALETTE -> {
+                supportActionBar?.setTitle("MDPalette")
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, MDPaletteFragment())
+                        .commit()
             }
             Constants.FRAG_PICK_FROM_PHOTO -> {
             }
@@ -42,7 +47,7 @@ class ContainerActivity : AppCompatActivity() {
             Constants.FRAG_GAME_PHUN -> {
             }
             Constants.FRAG_CALCULATE -> {
-                supportActionBar?.setTitle("calculate")
+                supportActionBar?.setTitle("Calculate")
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, CalculateFragment())
                         .commit()

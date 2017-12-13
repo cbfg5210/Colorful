@@ -11,7 +11,6 @@ import com.ue.colorful.feature.game.ClassicModeActivity
 import com.ue.colorful.feature.game.TimeTrialModeActivity
 import com.ue.colorful.feature.game_phun.EasyGameActivity
 import com.ue.colorful.feature.game_phun.HardGameActivity
-import com.ue.colorful.feature.material.MDPaletteActivity
 import com.ue.colorful.feature.pickargb.EditColorDialog
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerActivity
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerActivity
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onBtnClick(v: View) {
         when (v.id) {
-            R.id.btnMDPalette -> startActivity(Intent(this, MDPaletteActivity::class.java))
+            R.id.btnMDPalette -> ContainerActivity.start(this, Constants.FRAG_PICK_FROM_PALETTE)
             R.id.btnPickFromPhoto -> startActivity(Intent(this, PhotoColorPickerActivity::class.java))
             R.id.btnPickFromPalette -> startActivity(Intent(this, PaletteColorPickerActivity::class.java))
             R.id.btnPickFromScreen -> startActivity(Intent(this, ScreenColorPickerActivity::class.java))
