@@ -28,8 +28,8 @@
         <activity android:name=".feature.calculate.CalculateActivity"/>
         <activity android:name=".feature.game.ClassicModeActivity"/>
         <activity android:name=".feature.game.TimeTrialModeActivity"/>
-        <activity android:name=".feature.game_phun.EasyGameActivity"/>
-        <activity android:name=".feature.game_phun.HardGameActivity"/>
+        <activity android:name=".feature.game_phun.EasyGameFragment"/>
+        <activity android:name=".feature.game_phun.HardGameFragment"/>
         <activity android:name=".feature.game_phun.GameOverActivity"/>
         <activity android:name=".feature.test.ColorVisionTestActivity"/>
         <activity android:name=".feature.pickargb.PickFromARGBActivity">

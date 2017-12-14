@@ -10,7 +10,7 @@ import android.view.View
 
 import java.text.DecimalFormat
 
-class Chronometer : AppCompatTextView {
+class ChronometerTV : AppCompatTextView {
     private val TICK_WHAT = 2
     private var mBase: Long = 0
     private var mVisible: Boolean = false

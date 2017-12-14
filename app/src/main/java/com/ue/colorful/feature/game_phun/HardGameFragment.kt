@@ -3,31 +3,39 @@ package com.ue.colorful.feature.game_phun
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_hard_game.*
+import kotlinx.android.synthetic.main.fragment_hard_game.*
+import kotlinx.android.synthetic.main.fragment_hard_game.view.*
 import java.util.*
 
 
-class HardGameActivity : BasePhunActivity() {
+class HardGameFragment : BasePhunFragment() {
 
     private lateinit var buttonList: ArrayList<Button>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hard_game)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView=inflater.inflate(R.layout.fragment_hard_game,container,false)
+        return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setupProgressView()
 
         POINT_INCREMENT = 4
         TIMER_BUMP = 2
 
-        gameMode = BasePhunActivity.GameMode.HARD
+        gameMode = BasePhunFragment.GameMode.HARD
 
-        button_1.setOnClickListener(this)
-        button_2.setOnClickListener(this)
-        button_3.setOnClickListener(this)
-        button_4.setOnClickListener(this)
+        rootView.button_1.setOnClickListener(this)
+        rootView.button_2.setOnClickListener(this)
+        rootView.button_3.setOnClickListener(this)
+        rootView.button_4.setOnClickListener(this)
 
         buttonList = ArrayList()
         buttonList.add(button_1)

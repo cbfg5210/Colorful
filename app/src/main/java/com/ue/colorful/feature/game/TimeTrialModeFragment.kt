@@ -3,15 +3,20 @@ package com.ue.colorful.feature.game
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_time_trial_mode.*
+import kotlinx.android.synthetic.main.fragment_time_trial_mode.*
+import kotlinx.android.synthetic.main.fragment_time_trial_mode.view.*
 import java.util.*
 
-class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
+class TimeTrialModeFragment : Fragment(), View.OnClickListener {
+    private lateinit var rootView: View
+
     private var buttonsInRow: Int = 0
     private var randomButton: Int = 0
     private var width: Int = 0
@@ -20,18 +25,22 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
     private val arrays = Arrays()
     private val r = Random()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_time_trial_mode)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_time_trial_mode, container, false)
+        return rootView
+    }
 
-        tvLevel.text = "10"
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        rootView = view
 
-        btnRedraw.setOnClickListener {
+        rootView.tvLevel.text = "10"
+        rootView.btnRedraw.setOnClickListener {
             linearLayoutTags.removeAllViews()
             drawMap(HARD, 7)
         }
 
-        btnHalf.setOnClickListener { halfTiles(49) }
+        rootView.btnHalf.setOnClickListener { halfTiles(49) }
         startGame()
     }
 
@@ -56,11 +65,11 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         for (i in 0 until buttonsInRow) {
-            val row = LinearLayout(this)
+            val row = LinearLayout(activity)
             row.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
             for (j in 0 until buttonsInRow) {
-                val btn = Button(this)
+                val btn = Button(activity)
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
                 params.setMargins(5, 5, 5, 5)
                 btn.layoutParams = params
@@ -74,9 +83,9 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
                 row.addView(btn)
             }
 
-            linearLayoutTags.addView(row)
+            rootView.linearLayoutTags.addView(row)
         }
-        val b = linearLayoutTags.findViewById<View>(randomButton) as Button
+        val b = rootView.linearLayoutTags.findViewById<View>(randomButton) as Button
         val drawable2 = b.background as GradientDrawable
         drawable2.setColor(Color.parseColor("#" + color1))
     }
@@ -87,7 +96,7 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
 
         val myId = view.getId()
         if (myId == randomButton) {
-            linearLayoutTags.removeAllViews()
+            rootView.linearLayoutTags.removeAllViews()
 
             level--
             if (level > 7) {
@@ -98,9 +107,9 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
                 gameOver()
             }
 
-            tvLevel.text = level.toString()
+            rootView.tvLevel.text = level.toString()
         } else {
-            val b3 = linearLayoutTags.findViewById<View>(myId) as Button
+            val b3 = rootView.linearLayoutTags.findViewById<View>(myId) as Button
             val drawable3 = b3.background as GradientDrawable
             drawable3.setColor(Color.BLACK)
         }
@@ -108,7 +117,7 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
 
     fun halfTiles(num: Int) {
         val r = Random()
-        var random_tile: Int
+        var randomTile: Int
 
         val list = ArrayList<Int>()
         for (i in 1..num) {
@@ -121,11 +130,11 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
         run {
             var i = 1
             while (i < x) {
-                random_tile = r.nextInt(list.size) + 1
-                if (random_tile == randomButton) {
+                randomTile = r.nextInt(list.size) + 1
+                if (randomTile == randomButton) {
                     i--
-                } else if (!list2.contains(random_tile)) {
-                    list2.add(random_tile)
+                } else if (!list2.contains(randomTile)) {
+                    list2.add(randomTile)
                 } else {
                     i--
                 }
@@ -136,7 +145,7 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
         for (i in list.indices) {
             for (j in list2.indices) {
                 if (list[i] === list2[j]) {
-                    val b2 = linearLayoutTags.findViewById<View>(list[i]) as Button
+                    val b2 = rootView.linearLayoutTags.findViewById<View>(list[i]) as Button
                     b2.visibility = View.INVISIBLE
                 }
             }
@@ -144,44 +153,44 @@ class TimeTrialModeActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun gameOver() {
-        chronometerText.stop()
+        rootView.chronometerText.stop()
 
-        val dialog = TimeTrialResultDialog.newInstance(chronometerText.text.toString())
+        val dialog = TimeTrialResultDialog.newInstance(rootView.chronometerText.text.toString())
         dialog.setPlayAgainListener(View.OnClickListener { startGame() })
-        dialog.show(supportFragmentManager, "")
+        dialog.show(childFragmentManager, "")
     }
 
     fun startGame() {
-        chronometerText.start()
+        rootView.chronometerText.start()
 
         width = resources.displayMetrics.widthPixels * 9 / 10
-        linearLayoutTags.removeAllViews()
+        rootView.linearLayoutTags.removeAllViews()
 
         level = 10
-        tvLevel.text = level.toString()
+        rootView.tvLevel.text = level.toString()
         drawMap(HARD, 7)
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         super.onPause()
-        chronometerText.stop()
+        rootView.chronometerText.stop()
     }
 
-    public override fun onStop() {
+    override fun onStop() {
         super.onStop()
-        chronometerText.stop()
+        rootView.chronometerText.stop()
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
-        if (chronometerText.timeElapsed > 0) {
-            chronometerText.resume()
+        if (rootView.chronometerText.timeElapsed > 0) {
+            rootView.chronometerText.resume()
         }
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
-        chronometerText.stop()
+        rootView.chronometerText.stop()
     }
 
     companion object {

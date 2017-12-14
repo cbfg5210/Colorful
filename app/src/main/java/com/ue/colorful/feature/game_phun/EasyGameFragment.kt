@@ -3,24 +3,30 @@ package com.ue.colorful.feature.game_phun
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_easy_game.*
+import kotlinx.android.synthetic.main.fragment_easy_game.view.*
 
-class EasyGameActivity : BasePhunActivity() {
+class EasyGameFragment : BasePhunFragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_easy_game, container, false)
+        return rootView
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_easy_game)
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setupProgressView()
 
         POINT_INCREMENT = 2
         TIMER_BUMP = 2
 
-        gameMode = BasePhunActivity.GameMode.EASY
+        gameMode = BasePhunFragment.GameMode.EASY
 
-        topButton.setOnClickListener(this)
-        bottomButton.setOnClickListener(this)
+        rootView.topButton.setOnClickListener(this)
+        rootView.bottomButton.setOnClickListener(this)
 
         // bootstrap game
         resetGame()
@@ -50,12 +56,12 @@ class EasyGameActivity : BasePhunActivity() {
             alpha2 = 255
         }
 
-        topButton.setBackgroundColor(Color.argb(alpha1, red, green, blue))
-        bottomButton.setBackgroundColor(Color.argb(alpha2, red, green, blue))
+        rootView.topButton.setBackgroundColor(Color.argb(alpha1, red, green, blue))
+        rootView.bottomButton.setBackgroundColor(Color.argb(alpha2, red, green, blue))
     }
 
     override fun calculatePoints(clickedView: View) {
-        val unClickedView = if (clickedView === topButton) bottomButton else topButton
+        val unClickedView = if (clickedView === rootView.topButton) rootView.bottomButton else rootView.topButton
         val clickedColor = clickedView.background as ColorDrawable
         val unClickedColor = unClickedView.background as ColorDrawable
 

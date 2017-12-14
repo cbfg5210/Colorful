@@ -8,6 +8,8 @@ import android.view.MenuItem
 import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.calculate.CalculateFragment
+import com.ue.colorful.feature.game.TimeTrialModeFragment
+import com.ue.colorful.feature.game_phun.EasyGameFragment
 import com.ue.colorful.feature.material.MDPaletteFragment
 import com.ue.colorful.feature.pickargb.PickARGBFragment
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
@@ -34,13 +36,13 @@ class ContainerActivity : AppCompatActivity() {
         val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
         when (fragFlag) {
             Constants.FRAG_PICK_FROM_MD_PALETTE -> {
-                supportActionBar?.setTitle("MDPalette")
+                supportActionBar?.title = "MDPalette"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, MDPaletteFragment())
                         .commit()
             }
             Constants.FRAG_PICK_FROM_COLOR_PALETTE -> {
-                supportActionBar?.setTitle("ColorPalette")
+                supportActionBar?.title = "ColorPalette"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, PaletteColorPickerFragment())
                         .commit()
@@ -48,7 +50,7 @@ class ContainerActivity : AppCompatActivity() {
             Constants.FRAG_PICK_FROM_PHOTO -> {
             }
             Constants.FRAG_PICK_FROM_ARGB -> {
-                supportActionBar?.setTitle("ARGB")
+                supportActionBar?.title = "ARGB"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, PickARGBFragment())
                         .commit()
@@ -56,17 +58,25 @@ class ContainerActivity : AppCompatActivity() {
             Constants.FRAG_PICK_FROM_SCREEN -> {
             }
             Constants.FRAG_GAME_COLOR_DIFF -> {
+                supportActionBar?.title = "ColorDiff"
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, TimeTrialModeFragment())
+                        .commit()
             }
             Constants.FRAG_GAME_PHUN -> {
+                supportActionBar?.title = "Phun"
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, EasyGameFragment())
+                        .commit()
             }
             Constants.FRAG_CALCULATE -> {
-                supportActionBar?.setTitle("Calculate")
+                supportActionBar?.title = "Calculate"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, CalculateFragment())
                         .commit()
             }
-            Constants.FRAG_VISION_TEST->{
-                supportActionBar?.setTitle("VisionTest")
+            Constants.FRAG_VISION_TEST -> {
+                supportActionBar?.title = "VisionTest"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, ColorVisionTestFragment())
                         .commit()

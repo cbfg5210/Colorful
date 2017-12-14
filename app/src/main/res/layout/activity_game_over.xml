@@ -1,24 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:background="@color/white_bg"
-    android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
-    android:paddingLeft="80dp"
-    android:paddingRight="80dp"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_bg"
+              android:orientation="vertical"
+              android:paddingBottom="20dp"
+              android:paddingLeft="80dp"
+              android:paddingRight="80dp"
+              android:paddingTop="20dp">
 
     <TextView
         android:id="@+id/game_over"
         android:layout_width="wrap_content"
-        android:text="@string/game_over"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="40sp"
+        android:text="@string/game_over"
         android:textColor="@color/blue_gray"
-        android:layout_height="wrap_content" />
+        android:textSize="40sp"/>
 
     <View
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
@@ -26,63 +26,63 @@
 
     <TextView
         android:id="@+id/tvLevelIndicator"
-        android:text="Level 1"
-        android:textSize="20sp"
-        android:textColor="@color/dark_gray"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Level 1"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/tvPointsBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="36sp"
         android:background="@color/blue_gray"
+        android:padding="10dp"
         android:text="124"
         android:textColor="@color/yellow"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textSize="36sp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:text="@string/high_score"
-        android:textColor="@color/red"
         android:id="@+id/tvHighScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_height="wrap_content" />
+        android:text="@string/high_score"
+        android:textColor="@color/red"/>
 
     <LinearLayout
-        android:background="@drawable/border"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tvBestLabel"
-            android:text="@string/best_label"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/blue_gray"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/best_label"
+            android:textColor="@color/blue_gray"/>
 
         <TextView
             android:id="@+id/tvBestBox"
-            android:textSize="36sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:text="176"
             android:textColor="@color/red"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:textSize="36sp"/>
+    </LinearLayout>
 
     <View
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
@@ -91,11 +91,10 @@
     <Button
         android:id="@+id/btnReplay"
         android:layout_width="180dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/retry_game"
-        android:textSize="15sp"
         android:background="@drawable/replay_button"
-        android:onClick="playGame"
-        android:layout_height="wrap_content" />
+        android:text="@string/retry_game"
+        android:textSize="15sp"/>
 
 </LinearLayout>

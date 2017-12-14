@@ -4,16 +4,17 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.util.SPUtils
-import kotlinx.android.synthetic.main.progress_area_layout.*
+import kotlinx.android.synthetic.main.progress_area_layout.view.*
 
-abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BasePhunFragment : Fragment(), View.OnClickListener {
+    protected lateinit var rootView: View
 
     protected lateinit var pointAnim: AnimatorSet
     protected lateinit var levelAnim: AnimatorSet
@@ -41,15 +42,10 @@ abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
 
     protected fun setupProgressView() {
         // setting up animations
-        pointAnim = AnimatorInflater.loadAnimator(this, R.animator.points_animations) as AnimatorSet
-        pointAnim.setTarget(tvPointsValue)
-        levelAnim = AnimatorInflater.loadAnimator(this, R.animator.level_animations) as AnimatorSet
-        levelAnim.setTarget(tvLevelValue)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        endGame()
+        pointAnim = AnimatorInflater.loadAnimator(activity, R.animator.points_animations) as AnimatorSet
+        pointAnim.setTarget(rootView.tvPointsValue)
+        levelAnim = AnimatorInflater.loadAnimator(activity, R.animator.level_animations) as AnimatorSet
+        levelAnim.setTarget(rootView.tvLevelValue)
     }
 
     override fun onStop() {
@@ -73,14 +69,13 @@ abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
                             TIMER_DELTA = -TIMER_DELTA / TIMER_BUMP
                         }
                     }
-                    handler.post { pbTimerProgress.progress = timer }
+                    handler.post { rootView.pbTimerProgress.progress = timer }
                 }
                 if (gameStart) {
                     handler.post { endGame() }
                 }
             }
         }
-
     }
 
     protected fun resetGame() {
@@ -89,15 +84,15 @@ abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
         points = 0
 
         // update view
-        tvPointsValue.text = Integer.toString(points)
-        tvLevelValue.text = Integer.toString(level)
-        pbTimerProgress.progress = 0
+        rootView.tvPointsValue.text = Integer.toString(points)
+        rootView.tvLevelValue.text = Integer.toString(level)
+        rootView.pbTimerProgress.progress = 0
     }
 
     protected fun startGame() {
         gameStart = true
 
-        Toast.makeText(this, R.string.game_help, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, R.string.game_help, Toast.LENGTH_SHORT).show()
         setColorsOnButtons()
 
         // start timer
@@ -110,7 +105,6 @@ abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
         gameStart = false
         val highScore = saveAndGetHighScore()
         launchGameOver(highScore)
-        finish()
     }
 
     private fun saveAndGetHighScore(): Int {
@@ -124,20 +118,27 @@ abstract class BasePhunActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun launchGameOver(highScore: Int) {
-        // Send data to another activity
-        GameOverActivity.start(this, points, level, highScore, highScore == points, gameMode.name)
+        val dialog = GameOverDialog.newInstance(points, level, highScore, highScore == points, gameMode.name)
+        dialog.setReplayListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                dialog.dismiss()
+                resetGame()
+                startGame()
+            }
+        })
+        dialog.show(childFragmentManager, "")
     }
 
     // called on correct guess
     fun updatePoints() {
         points = points + POINT_INCREMENT
         TIMER_DELTA = -TIMER_BUMP * TIMER_DELTA // give a timer bump
-        tvPointsValue.text = Integer.toString(points)
+        rootView.tvPointsValue.text = Integer.toString(points)
         pointAnim.start()
 
         if (points > level * LEVEL) {
             incrementLevel()
-            tvLevelValue.text = Integer.toString(level)
+            rootView.tvLevelValue.text = Integer.toString(level)
             levelAnim.start()
         }
     }

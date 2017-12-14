@@ -4,15 +4,20 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_classic_mode.*
+import kotlinx.android.synthetic.main.fragment_classic_mode.*
+import kotlinx.android.synthetic.main.fragment_classic_mode.view.*
 import java.util.*
 
-class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
+class ClassicModeFragment : Fragment(), View.OnClickListener {
+    private lateinit var rootView: View
+
     private var countDownTimer: CountDownTimer? = null
     private var seconds: Int = 0
     private var buttonsInRow: Int = 0
@@ -23,16 +28,21 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
     private val arrays = Arrays()
     private val r = Random()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_classic_mode)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_classic_mode, container, false)
+    }
 
-        tvPause.setOnClickListener { toggleCountDownSwitch(!tvPause.isSelected) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        btnRedraw.setOnClickListener {
+        rootView = view
+
+        rootView.tvPause.setOnClickListener { toggleCountDownSwitch(!tvPause.isSelected) }
+
+        rootView.btnRedraw.setOnClickListener {
             changeTimer(-1)
 
-            linearLayoutTags.removeAllViews()
+            rootView.linearLayoutTags.removeAllViews()
 
             when (level) {
                 1 -> drawMap(EASY, 2)
@@ -45,7 +55,7 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        btnHalf.setOnClickListener {
+        rootView.btnHalf.setOnClickListener {
             when (level) {
                 1 -> halfTiles(4)
                 2 -> halfTiles(9)
@@ -89,11 +99,11 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
         randomButton = r.nextInt(buttonsInRow * buttonsInRow) + 1
 
         for (i in 0 until buttonsInRow) {
-            val row = LinearLayout(this)
+            val row = LinearLayout(activity)
             row.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
             for (j in 0 until buttonsInRow) {
-                val btn = Button(this)
+                val btn = Button(activity)
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
                 params.setMargins(5, 5, 5, 5)
                 btn.layoutParams = params
@@ -107,9 +117,9 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
                 row.addView(btn)
             }
 
-            linearLayoutTags.addView(row)
+            rootView.linearLayoutTags.addView(row)
         }
-        val b = linearLayoutTags.findViewById<View>(randomButton) as Button
+        val b = rootView.linearLayoutTags.findViewById<View>(randomButton) as Button
         val drawable2 = b.background as GradientDrawable
         drawable2.setColor(Color.parseColor("#" + color2))
     }
@@ -120,10 +130,10 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
 
         val myId = view.getId()
         if (myId == randomButton) {
-            linearLayoutTags.removeAllViews()
+            rootView.linearLayoutTags.removeAllViews()
 
             level++
-            tvLevel.text = level.toString()
+            rootView.tvLevel.text = level.toString()
             when (level) {
                 1 -> drawMap(EASY, 2)
                 2 -> drawMap(EASY, 3)
@@ -134,7 +144,7 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
                 else -> drawMap(VERY_HARD, 7)
             }
         } else {
-            val b3 = linearLayoutTags.findViewById<View>(myId) as Button
+            val b3 = rootView.linearLayoutTags.findViewById<View>(myId) as Button
             val drawable3 = b3.background as GradientDrawable
             drawable3.setColor(Color.BLACK)
         }
@@ -171,7 +181,7 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
         for (i in list.indices) {
             for (j in list2.indices) {
                 if (list[i] === list2[j]) {
-                    linearLayoutTags.findViewById<View>(list[i]).visibility = View.INVISIBLE
+                    rootView.linearLayoutTags.findViewById<View>(list[i]).visibility = View.INVISIBLE
                 }
             }
         }
@@ -189,17 +199,17 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
 
         val dialog = ClassicResultDialog.newInstance(level)
         dialog.setPlayAgainListener(View.OnClickListener { startGame() })
-        dialog.show(supportFragmentManager, "")
+        dialog.show(childFragmentManager, "")
     }
 
     private fun toggleCountDownSwitch(startCountDown: Boolean) {
         cancelCountDown()
-        tvPause.isSelected = startCountDown
+        rootView.tvPause.isSelected = startCountDown
         if (!startCountDown) {
-            tvPause.text = "Play"
+            rootView.tvPause.text = "Play"
             return
         }
-        tvPause.text = "Pause"
+        rootView.tvPause.text = "Pause"
         countDownTimer = object : CountDownTimer((seconds * 1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 tvTime.text = String.format("%02d:%02d", seconds / 60, seconds % 60)
@@ -217,19 +227,19 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
         toggleCountDownSwitch(true)
 
         width = resources.displayMetrics.widthPixels * 9 / 10
-        linearLayoutTags.removeAllViews()
+        rootView.linearLayoutTags.removeAllViews()
 
         level = 1
-        tvLevel.text = level.toString()
+        rootView.tvLevel.text = level.toString()
         drawMap(HARD, 2)
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         super.onPause()
         cancelCountDown()
     }
 
-    public override fun onStop() {
+    override fun onStop() {
         super.onStop()
         cancelCountDown()
     }
@@ -243,7 +253,7 @@ class ClassicModeActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    public override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         cancelCountDown()
     }
