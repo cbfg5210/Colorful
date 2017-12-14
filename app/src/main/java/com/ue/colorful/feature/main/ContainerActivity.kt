@@ -14,6 +14,7 @@ import com.ue.colorful.feature.material.MDPaletteFragment
 import com.ue.colorful.feature.pickargb.PickARGBFragment
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerFragment
+import com.ue.colorful.feature.pickscreen.ScreenColorPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
 
 class ContainerActivity : AppCompatActivity() {
@@ -61,6 +62,10 @@ class ContainerActivity : AppCompatActivity() {
                         .commit()
             }
             Constants.FRAG_PICK_FROM_SCREEN -> {
+                supportActionBar?.title = "PickFromScreen"
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, ScreenColorPickerFragment())
+                        .commit()
             }
             Constants.FRAG_GAME_COLOR_DIFF -> {
                 supportActionBar?.title = "ColorDiff"
