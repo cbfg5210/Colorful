@@ -37,29 +37,33 @@
 
         <LinearLayout
             android:id="@+id/vgMenuContainer"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <Button
+            <ImageView
                 android:id="@+id/ivAddColor"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="#999999"
-                android:text="添加"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp"
+                app:srcCompat="@drawable/svg_palette_black"/>
 
-            <Button
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/col_cccccc"/>
+
+            <ImageView
                 android:id="@+id/ivCopy"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="#cccc99"
-                android:text="复制"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp"
+                app:srcCompat="@drawable/svg_copy"/>
         </LinearLayout>
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
 </android.support.v7.widget.CardView>

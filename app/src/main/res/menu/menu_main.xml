@@ -3,10 +3,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuPalette"
-        android:title="色板"
+        android:icon="@drawable/svg_palette"
+        android:title="@string/palette"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menuAbout"
-        android:title="关于"
+        android:icon="@drawable/svg_about"
+        android:title="@string/about"
         app:showAsAction="always"/>
 </menu>

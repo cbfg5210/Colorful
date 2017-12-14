@@ -3,6 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuPalette"
+        android:icon="@drawable/svg_palette"
         android:title="色板"
         app:showAsAction="always"/>
 </menu>

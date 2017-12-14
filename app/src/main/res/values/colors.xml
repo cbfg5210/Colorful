@@ -26,10 +26,11 @@
     <color name="red">#ffF91C56</color>
     <color name="blue_gray">#ff425666</color>
     <color name="dark_gray">#ff626161</color>
-    <color name="yellow">#ffFFCE61</color>
+    <color name="yellow">#FFCE61</color>
     <color name="darkred">#ffb4284d</color>
     <color name="col_ff607d8b">#FF607D8B</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="col_80000000">#80000000</color>
+    <color name="col_cccccc">#cccccc</color>
 </resources>

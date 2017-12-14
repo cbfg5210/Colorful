@@ -215,4 +215,6 @@
     <string name="no_palette_color">还没有保存过颜色到色板哦</string>
     <string name="add_color_ok">已添加颜色到色板中</string>
     <string name="color_palette">色板</string>
+    <string name="palette">色板</string>
+    <string name="about">关于</string>
 </resources>
