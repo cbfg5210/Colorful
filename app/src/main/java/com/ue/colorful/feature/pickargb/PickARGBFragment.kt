@@ -143,17 +143,8 @@ class PickARGBFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         resetStatus(true)
         changeHex = false
         val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
-        etHex.setText(getHex(colorInt))
+        etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
-    }
-
-    private fun getHex(colorInt: Int): String {
-        var hex = Integer.toHexString(colorInt)
-        if (hex.length < 8) {
-            hex = "00000000$hex"
-            hex = hex.substring(hex.length - 8)
-        }
-        return hex
     }
 
     private fun onARGBProgressChanged(etFlag: Int) {
@@ -167,7 +158,7 @@ class PickARGBFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
 
         val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
-        etHex.setText(getHex(colorInt))
+        etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
 

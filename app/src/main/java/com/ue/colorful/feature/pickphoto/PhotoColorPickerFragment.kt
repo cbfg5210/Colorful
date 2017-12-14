@@ -20,7 +20,7 @@ class PhotoColorPickerFragment : Fragment() {
 
         view.pcpPhotoColorPicker.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
-                view.tvHex.text = "#" + String.format("%06X", 0xFFFFFF and color)
+                view.tvHex.text = "#${String.format("%06X", 0xFFFFFF and color)}"
                 view.vColorEffect.setBackgroundColor(color)
             }
         })
