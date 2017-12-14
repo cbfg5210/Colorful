@@ -16,11 +16,11 @@
     <color name="color_car_separator_light_color">@color/md_white_1000</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="yellow_bg">#ffffb732</color>
-    <color name="green_bg">#ff6e9900</color>
-    <color name='white_bg'>#ffffffff</color>
-    <color name="progress_green">#ff39DBAC</color>
-    <color name="progress_red">#ffff4255</color>
+    <color name="yellow_bg">#ffb732</color>
+    <color name="green_bg">#6e9900</color>
+    <color name='white_bg'>#ffffff</color>
+    <color name="progress_green">#39DBAC</color>
+    <color name="progress_red">#ff4255</color>
     <color name="text_label">#ff696A6D</color>
     <color name="number_label">#ff3C3D3E</color>
     <color name="red">#ffF91C56</color>

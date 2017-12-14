@@ -1,108 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnMDPalette"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="MDPalette"/>
-
-    <Button
-        android:id="@+id/btnPickFromPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="PickColorFromPhoto"/>
-
-    <Button
-        android:id="@+id/btnPickFromPalette"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="PickColorFromPalette"/>
-
-    <Button
-        android:id="@+id/btnPickFromScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="PickColorFromScreen"/>
-
-    <Button
-        android:id="@+id/btnPickFromARGB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="PickColorFromARGB"/>
-
-    <Button
-        android:id="@+id/btnCalculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="Calculate"/>
-
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFunctions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:scrollbars="none"/>
 
-        <Button
-            android:id="@+id/btnGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onBtnClick"
-            android:text="Game"/>
-
-        <Button
-            android:id="@+id/btnGame1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onBtnClick"
-            android:text="Game1"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnPhunGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onBtnClick"
-            android:text="PhunGame"/>
-
-        <Button
-            android:id="@+id/btnPhunGame1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onBtnClick"
-            android:text="PhunGame1"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClick"
-        android:text="Test"/>
-</LinearLayout>
+        android:layout_height="wrap_content"/>
+</FrameLayout>

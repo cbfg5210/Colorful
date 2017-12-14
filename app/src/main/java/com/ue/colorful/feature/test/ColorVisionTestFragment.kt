@@ -97,7 +97,7 @@ class ColorVisionTestFragment : Fragment() {
                 view.vgAnalysePanel.isSelected = true
                 (view.vsAnswer.inflate() as TextView).text = testAns
             } else {
-                view.tvTips.setOnClickListener { v ->
+                view.tvTips.setOnClickListener { _ ->
                     view.tvTips.visibility = View.GONE
                     view.vgAnalysePanel.isSelected = true
                     (view.vsAnswer.inflate() as TextView).text = testAns

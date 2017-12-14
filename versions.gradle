@@ -28,7 +28,7 @@ versions.leakCanary = "1.5"
 versions.playServiceAd = "11.4.2"
 versions.rxLifecycle = "2.1.0"
 versions.transitionsEverywhere = "1.7.8"
-
+versions.flexbox = "0.3.1"
 versions.easySwipeMenuLayout = "1.1.2"
 versions.oneDrawable = "1.1.0"
 versions.smartMenu = "v0.1"
@@ -80,8 +80,8 @@ deps.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGrad
 deps.kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlinJre = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
 // Anko Layouts
-deps.ankoSdk="org.jetbrains.anko:anko-sdk25:$versions.anko" // sdk15, sdk19, sdk21, sdk23 are also available
-deps.ankoAppcompatV7="org.jetbrains.anko:anko-appcompat-v7:$versions.anko"
+deps.ankoSdk = "org.jetbrains.anko:anko-sdk25:$versions.anko" // sdk15, sdk19, sdk21, sdk23 are also available
+deps.ankoAppcompatV7 = "org.jetbrains.anko:anko-appcompat-v7:$versions.anko"
 //
 deps.androidMavenPlugin = "com.github.dcendents:android-maven-gradle-plugin:$versions.androidMavenPlugin"
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
@@ -95,7 +95,7 @@ deps.leakCanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakCana
 deps.playServiceAd = "com.google.android.gms:play-services-ads:$versions.playServiceAd"
 deps.oneDrawable = "com.github.maoruibin:OneDrawable:$versions.oneDrawable"
 deps.transitionsEverywhere = "com.andkulikov:transitionseverywhere:$versions.transitionsEverywhere"
-
+deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.easySwipeMenuLayout = "com.github.anzaizai:EasySwipeMenuLayout:$versions.easySwipeMenuLayout"
 deps.smartMenu = "com.github.cbfg5210:SmartMenu:$versions.smartMenu"
 
