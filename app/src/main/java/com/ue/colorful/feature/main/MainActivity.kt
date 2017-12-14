@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     fun onBtnClick(v: View) {
         when (v.id) {
             R.id.btnMDPalette -> ContainerActivity.start(this, Constants.FRAG_PICK_FROM_MD_PALETTE)
-            R.id.btnPickFromPhoto -> ContainerActivity.start(this, Constants.FRAG_VISION_TEST)
+            R.id.btnPickFromPhoto -> ContainerActivity.start(this, Constants.FRAG_PICK_FROM_PHOTO)
             R.id.btnPickFromPalette -> ContainerActivity.start(this, Constants.FRAG_PICK_FROM_COLOR_PALETTE)
             R.id.btnPickFromScreen -> startActivity(Intent(this, ScreenColorPickerActivity::class.java))
             R.id.btnCalculate -> ContainerActivity.start(this, Constants.FRAG_CALCULATE)

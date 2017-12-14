@@ -13,6 +13,7 @@ import com.ue.colorful.feature.game_phun.EasyGameFragment
 import com.ue.colorful.feature.material.MDPaletteFragment
 import com.ue.colorful.feature.pickargb.PickARGBFragment
 import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
+import com.ue.colorful.feature.pickphoto.PhotoColorPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
 
 class ContainerActivity : AppCompatActivity() {
@@ -48,6 +49,10 @@ class ContainerActivity : AppCompatActivity() {
                         .commit()
             }
             Constants.FRAG_PICK_FROM_PHOTO -> {
+                supportActionBar?.title = "PickFromPhoto"
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, PhotoColorPickerFragment())
+                        .commit()
             }
             Constants.FRAG_PICK_FROM_ARGB -> {
                 supportActionBar?.title = "ARGB"

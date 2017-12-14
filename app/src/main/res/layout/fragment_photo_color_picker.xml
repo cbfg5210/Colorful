@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <com.ue.colorful.widget.PhotoColorPickerView
-            android:id="@+id/photoColorPicker"
+            android:id="@+id/pcpPhotoColorPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvHex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -39,10 +39,10 @@
                 android:textStyle="bold"/>
 
             <View
-                android:id="@+id/linearLayout"
+                android:id="@+id/vColorEffect"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_below="@+id/textView"
+                android:layout_below="@+id/tvHex"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"/>
 
@@ -53,8 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/sel_arrow_right"
-                android:onClick="onViewClick"/>
+                android:background="@drawable/sel_arrow_right"/>
 
             <ImageView
                 android:id="@+id/ivMoveUp"
@@ -62,8 +61,7 @@
                 android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/ivMoveRight"
-                android:background="@drawable/sel_arrow_up"
-                android:onClick="onViewClick"/>
+                android:background="@drawable/sel_arrow_up"/>
 
             <ImageView
                 android:id="@+id/ivThumbToggle"
@@ -74,8 +72,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@+id/ivMoveRight"
-                android:background="@drawable/sel_thumb_toggle"
-                android:onClick="onViewClick"/>
+                android:background="@drawable/sel_thumb_toggle"/>
 
             <ImageView
                 android:id="@+id/ivMoveLeft"
@@ -84,8 +81,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/ivThumbToggle"
-                android:background="@drawable/sel_arrow_left"
-                android:onClick="onViewClick"/>
+                android:background="@drawable/sel_arrow_left"/>
 
             <ImageView
                 android:id="@+id/ivMoveDown"
@@ -94,8 +90,7 @@
                 android:layout_alignLeft="@+id/ivMoveUp"
                 android:layout_below="@+id/ivThumbToggle"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/sel_arrow_down"
-                android:onClick="onViewClick"/>
+                android:background="@drawable/sel_arrow_down"/>
         </RelativeLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
