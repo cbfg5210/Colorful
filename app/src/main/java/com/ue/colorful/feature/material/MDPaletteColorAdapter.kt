@@ -79,11 +79,9 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
             holder.colorTitle.text = paletteColor.baseName
             holder.colorContent.text = paletteColor.hexString
             if (isColorLight(paletteColor.hex)) {
-                holder.ivCopy.setImageResource(R.mipmap.ic_content_copy_black_24dp)
                 holder.colorTitle.setTextColor(ContextCompat.getColor(activity, R.color.color_card_title_dark_color))
                 holder.colorContent.setTextColor(ContextCompat.getColor(activity, R.color.color_card_content_dark_color))
             } else {
-                holder.ivCopy.setImageResource(R.mipmap.ic_content_copy_white_24dp)
                 holder.colorTitle.setTextColor(ContextCompat.getColor(activity, R.color.color_card_title_light_color))
                 holder.colorContent.setTextColor(ContextCompat.getColor(activity, R.color.color_card_content_light_color))
             }
@@ -99,7 +97,7 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
             val colorTitle = itemView.colorTitle
             val colorContent = itemView.colorContent
             val ivCopy = itemView.ivCopy
-            val coloredZone = itemView.coloredZone
+            val coloredZone = itemView.vgColorZone
             val ivAddColor = itemView.ivAddColor
         }
     }

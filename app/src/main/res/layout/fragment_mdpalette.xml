@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="3.3"
         android:orientation="vertical"
-        android:paddingRight="5dp"
         android:scrollbars="none"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_md_palette_color"/>

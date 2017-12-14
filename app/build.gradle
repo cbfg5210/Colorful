@@ -44,4 +44,5 @@ dependencies {
     implementation deps.picasso
     implementation deps.gson
     implementation deps.eventbus
+    implementation deps.easySwipeMenuLayout
 }
