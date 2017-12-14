@@ -18,10 +18,10 @@ import com.ue.colorful.feature.calculate.CalculateFragment
 import com.ue.colorful.feature.game.TimeTrialModeFragment
 import com.ue.colorful.feature.game_phun.EasyGameFragment
 import com.ue.colorful.feature.material.MDPaletteFragment
-import com.ue.colorful.feature.pickargb.PickARGBFragment
-import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
-import com.ue.colorful.feature.pickphoto.PhotoColorPickerFragment
-import com.ue.colorful.feature.pickscreen.ScreenColorPickerFragment
+import com.ue.colorful.feature.pickargb.ARGBPickerFragment
+import com.ue.colorful.feature.pickpalette.PalettePickerFragment
+import com.ue.colorful.feature.pickphoto.PhotoPickerFragment
+import com.ue.colorful.feature.pickscreen.ScreenPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
 import com.ue.colorful.util.GsonHolder
 import com.ue.colorful.util.SPUtils
@@ -65,25 +65,25 @@ class ContainerActivity : AppCompatActivity() {
             FunFlags.PICKER_COLOR_PALETTE -> {
                 supportActionBar?.title = "ColorPalette"
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, PaletteColorPickerFragment())
+                        .add(R.id.vgFragmentContainer, PalettePickerFragment())
                         .commit()
             }
             FunFlags.PICKER_PHOTO -> {
                 supportActionBar?.title = "PickFromPhoto"
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, PhotoColorPickerFragment())
+                        .add(R.id.vgFragmentContainer, PhotoPickerFragment())
                         .commit()
             }
             FunFlags.PICKER_ARGB -> {
                 supportActionBar?.title = "ARGB"
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, PickARGBFragment())
+                        .add(R.id.vgFragmentContainer, ARGBPickerFragment())
                         .commit()
             }
             FunFlags.PICKER_SCREEN -> {
                 supportActionBar?.title = "PickFromScreen"
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, ScreenColorPickerFragment())
+                        .add(R.id.vgFragmentContainer, ScreenPickerFragment())
                         .commit()
             }
             FunFlags.GAME_COLOR_DIFF -> {

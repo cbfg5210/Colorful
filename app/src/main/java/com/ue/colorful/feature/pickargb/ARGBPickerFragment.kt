@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_pick_argb.view.*
  * Created by hawk on 2017/10/12.
  */
 
-class PickARGBFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
+class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     internal lateinit var ivColor: AppCompatImageView
     internal lateinit var etHex: AppCompatEditText
     internal lateinit var etA: EditText

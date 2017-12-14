@@ -18,24 +18,9 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity android:name=".feature.material.MDPaletteActivity"/>
-        <activity android:name=".feature.pickphoto.PhotoColorPickerActivity"/>
-        <activity android:name=".feature.pickpalette.PaletteColorPickerActivity"/>
-        <activity android:name=".feature.pickscreen.ScreenColorPickerActivity"/>
 
         <service android:name=".feature.pickscreen.CaptureService"/>
-
-        <activity android:name=".feature.calculate.CalculateActivity"/>
-        <activity android:name=".feature.game.ClassicModeActivity"/>
-        <activity android:name=".feature.game.TimeTrialModeActivity"/>
-        <activity android:name=".feature.game_phun.EasyGameFragment"/>
-        <activity android:name=".feature.game_phun.HardGameFragment"/>
-        <activity android:name=".feature.game_phun.GameOverActivity"/>
-        <activity android:name=".feature.test.ColorVisionTestActivity"/>
-        <activity android:name=".feature.pickargb.PickFromARGBActivity">
-        </activity>
-        <activity android:name=".feature.main.ContainerActivity">
-        </activity>
+        <activity android:name=".feature.main.ContainerActivity"/>
     </application>
 
 </manifest>

@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.ue.colorful.R
 import com.ue.colorful.event.ColorListener
-import kotlinx.android.synthetic.main.fragment_photo_color_picker.*
-import kotlinx.android.synthetic.main.fragment_photo_color_picker.view.*
+import kotlinx.android.synthetic.main.fragment_photo_picker.*
+import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 
-class PhotoColorPickerFragment : Fragment() {
+class PhotoPickerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_photo_color_picker, container, false)
+        return inflater.inflate(R.layout.fragment_photo_picker, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

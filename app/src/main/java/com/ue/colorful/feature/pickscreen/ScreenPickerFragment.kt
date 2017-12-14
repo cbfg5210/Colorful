@@ -13,10 +13,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
-import kotlinx.android.synthetic.main.fragment_screen_color_picker.view.*
+import kotlinx.android.synthetic.main.fragment_screen_picker.view.*
 
 
-class ScreenColorPickerFragment : Fragment() {
+class ScreenPickerFragment : Fragment() {
     private val REQUEST_MEDIA_PROJECTION = 1
     private var serviceIntent: Intent? = null
 
@@ -25,7 +25,7 @@ class ScreenColorPickerFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_screen_color_picker, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_screen_picker, container, false)
 
         rootView.btnCapture.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
