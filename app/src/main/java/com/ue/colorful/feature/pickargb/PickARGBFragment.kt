@@ -1,11 +1,8 @@
 package com.ue.colorful.feature.pickargb
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatSeekBar
@@ -14,16 +11,18 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.dialog_edit_color.view.*
+import kotlinx.android.synthetic.main.fragment_pick_argb.view.*
 
 /**
  * Created by hawk on 2017/10/12.
  */
 
-class EditColorDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
+class PickARGBFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     internal lateinit var ivColor: AppCompatImageView
     internal lateinit var etHex: AppCompatEditText
     internal lateinit var etA: EditText
@@ -48,8 +47,12 @@ class EditColorDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
         mOnAddColorListener = onAddColorListener
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_color, null)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_pick_argb, container, false)
+    }
+
+    override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         ivColor = rootView.ivColor
         etHex = rootView.etHex
@@ -83,15 +86,8 @@ class EditColorDialog : DialogFragment(), SeekBar.OnSeekBarChangeListener {
         changeHex = true
         etHex.setText("FF000000")
 
-        return AlertDialog.Builder(context)
-                .setTitle(getString(R.string.pick_color))
-                .setView(rootView)
-                .setNegativeButton(getString(R.string.cancel), null)
-                .setPositiveButton(getString(R.string.sure)) { dialogInterface: DialogInterface, i: Int ->
-                    val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
-                    mOnAddColorListener?.onAddColor(colorInt)
-                }
-                .create()
+//        val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
+//        mOnAddColorListener?.onAddColor(colorInt)
     }
 
     private fun getTextWatcher(etFlag: Int): TextWatcher {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +11,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_color_vision_test.*
+import kotlinx.android.synthetic.main.activity_color_vision_test.view.*
 import kotlinx.android.synthetic.main.fragment_test_img.view.*
 
-class ColorVisionTestActivity : AppCompatActivity() {
+/**
+ * Created by hawk on 2017/12/14.
+ */
+class ColorVisionTestFragment : Fragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.activity_color_vision_test, container, false)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_color_vision_test)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val testAnswer = resources.getStringArray(R.array.colorVisionAns)
         val size = testAnswer.size
@@ -30,13 +34,13 @@ class ColorVisionTestActivity : AppCompatActivity() {
         testImgResTa.recycle()
 
         //绑定自定义适配器
-        vpTestPager.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
+        view.vpTestPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getCount(): Int {
                 return size
             }
 
             override fun getItem(position: Int): Fragment {
-                val fragment = ColorVisionTestFragment.newInstance(position, testAnswer[position], testImgRes[position], states[position, false])
+                val fragment = CVTPagerFragment.newInstance(position, testAnswer[position], testImgRes[position], states[position, false])
                 fragment.setAnalyseListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
                         states.put(position, true)
@@ -46,14 +50,14 @@ class ColorVisionTestActivity : AppCompatActivity() {
             }
         }
 
-        tvTags.text = "${(vpTestPager.currentItem + 1)}/$size"
+        view.tvTags.text = "${(view.vpTestPager.currentItem + 1)}/$size"
 
-        vpTestPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view.vpTestPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
 
             override fun onPageSelected(position: Int) {
-                tvTags.text = "${(vpTestPager.currentItem + 1)}/$size"
+                view.tvTags.text = "${(view.vpTestPager.currentItem + 1)}/$size"
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -61,7 +65,7 @@ class ColorVisionTestActivity : AppCompatActivity() {
         })
     }
 
-    class ColorVisionTestFragment : Fragment() {
+    class CVTPagerFragment : Fragment() {
         internal var pageNum: Int = 0
         internal var testAns: String = ""
         internal var testImg: Int = 0
@@ -110,8 +114,8 @@ class ColorVisionTestActivity : AppCompatActivity() {
             private val ARG_TEST_IMG = "arg_test_img"
             private val ARG_IS_VISIBLE = "arg_is_visible"
 
-            fun newInstance(num: Int, testAns: String, testImg: Int, isVisible: Boolean): ColorVisionTestFragment {
-                val fragment = ColorVisionTestFragment()
+            fun newInstance(num: Int, testAns: String, testImg: Int, isVisible: Boolean): CVTPagerFragment {
+                val fragment = CVTPagerFragment()
                 val args = Bundle()
                 args.putInt(ARG_NUM, num)
                 args.putString(ARG_TEST_ANS, testAns)
@@ -122,4 +126,5 @@ class ColorVisionTestActivity : AppCompatActivity() {
             }
         }
     }
+
 }

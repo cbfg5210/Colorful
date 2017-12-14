@@ -9,6 +9,9 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.calculate.CalculateFragment
 import com.ue.colorful.feature.material.MDPaletteFragment
+import com.ue.colorful.feature.pickargb.PickARGBFragment
+import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
+import com.ue.colorful.feature.test.ColorVisionTestFragment
 
 class ContainerActivity : AppCompatActivity() {
 
@@ -30,15 +33,25 @@ class ContainerActivity : AppCompatActivity() {
 
         val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
         when (fragFlag) {
-            Constants.FRAG_PICK_FROM_PALETTE -> {
+            Constants.FRAG_PICK_FROM_MD_PALETTE -> {
                 supportActionBar?.setTitle("MDPalette")
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, MDPaletteFragment())
                         .commit()
             }
+            Constants.FRAG_PICK_FROM_COLOR_PALETTE -> {
+                supportActionBar?.setTitle("ColorPalette")
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, PaletteColorPickerFragment())
+                        .commit()
+            }
             Constants.FRAG_PICK_FROM_PHOTO -> {
             }
             Constants.FRAG_PICK_FROM_ARGB -> {
+                supportActionBar?.setTitle("ARGB")
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, PickARGBFragment())
+                        .commit()
             }
             Constants.FRAG_PICK_FROM_SCREEN -> {
             }
@@ -50,6 +63,12 @@ class ContainerActivity : AppCompatActivity() {
                 supportActionBar?.setTitle("Calculate")
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, CalculateFragment())
+                        .commit()
+            }
+            Constants.FRAG_VISION_TEST->{
+                supportActionBar?.setTitle("VisionTest")
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, ColorVisionTestFragment())
                         .commit()
             }
         }
