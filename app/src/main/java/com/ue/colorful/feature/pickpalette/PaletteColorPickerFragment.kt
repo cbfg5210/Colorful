@@ -10,8 +10,8 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.util.SPUtils
 import com.ue.colorful.widget.PaletteColorPickerView
-import kotlinx.android.synthetic.main.activity_palette_color_picker.*
-import kotlinx.android.synthetic.main.activity_palette_color_picker.view.*
+import kotlinx.android.synthetic.main.fragment_palette_color_picker.*
+import kotlinx.android.synthetic.main.fragment_palette_color_picker.view.*
 import java.util.*
 
 /**
@@ -21,7 +21,7 @@ class PaletteColorPickerFragment : Fragment(), PaletteColorPickerView.OnColorCha
     private lateinit var rootView: View;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.activity_palette_color_picker, container, false)
+        rootView = inflater.inflate(R.layout.fragment_palette_color_picker, container, false)
         return rootView
     }
 

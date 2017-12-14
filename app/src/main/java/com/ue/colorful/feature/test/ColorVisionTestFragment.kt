@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.activity_color_vision_test.view.*
+import kotlinx.android.synthetic.main.fragment_color_vision_test.view.*
 import kotlinx.android.synthetic.main.fragment_test_img.view.*
 
 /**
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_test_img.view.*
  */
 class ColorVisionTestFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_color_vision_test, container, false)
+        return inflater.inflate(R.layout.fragment_color_vision_test, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

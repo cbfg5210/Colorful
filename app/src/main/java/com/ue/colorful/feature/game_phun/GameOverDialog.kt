@@ -13,7 +13,7 @@ import android.widget.TextView
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.util.SPUtils
-import kotlinx.android.synthetic.main.activity_game_over.view.*
+import kotlinx.android.synthetic.main.dialog_game_over.view.*
 
 class GameOverDialog : DialogFragment() {
     private var points: Int = 0
@@ -63,11 +63,11 @@ class GameOverDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val rootView = LayoutInflater.from(context).inflate(R.layout.activity_game_over, null)
+        val rootView = LayoutInflater.from(context).inflate(R.layout.dialog_game_over, null)
         // set data
         rootView.tvPointsBox.text = String.format("%03d", points)
         rootView.tvBestBox.text = String.format("%03d", best)
-        rootView.tvLevelIndicator.text = "Level " + Integer.toString(level)
+        rootView.tvLevelIndicator.text = "Level $level"
 
         rootView.tvHighScore.visibility = if (newScore) View.VISIBLE else View.INVISIBLE
         rootView.btnReplay.setOnClickListener { replayListener?.onClick(null) }

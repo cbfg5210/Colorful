@@ -13,14 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:paddingTop="4dp"
         android:scrollbars="none"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@linearLayoutTags/item_palette_section"/>
+        tools:listitem="@layout/item_palette_section"/>
 
     <View
         android:layout_width="1px"
         android:layout_height="match_parent"
         android:layout_marginRight="1dp"
+        android:layout_marginTop="4dp"
         android:background="#000000"/>
 
     <android.support.v7.widget.RecyclerView
@@ -32,6 +34,6 @@
         android:paddingRight="5dp"
         android:scrollbars="none"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@linearLayoutTags/item_palette_color"/>
+        tools:listitem="@layout/item_palette_color"/>
 
 </LinearLayout>
