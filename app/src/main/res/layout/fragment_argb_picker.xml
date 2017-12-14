@@ -267,4 +267,30 @@
         app:layout_constraintRight_toRightOf="@+id/seekBarR"
         app:layout_constraintTop_toTopOf="@+id/tvBB"
         app:layout_constraintVertical_bias="0.555"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBB">
+
+        <ImageView
+            android:id="@+id/ivAddColor"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackground"
+            app:srcCompat="@drawable/svg_palette_black"/>
+
+        <ImageView
+            android:id="@+id/ivCopy"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="35dp"
+            android:background="?attr/selectableItemBackground"
+            app:srcCompat="@drawable/svg_copy"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

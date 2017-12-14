@@ -1,5 +1,8 @@
 package com.ue.colorful.feature.pickargb
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,20 +12,22 @@ import android.support.v7.widget.AppCompatSeekBar
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.SeekBar
+import android.widget.Toast
 import com.ue.colorful.R
-import kotlinx.android.synthetic.main.fragment_pick_argb.view.*
+import com.ue.colorful.event.AddPaletteColorEvent
+import com.ue.colorful.event.ShowPaletteEvent
+import kotlinx.android.synthetic.main.fragment_argb_picker.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/10/12.
  */
 
-class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
+class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+    internal lateinit var rootView: View
     internal lateinit var ivColor: AppCompatImageView
     internal lateinit var etHex: AppCompatEditText
     internal lateinit var etA: EditText
@@ -41,14 +46,14 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     private var changeB: Boolean = false
     private var changeProgress: Boolean = false
 
-    private var mOnAddColorListener: OnAddColorListener? = null
-
-    fun setOnAddColorListener(onAddColorListener: OnAddColorListener) {
-        mOnAddColorListener = onAddColorListener
+    private val mClipboardManager: ClipboardManager by lazy {
+        activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_pick_argb, container, false)
+        setHasOptionsMenu(true)
+        rootView = inflater.inflate(R.layout.fragment_argb_picker, container, false)
+        return rootView
     }
 
     override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
@@ -86,8 +91,8 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         changeHex = true
         etHex.setText("FF000000")
 
-//        val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
-//        mOnAddColorListener?.onAddColor(colorInt)
+        rootView.ivAddColor.setOnClickListener(this)
+        rootView.ivCopy.setOnClickListener(this)
     }
 
     private fun getTextWatcher(etFlag: Int): TextWatcher {
@@ -115,34 +120,34 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
                     changeA = true
                     return
                 }
-                seekBarA.progress = getARGB(FLAG_A)
+                seekBarA.progress = getCheckedVal(etA)
             }
             FLAG_R -> {
                 if (!changeR) {
                     changeR = true
                     return
                 }
-                seekBarR.progress = getARGB(FLAG_R)
+                seekBarR.progress = getCheckedVal(etR)
             }
             FLAG_G -> {
                 if (!changeG) {
                     changeG = true
                     return
                 }
-                seekBarG.progress = getARGB(FLAG_G)
+                seekBarG.progress = getCheckedVal(etG)
             }
             FLAG_B -> {
                 if (!changeB) {
                     changeB = true
                     return
                 }
-                seekBarB.progress = getARGB(FLAG_B)
+                seekBarB.progress = getCheckedVal(etB)
             }
         }
 
         resetStatus(true)
         changeHex = false
-        val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
+        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -157,7 +162,7 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             FLAG_B -> etB.setText(seekBarB.progress.toString())
         }
 
-        val colorInt = Color.argb(getARGB(FLAG_A), getARGB(FLAG_R), getARGB(FLAG_G), getARGB(FLAG_B))
+        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -194,16 +199,11 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         ivColor.setBackgroundColor(colorInt)
     }
 
-    private fun getARGB(etFlag: Int): Int {
-        var txt = ""
-        when (etFlag) {
-            FLAG_A -> txt = etA.text.toString()
-            FLAG_R -> txt = etR.text.toString()
-            FLAG_G -> txt = etG.text.toString()
-            FLAG_B -> txt = etB.text.toString()
-        }
-        val value = if (txt.isEmpty()) 0 else Integer.valueOf(txt)
-        return if (value > 255) 255 else value
+    private fun getCheckedVal(valueEt: EditText): Int {
+        val value = valueEt.text.toString()
+        val tempStr = if (value.isEmpty()) "0" else value
+        val tempInt = tempStr.toInt()
+        return if (tempInt > 255) 255 else tempInt
     }
 
     private fun resetStatus(status: Boolean) {
@@ -215,7 +215,6 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-        Log.e("EditColorDialog", "onProgressChanged: $changeHex,$changeR,$changeG,$changeB")
         if (!changeProgress) {
             return
         }
@@ -236,8 +235,35 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         changeProgress = false
     }
 
-    interface OnAddColorListener {
-        fun onAddColor(colorInt: Int)
+    override fun onClick(view: View) {
+        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
+        val hex = String.format("#%08X", colorInt)
+
+        if (view.id == R.id.ivCopy) {
+            val clip = ClipData.newPlainText("copy", hex)
+            mClipboardManager.primaryClip = clip
+
+            Toast.makeText(activity, activity.getString(R.string.color_copied, hex), Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (view.id == R.id.ivAddColor) {
+            EventBus.getDefault().post(AddPaletteColorEvent(colorInt))
+            return
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_palette, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuPalette -> {
+                EventBus.getDefault().post(ShowPaletteEvent())
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
