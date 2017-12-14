@@ -3,32 +3,27 @@
     <color name="colorPrimary">#26293a</color>
     <color name="colorPrimaryDark">#25293a</color>
     <color name="colorAccent">#3d95c9</color>
-    <color name="background">#1d1f2f</color>
-    <color name="btnColor">#30354b</color>
 
     <color name="color_card_title_dark_color">@color/md_black_1000</color>
     <color name="color_card_title_light_color">@color/md_white_1000</color>
-
     <color name="color_card_content_dark_color">@color/md_grey_900</color>
     <color name="color_card_content_light_color">@color/md_white_1000</color>
 
-    <color name="color_car_separator_dark_color">@android:color/darker_gray</color>
-    <color name="color_car_separator_light_color">@color/md_white_1000</color>
-
-    <color name="black_overlay">#66000000</color>
-    <color name="yellow_bg">#ffb732</color>
-    <color name="green_bg">#6e9900</color>
-    <color name='white_bg'>#ffffff</color>
-    <color name="progress_green">#39DBAC</color>
-    <color name="progress_red">#ff4255</color>
-    <color name="text_label">#ff696A6D</color>
-    <color name="number_label">#ff3C3D3E</color>
-    <color name="red">#ffF91C56</color>
-    <color name="blue_gray">#ff425666</color>
-    <color name="dark_gray">#ff626161</color>
-    <color name="yellow">#FFCE61</color>
-    <color name="darkred">#ffb4284d</color>
-    <color name="col_ff607d8b">#FF607D8B</color>
+    <color name="col_1d1f2f">#1d1f2f</color>
+    <color name="col_30354b">#30354b</color>
+    <color name="col_66000000">#66000000</color>
+    <color name="col_ffb732">#ffb732</color>
+    <color name="col_6e9900">#6e9900</color>
+    <color name="col_39dbac">#39DBAC</color>
+    <color name="col_ff4255">#ff4255</color>
+    <color name="col_696a6d">#ff696A6D</color>
+    <color name="col_3c3d3e">#3C3D3E</color>
+    <color name="col_f91c56">#F91C56</color>
+    <color name="col_425666">#425666</color>
+    <color name="col_626161">#626161</color>
+    <color name="col_ffce61">#FFCE61</color>
+    <color name="col_b4284d">#b4284d</color>
+    <color name="col_607d8b">#607D8B</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="col_80000000">#80000000</color>
