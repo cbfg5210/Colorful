@@ -2,11 +2,11 @@ package com.ue.colorful.feature.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.ue.colorful.R
+import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.model.ColorFunCategory
 import com.ue.colorful.model.ColorFunction
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         rvFunctions.setHasFixedSize(true)
-        rvFunctions.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         rvFunctions.adapter = ColorFunCategoryAdapter(this, funCategories)
     }
 
@@ -28,29 +27,25 @@ class MainActivity : AppCompatActivity() {
             val colorCats = ArrayList<ColorFunCategory>()
             //配色
             var colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("MaterialDesign配色", 0))
-            colorCats.add(ColorFunCategory("配色", colorFuns, "99000000"))
+            colorFuns.add(ColorFunction("MaterialDesign配色", FunFlags.PICKER_MD_PALETTE))
+            colorCats.add(ColorFunCategory("配色", colorFuns, "bbdefb"))
             //取色
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("图片取色", 1))
-            colorFuns.add(ColorFunction("色板取色", 1))
-            colorFuns.add(ColorFunction("屏幕取色", 1))
-            colorFuns.add(ColorFunction("argb取色", 1))
-            colorCats.add(ColorFunCategory("取色", colorFuns, "7F000000"))
+            colorFuns.add(ColorFunction("图片取色", FunFlags.PICKER_PHOTO))
+            colorFuns.add(ColorFunction("色板取色", FunFlags.PICKER_COLOR_PALETTE))
+            colorFuns.add(ColorFunction("屏幕取色", FunFlags.PICKER_SCREEN))
+            colorFuns.add(ColorFunction("argb取色", FunFlags.PICKER_ARGB))
+            colorCats.add(ColorFunCategory("取色", colorFuns, "f8bbd0"))
             //小游戏
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("ColorDiff", 0))
-            colorFuns.add(ColorFunction("ColorPhun", 0))
-            colorCats.add(ColorFunCategory("小游戏", colorFuns, "7F000000"))
-            //计算
-            colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("透明度计算", 0))
-            colorFuns.add(ColorFunction("argb计算", 0))
-            colorCats.add(ColorFunCategory("计算", colorFuns, "7F000000"))
+            colorFuns.add(ColorFunction("ColorDiff", FunFlags.GAME_COLOR_DIFF))
+            colorFuns.add(ColorFunction("ColorPhun", FunFlags.GAME_PHUN))
+            colorCats.add(ColorFunCategory("小游戏", colorFuns, "e1bee7"))
             //其它
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("色觉测试", 0))
-            colorCats.add(ColorFunCategory("其它", colorFuns, "7F000000"))
+            colorFuns.add(ColorFunction("计算", FunFlags.CALCULATE))
+            colorFuns.add(ColorFunction("色觉测试", FunFlags.VISION_TEST))
+            colorCats.add(ColorFunCategory("其它", colorFuns, "c5cae9"))
 
             return colorCats
         }

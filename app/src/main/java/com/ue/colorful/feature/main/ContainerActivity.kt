@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.ue.colorful.R
-import com.ue.colorful.constant.Constants
+import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.feature.calculate.CalculateFragment
 import com.ue.colorful.feature.game.TimeTrialModeFragment
 import com.ue.colorful.feature.game_phun.EasyGameFragment
@@ -37,55 +37,55 @@ class ContainerActivity : AppCompatActivity() {
 
         val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
         when (fragFlag) {
-            Constants.FRAG_PICK_FROM_MD_PALETTE -> {
+            FunFlags.PICKER_MD_PALETTE -> {
                 supportActionBar?.title = "MDPalette"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, MDPaletteFragment())
                         .commit()
             }
-            Constants.FRAG_PICK_FROM_COLOR_PALETTE -> {
+            FunFlags.PICKER_COLOR_PALETTE -> {
                 supportActionBar?.title = "ColorPalette"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, PaletteColorPickerFragment())
                         .commit()
             }
-            Constants.FRAG_PICK_FROM_PHOTO -> {
+            FunFlags.PICKER_PHOTO -> {
                 supportActionBar?.title = "PickFromPhoto"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, PhotoColorPickerFragment())
                         .commit()
             }
-            Constants.FRAG_PICK_FROM_ARGB -> {
+            FunFlags.PICKER_ARGB -> {
                 supportActionBar?.title = "ARGB"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, PickARGBFragment())
                         .commit()
             }
-            Constants.FRAG_PICK_FROM_SCREEN -> {
+            FunFlags.PICKER_SCREEN -> {
                 supportActionBar?.title = "PickFromScreen"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, ScreenColorPickerFragment())
                         .commit()
             }
-            Constants.FRAG_GAME_COLOR_DIFF -> {
+            FunFlags.GAME_COLOR_DIFF -> {
                 supportActionBar?.title = "ColorDiff"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, TimeTrialModeFragment())
                         .commit()
             }
-            Constants.FRAG_GAME_PHUN -> {
+            FunFlags.GAME_PHUN -> {
                 supportActionBar?.title = "Phun"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, EasyGameFragment())
                         .commit()
             }
-            Constants.FRAG_CALCULATE -> {
+            FunFlags.CALCULATE -> {
                 supportActionBar?.title = "Calculate"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, CalculateFragment())
                         .commit()
             }
-            Constants.FRAG_VISION_TEST -> {
+            FunFlags.VISION_TEST -> {
                 supportActionBar?.title = "VisionTest"
                 supportFragmentManager.beginTransaction()
                         .add(R.id.vgFragmentContainer, ColorVisionTestFragment())

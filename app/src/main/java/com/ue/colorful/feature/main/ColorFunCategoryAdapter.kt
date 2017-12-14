@@ -2,11 +2,12 @@ package com.ue.colorful.feature.main
 
 import android.app.Activity
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.StateListDrawable
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
-import com.google.android.flexbox.FlexboxLayout
+import android.widget.LinearLayout
 import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
@@ -31,7 +32,15 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
         if (position < 0 || position >= itemCount) {
             return
         }
-        Toast.makeText(activity, "item click", Toast.LENGTH_SHORT).show()
+        if (view.tag == null) {
+            return
+        }
+        val tag = view.tag
+        if (!(view.tag is Int)) {
+            return;
+        }
+        tag as Int
+        ContainerActivity.start(activity, tag)
     }
 
     /**
@@ -51,29 +60,36 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             holder as ViewHolder
 
             holder.tvCatName.text = item.catName
+            holder.tvCatName.setBackgroundColor(Color.parseColor("#" + item.colorHex))
 
-            if (holder.adapterPosition == 0) {
-                holder.tvCatName.setBackgroundColor(Color.parseColor("#99000000"))
-                holder.vgFunctions.setBackgroundColor(Color.parseColor("#7F000000"))
-            } else {
-                holder.tvCatName.setBackgroundColor(Color.parseColor("#7F000000"))
-                holder.vgFunctions.setBackgroundColor(Color.parseColor("#66000000"))
-            }
-
+            var count = 0
             for (func in item.funs) {
                 val textView = AppCompatTextView(activity)
                 textView.setPadding(20, 20, 20, 20)
                 textView.textSize = 17F
+                val drawable = StateListDrawable()
+                drawable.addState(intArrayOf(android.R.attr.state_pressed), ColorDrawable(Color.parseColor("#99" + item.colorHex)))
+                drawable.addState(intArrayOf(), ColorDrawable(Color.parseColor("#CC" + item.colorHex)))
+                textView.setBackgroundDrawable(drawable)
+
                 textView.text = func.funName
                 textView.tag = func.funFlag
                 textView.setOnClickListener { onDelegateClickListener?.onClick(textView, holder.adapterPosition) }
-                holder.vgFunctions.addView(textView, FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, FlexboxLayout.LayoutParams.WRAP_CONTENT))
+                holder.vgCatContainer.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+
+                count++
+
+                if (count < item.funs.size) {
+                    val divider = View(activity)
+                    divider.setBackgroundColor(Color.parseColor("#" + item.colorHex))
+                    holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1))
+                }
             }
         }
 
         private class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val vgCatContainer = itemView.vgCatContainer
             val tvCatName = itemView.tvCatName
-            val vgFunctions = itemView.vgFunctions
         }
     }
 }
