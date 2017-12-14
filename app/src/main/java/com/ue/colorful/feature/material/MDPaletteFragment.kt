@@ -3,23 +3,28 @@ package com.ue.colorful.feature.material
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.event.ShowPaletteEvent
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_mdpalette.*
 import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/12/13.
  */
 class MDPaletteFragment : Fragment() {
     private lateinit var paletteSections: List<PaletteSection>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mdpalette, container, false)
@@ -32,12 +37,12 @@ class MDPaletteFragment : Fragment() {
         paletteSections = getPaletteSections(lastColorOption)
 
         view.rvColorList.setHasFixedSize(true)
-        view.rvColorList.adapter = PaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors)
+        view.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors)
 
         view.rvColorOptions.setHasFixedSize(true)
-        view.rvColorOptions.adapter = PaletteSectionAdapter(activity, paletteSections,
+        view.rvColorOptions.adapter = MDPaletteSectionAdapter(activity, paletteSections,
                 OnDelegateClickListener { view, i ->
-                    val adapter = rvColorList.adapter as PaletteColorAdapter
+                    val adapter = rvColorList.adapter as MDPaletteColorAdapter
                     adapter.items.clear()
                     adapter.items.addAll(paletteSections[i].paletteColors)
                     adapter.notifyDataSetChanged()
@@ -71,5 +76,19 @@ class MDPaletteFragment : Fragment() {
         paletteSections[lastColorOption].isSelected = true
 
         return paletteSections
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_palette, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuPalette -> {
+                EventBus.getDefault().post(ShowPaletteEvent())
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

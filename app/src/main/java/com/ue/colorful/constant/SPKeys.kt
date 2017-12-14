@@ -13,5 +13,6 @@ class SPKeys {
         val TIME_RECORD_DATE = "timeRecordDate"
         val HIGH_SCORE = "highScore"
         val TIMES_PLAYED = "timesPlayed"
+        val PALETTE_COLORS = "paletteColors"
     }
 }

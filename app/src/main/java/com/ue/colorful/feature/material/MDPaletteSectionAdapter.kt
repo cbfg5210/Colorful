@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_palette_section.view.*
 /**
  * Created by hawk on 2017/12/9.
  */
-internal class PaletteSectionAdapter(private val activity: Activity, items: List<PaletteSection>?, private val onDelegateListener: OnDelegateClickListener?) : DelegationAdapter<PaletteSection>(), OnDelegateClickListener {
+internal class MDPaletteSectionAdapter(private val activity: Activity, items: List<PaletteSection>?, private val onDelegateListener: OnDelegateClickListener?) : DelegationAdapter<PaletteSection>(), OnDelegateClickListener {
     private var selection: Int
 
     init {

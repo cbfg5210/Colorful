@@ -4,9 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.MenuItem
+import android.widget.Toast
+import com.google.gson.reflect.TypeToken
 import com.ue.colorful.R
 import com.ue.colorful.constant.FunFlags
+import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.event.AddPaletteColorEvent
+import com.ue.colorful.event.RemovePaletteColorEvent
+import com.ue.colorful.event.ShowPaletteEvent
 import com.ue.colorful.feature.calculate.CalculateFragment
 import com.ue.colorful.feature.game.TimeTrialModeFragment
 import com.ue.colorful.feature.game_phun.EasyGameFragment
@@ -16,8 +23,14 @@ import com.ue.colorful.feature.pickpalette.PaletteColorPickerFragment
 import com.ue.colorful.feature.pickphoto.PhotoColorPickerFragment
 import com.ue.colorful.feature.pickscreen.ScreenColorPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
+import com.ue.colorful.util.GsonHolder
+import com.ue.colorful.util.SPUtils
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+
 
 class ContainerActivity : AppCompatActivity() {
+    private lateinit var paletteColors: ArrayList<Int>
 
     companion object {
         private val ARG_FRAGMENT_FLAG = "arg_frag_flag"
@@ -32,8 +45,14 @@ class ContainerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
+        EventBus.getDefault().register(this)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val paletteColorsStr = SPUtils.getString(SPKeys.PALETTE_COLORS, "")
+        paletteColors =
+                if (TextUtils.isEmpty(paletteColorsStr)) ArrayList<Int>()
+                else GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
 
         val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
         when (fragFlag) {
@@ -100,5 +119,33 @@ class ContainerActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe
+    fun onAddPaletteColorEvent(event: AddPaletteColorEvent) {
+        paletteColors.add(event.color)
+        SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
+        Toast.makeText(this, getString(R.string.add_color_ok), Toast.LENGTH_SHORT).show()
+    }
+
+    @Subscribe
+    fun onRemovePaletteColorEvent(event: RemovePaletteColorEvent) {
+        paletteColors.remove(event.position)
+        SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
+    }
+
+    @Subscribe
+    fun onShowPaletteEvent(event: ShowPaletteEvent) {
+        if (paletteColors.size == 0) {
+            Toast.makeText(this, getString(R.string.no_palette_color), Toast.LENGTH_SHORT).show()
+            return
+        }
+        val dialog = ColorPaletteDialog.newInstance(paletteColors)
+        dialog.show(supportFragmentManager, "")
     }
 }

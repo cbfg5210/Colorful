@@ -13,13 +13,15 @@ import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
+import com.ue.colorful.event.AddPaletteColorEvent
 import com.ue.colorful.model.PaletteColor
-import kotlinx.android.synthetic.main.item_palette_color.view.*
+import kotlinx.android.synthetic.main.item_md_palette_color.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/12/9.
  */
-internal class PaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
+internal class MDPaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
     private val mClipboardManager: ClipboardManager by lazy {
         activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
@@ -36,13 +38,16 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
         if (position < 0 || position >= itemCount) {
             return
         }
-        if (view.id == R.id.colorCopy) {
+        if (view.id == R.id.ivCopy) {
             val paletteColor = items[position]
-            val clip = ClipData.newPlainText(activity.getString(R.string.color_clipboard, paletteColor.colorSectionName,
-                    paletteColor.baseName), paletteColor.hexString)
+            val clip = ClipData.newPlainText("copy", paletteColor.hexString)
             mClipboardManager.primaryClip = clip
 
             Toast.makeText(activity, activity.getString(R.string.color_copied, paletteColor.hexString), Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (view.id == R.id.ivAddColor) {
+            EventBus.getDefault().post(AddPaletteColorEvent(items[position].hex))
             return
         }
     }
@@ -50,11 +55,17 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
     /**
      * Delegate
      */
-    private class PaletteColorDelegate(private val activity: Activity) : BaseAdapterDelegate<PaletteColor>(activity, R.layout.item_palette_color) {
+    private class PaletteColorDelegate(private val activity: Activity) : BaseAdapterDelegate<PaletteColor>(activity, R.layout.item_md_palette_color) {
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             val holder = ViewHolder(itemView)
-            holder.colorCopy.setOnClickListener { v -> onDelegateClickListener?.onClick(v, holder.adapterPosition) }
+            val clickListener = object : View.OnClickListener {
+                override fun onClick(v: View?) {
+                    onDelegateClickListener?.onClick(v, holder.adapterPosition)
+                }
+            }
+            holder.ivCopy.setOnClickListener(clickListener)
+            holder.ivAddColor.setOnClickListener(clickListener)
             return holder
         }
 
@@ -68,11 +79,11 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
             holder.colorTitle.text = paletteColor.baseName
             holder.colorContent.text = paletteColor.hexString
             if (isColorLight(paletteColor.hex)) {
-                holder.colorCopy.setImageResource(R.mipmap.ic_content_copy_black_24dp)
+                holder.ivCopy.setImageResource(R.mipmap.ic_content_copy_black_24dp)
                 holder.colorTitle.setTextColor(ContextCompat.getColor(activity, R.color.color_card_title_dark_color))
                 holder.colorContent.setTextColor(ContextCompat.getColor(activity, R.color.color_card_content_dark_color))
             } else {
-                holder.colorCopy.setImageResource(R.mipmap.ic_content_copy_white_24dp)
+                holder.ivCopy.setImageResource(R.mipmap.ic_content_copy_white_24dp)
                 holder.colorTitle.setTextColor(ContextCompat.getColor(activity, R.color.color_card_title_light_color))
                 holder.colorContent.setTextColor(ContextCompat.getColor(activity, R.color.color_card_content_light_color))
             }
@@ -87,8 +98,9 @@ internal class PaletteColorAdapter(private val activity: Activity, items: List<P
         private class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val colorTitle = itemView.colorTitle
             val colorContent = itemView.colorContent
-            val colorCopy = itemView.colorCopy
+            val ivCopy = itemView.ivCopy
             val coloredZone = itemView.coloredZone
+            val ivAddColor = itemView.ivAddColor
         }
     }
 }
