@@ -30,7 +30,7 @@ class ColorPaletteAdapter(private val activity: Activity, private val colors: Ar
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val color = colors[position]
         holder.vgColorPalette.setBackgroundColor(color)
-        holder.tvHex.text = String.format("%08X", color)
+        holder.tvHex.text = String.format("#%08X", color)
 
         holder.ivCopy.setOnClickListener { v ->
             val hex = holder.tvHex.text.toString()

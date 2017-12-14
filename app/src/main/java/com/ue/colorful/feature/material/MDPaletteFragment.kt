@@ -21,12 +21,8 @@ import org.greenrobot.eventbus.EventBus
 class MDPaletteFragment : Fragment() {
     private lateinit var paletteSections: List<PaletteSection>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_mdpalette, container, false)
     }
 

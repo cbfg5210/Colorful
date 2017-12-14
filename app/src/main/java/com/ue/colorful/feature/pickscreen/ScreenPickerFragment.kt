@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_screen_picker.view.*
 
 
 class ScreenPickerFragment : Fragment() {
-    private val REQUEST_MEDIA_PROJECTION = 1
+    private val REQ_MEDIA_PROJECTION = 1
     private var serviceIntent: Intent? = null
 
     private val mMediaProjectionManager by lazy {
@@ -29,7 +29,7 @@ class ScreenPickerFragment : Fragment() {
 
         rootView.btnCapture.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivityForResult(mMediaProjectionManager.createScreenCaptureIntent(), REQUEST_MEDIA_PROJECTION)
+                startActivityForResult(mMediaProjectionManager.createScreenCaptureIntent(), REQ_MEDIA_PROJECTION)
             } else {
                 Toast.makeText(activity, "Android5.0以上才可以屏幕取色", Toast.LENGTH_SHORT).show()
             }
@@ -39,7 +39,7 @@ class ScreenPickerFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_MEDIA_PROJECTION) {
+        if (requestCode == REQ_MEDIA_PROJECTION) {
             if (resultCode != Activity.RESULT_OK) {
                 Toast.makeText(activity, "没有授权", Toast.LENGTH_SHORT).show()
                 return
