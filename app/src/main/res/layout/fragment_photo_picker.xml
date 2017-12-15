@@ -14,44 +14,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        app:palette="@drawable/watercolor">
-
-        <FrameLayout
-            android:id="@+id/vgDirection"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/ivMoveRight"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="right|center_vertical"
-                android:background="@drawable/sel_arrow_right"/>
-
-            <ImageView
-                android:id="@+id/ivMoveUp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="top|center_horizontal"
-                android:background="@drawable/sel_arrow_up"/>
-
-            <ImageView
-                android:id="@+id/ivMoveLeft"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="left|center_vertical"
-                android:background="@drawable/sel_arrow_left"/>
-
-            <ImageView
-                android:id="@+id/ivMoveDown"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignLeft="@+id/ivMoveUp"
-                android:layout_gravity="bottom|center_horizontal"
-                android:background="@drawable/sel_arrow_down"/>
-        </FrameLayout>
-    </com.ue.colorful.widget.PhotoColorPickerView>
+        app:palette="@drawable/watercolor"/>
 
     <include layout="@layout/layout_common_picker"/>
 </LinearLayout>
