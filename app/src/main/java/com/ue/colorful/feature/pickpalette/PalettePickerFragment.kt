@@ -11,6 +11,7 @@ import com.ue.colorful.feature.main.BasePickerFragment
 import com.ue.colorful.util.SPUtils
 import com.ue.colorful.widget.PaletteColorPickerView
 import kotlinx.android.synthetic.main.fragment_palette_picker.view.*
+import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
 /**
  * Created by hawk on 2017/12/14.
