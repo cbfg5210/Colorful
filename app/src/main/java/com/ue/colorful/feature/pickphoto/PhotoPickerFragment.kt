@@ -1,27 +1,22 @@
 package com.ue.colorful.feature.pickphoto
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.ue.colorful.R
 import com.ue.colorful.event.ColorListener
+import com.ue.colorful.feature.main.BasePickerFragment
 import kotlinx.android.synthetic.main.fragment_photo_picker.*
 import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 
-class PhotoPickerFragment : Fragment() {
+class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker) {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_photo_picker, container, false)
-    }
+        super.onCreateView(inflater, container, savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.pcpPhotoColorPicker.setColorListener(object : ColorListener {
+        rootView.pcpPhotoColorPicker.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
-                view.tvHex.text = "#${String.format("%06X", 0xFFFFFF and color)}"
-                view.vColorEffect.setBackgroundColor(color)
+                rootView.tvHex.text = "#${String.format("%06X", 0xFFFFFF and color)}"
+                rootView.vColorEffect.setBackgroundColor(color)
             }
         })
 
@@ -29,20 +24,37 @@ class PhotoPickerFragment : Fragment() {
             override fun onClick(v: View) {
                 when (v.id) {
                     R.id.ivThumbToggle -> {
-                        view.ivThumbToggle.isSelected = !ivThumbToggle.isSelected
-                        view.pcpPhotoColorPicker.toggleThumbColor()
+                        rootView.ivThumbToggle.isSelected = !ivThumbToggle.isSelected
+                        rootView.pcpPhotoColorPicker.toggleThumbColor()
                     }
-                    R.id.ivMoveUp -> view.pcpPhotoColorPicker.offsetXY(0F, -3F)
-                    R.id.ivMoveDown -> view.pcpPhotoColorPicker.offsetXY(0F, 3F)
-                    R.id.ivMoveLeft -> view.pcpPhotoColorPicker.offsetXY(-3F, 0F)
-                    R.id.ivMoveRight -> view.pcpPhotoColorPicker.offsetXY(3F, 0F)
+                    R.id.ivMoveUp -> rootView.pcpPhotoColorPicker.offsetXY(0F, -3F)
+                    R.id.ivMoveDown -> rootView.pcpPhotoColorPicker.offsetXY(0F, 3F)
+                    R.id.ivMoveLeft -> rootView.pcpPhotoColorPicker.offsetXY(-3F, 0F)
+                    R.id.ivMoveRight -> rootView.pcpPhotoColorPicker.offsetXY(3F, 0F)
                 }
             }
         }
-        view.ivThumbToggle.setOnClickListener(directionListener)
-        view.ivMoveUp.setOnClickListener(directionListener)
-        view.ivMoveDown.setOnClickListener(directionListener)
-        view.ivMoveLeft.setOnClickListener(directionListener)
-        view.ivMoveRight.setOnClickListener(directionListener)
+        rootView.ivThumbToggle.setOnClickListener(directionListener)
+        rootView.ivMoveUp.setOnClickListener(directionListener)
+        rootView.ivMoveDown.setOnClickListener(directionListener)
+        rootView.ivMoveLeft.setOnClickListener(directionListener)
+        rootView.ivMoveRight.setOnClickListener(directionListener)
+
+        return rootView
+    }
+
+    override fun getColorInt(): Int {
+        return rootView.pcpPhotoColorPicker.color
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_photo, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menuAlbum) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

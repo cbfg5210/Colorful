@@ -1,33 +1,27 @@
 package com.ue.colorful.feature.pickargb
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatSeekBar
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
-import android.widget.Toast
 import com.ue.colorful.R
-import com.ue.colorful.event.AddPaletteColorEvent
-import com.ue.colorful.event.ShowPaletteEvent
+import com.ue.colorful.feature.main.BasePickerFragment
 import kotlinx.android.synthetic.main.fragment_argb_picker.view.*
-import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/10/12.
  */
 
-class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnClickListener {
-    internal lateinit var rootView: View
+class ARGBPickerFragment : BasePickerFragment(R.layout.fragment_argb_picker), SeekBar.OnSeekBarChangeListener {
     internal lateinit var ivColor: AppCompatImageView
     internal lateinit var etHex: AppCompatEditText
     internal lateinit var etA: EditText
@@ -46,18 +40,8 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
     private var changeB: Boolean = false
     private var changeProgress: Boolean = false
 
-    private val mClipboardManager: ClipboardManager by lazy {
-        activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-        rootView = inflater.inflate(R.layout.fragment_argb_picker, container, false)
-        return rootView
-    }
-
-    override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
 
         ivColor = rootView.ivColor
         etHex = rootView.etHex
@@ -91,8 +75,10 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
         changeHex = true
         etHex.setText("FF000000")
 
-        rootView.ivAddColor.setOnClickListener(this)
-        rootView.ivCopy.setOnClickListener(this)
+        rootView.ivAddColor.setOnClickListener(pickerListener)
+        rootView.ivCopy.setOnClickListener(pickerListener)
+
+        return rootView
     }
 
     private fun getTextWatcher(etFlag: Int): TextWatcher {
@@ -115,39 +101,15 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
 
     private fun onRGBTextChanged(etFlag: Int) {
         when (etFlag) {
-            FLAG_A -> {
-                if (!changeA) {
-                    changeA = true
-                    return
-                }
-                seekBarA.progress = getCheckedVal(etA)
-            }
-            FLAG_R -> {
-                if (!changeR) {
-                    changeR = true
-                    return
-                }
-                seekBarR.progress = getCheckedVal(etR)
-            }
-            FLAG_G -> {
-                if (!changeG) {
-                    changeG = true
-                    return
-                }
-                seekBarG.progress = getCheckedVal(etG)
-            }
-            FLAG_B -> {
-                if (!changeB) {
-                    changeB = true
-                    return
-                }
-                seekBarB.progress = getCheckedVal(etB)
-            }
+            FLAG_A -> if (changeA) seekBarA.progress = getCheckedVal(etA) else changeA = true
+            FLAG_R -> if (changeR) seekBarR.progress = getCheckedVal(etR) else changeR = true
+            FLAG_G -> if (changeG) seekBarG.progress = getCheckedVal(etG) else changeG = true
+            FLAG_B -> if (changeB) seekBarB.progress = getCheckedVal(etB) else changeB = true
         }
 
         resetStatus(true)
         changeHex = false
-        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
+        val colorInt = getColorInt()
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -162,7 +124,7 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
             FLAG_B -> etB.setText(seekBarB.progress.toString())
         }
 
-        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
+        val colorInt = getColorInt()
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -199,6 +161,10 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
         ivColor.setBackgroundColor(colorInt)
     }
 
+    override fun getColorInt(): Int {
+        return Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
+    }
+
     private fun getCheckedVal(valueEt: EditText): Int {
         val value = valueEt.text.toString()
         val tempStr = if (value.isEmpty()) "0" else value
@@ -233,37 +199,6 @@ class ARGBPickerFragment : Fragment(), SeekBar.OnSeekBarChangeListener, View.OnC
 
     override fun onStopTrackingTouch(seekBar: SeekBar) {
         changeProgress = false
-    }
-
-    override fun onClick(view: View) {
-        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
-        val hex = String.format("#%08X", colorInt)
-
-        if (view.id == R.id.ivCopy) {
-            val clip = ClipData.newPlainText("copy", hex)
-            mClipboardManager.primaryClip = clip
-
-            Toast.makeText(activity, activity.getString(R.string.color_copied, hex), Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (view.id == R.id.ivAddColor) {
-            EventBus.getDefault().post(AddPaletteColorEvent(colorInt))
-            return
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_palette, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menuPalette -> {
-                EventBus.getDefault().post(ShowPaletteEvent())
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     companion object {
