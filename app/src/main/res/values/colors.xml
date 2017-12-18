@@ -28,4 +28,5 @@
     <color name="black">#000000</color>
     <color name="col_80000000">#80000000</color>
     <color name="col_cccccc">#cccccc</color>
+    <color name="col_normal_txt">#de000000</color>
 </resources>

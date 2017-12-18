@@ -46,9 +46,13 @@ class MainActivity : AppCompatActivity() {
             colorFuns.add(ColorFunction("ColorDiff", FunFlags.GAME_COLOR_DIFF))
             colorFuns.add(ColorFunction("ColorPhun", FunFlags.GAME_PHUN))
             colorCats.add(ColorFunCategory("小游戏", colorFuns, "e1bee7"))
+            //计算
+            colorFuns = ArrayList<ColorFunction>()
+            colorFuns.add(ColorFunction("透明度", FunFlags.CALC_ALPHA))
+            colorFuns.add(ColorFunction("颜色值&ARGB", FunFlags.CALC_ARGB))
+            colorCats.add(ColorFunCategory("计算", colorFuns, "c8e6c9"))
             //其它
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("计算", FunFlags.CALCULATE))
             colorFuns.add(ColorFunction("色觉测试", FunFlags.VISION_TEST))
             colorCats.add(ColorFunCategory("其它", colorFuns, "c5cae9"))
 

@@ -5,16 +5,18 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ue.adapterdelegate.Item
 import com.ue.colorful.R
 import com.ue.colorful.model.AlphaHex
-import kotlinx.android.synthetic.main.fragment_calculate.view.*
+import com.ue.colorful.model.AlphaHexTitle
+import kotlinx.android.synthetic.main.fragment_calc_alpha.view.*
 
 /**
  * Created by hawk on 2017/12/13.
  */
-class CalculateFragment : Fragment() {
+class CalcAlphaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_calculate, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_calc_alpha, container, false)
 
         rootView.rvAlphas.setHasFixedSize(true)
         rootView.rvAlphas.adapter = AlphaHexAdapter(activity, alphaHexs)
@@ -22,14 +24,15 @@ class CalculateFragment : Fragment() {
         return rootView
     }
 
-    val alphaHexs: List<AlphaHex>
+    val alphaHexs: List<Item>
         get() {
-            val alphaHexs = ArrayList<AlphaHex>()
+            val alphaHexs = ArrayList<Item>()
+            alphaHexs.add(AlphaHexTitle(getString(R.string.alpha_title), getString(R.string.hex_title)))
             var i = 0
-            while (i < 21) {
-                var hex = Integer.toHexString(Math.round(12.75 * i).toInt()).toUpperCase()
+            while (i < 100) {
+                var hex = Integer.toHexString(Math.round(2.55F * i)).toUpperCase()
                 if (hex.length == 1) hex = "0$hex"
-                alphaHexs.add(AlphaHex("${100 - i * 5}%", hex))
+                alphaHexs.add(AlphaHex("${100 - i}%", hex))
                 i++
             }
             return alphaHexs

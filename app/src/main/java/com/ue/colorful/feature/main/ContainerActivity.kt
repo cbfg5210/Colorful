@@ -14,7 +14,8 @@ import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.AddPaletteColorEvent
 import com.ue.colorful.event.RemovePaletteColorEvent
 import com.ue.colorful.event.ShowPaletteEvent
-import com.ue.colorful.feature.calculate.CalculateFragment
+import com.ue.colorful.feature.calculate.CalcARGBFragment
+import com.ue.colorful.feature.calculate.CalcAlphaFragment
 import com.ue.colorful.feature.game.TimeTrialModeFragment
 import com.ue.colorful.feature.game_phun.EasyGameFragment
 import com.ue.colorful.feature.material.MDPaletteFragment
@@ -98,10 +99,16 @@ class ContainerActivity : AppCompatActivity() {
                         .add(R.id.vgFragmentContainer, EasyGameFragment())
                         .commit()
             }
-            FunFlags.CALCULATE -> {
-                supportActionBar?.title = "Calculate"
+            FunFlags.CALC_ALPHA -> {
+                supportActionBar?.title = "Calculate alpha"
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, CalculateFragment())
+                        .add(R.id.vgFragmentContainer, CalcAlphaFragment())
+                        .commit()
+            }
+            FunFlags.CALC_ARGB -> {
+                supportActionBar?.title = "Calculate argb"
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.vgFragmentContainer, CalcARGBFragment())
                         .commit()
             }
             FunFlags.VISION_TEST -> {

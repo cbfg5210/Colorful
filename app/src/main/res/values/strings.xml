@@ -221,4 +221,50 @@
     <string name="choose_photo">选择图片</string>
     <string name="load_photo_failed">加载图片失败</string>
     <string name="pick_photo">点击右上角菜单前往选择图片吧~</string>
+    <string name="alpha_title">透明度</string>
+    <string name="hex_title">16进制值</string>
+    <string name="cal_alpha">
+        颜色透明度计算:\n
+        栗子：UI给出的颜色是#FFFFFF，透明度为20%，求结果。\n
+        换算过程：\n
+        1、将透明度转换成不透明度。不透明度=80%\n
+        2、不透明度乘以255=204\n
+        3、将计算结果转换成16进制(204/16商12余12,12(10)=C(16))，得到最终的不透明度=CC\n
+        4、将不透明度和颜色值拼接成ARGB格式，得到最终的颜色值= #CCFFFFFF\n\n
+        透明度对应的16进制值表：
+    </string>
+    <string name="calc_argb" formatted="false">
+        ARGB值计算:\n
+            说明:\n
+            6位（如:#000000）就是RGB值\n
+            8位（如:#1e000000）ARGB 头两位是透明度，00是完全透明，FF是完全不透明，后6位是RGB值，每两位分别属于R、G、B部分\n\n
+            (栗子1):给出的颜色的16进制值是EAEAEA，求A、R、G、B。\n
+            计算过程:\n
+            #ECEFF1相当于#FFECEFF1\n
+            (A)=FF(16)=(15x16+15)(10)=255(10)\n
+            (R)=EC(16)=(14x16+12)(10)=236(10)\n
+            (G)=EF(16)=(14x16+15)(10)=239(10)\n
+            (B)=F1(16)=(15x16+1)(10)=241(10)\n\n
+
+            (栗子2):给出的颜色的A、R、G、B的十进制值为123、233、245、250，求该颜色的16进制值。\n
+            计算过程:\n
+            十进制转为K进制使用除K取余法，这里的K=16\n
+            (A)\n
+            123÷16=7\t\t余11->B\n
+            7÷16=0\t\t余7\n
+            ->A=7B\n
+            (R)\n
+            233÷16=14\t\t余9\n
+            14÷16=0\t\t余14->E\n
+            ->R=E9\n
+            (G)\n
+            245÷16=15\t\t余5\n
+            15÷16=0\t\t余15->F\n
+            ->G=F5\n
+            (B)\n
+            250÷16=15\t\t余10->A\n
+            15÷16=0\t\t余15->F\n
+            ->B=FA\n
+            该颜色的16进制值 = 7BE9F5FA\n
+    </string>
 </resources>

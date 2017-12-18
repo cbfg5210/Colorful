@@ -12,7 +12,8 @@ class FunFlags {
         val PICKER_SCREEN = 4
         val GAME_COLOR_DIFF = 5
         val GAME_PHUN = 6
-        val CALCULATE = 7
-        val VISION_TEST = 8
+        val CALC_ALPHA = 7
+        val CALC_ARGB = 8
+        val VISION_TEST = 9
     }
 }
