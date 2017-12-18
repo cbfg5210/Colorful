@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import com.ue.colorful.R
 import com.ue.colorful.event.ColorListener
 import kotlinx.android.synthetic.main.layout_photo_picker.view.*
+
 
 class PhotoColorPickerView : FrameLayout {
     var color: Int = 0
@@ -41,32 +43,20 @@ class PhotoColorPickerView : FrameLayout {
             ivPickerPhoto.setImageDrawable(paletteDrawable)
         }
 
-        addDirectionTouchListener()
-        setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> onTouchReceived(event)
-                MotionEvent.ACTION_MOVE -> onTouchReceived(event)
-                else -> false
-            }
-        }
-
-        post(Runnable {
-            //加入队列等待执行
-            color = getColorFromBitmap(measuredWidth * 0.5F, measuredHeight * 0.5F)
+        ivPickerSelector.addOnLayoutChangeListener({ v, left, top, _, _, _, _, _, _ ->
+            color = getColorFromBitmap(left + v.measuredWidth * 0.5F, top + v.measuredHeight * 0.5F)
             colorListener?.onColorSelected(color)
         })
-    }
 
-    private fun addDirectionTouchListener() {
-        vgDirection.setOnTouchListener(object : View.OnTouchListener {
-            var lastX = 0
-            var lastY = 0
-            var offX = 0
-            var offY = 0
-            var l = 0
-            var r = 0
-            var t = 0
-            var b = 0
+        val touchMoveListener = object : View.OnTouchListener {
+            internal var lastX = 0
+            internal var lastY = 0
+            internal var offX = 0
+            internal var offY = 0
+            internal var l = 0
+            internal var t = 0
+            internal var r = 0
+            internal var b = 0
 
             override fun onTouch(view: View, event: MotionEvent): Boolean {
                 when (event.action) {
@@ -76,59 +66,57 @@ class PhotoColorPickerView : FrameLayout {
                     }
                     MotionEvent.ACTION_MOVE -> {
                         //计算移动的距离
-                        //Log.e("PhotoColorPickerView", "onTouch: l=$left,r=$right,t=$top,b=$bottom");
-                        //l=0,r=720,t=0,b=958
                         offX = event.x.toInt() - lastX
                         offY = event.y.toInt() - lastY
-                        //调用layout方法来重新放置它的位置
+
                         l = view.left + offX
-                        r = view.right + offX
                         t = view.top + offY
+                        r = view.right + offX
                         b = view.bottom + offY
 
-                        if (l < left) {
-                            l = 0
-                            r = view.measuredWidth
-                        } else if (r > right) {
-                            r = right
-                            l = r - view.measuredWidth
-                        }
-                        if (t < top) {
-                            t = 0
-                            b = view.measuredHeight
-                        } else if (b > bottom) {
-                            b = bottom
-                            t = b - view.measuredHeight
-                        }
+                        if (l < left) l = left
+                        else if (r > right) r = right
+
+                        if (t < top) t = top
+                        else if (b > bottom) b = bottom
+
                         view.layout(l, t, r, b)
                     }
                 }
                 return true
             }
-        })
+        }
+
+        ivPickerSelector.setOnTouchListener(touchMoveListener)
+        vgDirection.setOnTouchListener(touchMoveListener)
 
         val directionListener = object : View.OnClickListener {
+            internal var nX = 0F
+            internal var nY = 0F
             override fun onClick(v: View) {
+                nX = ivPickerSelector.x
+                nY = ivPickerSelector.y
                 when (v.id) {
-                    R.id.ivMoveUp -> offsetXY(0F, -3F)
-                    R.id.ivMoveDown -> offsetXY(0F, 3F)
-                    R.id.ivMoveLeft -> offsetXY(-3F, 0F)
-                    R.id.ivMoveRight -> offsetXY(3F, 0F)
+                    R.id.ivMoveUp -> nY -= 3
+                    R.id.ivMoveDown -> nY += 3
+                    R.id.ivMoveLeft -> nX -= 3
+                    R.id.ivMoveRight -> nX += 3
                 }
+                //模拟touch事件
+                ivPickerSelector.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, ivPickerSelector.x, ivPickerSelector.y, 0))
+                ivPickerSelector.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, nX, nY, 0))
             }
         }
         ivMoveUp.setOnClickListener(directionListener)
         ivMoveDown.setOnClickListener(directionListener)
         ivMoveLeft.setOnClickListener(directionListener)
         ivMoveRight.setOnClickListener(directionListener)
-    }
 
-    private fun onTouchReceived(event: MotionEvent): Boolean {
-        color = getColorFromBitmap(event.x, event.y)
-        ivPickerSelector.x = event.x - ivPickerSelector.measuredWidth / 2
-        ivPickerSelector.y = event.y - ivPickerSelector.measuredHeight / 2
-        colorListener?.onColorSelected(color)
-        return true
+        post({
+            //加入队列等待执行
+            color = getColorFromBitmap(measuredWidth * 0.5F, measuredHeight * 0.5F)
+            colorListener?.onColorSelected(color)
+        })
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
@@ -147,14 +135,6 @@ class PhotoColorPickerView : FrameLayout {
 
             (ivPickerPhoto.drawable as BitmapDrawable).bitmap.getPixel(mappedPoints[0].toInt(), mappedPoints[1].toInt())
         } else 0
-    }
-
-    fun offsetXY(offsetX: Float, offsetY: Float) {
-        ivPickerSelector.x += offsetX
-        ivPickerSelector.y += offsetY
-        //(selector.x + selector.measuredWidth / 2, selector.y + selector.measuredWidth / 2)才是中心点坐标
-        color = getColorFromBitmap(ivPickerSelector.x + ivPickerSelector.measuredWidth / 2, ivPickerSelector.y + ivPickerSelector.measuredWidth / 2)
-        colorListener?.onColorSelected(color)
     }
 
     fun setColorListener(colorListener: ColorListener) {
