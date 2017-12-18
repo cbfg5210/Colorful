@@ -64,11 +64,11 @@ class PhotoColorPickerView : FrameLayout {
                         l = view.left + event.x.toInt() - lastX
                         t = view.top + event.y.toInt() - lastY
 
-                        if (l < left) l = left
-                        else if (l + view.measuredWidth > right) l = right - view.measuredWidth
+                        if (l < left - view.measuredWidth / 2) l = left - view.measuredWidth / 2
+                        else if (l > right - view.measuredWidth / 2) l = right - view.measuredWidth / 2
 
-                        if (t < top) t = top
-                        else if (t + view.measuredHeight > bottom) t = bottom - view.measuredHeight
+                        if (t < top - view.measuredHeight / 2) t = top - view.measuredHeight / 2
+                        else if (t > bottom - view.measuredHeight / 2) t = bottom - view.measuredHeight / 2
 
                         view.layout(l, t, l + view.measuredWidth, t + view.measuredHeight)
                     }
