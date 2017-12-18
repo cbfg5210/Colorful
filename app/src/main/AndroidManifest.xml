@@ -3,6 +3,9 @@
           package="com.ue.colorful">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--如果图片是图库中的，没有添加外部读取权限的话显示不了-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".ReleaseApplication"

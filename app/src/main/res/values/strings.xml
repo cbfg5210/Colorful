@@ -218,4 +218,7 @@
     <string name="palette">色板</string>
     <string name="about">关于</string>
     <string name="album">相册</string>
+    <string name="choose_photo">选择图片</string>
+    <string name="load_photo_failed">加载图片失败</string>
+    <string name="pick_photo">点击右上角菜单前往选择图片吧~</string>
 </resources>

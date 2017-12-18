@@ -14,5 +14,6 @@ class SPKeys {
         val HIGH_SCORE = "highScore"
         val TIMES_PLAYED = "timesPlayed"
         val PALETTE_COLORS = "paletteColors"
+        val PICKER_PHOTO_PATH = "pickerPhotoPath"
     }
 }

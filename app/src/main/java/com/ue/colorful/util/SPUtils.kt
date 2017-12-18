@@ -42,7 +42,7 @@ class SPUtils private constructor() {
             editor.apply()
         }
 
-        fun getString(key: String, defaultVaule: String): String? {
+        fun getString(key: String, defaultVaule: String): String {
             return sharedPreferences.getString(key, defaultVaule)
         }
 

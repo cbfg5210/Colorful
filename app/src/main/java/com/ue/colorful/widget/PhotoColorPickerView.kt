@@ -1,6 +1,7 @@
 package com.ue.colorful.widget
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -18,30 +19,29 @@ class PhotoColorPickerView : FrameLayout {
     var color: Int = 0
         private set
 
-    private var paletteDrawable: Drawable? = null
     private var colorListener: ColorListener? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.PhotoColorPickerView)
-            if (a.hasValue(R.styleable.PhotoColorPickerView_palette)) {
-                paletteDrawable = a.getDrawable(R.styleable.PhotoColorPickerView_palette)
-            }
-            a.recycle()
-        }
-
         setPadding(0, 0, 0, 0) //不设置的话取色不正确
         View.inflate(context, R.layout.layout_photo_picker, this)
     }
 
+    fun setPhoto(photoRes: Int) {
+        ivPickerPhoto.setImageResource(photoRes)
+    }
+
+    fun setPhoto(photo: Drawable?) {
+        ivPickerPhoto.setImageDrawable(photo)
+    }
+
+    fun setPhoto(photo: Bitmap?) {
+        ivPickerPhoto.setImageBitmap(photo)
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        if (paletteDrawable != null) {
-            ivPickerPhoto.setImageDrawable(paletteDrawable)
-        }
 
         ivPickerSelector.addOnLayoutChangeListener({ v, left, top, _, _, _, _, _, _ ->
             color = getColorFromBitmap(left + v.measuredWidth * 0.5F, top + v.measuredHeight * 0.5F)
@@ -110,7 +110,7 @@ class PhotoColorPickerView : FrameLayout {
     }
 
     private fun getColorFromBitmap(x: Float, y: Float): Int {
-        if (paletteDrawable == null) return 0
+        if (ivPickerPhoto.drawable == null) return 0
 
         val invertMatrix = Matrix()
         ivPickerPhoto.imageMatrix.invert(invertMatrix)
