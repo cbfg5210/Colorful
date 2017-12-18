@@ -51,12 +51,8 @@ class PhotoColorPickerView : FrameLayout {
         val touchMoveListener = object : View.OnTouchListener {
             internal var lastX = 0
             internal var lastY = 0
-            internal var offX = 0
-            internal var offY = 0
             internal var l = 0
             internal var t = 0
-            internal var r = 0
-            internal var b = 0
 
             override fun onTouch(view: View, event: MotionEvent): Boolean {
                 when (event.action) {
@@ -65,22 +61,16 @@ class PhotoColorPickerView : FrameLayout {
                         lastY = event.y.toInt()
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        //计算移动的距离
-                        offX = event.x.toInt() - lastX
-                        offY = event.y.toInt() - lastY
-
-                        l = view.left + offX
-                        t = view.top + offY
-                        r = view.right + offX
-                        b = view.bottom + offY
+                        l = view.left + event.x.toInt() - lastX
+                        t = view.top + event.y.toInt() - lastY
 
                         if (l < left) l = left
-                        else if (r > right) r = right
+                        else if (l + view.measuredWidth > right) l = right - view.measuredWidth
 
                         if (t < top) t = top
-                        else if (b > bottom) b = bottom
+                        else if (t + view.measuredHeight > bottom) t = bottom - view.measuredHeight
 
-                        view.layout(l, t, r, b)
+                        view.layout(l, t, l + view.measuredWidth, t + view.measuredHeight)
                     }
                 }
                 return true
