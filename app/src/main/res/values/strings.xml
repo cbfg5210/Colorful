@@ -209,7 +209,7 @@
     <string name="answer22">普通人能看到蓝绿色/黄绿色的线条\n红绿色弱会看到蓝绿色和红色线条\n全色弱看不到任何线条</string>
     <string name="answer23">普通人能看到红色和橙色线条\n红绿色弱会看到红色和蓝绿色线条\n全色弱什么都看不到</string>
     <string name="answer24">所有人都能看到一条弯曲的线条</string>
-    <string name="pick_color">选择颜色</string>
+    <string name="choose_color">选择颜色</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
     <string name="no_palette_color">还没有保存过颜色到色板哦</string>
@@ -233,7 +233,7 @@
         4、将不透明度和颜色值拼接成ARGB格式，得到最终的颜色值= #CCFFFFFF\n\n
         透明度对应的16进制值表：
     </string>
-    <string name="calc_argb" formatted="false">
+    <string name="calc_argb_detail" formatted="false">
         ARGB值计算:\n
             说明:\n
             6位（如:#000000）就是RGB值\n
@@ -267,4 +267,19 @@
             ->B=FA\n
             该颜色的16进制值 = 7BE9F5FA\n
     </string>
+    <string name="md_colors">Material Design配色</string>
+    <string name="harmonize_colors">配色</string>
+    <string name="pick_photo_color">图片取色</string>
+    <string name="pick_palette_color">色板取色</string>
+    <string name="pick_screen_color">屏幕取色</string>
+    <string name="pick_argb_color">argb取色</string>
+    <string name="pick_color">取色</string>
+    <string name="game_color_diff">色差找找看</string>
+    <string name="game_color_light">哪个颜色浅</string>
+    <string name="games">小游戏</string>
+    <string name="transparency">透明度</string>
+    <string name="cal_argb"><![CDATA[颜色值&ARGB]]></string>
+    <string name="calculate">计算</string>
+    <string name="vision_test">色觉测试</string>
+    <string name="other">其它</string>
 </resources>

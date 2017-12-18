@@ -3,6 +3,7 @@ package com.ue.colorful.feature.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
@@ -24,6 +25,7 @@ import com.ue.colorful.feature.pickpalette.PalettePickerFragment
 import com.ue.colorful.feature.pickphoto.PhotoPickerFragment
 import com.ue.colorful.feature.pickscreen.ScreenPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
+import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.GsonHolder
 import com.ue.colorful.util.SPUtils
 import org.greenrobot.eventbus.EventBus
@@ -34,11 +36,11 @@ class ContainerActivity : AppCompatActivity() {
     private lateinit var paletteColors: ArrayList<Int>
 
     companion object {
-        private val ARG_FRAGMENT_FLAG = "arg_frag_flag"
+        private val ARG_COLOR_FUNCTION = "arg_frag_flag"
 
-        fun start(context: Context, fragFlag: Int) {
+        fun start(context: Context, colorFunction: ColorFunction) {
             val intent = Intent(context, ContainerActivity::class.java)
-            intent.putExtra(ARG_FRAGMENT_FLAG, fragFlag)
+            intent.putExtra(ARG_COLOR_FUNCTION, colorFunction)
             context.startActivity(intent)
         }
     }
@@ -46,78 +48,41 @@ class ContainerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
+
+        if (!intent.hasExtra(ARG_COLOR_FUNCTION)) {
+            finish()
+            return
+        }
         EventBus.getDefault().register(this)
 
+        val colorFunction = intent.getParcelableExtra<ColorFunction>(ARG_COLOR_FUNCTION)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = colorFunction.funName
 
         val paletteColorsStr = SPUtils.getString(SPKeys.PALETTE_COLORS, "")
         paletteColors =
                 if (TextUtils.isEmpty(paletteColorsStr)) ArrayList<Int>()
                 else GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
 
-        val fragFlag = intent.getIntExtra(ARG_FRAGMENT_FLAG, 0)
-        when (fragFlag) {
-            FunFlags.PICKER_MD_PALETTE -> {
-                supportActionBar?.title = "MDPalette"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, MDPaletteFragment())
-                        .commit()
-            }
-            FunFlags.PICKER_COLOR_PALETTE -> {
-                supportActionBar?.title = "ColorPalette"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, PalettePickerFragment())
-                        .commit()
-            }
-            FunFlags.PICKER_PHOTO -> {
-                supportActionBar?.title = "PickFromPhoto"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, PhotoPickerFragment())
-                        .commit()
-            }
-            FunFlags.PICKER_ARGB -> {
-                supportActionBar?.title = "ARGB"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, ARGBPickerFragment())
-                        .commit()
-            }
-            FunFlags.PICKER_SCREEN -> {
-                supportActionBar?.title = "PickFromScreen"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, ScreenPickerFragment())
-                        .commit()
-            }
-            FunFlags.GAME_COLOR_DIFF -> {
-                supportActionBar?.title = "ColorDiff"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, TimeTrialModeFragment())
-                        .commit()
-            }
-            FunFlags.GAME_PHUN -> {
-                supportActionBar?.title = "Phun"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, EasyGameFragment())
-                        .commit()
-            }
-            FunFlags.CALC_ALPHA -> {
-                supportActionBar?.title = "Calculate alpha"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, CalcAlphaFragment())
-                        .commit()
-            }
-            FunFlags.CALC_ARGB -> {
-                supportActionBar?.title = "Calculate argb"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, CalcARGBFragment())
-                        .commit()
-            }
-            FunFlags.VISION_TEST -> {
-                supportActionBar?.title = "VisionTest"
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.vgFragmentContainer, ColorVisionTestFragment())
-                        .commit()
-            }
+        lateinit var fragment: Fragment
+
+        when (colorFunction.funFlag) {
+            FunFlags.PICKER_MD_PALETTE -> fragment = MDPaletteFragment()
+            FunFlags.PICKER_COLOR_PALETTE -> fragment = PalettePickerFragment()
+            FunFlags.PICKER_PHOTO -> fragment = PhotoPickerFragment()
+            FunFlags.PICKER_ARGB -> fragment = ARGBPickerFragment()
+            FunFlags.PICKER_SCREEN -> fragment = ScreenPickerFragment()
+            FunFlags.GAME_COLOR_DIFF -> fragment = TimeTrialModeFragment()
+            FunFlags.GAME_PHUN -> fragment = EasyGameFragment()
+            FunFlags.CALC_ALPHA -> fragment = CalcAlphaFragment()
+            FunFlags.CALC_ARGB -> fragment = CalcARGBFragment()
+            FunFlags.VISION_TEST -> fragment = ColorVisionTestFragment()
+            else -> fragment = MDPaletteFragment()
         }
+        supportFragmentManager.beginTransaction()
+                .add(R.id.vgFragmentContainer, fragment)
+                .commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

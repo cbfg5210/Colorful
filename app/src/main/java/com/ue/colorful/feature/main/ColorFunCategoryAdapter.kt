@@ -13,6 +13,7 @@ import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.model.ColorFunCategory
+import com.ue.colorful.model.ColorFunction
 import kotlinx.android.synthetic.main.item_color_fun_category.view.*
 
 /**
@@ -36,11 +37,10 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             return
         }
         val tag = view.tag
-        if (!(view.tag is Int)) {
+        if (!(tag is Int)) {
             return;
         }
-        tag as Int
-        ContainerActivity.start(activity, tag)
+        ContainerActivity.start(activity, items[position].funs[tag])
     }
 
     /**
@@ -63,7 +63,10 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             holder.tvCatName.setBackgroundColor(Color.parseColor("#" + item.colorHex))
 
             var count = 0
-            for (func in item.funs) {
+            val funs = item.funs
+            var func: ColorFunction
+            for (i in funs.indices) {
+                func = funs.get(i)
                 val textView = AppCompatTextView(activity)
                 textView.setPadding(20, 20, 20, 20)
                 textView.textSize = 17F
@@ -73,13 +76,13 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
                 textView.setBackgroundDrawable(drawable)
 
                 textView.text = func.funName
-                textView.tag = func.funFlag
+                textView.tag = i
                 textView.setOnClickListener { onDelegateClickListener?.onClick(textView, holder.adapterPosition) }
                 holder.vgCatContainer.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
 
                 count++
 
-                if (count < item.funs.size) {
+                if (count < funs.size) {
                     val divider = View(activity)
                     divider.setBackgroundColor(Color.parseColor("#" + item.colorHex))
                     holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1))

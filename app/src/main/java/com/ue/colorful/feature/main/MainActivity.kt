@@ -32,29 +32,29 @@ class MainActivity : AppCompatActivity() {
             val colorCats = ArrayList<ColorFunCategory>()
             //配色
             var colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("MaterialDesign配色", FunFlags.PICKER_MD_PALETTE))
-            colorCats.add(ColorFunCategory("配色", colorFuns, "bbdefb"))
+            colorFuns.add(ColorFunction(getString(R.string.md_colors), FunFlags.PICKER_MD_PALETTE))
+            colorCats.add(ColorFunCategory(getString(R.string.harmonize_colors), colorFuns, "bbdefb"))
             //取色
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("图片取色", FunFlags.PICKER_PHOTO))
-            colorFuns.add(ColorFunction("色板取色", FunFlags.PICKER_COLOR_PALETTE))
-            colorFuns.add(ColorFunction("屏幕取色", FunFlags.PICKER_SCREEN))
-            colorFuns.add(ColorFunction("argb取色", FunFlags.PICKER_ARGB))
-            colorCats.add(ColorFunCategory("取色", colorFuns, "f8bbd0"))
+            colorFuns.add(ColorFunction(getString(R.string.pick_photo_color), FunFlags.PICKER_PHOTO))
+            colorFuns.add(ColorFunction(getString(R.string.pick_palette_color), FunFlags.PICKER_COLOR_PALETTE))
+            colorFuns.add(ColorFunction(getString(R.string.pick_screen_color), FunFlags.PICKER_SCREEN))
+            colorFuns.add(ColorFunction(getString(R.string.pick_argb_color), FunFlags.PICKER_ARGB))
+            colorCats.add(ColorFunCategory(getString(R.string.pick_color), colorFuns, "f8bbd0"))
             //小游戏
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("ColorDiff", FunFlags.GAME_COLOR_DIFF))
-            colorFuns.add(ColorFunction("ColorPhun", FunFlags.GAME_PHUN))
-            colorCats.add(ColorFunCategory("小游戏", colorFuns, "e1bee7"))
+            colorFuns.add(ColorFunction(getString(R.string.game_color_diff), FunFlags.GAME_COLOR_DIFF))
+            colorFuns.add(ColorFunction(getString(R.string.game_color_light), FunFlags.GAME_PHUN))
+            colorCats.add(ColorFunCategory(getString(R.string.games), colorFuns, "e1bee7"))
             //计算
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("透明度", FunFlags.CALC_ALPHA))
-            colorFuns.add(ColorFunction("颜色值&ARGB", FunFlags.CALC_ARGB))
-            colorCats.add(ColorFunCategory("计算", colorFuns, "c8e6c9"))
+            colorFuns.add(ColorFunction(getString(R.string.transparency), FunFlags.CALC_ALPHA))
+            colorFuns.add(ColorFunction(getString(R.string.cal_argb), FunFlags.CALC_ARGB))
+            colorCats.add(ColorFunCategory(getString(R.string.calculate), colorFuns, "c8e6c9"))
             //其它
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction("色觉测试", FunFlags.VISION_TEST))
-            colorCats.add(ColorFunCategory("其它", colorFuns, "c5cae9"))
+            colorFuns.add(ColorFunction(getString(R.string.vision_test), FunFlags.VISION_TEST))
+            colorCats.add(ColorFunCategory(getString(R.string.other), colorFuns, "c5cae9"))
 
             return colorCats
         }

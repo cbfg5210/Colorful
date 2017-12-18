@@ -11,6 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="8dp"
-        android:text="@string/calc_argb"
+        android:text="@string/calc_argb_detail"
         android:textColor="@color/col_normal_txt"/>
 </FrameLayout>
