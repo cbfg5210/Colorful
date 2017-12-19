@@ -265,7 +265,7 @@
             250÷16=15\t\t余10->A\n
             15÷16=0\t\t余15->F\n
             ->B=FA\n
-            该颜色的16进制值 = 7BE9F5FA\n
+            该颜色的16进制值 = 7BE9F5FA
     </string>
     <string name="md_colors">Material Design配色</string>
     <string name="harmonize_colors">配色</string>

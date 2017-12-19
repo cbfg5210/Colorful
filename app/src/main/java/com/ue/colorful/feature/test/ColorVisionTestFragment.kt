@@ -11,20 +11,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.ue.colorful.R
+import com.ue.colorful.feature.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_color_vision_test.view.*
 import kotlinx.android.synthetic.main.fragment_test_img.view.*
 
 /**
  * Created by hawk on 2017/12/14.
  */
-class ColorVisionTestFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_color_vision_test, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+class ColorVisionTestFragment : BaseFragment(R.layout.fragment_color_vision_test, 0) {
+    override fun initViews() {
         val testAnswer = resources.getStringArray(R.array.colorVisionAns)
         val size = testAnswer.size
         val states = SparseArray<Boolean>()
@@ -34,7 +29,7 @@ class ColorVisionTestFragment : Fragment() {
         testImgResTa.recycle()
 
         //绑定自定义适配器
-        view.vpTestPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
+        rootView.vpTestPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getCount(): Int {
                 return size
             }
@@ -50,14 +45,14 @@ class ColorVisionTestFragment : Fragment() {
             }
         }
 
-        view.tvTags.text = "${(view.vpTestPager.currentItem + 1)}/$size"
+        rootView.tvTags.text = "${(rootView.vpTestPager.currentItem + 1)}/$size"
 
-        view.vpTestPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        rootView.vpTestPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
 
             override fun onPageSelected(position: Int) {
-                view.tvTags.text = "${(view.vpTestPager.currentItem + 1)}/$size"
+                rootView.tvTags.text = "${(rootView.vpTestPager.currentItem + 1)}/$size"
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -66,11 +61,11 @@ class ColorVisionTestFragment : Fragment() {
     }
 
     class CVTPagerFragment : Fragment() {
-        internal var pageNum: Int = 0
-        internal var testAns: String = ""
-        internal var testImg: Int = 0
-        internal var isVisible: Boolean = false
-        internal var onAnalyseListener: View.OnClickListener? = null
+        private var pageNum: Int = 0
+        private var testAns: String = ""
+        private var testImg: Int = 0
+        private var isShow: Boolean = false
+        private var onAnalyseListener: View.OnClickListener? = null
 
         fun setAnalyseListener(onAnalyseListener: View.OnClickListener) {
             this.onAnalyseListener = onAnalyseListener
@@ -82,7 +77,7 @@ class ColorVisionTestFragment : Fragment() {
             pageNum = arguments.getInt(ARG_NUM)
             testAns = arguments.getString(ARG_TEST_ANS)
             testImg = arguments.getInt(ARG_TEST_IMG)
-            isVisible = arguments.getBoolean(ARG_IS_VISIBLE)
+            isShow = arguments.getBoolean(ARG_IS_VISIBLE)
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -92,7 +87,7 @@ class ColorVisionTestFragment : Fragment() {
                     .load(testImg)
                     .into(view.testImg)
 
-            if (isVisible) {
+            if (isShow) {
                 view.tvTips.visibility = View.GONE
                 view.vgAnalysePanel.isSelected = true
                 (view.vsAnswer.inflate() as TextView).text = testAns

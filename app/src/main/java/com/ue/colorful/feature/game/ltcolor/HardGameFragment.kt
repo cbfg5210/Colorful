@@ -2,10 +2,7 @@ package com.ue.colorful.feature.game.ltcolor
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import com.ue.colorful.R
 import kotlinx.android.synthetic.main.fragment_hard_game.*
@@ -13,13 +10,10 @@ import kotlinx.android.synthetic.main.fragment_hard_game.view.*
 import java.util.*
 
 
-class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game,R.menu.menu_game_ltcolor) {
-
+class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game, R.menu.menu_game_ltcolor) {
     private lateinit var buttonList: ArrayList<Button>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+    override fun initViews() {
         setupProgressView()
 
         POINT_INCREMENT = 4
@@ -42,8 +36,6 @@ class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game,R.menu.m
         resetGame()
         setupGameLoop()
         startGame()
-
-        return rootView
     }
 
     override fun setColorsOnButtons() {

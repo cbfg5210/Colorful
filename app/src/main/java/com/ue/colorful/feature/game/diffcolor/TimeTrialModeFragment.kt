@@ -2,10 +2,7 @@ package com.ue.colorful.feature.game.diffcolor
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
@@ -23,9 +20,7 @@ class TimeTrialModeFragment : BaseFragment(R.layout.fragment_time_trial_mode,R.m
     private val arrays = Arrays()
     private val r = Random()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+    override fun initViews() {
         rootView.tvLevel.text = "10"
         rootView.btnRedraw.setOnClickListener {
             linearLayoutTags.removeAllViews()
@@ -34,8 +29,6 @@ class TimeTrialModeFragment : BaseFragment(R.layout.fragment_time_trial_mode,R.m
 
         rootView.btnHalf.setOnClickListener { halfTiles(49) }
         startGame()
-
-        return rootView
     }
 
     private fun drawMap(level: Int, buttons: Int) {

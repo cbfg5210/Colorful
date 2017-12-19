@@ -11,17 +11,20 @@ import com.ue.colorful.event.ContainerCallback
  */
 abstract class BaseFragment(private val layoutRes: Int, private val menuRes: Int) : Fragment() {
     protected lateinit var rootView: View
-    protected var containerCallbck: ContainerCallback? = null
+    protected var containerCallback: ContainerCallback? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         rootView = inflater.inflate(layoutRes, container, false)
+        initViews()
         return rootView
     }
 
+    abstract fun initViews()
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is ContainerCallback) containerCallbck = context
+        if (context is ContainerCallback) containerCallback = context
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {

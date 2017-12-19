@@ -5,11 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -23,11 +19,8 @@ import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
 
-class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker,R.menu.menu_photo) {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker, R.menu.menu_photo) {
+    override fun initViews() {
         rootView.pcpPhotoColorPicker.setColorListener(object : ColorListener {
             override fun onColorSelected(color: Int) {
                 rootView.ivColorEffect.setBackgroundColor(color)
@@ -37,18 +30,12 @@ class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker,R.menu.m
             }
         })
 
-        rootView.ivAddColor.setOnClickListener({ containerCallbck?.addPaletteColor(getColorInt()) })
-        rootView.ivCopy.setOnClickListener({ containerCallbck?.copyColor(getColorInt()) })
+        rootView.ivAddColor.setOnClickListener({ containerCallback?.addPaletteColor(rootView.pcpPhotoColorPicker.color) })
+        rootView.ivCopy.setOnClickListener({ containerCallback?.copyColor(rootView.pcpPhotoColorPicker.color) })
 
         val pickerPhotoPath = SPUtils.getString(SPKeys.PICKER_PHOTO_PATH, "")
         if (TextUtils.isEmpty(pickerPhotoPath)) Toast.makeText(activity, R.string.pick_photo, Toast.LENGTH_LONG).show()
         else loadPhoto(pickerPhotoPath)
-
-        return rootView
-    }
-
-    fun getColorInt(): Int {
-        return rootView.pcpPhotoColorPicker.color
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

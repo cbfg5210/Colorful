@@ -2,11 +2,8 @@ package com.ue.colorful.feature.game.diffcolor
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
@@ -26,9 +23,7 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
     private val arrays = Arrays()
     private val r = Random()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+    override fun initViews() {
         rootView.tvPause.setOnClickListener { toggleCountDownSwitch(!tvPause.isSelected) }
 
         rootView.btnRedraw.setOnClickListener {
@@ -58,7 +53,6 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
                 else -> halfTiles(49)
             }
         }
-        return rootView
     }
 
     private fun drawMap(level: Int, buttons: Int) {
@@ -143,7 +137,7 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
         }
     }
 
-    fun halfTiles(num: Int) {
+    private fun halfTiles(num: Int) {
         changeTimer(0)
 
         val r = Random()
@@ -180,12 +174,12 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
         }
     }
 
-    fun changeTimer(sec: Int) {
+    private fun changeTimer(sec: Int) {
         seconds += sec
         toggleCountDownSwitch(true)
     }
 
-    fun gameOver() {
+    private fun gameOver() {
         cancelCountDown()
         level--
         tvTime.text = "00:00"
@@ -215,7 +209,7 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
         }.start()
     }
 
-    fun startGame() {
+    private fun startGame() {
         seconds = 30
         toggleCountDownSwitch(true)
 

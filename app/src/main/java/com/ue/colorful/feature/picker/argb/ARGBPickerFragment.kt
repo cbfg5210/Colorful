@@ -1,16 +1,12 @@
 package com.ue.colorful.feature.picker.argb
 
 import android.graphics.Color
-import android.os.Bundle
 import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatSeekBar
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
 import com.ue.colorful.R
@@ -22,16 +18,16 @@ import kotlinx.android.synthetic.main.fragment_argb_picker.view.*
  */
 
 class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.menu_palette), SeekBar.OnSeekBarChangeListener {
-    internal lateinit var ivColor: AppCompatImageView
-    internal lateinit var etHex: AppCompatEditText
-    internal lateinit var etA: EditText
-    internal lateinit var etR: EditText
-    internal lateinit var etG: EditText
-    internal lateinit var etB: EditText
-    internal lateinit var seekBarA: AppCompatSeekBar
-    internal lateinit var seekBarR: AppCompatSeekBar
-    internal lateinit var seekBarG: AppCompatSeekBar
-    internal lateinit var seekBarB: AppCompatSeekBar
+    private lateinit var ivColor: AppCompatImageView
+    private lateinit var etHex: AppCompatEditText
+    private lateinit var etA: EditText
+    private lateinit var etR: EditText
+    private lateinit var etG: EditText
+    private lateinit var etB: EditText
+    private lateinit var seekBarA: AppCompatSeekBar
+    private lateinit var seekBarR: AppCompatSeekBar
+    private lateinit var seekBarG: AppCompatSeekBar
+    private lateinit var seekBarB: AppCompatSeekBar
 
     private var changeHex: Boolean = false
     private var changeA: Boolean = false
@@ -40,9 +36,7 @@ class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.me
     private var changeB: Boolean = false
     private var changeProgress: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+    override fun initViews() {
         ivColor = rootView.ivColor
         etHex = rootView.etHex
         etA = rootView.etA
@@ -75,10 +69,8 @@ class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.me
         changeHex = true
         etHex.setText("FF000000")
 
-        rootView.ivAddColor.setOnClickListener({ containerCallbck?.addPaletteColor(getColorInt()) })
-        rootView.ivCopy.setOnClickListener({ containerCallbck?.copyColor(getColorInt()) })
-
-        return rootView
+        rootView.ivAddColor.setOnClickListener({ containerCallback?.addPaletteColor(Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))) })
+        rootView.ivCopy.setOnClickListener({ containerCallback?.copyColor(Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))) })
     }
 
     private fun getTextWatcher(etFlag: Int): TextWatcher {
@@ -109,7 +101,7 @@ class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.me
 
         resetStatus(true)
         changeHex = false
-        val colorInt = getColorInt()
+        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -124,7 +116,7 @@ class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.me
             FLAG_B -> etB.setText(seekBarB.progress.toString())
         }
 
-        val colorInt = getColorInt()
+        val colorInt = Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
         etHex.setText(String.format("%08X", colorInt))
         ivColor.setBackgroundColor(colorInt)
     }
@@ -159,10 +151,6 @@ class ARGBPickerFragment : BaseFragment(R.layout.fragment_argb_picker, R.menu.me
         seekBarB.progress = bVal
 
         ivColor.setBackgroundColor(colorInt)
-    }
-
-    fun getColorInt(): Int {
-        return Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
     }
 
     private fun getCheckedVal(valueEt: EditText): Int {

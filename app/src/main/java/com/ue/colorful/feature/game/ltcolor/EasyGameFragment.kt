@@ -2,17 +2,13 @@ package com.ue.colorful.feature.game.ltcolor
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.ue.colorful.R
 import kotlinx.android.synthetic.main.fragment_easy_game.view.*
 
 class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.menu_game_ltcolor) {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
 
+    override fun initViews() {
         setupProgressView()
 
         POINT_INCREMENT = 2
@@ -27,8 +23,6 @@ class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.
         resetGame()
         setupGameLoop()
         startGame()
-
-        return rootView
     }
 
     override fun onClick(view: View) {

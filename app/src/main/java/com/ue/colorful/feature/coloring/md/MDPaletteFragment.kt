@@ -22,9 +22,7 @@ import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
 class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_palette) {
     private lateinit var paletteSections: List<PaletteSection>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
+    override fun initViews() {
         val lastColorOption = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
         paletteSections = getPaletteSections(lastColorOption)
 
@@ -32,11 +30,11 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
         rootView.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors,
                 object : MDPaletteListener {
                     override fun copyColor(color: Int) {
-                        containerCallbck?.copyColor(color)
+                        containerCallback?.copyColor(color)
                     }
 
                     override fun addPaletteColor(color: Int) {
-                        containerCallbck?.addPaletteColor(color)
+                        containerCallback?.addPaletteColor(color)
                     }
 
                 })
@@ -51,8 +49,6 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
                 })
         //移动到指定位置，可以置顶则置顶
         (rootView.rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastColorOption, 0)
-
-        return rootView
     }
 
     private fun getPaletteSections(lastColorOption: Int): List<PaletteSection> {
