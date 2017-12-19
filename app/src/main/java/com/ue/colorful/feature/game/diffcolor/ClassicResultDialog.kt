@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.game
+package com.ue.colorful.feature.game.diffcolor
 
 import android.app.Dialog
 import android.graphics.Color

@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.game_phun
+package com.ue.colorful.feature.game.ltcolor
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet

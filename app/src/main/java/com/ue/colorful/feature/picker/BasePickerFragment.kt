@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.main
+package com.ue.colorful.feature.picker
 
 import android.content.ClipData
 import android.content.ClipboardManager

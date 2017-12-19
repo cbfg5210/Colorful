@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.pickscreen
+package com.ue.colorful.feature.picker.screen
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.pickargb
+package com.ue.colorful.feature.picker.argb
 
 import android.graphics.Color
 import android.os.Bundle
@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
 import com.ue.colorful.R
-import com.ue.colorful.feature.main.BasePickerFragment
+import com.ue.colorful.feature.picker.BasePickerFragment
 import kotlinx.android.synthetic.main.fragment_argb_picker.view.*
 
 /**

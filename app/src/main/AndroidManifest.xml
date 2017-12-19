@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".feature.pickscreen.CaptureService"/>
+        <service android:name="com.ue.colorful.feature.picker.screen.CaptureService"/>
         <activity
             android:name=".feature.main.ContainerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout"

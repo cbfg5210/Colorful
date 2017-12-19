@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.pickpalette
+package com.ue.colorful.feature.picker.palette
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
-import com.ue.colorful.feature.main.BasePickerFragment
+import com.ue.colorful.feature.picker.BasePickerFragment
 import com.ue.colorful.util.SPUtils
 import com.ue.colorful.widget.PaletteColorPickerView
 import kotlinx.android.synthetic.main.fragment_palette_picker.view.*

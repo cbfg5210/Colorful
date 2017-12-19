@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.pickphoto
+package com.ue.colorful.feature.picker.photo
 
 import android.app.Activity
 import android.content.Intent
@@ -14,7 +14,7 @@ import com.squareup.picasso.Target
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.ColorListener
-import com.ue.colorful.feature.main.BasePickerFragment
+import com.ue.colorful.feature.picker.BasePickerFragment
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*

@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.material
+package com.ue.colorful.feature.coloring.md
 
 import android.app.Activity
 import android.content.ClipData

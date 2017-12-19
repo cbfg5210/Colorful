@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.game
+package com.ue.colorful.feature.game.diffcolor
 
 /**
  * Created by erdomester on 11/22/2015.

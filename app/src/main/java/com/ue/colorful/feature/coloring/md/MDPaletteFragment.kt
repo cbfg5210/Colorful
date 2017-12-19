@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.material
+package com.ue.colorful.feature.coloring.md
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
-import com.ue.colorful.feature.main.BasePickerFragment
+import com.ue.colorful.feature.picker.BasePickerFragment
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils

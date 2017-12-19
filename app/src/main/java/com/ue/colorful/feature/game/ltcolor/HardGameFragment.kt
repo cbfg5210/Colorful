@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.game_phun
+package com.ue.colorful.feature.game.ltcolor
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
