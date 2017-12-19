@@ -26,15 +26,15 @@ class PalettePickerFragment : BasePickerFragment(R.layout.fragment_palette_picke
         rootView.paletteColorPicker.setOnColorChangedListener(this)
         rootView.paletteColorPicker.setColor(initialColor, true)
 
-        rootView.ivAddColor.setOnClickListener(pickerListener)
-        rootView.ivCopy.setOnClickListener(pickerListener)
+        rootView.ivAddColor.setOnClickListener({ containerCallbck?.addPaletteColor(getColorInt()) })
+        rootView.ivCopy.setOnClickListener({ containerCallbck?.copyColor(getColorInt()) })
 
         onColorChanged(initialColor)
 
         return rootView
     }
 
-    override fun getColorInt(): Int {
+    fun getColorInt(): Int {
         return rootView.paletteColorPicker.color
     }
 

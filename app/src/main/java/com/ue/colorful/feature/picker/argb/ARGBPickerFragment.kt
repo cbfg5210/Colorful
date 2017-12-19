@@ -75,8 +75,8 @@ class ARGBPickerFragment : BasePickerFragment(R.layout.fragment_argb_picker, R.m
         changeHex = true
         etHex.setText("FF000000")
 
-        rootView.ivAddColor.setOnClickListener(pickerListener)
-        rootView.ivCopy.setOnClickListener(pickerListener)
+        rootView.ivAddColor.setOnClickListener({ containerCallbck?.addPaletteColor(getColorInt()) })
+        rootView.ivCopy.setOnClickListener({ containerCallbck?.copyColor(getColorInt()) })
 
         return rootView
     }
@@ -161,7 +161,7 @@ class ARGBPickerFragment : BasePickerFragment(R.layout.fragment_argb_picker, R.m
         ivColor.setBackgroundColor(colorInt)
     }
 
-    override fun getColorInt(): Int {
+    fun getColorInt(): Int {
         return Color.argb(getCheckedVal(etA), getCheckedVal(etR), getCheckedVal(etG), getCheckedVal(etB))
     }
 

@@ -1,30 +1,21 @@
 package com.ue.colorful.feature.coloring.md
 
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
 import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
-import com.ue.colorful.event.AddPaletteColorEvent
 import com.ue.colorful.model.PaletteColor
 import kotlinx.android.synthetic.main.item_md_palette_color.view.*
-import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/12/9.
  */
-internal class MDPaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
-    private val mClipboardManager: ClipboardManager by lazy {
-        activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    }
+internal class MDPaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?, private val mdPaletteListener: MDPaletteListener) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
 
     init {
         this.items = items ?: ArrayList()
@@ -38,17 +29,9 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
         if (position < 0 || position >= itemCount) {
             return
         }
-        if (view.id == R.id.ivCopy) {
-            val paletteColor = items[position]
-            val clip = ClipData.newPlainText("copy", paletteColor.hexString)
-            mClipboardManager.primaryClip = clip
-
-            Toast.makeText(activity, activity.getString(R.string.color_copied, paletteColor.hexString), Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (view.id == R.id.ivAddColor) {
-            EventBus.getDefault().post(AddPaletteColorEvent(items[position].hex))
-            return
+        when (view.id) {
+            R.id.ivCopy -> mdPaletteListener?.copyColor(items[position].hex)
+            R.id.ivAddColor -> mdPaletteListener?.addPaletteColor(items[position].hex)
         }
     }
 
@@ -100,5 +83,10 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
             val coloredZone = itemView.vgColorZone
             val ivAddColor = itemView.ivAddColor
         }
+    }
+
+    interface MDPaletteListener {
+        fun copyColor(color: Int)
+        fun addPaletteColor(color: Int)
     }
 }

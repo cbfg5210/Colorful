@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.feature.coloring.md.MDPaletteColorAdapter.MDPaletteListener
 import com.ue.colorful.feature.picker.BasePickerFragment
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
 /**
  * Created by hawk on 2017/12/13.
  */
-class MDPaletteFragment : BasePickerFragment(R.layout.fragment_mdpalette) {
+class MDPaletteFragment : BasePickerFragment(R.layout.fragment_mdpalette, R.menu.menu_palette) {
     private lateinit var paletteSections: List<PaletteSection>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,7 +29,17 @@ class MDPaletteFragment : BasePickerFragment(R.layout.fragment_mdpalette) {
         paletteSections = getPaletteSections(lastColorOption)
 
         rootView.rvColorList.setHasFixedSize(true)
-        rootView.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors)
+        rootView.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors,
+                object : MDPaletteListener {
+                    override fun copyColor(color: Int) {
+                        containerCallbck?.copyColor(color)
+                    }
+
+                    override fun addPaletteColor(color: Int) {
+                        containerCallbck?.addPaletteColor(color)
+                    }
+
+                })
 
         rootView.rvColorOptions.setHasFixedSize(true)
         rootView.rvColorOptions.adapter = MDPaletteSectionAdapter(activity, paletteSections,
@@ -69,9 +80,5 @@ class MDPaletteFragment : BasePickerFragment(R.layout.fragment_mdpalette) {
         paletteSections[lastColorOption].isSelected = true
 
         return paletteSections
-    }
-
-    override fun getColorInt(): Int {
-        return 0
     }
 }

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
 
-class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker, R.menu.menu_photo) {
+class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker,R.menu.menu_photo) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -37,8 +37,8 @@ class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker, R
             }
         })
 
-        rootView.ivAddColor.setOnClickListener(pickerListener)
-        rootView.ivCopy.setOnClickListener(pickerListener)
+        rootView.ivAddColor.setOnClickListener({ containerCallbck?.addPaletteColor(getColorInt()) })
+        rootView.ivCopy.setOnClickListener({ containerCallbck?.copyColor(getColorInt()) })
 
         val pickerPhotoPath = SPUtils.getString(SPKeys.PICKER_PHOTO_PATH, "")
         if (TextUtils.isEmpty(pickerPhotoPath)) Toast.makeText(activity, R.string.pick_photo, Toast.LENGTH_LONG).show()
@@ -47,7 +47,7 @@ class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker, R
         return rootView
     }
 
-    override fun getColorInt(): Int {
+    fun getColorInt(): Int {
         return rootView.pcpPhotoColorPicker.color
     }
 

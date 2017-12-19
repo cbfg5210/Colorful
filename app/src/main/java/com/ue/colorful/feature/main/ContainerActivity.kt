@@ -1,5 +1,7 @@
 package com.ue.colorful.feature.main
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +15,7 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.constant.SPKeys
-import com.ue.colorful.event.AddPaletteColorEvent
+import com.ue.colorful.event.ContainerCallback
 import com.ue.colorful.event.RemovePaletteColorEvent
 import com.ue.colorful.feature.calculate.CalcARGBFragment
 import com.ue.colorful.feature.calculate.CalcAlphaFragment
@@ -31,10 +33,13 @@ import com.ue.colorful.util.SPUtils
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-
-class ContainerActivity : AppCompatActivity() {
+class ContainerActivity : AppCompatActivity(), ContainerCallback {
     private lateinit var paletteColors: ArrayList<Int>
     private lateinit var fragment: Fragment
+
+    private val mClipboardManager: ClipboardManager by lazy {
+        getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    }
 
     companion object {
         private val ARG_COLOR_FUNCTION = "arg_frag_flag"
@@ -105,13 +110,6 @@ class ContainerActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    fun onAddPaletteColorEvent(event: AddPaletteColorEvent) {
-        paletteColors.add(event.color)
-        SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
-        Toast.makeText(this, getString(R.string.add_color_ok), Toast.LENGTH_SHORT).show()
-    }
-
-    @Subscribe
     fun onRemovePaletteColorEvent(event: RemovePaletteColorEvent) {
         paletteColors.remove(event.position)
         SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
@@ -124,5 +122,19 @@ class ContainerActivity : AppCompatActivity() {
         }
         val dialog = ColorPaletteDialog.newInstance(paletteColors)
         dialog.show(supportFragmentManager, "")
+    }
+
+    override fun copyColor(color: Int) {
+        val hex = String.format("#%08X", color)
+        val clip = ClipData.newPlainText("copy", hex)
+        mClipboardManager.primaryClip = clip
+
+        Toast.makeText(this, getString(R.string.color_copied, hex), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun addPaletteColor(color: Int) {
+        paletteColors.add(color)
+        SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
+        Toast.makeText(this, getString(R.string.add_color_ok), Toast.LENGTH_SHORT).show()
     }
 }
