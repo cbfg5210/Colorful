@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.layout_common_picker.view.*
 /**
  * Created by hawk on 2017/12/14.
  */
-class PalettePickerFragment : BasePickerFragment(R.layout.fragment_palette_picker), PaletteColorPickerView.OnColorChangedListener {
+class PalettePickerFragment : BasePickerFragment(R.layout.fragment_palette_picker,R.menu.menu_palette), PaletteColorPickerView.OnColorChangedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)

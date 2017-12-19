@@ -6,5 +6,6 @@ package com.ue.colorful.constant
 class Constants {
     companion object {
         val REQ_RESULT_DATA = "reqResultData";
+        val REQ_PICK_PHOTO = 11
     }
 }

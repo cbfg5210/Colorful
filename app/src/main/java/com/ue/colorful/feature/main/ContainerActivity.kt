@@ -10,16 +10,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.google.gson.reflect.TypeToken
 import com.ue.colorful.R
+import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.AddPaletteColorEvent
 import com.ue.colorful.event.RemovePaletteColorEvent
-import com.ue.colorful.event.ShowPaletteEvent
 import com.ue.colorful.feature.calculate.CalcARGBFragment
 import com.ue.colorful.feature.calculate.CalcAlphaFragment
+import com.ue.colorful.feature.coloring.md.MDPaletteFragment
 import com.ue.colorful.feature.game.diffcolor.TimeTrialModeFragment
 import com.ue.colorful.feature.game.ltcolor.EasyGameFragment
-import com.ue.colorful.feature.coloring.md.MDPaletteFragment
 import com.ue.colorful.feature.picker.argb.ARGBPickerFragment
 import com.ue.colorful.feature.picker.palette.PalettePickerFragment
 import com.ue.colorful.feature.picker.photo.PhotoPickerFragment
@@ -34,6 +34,7 @@ import org.greenrobot.eventbus.Subscribe
 
 class ContainerActivity : AppCompatActivity() {
     private lateinit var paletteColors: ArrayList<Int>
+    private lateinit var fragment: Fragment
 
     companion object {
         private val ARG_COLOR_FUNCTION = "arg_frag_flag"
@@ -65,8 +66,6 @@ class ContainerActivity : AppCompatActivity() {
                 if (TextUtils.isEmpty(paletteColorsStr)) ArrayList<Int>()
                 else GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
 
-        lateinit var fragment: Fragment
-
         when (colorFunction.funFlag) {
             FunFlags.PICKER_MD_PALETTE -> fragment = MDPaletteFragment()
             FunFlags.PICKER_COLOR_PALETTE -> fragment = PalettePickerFragment()
@@ -86,11 +85,18 @@ class ContainerActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
+        when (item.itemId) {
+            android.R.id.home -> finish()
+            R.id.menuPalette -> showPalette()
+            R.id.menuAlbum -> startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), Constants.REQ_PICK_PHOTO)
         }
-        return super.onOptionsItemSelected(item)
+        return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (fragment != null && fragment.isAdded) {
+            fragment.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onDestroy() {
@@ -111,8 +117,7 @@ class ContainerActivity : AppCompatActivity() {
         SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
     }
 
-    @Subscribe
-    fun onShowPaletteEvent(event: ShowPaletteEvent) {
+    fun showPalette() {
         if (paletteColors.size == 0) {
             Toast.makeText(this, getString(R.string.no_palette_color), Toast.LENGTH_SHORT).show()
             return

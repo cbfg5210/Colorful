@@ -7,11 +7,14 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import com.ue.colorful.R
+import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.ColorListener
 import com.ue.colorful.feature.picker.BasePickerFragment
@@ -20,8 +23,7 @@ import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
 
-class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker) {
-    private val REQ_PICK_PHOTO = 11
+class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker, R.menu.menu_photo) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -49,21 +51,8 @@ class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker) {
         return rootView.pcpPhotoColorPicker.color
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_photo, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menuAlbum) {
-            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), REQ_PICK_PHOTO)
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode != REQ_PICK_PHOTO) {
-            super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != Constants.REQ_PICK_PHOTO) {
             return
         }
         if (resultCode != Activity.RESULT_OK || data == null) {

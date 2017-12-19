@@ -9,13 +9,12 @@ import android.view.*
 import android.widget.Toast
 import com.ue.colorful.R
 import com.ue.colorful.event.AddPaletteColorEvent
-import com.ue.colorful.event.ShowPaletteEvent
 import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/12/15.
  */
-abstract class BasePickerFragment(private val layoutRes: Int) : Fragment() {
+abstract class BasePickerFragment(private val layoutRes: Int, private val menuRes: Int) : Fragment() {
     protected lateinit var rootView: View
 
     private val mClipboardManager: ClipboardManager by lazy {
@@ -29,15 +28,7 @@ abstract class BasePickerFragment(private val layoutRes: Int) : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_palette, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menuPalette) {
-            EventBus.getDefault().post(ShowPaletteEvent())
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+        if (menuRes > 0) inflater.inflate(menuRes, menu)
     }
 
     val pickerListener = object : View.OnClickListener {
