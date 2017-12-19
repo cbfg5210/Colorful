@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
+import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_ten_times_mode.*
 import kotlinx.android.synthetic.main.fragment_ten_times_mode.view.*
 import java.util.*
 
 class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode, R.menu.menu_game_diffcolor), View.OnClickListener {
+    private val TOTAL_LEVEL = 10
     private var buttonsInRow: Int = 0
     private var randomButton: Int = 0
     private var width: Int = 0
@@ -21,14 +23,13 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode, R.me
     private val r = Random()
 
     override fun initViews() {
-        rootView.tvLevel.text = "10"
-        rootView.btnRedraw.setOnClickListener {
-            linearLayoutTags.removeAllViews()
-            drawMap(HARD, 7)
-        }
+        width = resources.displayMetrics.widthPixels * 9 / 10
+        rootView.tvLevel.text = TOTAL_LEVEL.toString()
 
-        rootView.btnHalf.setOnClickListener { halfTiles(49) }
-        startGame()
+        rootView.tvStartGame.setOnClickListener { startGame() }
+
+        drawMap(HARD, 7)
+        rootView.linearLayoutTags.findViewById<View>(randomButton).isEnabled = false
     }
 
     private fun drawMap(level: Int, buttons: Int) {
@@ -56,113 +57,54 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode, R.me
 
             for (j in 0 until buttonsInRow) {
                 val btn = Button(activity)
+
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f)
                 params.setMargins(5, 5, 5, 5)
                 btn.layoutParams = params
+
                 btn.id = j + 1 + i * buttonsInRow
                 btn.width = width / buttonsInRow
                 btn.height = width / buttonsInRow
+
                 btn.setBackgroundResource(R.drawable.button_wrong)
-                val drawable = btn.background as GradientDrawable
-                drawable.setColor(Color.parseColor("#" + color0))
+                (btn.background as GradientDrawable).setColor(Color.parseColor("#$color0"))
+
                 btn.setOnClickListener(this)
                 row.addView(btn)
             }
 
             rootView.linearLayoutTags.addView(row)
         }
-        val b = rootView.linearLayoutTags.findViewById<View>(randomButton) as Button
-        val drawable2 = b.background as GradientDrawable
-        drawable2.setColor(Color.parseColor("#" + color1))
+        (rootView.linearLayoutTags.findViewById<View>(randomButton).background as GradientDrawable).setColor(Color.parseColor("#$color1"))
     }
 
     override fun onClick(view: View) {
         (view as Button).text = "*"
-        view.setEnabled(false)
+        view.isEnabled = false
 
-        val myId = view.getId()
-        if (myId == randomButton) {
+        if (view.id == randomButton) {
             level--
 
             if (level > 7) drawMap(MEDIUM, 7)
-            else if (level > 0 && level <= 7) drawMap(HARD, 7)
+            else if (level in 1..7) drawMap(HARD, 7)
             else gameOver()
 
             rootView.tvLevel.text = level.toString()
-        } else {
-            val b3 = rootView.linearLayoutTags.findViewById<View>(myId) as Button
-            val drawable3 = b3.background as GradientDrawable
-            drawable3.setColor(Color.BLACK)
-        }
-    }
-
-    private fun halfTiles(num: Int) {
-        val r = Random()
-        var randomTile: Int
-
-        val list = ArrayList<Int>()
-        for (i in 1..num) {
-            list.add(i)
-        }
-
-        val x = list.size / 2 + 1
-
-        val list2 = ArrayList<Int>()
-        run {
-            var i = 1
-            while (i < x) {
-                randomTile = r.nextInt(list.size) + 1
-                if (randomTile == randomButton) i--
-                else if (!list2.contains(randomTile)) list2.add(randomTile)
-                else i--
-
-                i++
-            }
-        }
-
-        for (i in list.indices) {
-            for (j in list2.indices) {
-                if (list[i] === list2[j]) {
-                    (rootView.linearLayoutTags.findViewById<View>(list[i]) as Button).visibility = View.INVISIBLE
-                }
-            }
-        }
+        } else (view.background as GradientDrawable).setColor(Color.BLACK)
     }
 
     private fun gameOver() {
+        rootView.tvStartGame.visibility = View.VISIBLE
         rootView.chronometerText.stop()
-
-        val dialog = TimeTrialResultDialog.newInstance(rootView.chronometerText.text.toString())
-        dialog.setPlayAgainListener(View.OnClickListener { startGame() })
-        dialog.show(childFragmentManager, "")
+        containerCallback?.gameOver(Constants.GAME_DIFF_TEN_TIMES, chronometerText.timeElapsed)
     }
 
-    fun startGame() {
+    private fun startGame() {
+        rootView.tvStartGame.visibility = View.INVISIBLE
+        level = TOTAL_LEVEL
         rootView.chronometerText.start()
-
-        width = resources.displayMetrics.widthPixels * 9 / 10
-        rootView.linearLayoutTags.removeAllViews()
-
-        level = 10
         rootView.tvLevel.text = level.toString()
         drawMap(HARD, 7)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        rootView.chronometerText.stop()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        rootView.chronometerText.stop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (rootView.chronometerText.timeElapsed > 0) {
-            rootView.chronometerText.resume()
-        }
     }
 
     override fun onDestroy() {

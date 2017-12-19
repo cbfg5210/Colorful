@@ -7,9 +7,11 @@ class SPKeys {
     companion object {
         val LAST_MD_COLOR = "lastMDColor"
         val LAST_PALETTE_COLOR = "lastPaletteColor"
-        val RECORD = "record"
+        val GAME_DIFF_CLASSIC_RECORD = "diffClassicRecord"
+        val GAME_DIFF_CLASSIC_LAST = "diffClassicLast"
         val RECORD_DATE = "recordDate"
-        val TIME_RECORD = "timeRecord"
+        val GAME_DIFF_TIME_RECORD = "diffTimeRecord"
+        val GAME_DIFF_TIME_LAST = "diffTimeLast"
         val TIME_RECORD_DATE = "timeRecordDate"
         val HIGH_SCORE = "highScore"
         val TIMES_PLAYED = "timesPlayed"

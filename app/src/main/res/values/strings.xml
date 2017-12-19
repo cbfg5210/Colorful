@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Colorful</string>
+    <string name="app_name">颜值</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -177,7 +177,7 @@
     <string name="youcandobetterthanthat">You can do better than that!</string>
 
     <string name="game_help">Tap the lighter color FAST!</string>
-    <string name="game_over">Game Over</string>
+    <string name="game_over">游戏结束</string>
     <string name="retry_game">Replay</string>
     <string name="preference_file_key">com.example.prakharsriv.colorphun.PREFERENCES_FILE</string>
     <string name="points_text">Points</string>
@@ -278,7 +278,7 @@
     <string name="game_color_light">哪个颜色浅</string>
     <string name="games">小游戏</string>
     <string name="transparency">透明度</string>
-    <string name="cal_argb"><![CDATA[颜色值&ARGB]]></string>
+    <string name="cal_argb" formatted="false">颜色值&#038;ARGB</string>
     <string name="calculate">计算</string>
     <string name="vision_test">色觉测试</string>
     <string name="other">其它</string>
@@ -287,4 +287,10 @@
     <string name="mode_ten_times">十次计时</string>
     <string name="mode_easy">简单模式</string>
     <string name="mode_hard">复杂模式</string>
+    <string name="game_diff_classic_best">最佳闯关数：%d</string>
+    <string name="start_game">开始游戏</string>
+    <string name="game_diff_classic_compare">与上次相比,闯关数：%s</string>
+    <string name="equal">相等</string>
+    <string name="game_diff_time_best">最短耗时：%d</string>
+    <string name="game_diff_time_compare">与上次相比,耗时(毫秒)：%s</string>
 </resources>

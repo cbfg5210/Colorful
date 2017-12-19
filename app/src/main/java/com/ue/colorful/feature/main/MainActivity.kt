@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             colorFuns = ArrayList<ColorFunction>()
             colorFuns.add(ColorFunction(getString(R.string.pick_photo_color), FunFlags.PICKER_PHOTO))
             colorFuns.add(ColorFunction(getString(R.string.pick_palette_color), FunFlags.PICKER_COLOR_PALETTE))
-            colorFuns.add(ColorFunction(getString(R.string.pick_screen_color), FunFlags.PICKER_SCREEN))
+//            colorFuns.add(ColorFunction(getString(R.string.pick_screen_color), FunFlags.PICKER_SCREEN))
             colorFuns.add(ColorFunction(getString(R.string.pick_argb_color), FunFlags.PICKER_ARGB))
             colorCats.add(ColorFunCategory(getString(R.string.pick_color), colorFuns, "f8bbd0"))
             //小游戏

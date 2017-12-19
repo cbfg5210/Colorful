@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_game_result"
+    android:orientation="vertical"
+    android:paddingBottom="25dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/tvResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/game_over"
+        android:textColor="@color/col_normal_txt"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <com.github.glomadrian.dashedcircularprogress.DashedCircularProgress
+        android:id="@+id/simple"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        custom:base_color="#ffffff"
+        custom:duration="2500"
+        custom:external_color="#ffffff"
+        custom:max="100"
+        custom:min="0"
+        custom:progress_color="@color/colorPrimary"
+        custom:progress_icon="@mipmap/star">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textSize="30sp"/>
+        </LinearLayout>
+    </com.github.glomadrian.dashedcircularprogress.DashedCircularProgress>
+
+    <TextView
+        android:id="@+id/tvBestRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/col_normal_txt"
+        android:textSize="16sp"
+        tools:text="@string/game_diff_classic_best"/>
+
+    <TextView
+        android:id="@+id/tvCompareResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/col_normal_txt"
+        android:textSize="16sp"
+        tools:text="@string/game_diff_classic_compare"/>
+
+</LinearLayout>

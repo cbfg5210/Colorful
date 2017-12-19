@@ -180,4 +180,8 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
         SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
         Toast.makeText(this, getString(R.string.add_color_ok), Toast.LENGTH_SHORT).show()
     }
+
+    override fun gameOver(gameMode: Int, gameResult: Long) {
+        GameResultDialog.newInstance(gameMode,gameResult).show(supportFragmentManager, "")
+    }
 }

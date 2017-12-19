@@ -46,4 +46,5 @@ dependencies {
     implementation deps.eventbus
     implementation deps.easySwipeMenuLayout
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
 }

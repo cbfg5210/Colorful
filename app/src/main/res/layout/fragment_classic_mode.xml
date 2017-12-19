@@ -1,144 +1,56 @@
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FDFDFD"
     android:padding="16dp">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="10">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="3"
             android:background="#37474F"
-            android:gravity="center_horizontal">
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
 
-            <TextView
-                android:id="@+id/tvLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:text="@string/text_lvl"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:background="#FFFFFF"
-            android:gravity="center_horizontal"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:layout_gravity="center"
+            android:text="00:30"
+            android:textColor="#1C1C1C"
+            android:textSize="20sp"/>
 
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="00:30"
-                android:textColor="#1C1C1C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/tv_bonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="+2"
-                android:textColor="#1C1C1C"
-                android:textSize="20sp"
-                android:visibility="invisible"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_pause"
+        <TextView
+            android:id="@+id/tvStartGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="5dp"
-            android:layout_weight="3"
             android:background="#37474F"
-            android:gravity="center_horizontal"
+            android:gravity="center"
+            android:minWidth="100dp"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/tvPause"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="II"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:paddingTop="5dp"
+            android:text="@string/start_game"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayoutTags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:orientation="vertical">
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/btnRedraw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/gamebutton_selector"
-            android:text="@string/button_redraw"
-            android:textColor="#FFFFFF"/>
-
-        <Button
-            android:id="@+id/btnHalf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/gamebutton_selector"
-            android:text="@string/button_half"
-            android:textColor="#FFFFFF"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutTags"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/pointsbg"
-        android:padding="8dp"
-        android:text="-1 second"
-        android:textColor="#CC1212"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="invisible"/>
-
-    <ImageView
-        android:id="@+id/ivAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@mipmap/b_good"
-        android:visibility="invisible"/>
-</RelativeLayout>
+</FrameLayout>
