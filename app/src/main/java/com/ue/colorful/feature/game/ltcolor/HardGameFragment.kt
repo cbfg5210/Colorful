@@ -13,24 +13,19 @@ import kotlinx.android.synthetic.main.fragment_hard_game.view.*
 import java.util.*
 
 
-class HardGameFragment : BasePhunFragment() {
+class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game,R.menu.menu_game_ltcolor) {
 
     private lateinit var buttonList: ArrayList<Button>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView=inflater.inflate(R.layout.fragment_hard_game,container,false)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
 
         setupProgressView()
 
         POINT_INCREMENT = 4
         TIMER_BUMP = 2
 
-        gameMode = BasePhunFragment.GameMode.HARD
+        gameMode = BaseLtGameFragment.GameMode.HARD
 
         rootView.button_1.setOnClickListener(this)
         rootView.button_2.setOnClickListener(this)
@@ -47,6 +42,8 @@ class HardGameFragment : BasePhunFragment() {
         resetGame()
         setupGameLoop()
         startGame()
+
+        return rootView
     }
 
     override fun setColorsOnButtons() {

@@ -1,4 +1,4 @@
-package com.ue.colorful.feature.picker
+package com.ue.colorful.feature.main
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.ue.colorful.event.ContainerCallback
 /**
  * Created by hawk on 2017/12/15.
  */
-abstract class BasePickerFragment(private val layoutRes: Int, private val menuRes: Int) : Fragment() {
+abstract class BaseFragment(private val layoutRes: Int, private val menuRes: Int) : Fragment() {
     protected lateinit var rootView: View
     protected var containerCallbck: ContainerCallback? = null
 

@@ -3,20 +3,18 @@ package com.ue.colorful.feature.game.diffcolor
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
+import com.ue.colorful.feature.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_time_trial_mode.*
 import kotlinx.android.synthetic.main.fragment_time_trial_mode.view.*
 import java.util.*
 
-class TimeTrialModeFragment : Fragment(), View.OnClickListener {
-    private lateinit var rootView: View
-
+class TimeTrialModeFragment : BaseFragment(R.layout.fragment_time_trial_mode,R.menu.menu_game_diffcolor), View.OnClickListener {
     private var buttonsInRow: Int = 0
     private var randomButton: Int = 0
     private var width: Int = 0
@@ -26,13 +24,7 @@ class TimeTrialModeFragment : Fragment(), View.OnClickListener {
     private val r = Random()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_time_trial_mode, container, false)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        rootView = view
+        super.onCreateView(inflater, container, savedInstanceState)
 
         rootView.tvLevel.text = "10"
         rootView.btnRedraw.setOnClickListener {
@@ -42,6 +34,8 @@ class TimeTrialModeFragment : Fragment(), View.OnClickListener {
 
         rootView.btnHalf.setOnClickListener { halfTiles(49) }
         startGame()
+
+        return rootView
     }
 
     private fun drawMap(level: Int, buttons: Int) {

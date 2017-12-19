@@ -9,7 +9,7 @@ import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.feature.coloring.md.MDPaletteColorAdapter.MDPaletteListener
-import com.ue.colorful.feature.picker.BasePickerFragment
+import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.model.PaletteColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
 /**
  * Created by hawk on 2017/12/13.
  */
-class MDPaletteFragment : BasePickerFragment(R.layout.fragment_mdpalette, R.menu.menu_palette) {
+class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_palette) {
     private lateinit var paletteSections: List<PaletteSection>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

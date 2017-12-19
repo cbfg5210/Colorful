@@ -4,17 +4,16 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.progress_area_layout.view.*
 
-abstract class BasePhunFragment : Fragment(), View.OnClickListener {
-    protected lateinit var rootView: View
+abstract class BaseLtGameFragment(private val layoutRes:Int, private val menuRes:Int) : BaseFragment(layoutRes,menuRes), View.OnClickListener {
 
     protected lateinit var pointAnim: AnimatorSet
     protected lateinit var levelAnim: AnimatorSet

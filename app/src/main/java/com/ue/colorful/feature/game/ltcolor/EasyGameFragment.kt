@@ -9,21 +9,16 @@ import android.view.ViewGroup
 import com.ue.colorful.R
 import kotlinx.android.synthetic.main.fragment_easy_game.view.*
 
-class EasyGameFragment : BasePhunFragment() {
+class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.menu_game_ltcolor) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_easy_game, container, false)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
 
         setupProgressView()
 
         POINT_INCREMENT = 2
         TIMER_BUMP = 2
 
-        gameMode = BasePhunFragment.GameMode.EASY
+        gameMode = BaseLtGameFragment.GameMode.EASY
 
         rootView.topButton.setOnClickListener(this)
         rootView.bottomButton.setOnClickListener(this)
@@ -32,6 +27,8 @@ class EasyGameFragment : BasePhunFragment() {
         resetGame()
         setupGameLoop()
         startGame()
+
+        return rootView
     }
 
     override fun onClick(view: View) {
@@ -69,10 +66,7 @@ class EasyGameFragment : BasePhunFragment() {
         val alpha2 = Color.alpha(unClickedColor.color)
 
         // correct guess
-        if (alpha1 < alpha2) {
-            updatePoints()
-        } else { // incorrect guess
-            endGame()
-        }
+        if (alpha1 < alpha2) updatePoints()
+        else endGame()
     }
 }

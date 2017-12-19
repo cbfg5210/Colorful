@@ -21,7 +21,7 @@ class GameOverDialog : DialogFragment() {
     private var level: Int = 0
     private var newScore: Boolean = false
     private var shown = false
-    private var mode: BasePhunFragment.GameMode? = null
+    private var mode: BaseLtGameFragment.GameMode? = null
     private var replayListener: View.OnClickListener? = null
 
     companion object {
@@ -59,7 +59,7 @@ class GameOverDialog : DialogFragment() {
         level = arguments.getInt(ARG_LEVEL)
         best = arguments.getInt(ARG_BEST)
         newScore = arguments.getBoolean(ARG_NEW_SCORE)
-        mode = BasePhunFragment.GameMode.valueOf(arguments.getString(ARG_MODE))
+        mode = BaseLtGameFragment.GameMode.valueOf(arguments.getString(ARG_MODE))
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

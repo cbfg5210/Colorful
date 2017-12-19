@@ -282,4 +282,9 @@
     <string name="calculate">计算</string>
     <string name="vision_test">色觉测试</string>
     <string name="other">其它</string>
+    <string name="gameMode">游戏模式</string>
+    <string name="mode_classic">经典模式</string>
+    <string name="mode_times">十次计时</string>
+    <string name="mode_easy">简单模式</string>
+    <string name="mode_hard">复杂模式</string>
 </resources>

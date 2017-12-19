@@ -4,20 +4,18 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
+import com.ue.colorful.feature.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_classic_mode.*
 import kotlinx.android.synthetic.main.fragment_classic_mode.view.*
 import java.util.*
 
-class ClassicModeFragment : Fragment(), View.OnClickListener {
-    private lateinit var rootView: View
-
+class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.menu_game_diffcolor), View.OnClickListener {
     private var countDownTimer: CountDownTimer? = null
     private var seconds: Int = 0
     private var buttonsInRow: Int = 0
@@ -29,13 +27,7 @@ class ClassicModeFragment : Fragment(), View.OnClickListener {
     private val r = Random()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_classic_mode, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        rootView = view
+        super.onCreateView(inflater, container, savedInstanceState)
 
         rootView.tvPause.setOnClickListener { toggleCountDownSwitch(!tvPause.isSelected) }
 
@@ -66,6 +58,7 @@ class ClassicModeFragment : Fragment(), View.OnClickListener {
                 else -> halfTiles(49)
             }
         }
+        return rootView
     }
 
     private fun drawMap(level: Int, buttons: Int) {

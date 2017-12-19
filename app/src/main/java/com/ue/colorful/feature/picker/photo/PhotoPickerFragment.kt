@@ -17,13 +17,13 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.ColorListener
-import com.ue.colorful.feature.picker.BasePickerFragment
+import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
 
-class PhotoPickerFragment : BasePickerFragment(R.layout.fragment_photo_picker,R.menu.menu_photo) {
+class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker,R.menu.menu_photo) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
