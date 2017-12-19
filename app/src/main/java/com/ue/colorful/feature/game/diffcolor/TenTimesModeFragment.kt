@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_ten_times_mode.*
 import kotlinx.android.synthetic.main.fragment_ten_times_mode.view.*
 import java.util.*
 
-class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.menu.menu_game_diffcolor), View.OnClickListener {
+class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode, R.menu.menu_game_diffcolor), View.OnClickListener {
     private var buttonsInRow: Int = 0
     private var randomButton: Int = 0
     private var width: Int = 0
@@ -32,23 +32,22 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.men
     }
 
     private fun drawMap(level: Int, buttons: Int) {
+        rootView.linearLayoutTags.removeAllViews()
+
         val color0: String
         val color1: String
 
         buttonsInRow = buttons
         randomButton = r.nextInt(buttonsInRow * buttonsInRow) + 1
 
-        when (level) {
-            MEDIUM -> {
-                val randomColor = r.nextInt(arrays.mediumColors.size)
-                color0 = arrays.getMediumColor0(randomColor)
-                color1 = arrays.getMediumColor1(randomColor)
-            }
-            else -> {
-                val randomColor = r.nextInt(arrays.hardColors.size)
-                color0 = arrays.getHardColor0(randomColor)
-                color1 = arrays.getHardColor1(randomColor)
-            }
+        if (level == MEDIUM) {
+            val randomColor = r.nextInt(arrays.mediumColors.size)
+            color0 = arrays.getMediumColor0(randomColor)
+            color1 = arrays.getMediumColor1(randomColor)
+        } else {
+            val randomColor = r.nextInt(arrays.hardColors.size)
+            color0 = arrays.getHardColor0(randomColor)
+            color1 = arrays.getHardColor1(randomColor)
         }
 
         for (i in 0 until buttonsInRow) {
@@ -83,16 +82,11 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.men
 
         val myId = view.getId()
         if (myId == randomButton) {
-            rootView.linearLayoutTags.removeAllViews()
-
             level--
-            if (level > 7) {
-                drawMap(MEDIUM, 7)
-            } else if (level > 0 && level <= 7) {
-                drawMap(HARD, 7)
-            } else {
-                gameOver()
-            }
+
+            if (level > 7) drawMap(MEDIUM, 7)
+            else if (level > 0 && level <= 7) drawMap(HARD, 7)
+            else gameOver()
 
             rootView.tvLevel.text = level.toString()
         } else {
@@ -102,7 +96,7 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.men
         }
     }
 
-    fun halfTiles(num: Int) {
+    private fun halfTiles(num: Int) {
         val r = Random()
         var randomTile: Int
 
@@ -118,13 +112,10 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.men
             var i = 1
             while (i < x) {
                 randomTile = r.nextInt(list.size) + 1
-                if (randomTile == randomButton) {
-                    i--
-                } else if (!list2.contains(randomTile)) {
-                    list2.add(randomTile)
-                } else {
-                    i--
-                }
+                if (randomTile == randomButton) i--
+                else if (!list2.contains(randomTile)) list2.add(randomTile)
+                else i--
+
                 i++
             }
         }
@@ -132,14 +123,13 @@ class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.men
         for (i in list.indices) {
             for (j in list2.indices) {
                 if (list[i] === list2[j]) {
-                    val b2 = rootView.linearLayoutTags.findViewById<View>(list[i]) as Button
-                    b2.visibility = View.INVISIBLE
+                    (rootView.linearLayoutTags.findViewById<View>(list[i]) as Button).visibility = View.INVISIBLE
                 }
             }
         }
     }
 
-    fun gameOver() {
+    private fun gameOver() {
         rootView.chronometerText.stop()
 
         val dialog = TimeTrialResultDialog.newInstance(rootView.chronometerText.text.toString())
