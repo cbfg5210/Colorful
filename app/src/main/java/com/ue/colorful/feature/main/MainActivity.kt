@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             colorCats.add(ColorFunCategory(getString(R.string.pick_color), colorFuns, "f8bbd0"))
             //小游戏
             colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction(getString(R.string.game_color_diff), FunFlags.GAME_COLOR_DIFF))
-            colorFuns.add(ColorFunction(getString(R.string.game_color_light), FunFlags.GAME_PHUN))
+            colorFuns.add(ColorFunction(getString(R.string.game_color_diff), FunFlags.GAME_DIFF_COLOR))
+            colorFuns.add(ColorFunction(getString(R.string.game_color_light), FunFlags.GAME_LT_COLOR))
             colorCats.add(ColorFunCategory(getString(R.string.games), colorFuns, "e1bee7"))
             //计算
             colorFuns = ArrayList<ColorFunction>()

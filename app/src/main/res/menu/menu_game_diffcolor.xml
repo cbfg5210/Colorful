@@ -8,11 +8,11 @@
         app:showAsAction="always">
         <menu>
             <item
-                android:id="@+id/menuClassic"
+                android:id="@+id/menuClassicMode"
                 android:title="@string/mode_classic"/>
             <item
-                android:id="@+id/menuTimes"
-                android:title="@string/mode_times"/>
+                android:id="@+id/menuTenTimesMode"
+                android:title="@string/mode_ten_times"/>
         </menu>
     </item>
 </menu>

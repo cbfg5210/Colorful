@@ -20,8 +20,10 @@ import com.ue.colorful.event.RemovePaletteColorEvent
 import com.ue.colorful.feature.calculate.CalcARGBFragment
 import com.ue.colorful.feature.calculate.CalcAlphaFragment
 import com.ue.colorful.feature.coloring.md.MDPaletteFragment
-import com.ue.colorful.feature.game.diffcolor.TimeTrialModeFragment
+import com.ue.colorful.feature.game.diffcolor.ClassicModeFragment
+import com.ue.colorful.feature.game.diffcolor.TenTimesModeFragment
 import com.ue.colorful.feature.game.ltcolor.EasyGameFragment
+import com.ue.colorful.feature.game.ltcolor.HardGameFragment
 import com.ue.colorful.feature.picker.argb.ARGBPickerFragment
 import com.ue.colorful.feature.picker.palette.PalettePickerFragment
 import com.ue.colorful.feature.picker.photo.PhotoPickerFragment
@@ -35,7 +37,8 @@ import org.greenrobot.eventbus.Subscribe
 
 class ContainerActivity : AppCompatActivity(), ContainerCallback {
     private lateinit var paletteColors: ArrayList<Int>
-    private lateinit var fragment: Fragment
+    private var fragment: Fragment? = null
+    private lateinit var colorFunction: ColorFunction
 
     private val mClipboardManager: ClipboardManager by lazy {
         getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -61,31 +64,52 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
         }
         EventBus.getDefault().register(this)
 
-        val colorFunction = intent.getParcelableExtra<ColorFunction>(ARG_COLOR_FUNCTION)
+        colorFunction = intent.getParcelableExtra<ColorFunction>(ARG_COLOR_FUNCTION)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = colorFunction.funName
+
+        when (colorFunction.funFlag) {
+            FunFlags.PICKER_MD_PALETTE -> showFragment(MDPaletteFragment())
+            FunFlags.PICKER_COLOR_PALETTE -> showFragment(PalettePickerFragment())
+            FunFlags.PICKER_PHOTO -> showFragment(PhotoPickerFragment())
+            FunFlags.PICKER_ARGB -> showFragment(ARGBPickerFragment())
+            FunFlags.PICKER_SCREEN -> showFragment(ScreenPickerFragment())
+            FunFlags.GAME_DIFF_COLOR -> {
+                val mode = SPUtils.getInt(SPKeys.GAME_DIFF_MODE, Constants.GAME_DIFF_CLASSIC)
+                if (mode == Constants.GAME_DIFF_CLASSIC) {
+                    supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_classic)}"
+                    showFragment(ClassicModeFragment())
+                } else {
+                    supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_ten_times)}"
+                    showFragment(TenTimesModeFragment())
+                }
+            }
+            FunFlags.GAME_LT_COLOR -> {
+                val mode = SPUtils.getInt(SPKeys.GAME_LT_MODE, Constants.GAME_LT_EASY)
+                if (mode == Constants.GAME_LT_EASY) {
+                    supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_easy)}"
+                    showFragment(EasyGameFragment())
+                } else {
+                    supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_hard)}"
+                    showFragment(HardGameFragment())
+                }
+            }
+            FunFlags.CALC_ALPHA -> showFragment(CalcAlphaFragment())
+            FunFlags.CALC_ARGB -> showFragment(CalcARGBFragment())
+            FunFlags.VISION_TEST -> showFragment(ColorVisionTestFragment())
+        }
 
         val paletteColorsStr = SPUtils.getString(SPKeys.PALETTE_COLORS, "")
         paletteColors =
                 if (TextUtils.isEmpty(paletteColorsStr)) ArrayList<Int>()
                 else GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
+    }
 
-        when (colorFunction.funFlag) {
-            FunFlags.PICKER_MD_PALETTE -> fragment = MDPaletteFragment()
-            FunFlags.PICKER_COLOR_PALETTE -> fragment = PalettePickerFragment()
-            FunFlags.PICKER_PHOTO -> fragment = PhotoPickerFragment()
-            FunFlags.PICKER_ARGB -> fragment = ARGBPickerFragment()
-            FunFlags.PICKER_SCREEN -> fragment = ScreenPickerFragment()
-            FunFlags.GAME_COLOR_DIFF -> fragment = TimeTrialModeFragment()
-            FunFlags.GAME_PHUN -> fragment = EasyGameFragment()
-            FunFlags.CALC_ALPHA -> fragment = CalcAlphaFragment()
-            FunFlags.CALC_ARGB -> fragment = CalcARGBFragment()
-            FunFlags.VISION_TEST -> fragment = ColorVisionTestFragment()
-            else -> fragment = MDPaletteFragment()
-        }
+    private fun showFragment(mFragment: Fragment) {
+        fragment = mFragment
         supportFragmentManager.beginTransaction()
-                .add(R.id.vgFragmentContainer, fragment)
+                .replace(R.id.vgFragmentContainer, fragment)
                 .commit()
     }
 
@@ -94,14 +118,33 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
             android.R.id.home -> finish()
             R.id.menuPalette -> showPalette()
             R.id.menuAlbum -> startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), Constants.REQ_PICK_PHOTO)
+
+            R.id.menuClassicMode -> if (fragment !is ClassicModeFragment) {
+                supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_classic)}"
+                showFragment(ClassicModeFragment())
+                SPUtils.putInt(SPKeys.GAME_DIFF_MODE, Constants.GAME_DIFF_CLASSIC)
+            }
+            R.id.menuTenTimesMode -> if (fragment !is TenTimesModeFragment) {
+                supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_ten_times)}"
+                showFragment(TenTimesModeFragment())
+                SPUtils.putInt(SPKeys.GAME_DIFF_MODE, Constants.GAME_DIFF_TEN_TIMES)
+            }
+            R.id.menuEasyMode -> if (fragment !is EasyGameFragment) {
+                supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_easy)}"
+                showFragment(EasyGameFragment())
+                SPUtils.putInt(SPKeys.GAME_LT_MODE, Constants.GAME_LT_EASY)
+            }
+            R.id.menuHardMode -> if (fragment !is HardGameFragment) {
+                supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_hard)}"
+                showFragment(HardGameFragment())
+                SPUtils.putInt(SPKeys.GAME_LT_MODE, Constants.GAME_LT_HARD)
+            }
         }
         return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (fragment != null && fragment.isAdded) {
-            fragment.onActivityResult(requestCode, resultCode, data)
-        }
+        if (fragment != null && fragment!!.isAdded) fragment!!.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDestroy() {
@@ -115,7 +158,7 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
         SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
     }
 
-    fun showPalette() {
+    private fun showPalette() {
         if (paletteColors.size == 0) {
             Toast.makeText(this, getString(R.string.no_palette_color), Toast.LENGTH_SHORT).show()
             return

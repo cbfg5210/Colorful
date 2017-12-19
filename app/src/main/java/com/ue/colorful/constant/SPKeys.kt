@@ -15,5 +15,7 @@ class SPKeys {
         val TIMES_PLAYED = "timesPlayed"
         val PALETTE_COLORS = "paletteColors"
         val PICKER_PHOTO_PATH = "pickerPhotoPath"
+        val GAME_DIFF_MODE = "diffGameMode"
+        val GAME_LT_MODE = "ltGameMode"
     }
 }

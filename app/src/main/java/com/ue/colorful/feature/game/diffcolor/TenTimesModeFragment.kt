@@ -7,11 +7,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.ue.colorful.R
 import com.ue.colorful.feature.main.BaseFragment
-import kotlinx.android.synthetic.main.fragment_time_trial_mode.*
-import kotlinx.android.synthetic.main.fragment_time_trial_mode.view.*
+import kotlinx.android.synthetic.main.fragment_ten_times_mode.*
+import kotlinx.android.synthetic.main.fragment_ten_times_mode.view.*
 import java.util.*
 
-class TimeTrialModeFragment : BaseFragment(R.layout.fragment_time_trial_mode,R.menu.menu_game_diffcolor), View.OnClickListener {
+class TenTimesModeFragment : BaseFragment(R.layout.fragment_ten_times_mode,R.menu.menu_game_diffcolor), View.OnClickListener {
     private var buttonsInRow: Int = 0
     private var randomButton: Int = 0
     private var width: Int = 0
