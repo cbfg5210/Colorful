@@ -16,9 +16,6 @@ class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game, R.menu.
     override fun initViews() {
         setupProgressView()
 
-        POINT_INCREMENT = 1
-        TIMER_BUMP = 2
-
         gameMode = Constants.GAME_LT_HARD
 
         buttonList = ArrayList()

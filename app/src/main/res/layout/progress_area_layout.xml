@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ProgressBar
-        android:layout_width="match_parent"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_height="30dp"
         android:id="@+id/pbTimerProgress"
-        android:progressDrawable="@drawable/timer_progress"
-        android:max="400" />
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:max="200"
+        android:progressDrawable="@drawable/timer_progress"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,50 +20,50 @@
         android:paddingRight="20dp">
 
         <TextView
+            android:id="@+id/tvPointsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvPointsLabel"
-            android:text="@string/points_text"
-            android:textColor="@color/col_696a6d"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
+            android:text="@string/points_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"/>
+            android:textColor="@color/col_696a6d"/>
 
         <TextView
+            android:id="@+id/tvPointsValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvPointsValue"
-            android:textColor="@color/col_3c3d3e"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@id/tvPointsLabel"
             android:layout_toRightOf="@id/tvPointsLabel"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvLevelValue"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/col_3c3d3e"
-            android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"/>
+            android:textColor="@color/col_3c3d3e"/>
 
         <TextView
+            android:id="@+id/tvLevelValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/col_3c3d3e"/>
+
+        <TextView
             android:id="@+id/tvLevelLabel"
-            android:text="@string/level_text"
-            android:textColor="@color/col_696a6d"
-            android:layout_toStartOf="@id/tvLevelValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/tvLevelValue"
+            android:layout_toStartOf="@id/tvLevelValue"
+            android:text="@string/level_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_centerVertical="true" />
+            android:textColor="@color/col_696a6d"/>
 
     </RelativeLayout>
 

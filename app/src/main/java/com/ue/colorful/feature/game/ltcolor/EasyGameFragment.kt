@@ -12,9 +12,6 @@ class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.
     override fun initViews() {
         setupProgressView()
 
-        POINT_INCREMENT = 1
-        TIMER_BUMP = 2
-
         gameMode = Constants.GAME_LT_EASY
 
         rootView.topButton.setOnClickListener(this)
