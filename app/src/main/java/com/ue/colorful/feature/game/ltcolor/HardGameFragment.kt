@@ -28,9 +28,13 @@ class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game, R.menu.
         buttonList[2].setOnClickListener(this)
         buttonList[3].setOnClickListener(this)
 
-        // bootstrap game
+        ivStartGame = rootView.ivStartGame
+        ivStartGame.setOnClickListener({
+            resetGame()
+            startGame()
+        })
+
         resetGame()
-        startGame()
     }
 
     override fun setColorsOnButtons() {

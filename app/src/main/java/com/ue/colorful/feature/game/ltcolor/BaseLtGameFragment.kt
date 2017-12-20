@@ -22,6 +22,8 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
 
     protected lateinit var handler: Handler
     private var timer: Timer? = null
+    
+    protected lateinit var ivStartGame:View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,7 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
     }
 
     protected fun startGame() {
+        ivStartGame.visibility = View.GONE
         gameStart = true
         restTime = START_TIMER
 
@@ -73,8 +76,10 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
     }
 
     protected fun endGame() {
-        gameStart = false
         timer?.cancel()
+        gameStart = false
+        ivStartGame.visibility = View.VISIBLE
+
         containerCallback?.gameOver(gameMode, points.toLong())
     }
 

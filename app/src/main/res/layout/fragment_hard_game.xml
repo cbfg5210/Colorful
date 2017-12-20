@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -8,41 +9,53 @@
 
     <include layout="@layout/progress_area_layout"/>
 
-    <TableLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:stretchColumns="0">
+        android:layout_height="match_parent">
 
-        <TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:stretchColumns="0">
 
-            <Button
-                android:id="@+id/button_1"
-                android:layout_width="0dp"
-                android:layout_height="260dp"
-                android:layout_weight="1"/>
+            <TableRow>
 
-            <Button
-                android:id="@+id/button_2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-        </TableRow>
+                <Button
+                    android:id="@+id/button_1"
+                    android:layout_width="0dp"
+                    android:layout_height="260dp"
+                    android:layout_weight="1"/>
 
-        <TableRow>
+                <Button
+                    android:id="@+id/button_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+            </TableRow>
 
-            <Button
-                android:id="@+id/button_3"
-                android:layout_width="0dp"
-                android:layout_height="260dp"
-                android:layout_weight="1"/>
+            <TableRow>
 
-            <Button
-                android:id="@+id/button_4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-        </TableRow>
+                <Button
+                    android:id="@+id/button_3"
+                    android:layout_width="0dp"
+                    android:layout_height="260dp"
+                    android:layout_weight="1"/>
 
-    </TableLayout>
+                <Button
+                    android:id="@+id/button_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/ivStartGame"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/svg_start_game"/>
+    </FrameLayout>
 </LinearLayout>

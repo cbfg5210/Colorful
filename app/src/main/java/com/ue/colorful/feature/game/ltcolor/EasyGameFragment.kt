@@ -17,9 +17,13 @@ class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.
         rootView.topButton.setOnClickListener(this)
         rootView.bottomButton.setOnClickListener(this)
 
-        // bootstrap game
+        ivStartGame = rootView.ivStartGame
+        ivStartGame.setOnClickListener({
+            resetGame()
+            startGame()
+        })
+
         resetGame()
-        startGame()
     }
 
     override fun onClick(view: View) {
