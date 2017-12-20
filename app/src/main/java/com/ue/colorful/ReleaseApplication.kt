@@ -5,12 +5,13 @@ import android.app.Application
 import android.content.Context
 import android.os.Process
 import android.support.v7.app.AppCompatDelegate
+import com.tencent.bugly.Bugly
 import com.ue.colorful.util.SPUtils
 
 /**
  * Created by hawk on 2017/8/23.
  */
-open class ReleaseApplication : Application() {
+class ReleaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -21,6 +22,8 @@ open class ReleaseApplication : Application() {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
             // init shared preferences util
             SPUtils.init(this)
+            // init bugly
+            Bugly.init(this, BuildConfig.BUGLY_APP_ID, false);
             // init debug tools
             initDebugTools()
         } else {
