@@ -1,18 +1,5 @@
 <resources>
     <string name="app_name">颜值</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- menu -->
-    <string name="menu_go_to_preview">Go to preview</string>
-
-    <string name="card_menu_actionbar_color_preview">Use as actionbar color preview</string>
-    <string name="card_menu_color_preview">Use as color preview</string>
-    <string name="card_menu_remove_actionbar_color_preview">Do not use as actionbar color preview</string>
-    <string name="card_menu_remove_color_preview">Do not use as color preview</string>
-    <string name="card_menu_copy_color">Copy color to clipboard</string>
-    <string name="color_copied">Color %s copied to clipboard</string>
-    <string name="color_clipboard">Color %1$s %2$s</string>
 
     <!-- navigation drawer sections 19-->
     <string-array name="color_sections_names">
@@ -169,21 +156,7 @@
         <item>1000</item>
     </string-array>
 
-    <string name="text_lvl">Lvl</string>
-    <string name="button_redraw">REDRAW</string>
-    <string name="button_half">HALF</string>
-    <string name="newrecord">That\'s a new record!</string>
-    <string name="almost">Almost</string>
-    <string name="youcandobetterthanthat">You can do better than that!</string>
-
-    <string name="game_help">Tap the lighter color FAST!</string>
     <string name="game_over">游戏结束</string>
-    <string name="retry_game">Replay</string>
-    <string name="preference_file_key">com.example.prakharsriv.colorphun.PREFERENCES_FILE</string>
-    <string name="points_text">Points</string>
-    <string name="level_text">Level</string>
-    <string name="high_score">New High Score!</string>
-    <string name="best_label">Best</string>
 
     <string name="answer01">所有人都能看到12</string>
     <string name="answer02">普通人看到8\n红绿色弱看到3\n全色弱什么都看不到</string>
@@ -209,15 +182,10 @@
     <string name="answer22">普通人能看到蓝绿色/黄绿色的线条\n红绿色弱会看到蓝绿色和红色线条\n全色弱看不到任何线条</string>
     <string name="answer23">普通人能看到红色和橙色线条\n红绿色弱会看到红色和蓝绿色线条\n全色弱什么都看不到</string>
     <string name="answer24">所有人都能看到一条弯曲的线条</string>
-    <string name="choose_color">选择颜色</string>
-    <string name="cancel">取消</string>
-    <string name="sure">确定</string>
     <string name="no_palette_color">还没有保存过颜色到色板哦</string>
     <string name="add_color_ok">已添加颜色到色板中</string>
-    <string name="color_palette">色板</string>
     <string name="palette">色板</string>
     <string name="about">关于</string>
-    <string name="album">相册</string>
     <string name="choose_photo">选择图片</string>
     <string name="load_photo_failed">加载图片失败</string>
     <string name="pick_photo">点击右上角菜单前往选择图片吧~</string>
@@ -282,13 +250,11 @@
     <string name="calculate">计算</string>
     <string name="vision_test">色觉测试</string>
     <string name="other">其它</string>
-    <string name="gameMode">游戏模式</string>
     <string name="mode_classic">经典模式</string>
     <string name="mode_ten_times">十次计时</string>
     <string name="mode_easy">简单模式</string>
     <string name="mode_hard">复杂模式</string>
     <string name="game_diff_classic_best">最佳闯关数：%d</string>
-    <string name="start_game">开始游戏</string>
     <string name="game_diff_classic_compare">与上次相比,闯关数：%s</string>
     <string name="equal">相等</string>
     <string name="game_diff_time_best">最短耗时：%d</string>
@@ -296,4 +262,8 @@
     <string name="game_lt_best">最佳得分：%d</string>
     <string name="game_lt_compare">与上次相比,得分：%s</string>
     <string name="color_collections">采色板</string>
+    <string name="start_game">开始游戏</string>
+    <string name="gameMode">游戏模式</string>
+    <string name="album">相册</string>
+    <string name="color_copied">颜色值 %s 已经复制到粘贴板</string>
 </resources>

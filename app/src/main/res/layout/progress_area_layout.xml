@@ -28,7 +28,6 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/points_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/col_696a6d"/>
 
@@ -61,7 +60,6 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/tvLevelValue"
             android:layout_toStartOf="@id/tvLevelValue"
-            android:text="@string/level_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/col_696a6d"/>
 
