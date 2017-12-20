@@ -28,5 +28,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="2dp"
-        android:background="@drawable/svg_selected"/>
+        app:srcCompat="@drawable/svg_selected"/>
 </LinearLayout>

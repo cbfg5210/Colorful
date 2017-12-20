@@ -93,9 +93,7 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
 
             rootView.linearLayoutTags.addView(row)
         }
-        val b = rootView.linearLayoutTags.findViewById<View>(randomButton) as Button
-        val drawable2 = b.background as GradientDrawable
-        drawable2.setColor(Color.parseColor("#$color2"))
+        (rootView.linearLayoutTags.findViewById<View>(randomButton).background as GradientDrawable).setColor(Color.parseColor("#$color2"))
     }
 
     override fun onClick(view: View) {
@@ -125,7 +123,7 @@ class ClassicModeFragment : BaseFragment(R.layout.fragment_classic_mode, R.menu.
         level--
         tvTime.text = "00:00"
 
-        containerCallback?.gameOver(Constants.Companion.GAME_DIFF_CLASSIC, level.toLong())
+        containerCallback?.gameOver(Constants.GAME_DIFF_CLASSIC, level.toLong())
     }
 
     private fun startGame() {
