@@ -60,7 +60,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             holder as ViewHolder
 
             holder.tvCatName.text = item.catName
-            holder.tvCatName.setBackgroundColor(Color.parseColor("#" + item.colorHex))
+            holder.tvCatName.setBackgroundColor(Color.parseColor("#${item.colorHex}"))
 
             var count = 0
             val funs = item.funs
@@ -68,11 +68,11 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             for (i in funs.indices) {
                 func = funs.get(i)
                 val textView = AppCompatTextView(activity)
-                textView.setPadding(20, 20, 20, 20)
+                textView.setPadding(20, 40, 20, 40)
                 textView.textSize = 17F
                 val drawable = StateListDrawable()
-                drawable.addState(intArrayOf(android.R.attr.state_pressed), ColorDrawable(Color.parseColor("#99" + item.colorHex)))
-                drawable.addState(intArrayOf(), ColorDrawable(Color.parseColor("#CC" + item.colorHex)))
+                drawable.addState(intArrayOf(android.R.attr.state_pressed), ColorDrawable(Color.parseColor("#99${item.colorHex}")))
+                drawable.addState(intArrayOf(), ColorDrawable(Color.parseColor("#CC${item.colorHex}")))
                 textView.setBackgroundDrawable(drawable)
 
                 textView.text = func.funName
@@ -84,7 +84,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
 
                 if (count < funs.size) {
                     val divider = View(activity)
-                    divider.setBackgroundColor(Color.parseColor("#" + item.colorHex))
+                    divider.setBackgroundColor(Color.parseColor("#${item.colorHex}"))
                     holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1))
                 }
             }
