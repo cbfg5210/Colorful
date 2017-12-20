@@ -3,4 +3,6 @@
     <stroke
         android:width="1px"
         android:color="@color/col_66000000"/>
+    <!--低版本4.1.1如果不设置solid会是黑色背景-->
+    <solid android:color="@color/white"/>
 </shape>
