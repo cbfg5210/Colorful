@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import com.ue.colorful.R
+import com.ue.colorful.constant.Constants
 import kotlinx.android.synthetic.main.fragment_easy_game.view.*
 
 class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.menu_game_ltcolor) {
@@ -11,10 +12,10 @@ class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.
     override fun initViews() {
         setupProgressView()
 
-        POINT_INCREMENT = 2
+        POINT_INCREMENT = 1
         TIMER_BUMP = 2
 
-        gameMode = BaseLtGameFragment.GameMode.EASY
+        gameMode = Constants.GAME_LT_EASY
 
         rootView.topButton.setOnClickListener(this)
         rootView.bottomButton.setOnClickListener(this)

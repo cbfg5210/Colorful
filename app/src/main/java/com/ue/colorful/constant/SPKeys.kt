@@ -7,16 +7,20 @@ class SPKeys {
     companion object {
         val LAST_MD_COLOR = "lastMDColor"
         val LAST_PALETTE_COLOR = "lastPaletteColor"
+        val PALETTE_COLORS = "paletteColors"
+
         val GAME_DIFF_CLASSIC_RECORD = "diffClassicRecord"
         val GAME_DIFF_CLASSIC_LAST = "diffClassicLast"
-        val RECORD_DATE = "recordDate"
         val GAME_DIFF_TIME_RECORD = "diffTimeRecord"
         val GAME_DIFF_TIME_LAST = "diffTimeLast"
-        val TIME_RECORD_DATE = "timeRecordDate"
-        val HIGH_SCORE = "highScore"
-        val TIMES_PLAYED = "timesPlayed"
-        val PALETTE_COLORS = "paletteColors"
+
+        val GAME_LT_EASY_RECORD = "ltEasyRecord"
+        val GAME_LT_EASY_LAST = "ltEasyLast"
+        val GAME_LT_HARD_RECORD = "ltHardRecord"
+        val GAME_LT_HARD_LAST = "ltHardLast"
+
         val PICKER_PHOTO_PATH = "pickerPhotoPath"
+
         val GAME_DIFF_MODE = "diffGameMode"
         val GAME_LT_MODE = "ltGameMode"
     }

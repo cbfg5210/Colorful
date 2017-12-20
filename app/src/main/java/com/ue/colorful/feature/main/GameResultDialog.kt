@@ -54,8 +54,8 @@ class GameResultDialog : DialogFragment() {
         when (gameMode) {
             Constants.GAME_DIFF_CLASSIC -> showDiffClassicResult(rootView)
             Constants.GAME_DIFF_TEN_TIMES -> showDiffTimeResult(rootView)
-            Constants.GAME_LT_EASY -> showLtEasyResult(rootView)
-            Constants.GAME_LT_HARD -> showLtHardResult(rootView)
+            Constants.GAME_LT_EASY -> showLtResult(rootView, SPKeys.GAME_LT_EASY_RECORD, SPKeys.GAME_LT_EASY_LAST)
+            Constants.GAME_LT_HARD -> showLtResult(rootView, SPKeys.GAME_LT_HARD_RECORD, SPKeys.GAME_LT_HARD_LAST)
         }
 
         val dialog = AlertDialog.Builder(context)
@@ -68,12 +68,23 @@ class GameResultDialog : DialogFragment() {
 
     }
 
-    private fun showLtEasyResult(rootView: View) {
+    private fun showLtResult(rootView: View, recordKey: String, lastKey: String) {
+        var bestRecord = SPUtils.getLong(recordKey, 0L)
+        if (gameResult > bestRecord) {
+            bestRecord = gameResult
+            SPUtils.putLong(recordKey, bestRecord)
+        }
+        rootView.tvBestRecord.text = getString(R.string.game_lt_best, bestRecord)
 
-    }
+        val lastResult = SPUtils.getLong(lastKey, gameResult)
+        val diff = gameResult - lastResult
+        SPUtils.putLong(lastKey, gameResult)
 
-    private fun showLtHardResult(rootView: View) {
+        if (diff < 0) rootView.tvCompareResult.text = getString(R.string.game_lt_compare, diff.toString())
+        else if (diff == 0L) rootView.tvCompareResult.text = getString(R.string.game_lt_compare, getString(R.string.equal))
+        else rootView.tvCompareResult.text = getString(R.string.game_lt_compare, "+$diff")
 
+        rootView.simple.setValue(if (gameResult > 76) 100F else gameResult * 1.3F)
     }
 
     private fun showDiffTimeResult(rootView: View) {

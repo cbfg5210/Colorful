@@ -8,12 +8,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ue.colorful.R
-import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.main.BaseFragment
-import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.progress_area_layout.view.*
 
-abstract class BaseLtGameFragment(private val layoutRes:Int, private val menuRes:Int) : BaseFragment(layoutRes,menuRes), View.OnClickListener {
+abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRes: Int) : BaseFragment(layoutRes, menuRes), View.OnClickListener {
 
     protected lateinit var pointAnim: AnimatorSet
     protected lateinit var levelAnim: AnimatorSet
@@ -23,16 +22,12 @@ abstract class BaseLtGameFragment(private val layoutRes:Int, private val menuRes
     protected var gameStart = false
     protected lateinit var runnable: Runnable
     protected var timer: Int = 0
-    protected lateinit var gameMode: GameMode
+    protected var gameMode: Int = Constants.GAME_LT_EASY
 
     protected var POINT_INCREMENT: Int = 0
     protected var TIMER_BUMP: Int = 0
 
     protected lateinit var handler: Handler
-
-    enum class GameMode {
-        EASY, HARD
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,30 +97,7 @@ abstract class BaseLtGameFragment(private val layoutRes:Int, private val menuRes
 
     protected fun endGame() {
         gameStart = false
-        val highScore = saveAndGetHighScore()
-        launchGameOver(highScore)
-    }
-
-    private fun saveAndGetHighScore(): Int {
-        var highScore = SPUtils.getInt(SPKeys.HIGH_SCORE, 0)
-
-        if (points > highScore) {
-            SPUtils.putInt(SPKeys.HIGH_SCORE, points)
-            highScore = points
-        }
-        return highScore
-    }
-
-    private fun launchGameOver(highScore: Int) {
-        val dialog = GameOverDialog.newInstance(points, level, highScore, highScore == points, gameMode.name)
-        dialog.setReplayListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                dialog.dismiss()
-                resetGame()
-                startGame()
-            }
-        })
-        dialog.show(childFragmentManager, "")
+        containerCallback?.gameOver(gameMode, points.toLong())
     }
 
     // called on correct guess

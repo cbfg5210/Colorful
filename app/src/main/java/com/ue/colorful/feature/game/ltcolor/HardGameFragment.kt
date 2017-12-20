@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.Button
 import com.ue.colorful.R
+import com.ue.colorful.constant.Constants
 import kotlinx.android.synthetic.main.fragment_hard_game.view.*
 import java.util.*
 
@@ -15,10 +16,10 @@ class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game, R.menu.
     override fun initViews() {
         setupProgressView()
 
-        POINT_INCREMENT = 4
+        POINT_INCREMENT = 1
         TIMER_BUMP = 2
 
-        gameMode = BaseLtGameFragment.GameMode.HARD
+        gameMode = Constants.GAME_LT_HARD
 
         buttonList = ArrayList()
         buttonList.add(rootView.button_1)
