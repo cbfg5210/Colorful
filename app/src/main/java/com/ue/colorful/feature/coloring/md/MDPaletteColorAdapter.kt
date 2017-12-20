@@ -60,7 +60,7 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
             holder as ViewHolder
             holder.coloredZone.setBackgroundColor(paletteColor.hex)
             holder.colorTitle.text = paletteColor.baseName
-            holder.colorContent.text = paletteColor.hexString
+            holder.colorContent.text = paletteColor.hexString.toUpperCase()
             if (isColorLight(paletteColor.hex)) {
                 holder.colorTitle.setTextColor(ContextCompat.getColor(activity, R.color.color_card_title_dark_color))
                 holder.colorContent.setTextColor(ContextCompat.getColor(activity, R.color.color_card_content_dark_color))

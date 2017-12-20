@@ -85,7 +85,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
                 if (count < funs.size) {
                     val divider = View(activity)
                     divider.setBackgroundColor(Color.parseColor("#${item.colorHex}"))
-                    holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1))
+                    holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2))
                 }
             }
         }

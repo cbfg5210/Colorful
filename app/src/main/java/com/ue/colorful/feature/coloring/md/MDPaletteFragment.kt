@@ -1,10 +1,6 @@
 package com.ue.colorful.feature.coloring.md
 
-import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
@@ -67,7 +63,7 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
 
             var j = 0
             while (j < paletteSectionNames.size) {
-                paletteColors.add(PaletteColor(colorSectionsNames[i], paletteColorValues[j], paletteSectionNames[j]))
+                paletteColors.add(PaletteColor(paletteColorValues[j], paletteSectionNames[j]))
                 j++
             }
             paletteSections.add(PaletteSection(colorSectionsNames[i], colorSectionsValues[i], paletteColors))
