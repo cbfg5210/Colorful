@@ -10,7 +10,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:max="200"
+        android:max="300"
         android:progressDrawable="@drawable/timer_progress"/>
 
     <RelativeLayout

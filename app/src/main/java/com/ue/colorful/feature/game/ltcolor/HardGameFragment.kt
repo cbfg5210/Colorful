@@ -30,7 +30,6 @@ class HardGameFragment : BaseLtGameFragment(R.layout.fragment_hard_game, R.menu.
 
         // bootstrap game
         resetGame()
-        setupGameLoop()
         startGame()
     }
 

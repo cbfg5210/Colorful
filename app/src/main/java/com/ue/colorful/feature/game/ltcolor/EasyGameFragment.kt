@@ -19,7 +19,6 @@ class EasyGameFragment : BaseLtGameFragment(R.layout.fragment_easy_game, R.menu.
 
         // bootstrap game
         resetGame()
-        setupGameLoop()
         startGame()
     }
 

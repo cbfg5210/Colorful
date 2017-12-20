@@ -4,27 +4,24 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import com.ue.colorful.R
-import com.ue.colorful.constant.Constants
 import com.ue.colorful.feature.main.BaseFragment
 import kotlinx.android.synthetic.main.progress_area_layout.view.*
+import java.util.*
 
 abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRes: Int) : BaseFragment(layoutRes, menuRes), View.OnClickListener {
+    private lateinit var pointAnim: AnimatorSet
+    private lateinit var levelAnim: AnimatorSet
 
-    protected lateinit var pointAnim: AnimatorSet
-    protected lateinit var levelAnim: AnimatorSet
-
-    protected var level: Int = 0
-    protected var points: Int = 0
+    protected var gameMode: Int = 0
     protected var gameStart = false
-    protected lateinit var runnable: Runnable
-    protected var timer: Int = 0
-    protected var gameMode: Int = Constants.GAME_LT_EASY
+    private var level: Int = 0
+    private var points: Int = 0
+    private var restTime: Int = 0
 
     protected lateinit var handler: Handler
-    private lateinit var thread: Thread
+    private var timer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,28 +39,7 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
     override fun onStop() {
         super.onStop()
         gameStart = false
-    }
-
-    protected fun setupGameLoop() {
-        runnable = object : Runnable {
-            override fun run() {
-                while (timer > 0 && gameStart) {
-                    synchronized(this) {
-                        try {
-                            (runnable as java.lang.Object).wait(FPS.toLong())
-                        } catch (e: InterruptedException) {
-                            Log.e("THREAD ERROR", "e=$e")
-                        }
-
-                        timer--
-                    }
-                    handler.post { rootView.pbTimerProgress.progress = timer }
-                }
-                if (gameStart) {
-                    handler.post { endGame() }
-                }
-            }
-        }
+        timer?.cancel()
     }
 
     protected fun resetGame() {
@@ -79,26 +55,32 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
 
     protected fun startGame() {
         gameStart = true
+        restTime = START_TIMER
 
         setColorsOnButtons()
 
-        // start timer
-        timer = START_TIMER
-        thread = Thread(runnable)
-        thread.start()
+        timer?.cancel()
+        timer = Timer()
+        timer!!.schedule(object : TimerTask() {
+            override fun run() {
+                handler.post { rootView.pbTimerProgress.progress = restTime }
+                restTime--
+                if (restTime < 0) {
+                    handler.post { endGame() }
+                }
+            }
+        }, 0, FPS)
     }
 
     protected fun endGame() {
         gameStart = false
-        if (!thread.isInterrupted) {
-            thread.interrupt()
-        }
+        timer?.cancel()
         containerCallback?.gameOver(gameMode, points.toLong())
     }
 
     // called on correct guess
     fun updatePoints() {
-        points = points++
+        points += 1
         rootView.tvPointsValue.text = points.toString()
         pointAnim.start()
 
@@ -115,8 +97,8 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
     protected abstract fun calculatePoints(view: View)
 
     companion object {
-        protected val START_TIMER = 200
-        protected val FPS = 200
+        protected val START_TIMER = 300
+        protected val FPS = 150L
         protected val LEVEL = 15
     }
 }
