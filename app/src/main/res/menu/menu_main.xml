@@ -6,9 +6,9 @@
         android:icon="@drawable/svg_palette"
         android:title="@string/palette"
         app:showAsAction="always"/>
-    <item
+    <!--<item
         android:id="@+id/menuAbout"
         android:icon="@drawable/svg_about"
         android:title="@string/about"
-        app:showAsAction="always"/>
+        app:showAsAction="always"/>-->
 </menu>

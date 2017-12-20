@@ -67,21 +67,19 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuPalette -> showPalette()
-            R.id.menuAbout -> Toast.makeText(this, "about", Toast.LENGTH_SHORT).show()
+//            R.id.menuAbout -> Toast.makeText(this, "about", Toast.LENGTH_SHORT).show()
         }
         return true
     }
 
     private fun showPalette() {
         val paletteColorsStr = SPUtils.getString(SPKeys.PALETTE_COLORS, "")
-        val paletteColors =
-                if (TextUtils.isEmpty(paletteColorsStr)) ArrayList<Int>()
-                else GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
-
-        if (paletteColors.size == 0) {
+        if (TextUtils.isEmpty(paletteColorsStr)) {
             Toast.makeText(this, getString(R.string.no_palette_color), Toast.LENGTH_SHORT).show()
             return
         }
+        val paletteColors: ArrayList<Int> = GsonHolder.gson.fromJson(paletteColorsStr, object : TypeToken<ArrayList<Int>>() {}.type)
+
         val dialog = ColorPaletteDialog.newInstance(paletteColors)
         dialog.show(supportFragmentManager, "")
     }

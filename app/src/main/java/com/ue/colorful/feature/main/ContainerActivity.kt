@@ -15,8 +15,9 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.event.ClearColorEvent
 import com.ue.colorful.event.ContainerCallback
-import com.ue.colorful.event.RemovePaletteColorEvent
+import com.ue.colorful.event.RemoveColorEvent
 import com.ue.colorful.feature.calculate.CalcARGBFragment
 import com.ue.colorful.feature.calculate.CalcAlphaFragment
 import com.ue.colorful.feature.coloring.md.MDPaletteFragment
@@ -153,9 +154,13 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
     }
 
     @Subscribe
-    fun onRemovePaletteColorEvent(event: RemovePaletteColorEvent) {
+    fun onRemoveColorEvent(event: RemoveColorEvent) {
         paletteColors.remove(event.position)
-        SPUtils.putString(SPKeys.PALETTE_COLORS, paletteColors.toString())
+    }
+
+    @Subscribe
+    fun onClearColorEvent(event: ClearColorEvent) {
+        paletteColors.clear()
     }
 
     private fun showPalette() {
@@ -182,6 +187,6 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
     }
 
     override fun gameOver(gameMode: Int, gameResult: Long) {
-        GameResultDialog.newInstance(gameMode,gameResult).show(supportFragmentManager, "")
+        GameResultDialog.newInstance(gameMode, gameResult).show(supportFragmentManager, "")
     }
 }
