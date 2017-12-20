@@ -67,7 +67,7 @@ class ColorPaletteAdapter(private val activity: Activity, private val colors: Ar
         holder.tvHex.setBackgroundColor(color)
         holder.tvHex.text = String.format("#%08X", color)
 
-        holder.ivState.visibility = if (selection == position) View.VISIBLE else View.GONE
+        holder.ivState.visibility = if (selection == position) View.VISIBLE else View.INVISIBLE
 
         holder.vgColorPalette.setOnClickListener({ v ->
             lastSelection = selection
@@ -75,19 +75,6 @@ class ColorPaletteAdapter(private val activity: Activity, private val colors: Ar
             notifyItemChanged(lastSelection)
             notifyItemChanged(selection)
         })
-
-        /*holder.ivCopy.setOnClickListener { v ->
-            val hex = holder.tvHex.text.toString()
-            val clip = ClipData.newPlainText("copy", hex)
-            mClipboardManager.primaryClip = clip
-
-            Toast.makeText(activity, activity.getString(R.string.color_copied, hex), Toast.LENGTH_SHORT).show()
-        }
-        holder.ivRemove.setOnClickListener {
-            EventBus.getDefault().post(RemovePaletteColorEvent(holder.adapterPosition))
-            colors.removeAt(holder.adapterPosition)
-            notifyItemRemoved(holder.adapterPosition)
-        }*/
     }
 
     override fun getItemCount(): Int {
@@ -97,8 +84,6 @@ class ColorPaletteAdapter(private val activity: Activity, private val colors: Ar
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val vgColorPalette = itemView.vgColorPalette
         val tvHex = itemView.tvHex
-        //        val ivCopy = itemView.ivCopy
-//        val ivRemove = itemView.ivRemove
         val ivState = itemView.ivState
     }
 }
