@@ -23,6 +23,19 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BUGLY_APP_ID", '"5508a97d4a"'
+        buildConfigField 'String', 'BMOB_APP_ID', '"ac6d5ed979a5862943f9d626edd7a48a"'
+        buildConfigField 'String', 'BMOB_API_KEY', '"0ae8495281019e6ab1f1b44caf94c789"'
+
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                if (output.outputFile != null
+                        && outputFileName.endsWith('.apk')
+                        && 'release'.equals(variant.buildType.name)) {
+
+                    outputFileName = "${applicationId}_v" + defaultConfig.versionName + ".apk"
+                }
+            }
+        }
 
         vectorDrawables.useSupportLibrary = true
 
@@ -71,4 +84,12 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
     implementation deps.bugly
+    implementation deps.recommendApp
+    implementation deps.support.design
+    /*rxjava*/
+    implementation deps.rxjava2
+    implementation deps.rxAndroid
+    /*room*/
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
 }

@@ -12,8 +12,10 @@ import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.model.ColorFunCategory
 import com.ue.colorful.model.ColorFunction
+import com.ue.colorful.util.BackPressedUtils
 import com.ue.colorful.util.GsonHolder
 import com.ue.colorful.util.SPUtils
+import com.ue.recommend.widget.NBottomSheetBehavior.STATE_EXPANDED
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -82,5 +84,13 @@ class MainActivity : AppCompatActivity() {
 
         val dialog = ColorPaletteDialog.newInstance(paletteColors)
         dialog.show(supportFragmentManager, "")
+    }
+
+    override fun onBackPressed() {
+        if (mbsRecommendSheet.state == STATE_EXPANDED) {
+            mbsRecommendSheet.hideBottomSheet();
+            return
+        }
+        BackPressedUtils.exitIfBackTwice(this, getString(R.string.tap_again_to_exit));
     }
 }

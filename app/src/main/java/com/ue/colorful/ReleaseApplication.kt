@@ -7,6 +7,7 @@ import android.os.Process
 import android.support.v7.app.AppCompatDelegate
 import com.tencent.bugly.Bugly
 import com.ue.colorful.util.SPUtils
+import com.ue.recommend.util.BmobUtils
 
 /**
  * Created by hawk on 2017/8/23.
@@ -24,6 +25,8 @@ class ReleaseApplication : Application() {
             SPUtils.init(this)
             // init bugly
             Bugly.init(this, BuildConfig.BUGLY_APP_ID, false);
+            //init bmob
+            BmobUtils.getInstance().initBmob(BuildConfig.BMOB_APP_ID, BuildConfig.BMOB_API_KEY);
             // init debug tools
             initDebugTools()
         } else {

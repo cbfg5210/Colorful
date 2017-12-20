@@ -266,4 +266,5 @@
     <string name="gameMode">游戏模式</string>
     <string name="album">相册</string>
     <string name="color_copied">颜色值 %s 已经复制到粘贴板</string>
+    <string name="tap_again_to_exit">再点一次退出应用</string>
 </resources>

@@ -14,7 +14,9 @@
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
         app:spanCount="2"/>
 
-    <FrameLayout
+    <com.ue.recommend.RecommendSheetView
+        android:id="@+id/mbsRecommendSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
 </FrameLayout>
