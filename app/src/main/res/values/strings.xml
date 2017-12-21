@@ -167,8 +167,8 @@
     <string name="game_diff_classic_best">最佳闯关数：%d</string>
     <string name="game_diff_classic_compare">与上次相比,闯关数：%s</string>
     <string name="equal">相等</string>
-    <string name="game_diff_time_best">最短耗时：%d</string>
-    <string name="game_diff_time_compare">与上次相比,耗时(毫秒)：%s</string>
+    <string name="game_diff_time_best">最短耗时：%s</string>
+    <string name="game_diff_time_compare">与上次相比,耗时：%s</string>
     <string name="game_lt_best">最佳得分：%d</string>
     <string name="game_lt_compare">与上次相比,得分：%s</string>
     <string name="color_collections">采色板</string>

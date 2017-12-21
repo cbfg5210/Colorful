@@ -13,6 +13,7 @@ import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.dialog_game_result.view.*
+import java.text.SimpleDateFormat
 
 
 /**
@@ -88,20 +89,21 @@ class GameResultDialog : DialogFragment() {
     }
 
     private fun showDiffTimeResult(rootView: View) {
-        var bestRecord = SPUtils.getLong(SPKeys.GAME_DIFF_TIME_RECORD, 0L)
+        var bestRecord = SPUtils.getLong(SPKeys.GAME_DIFF_TIME_RECORD, gameResult)
         if (gameResult < bestRecord) {
             bestRecord = gameResult
             SPUtils.putLong(SPKeys.GAME_DIFF_TIME_RECORD, bestRecord)
         }
-        rootView.tvBestRecord.text = getString(R.string.game_diff_time_best, bestRecord)
+        val formatter = SimpleDateFormat("mm:ss.SSS")
+        rootView.tvBestRecord.text = getString(R.string.game_diff_time_best, formatter.format(bestRecord))
 
         val lastResult = SPUtils.getLong(SPKeys.GAME_DIFF_TIME_LAST, gameResult)
         val diff = gameResult - lastResult
         SPUtils.putLong(SPKeys.GAME_DIFF_TIME_LAST, gameResult)
 
-        if (diff < 0) rootView.tvCompareResult.text = getString(R.string.game_diff_time_compare, diff.toString())
+        if (diff < 0) rootView.tvCompareResult.text = getString(R.string.game_diff_time_compare, "-${formatter.format(-diff)}")
         else if (diff == 0L) rootView.tvCompareResult.text = getString(R.string.game_diff_time_compare, getString(R.string.equal))
-        else rootView.tvCompareResult.text = getString(R.string.game_diff_time_compare, "+$diff")
+        else rootView.tvCompareResult.text = getString(R.string.game_diff_time_compare, "+${formatter.format(diff)}")
 
         val score = (100000F - gameResult) / 1000
         rootView.simple.setValue(if (score < 0) 0F else score)
