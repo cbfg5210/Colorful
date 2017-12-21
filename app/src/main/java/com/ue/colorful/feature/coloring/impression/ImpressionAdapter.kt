@@ -2,10 +2,9 @@ package com.ue.colorful.feature.coloring.impression
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
-import com.ue.adapterdelegate.BaseAdapterDelegate
-import com.ue.adapterdelegate.DelegationAdapter
-import com.ue.adapterdelegate.OnDelegateClickListener
+import android.view.ViewGroup
 import com.ue.colorful.R
 import com.ue.colorful.model.ImpressionItem
 import kotlinx.android.synthetic.main.item_impression.view.*
@@ -13,41 +12,39 @@ import kotlinx.android.synthetic.main.item_impression.view.*
 /**
  * Created by hawk on 2017/12/21.
  */
-class ImpressionAdapter(activity: Activity, items: List<ImpressionItem>) : DelegationAdapter<ImpressionItem>(), OnDelegateClickListener {
+class ImpressionAdapter(private val activity: Activity, mItems: List<ImpressionItem>) : RecyclerView.Adapter<ImpressionAdapter.ViewHolder>() {
+    private val items = ArrayList<ImpressionItem>()
 
     init {
-        this.items = items
-
-        this.addDelegate(ImpressionItemDelegate(activity))
+        if (mItems != null) items.addAll(mItems)
     }
 
-    override fun onClick(view: View, position: Int) {
-        if (position < 0 || position >= itemCount) {
-            return
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        holder as ViewHolder
+
+        val item = items[position]
+        holder.tvTitle.text = item.title
+        holder.rvImpressions.setHasFixedSize(true)
+        holder.rvImpressions.adapter = ImpressionSubAdapter(activity, item.colors)
+
+        holder.ivToggle.setOnClickListener {
+            holder.rvImpressions.visibility = if (holder.ivToggle.isSelected) View.VISIBLE else View.GONE
+            holder.ivToggle.isSelected = !holder.ivToggle.isSelected
         }
     }
 
-    private class ImpressionItemDelegate(private val activity: Activity) : BaseAdapterDelegate<ImpressionItem>(activity, R.layout.item_impression) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_impression, null)
+        return ViewHolder(itemView)
+    }
 
-        override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
-            return ViewHolder(itemView)
-        }
-
-        override fun isForViewType(item: ImpressionItem): Boolean {
-            return true
-        }
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ImpressionItem, payloads: List<*>) {
-            holder as ViewHolder
-
-            holder.tvTitle.text = item.title
-            holder.rvImpressions.setHasFixedSize(true)
-            holder.rvImpressions.adapter = ImpressionSubAdapter(activity, item.colors)
-        }
-
-        class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val tvTitle = itemView.tvTitle!!
-            val rvImpressions = itemView.rvImpressions!!
-        }
+    class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvTitle = itemView.tvTitle!!
+        val ivToggle = itemView.ivToggle!!
+        val rvImpressions = itemView.rvImpressions!!
     }
 }

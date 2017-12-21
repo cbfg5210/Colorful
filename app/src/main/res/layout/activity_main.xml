@@ -9,6 +9,7 @@
         android:id="@+id/rvFunctions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingBottom="100dp"
         android:scrollbars="none"
