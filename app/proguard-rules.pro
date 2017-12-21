@@ -156,3 +156,13 @@
 
 #picasso
 -dontwarn com.squareup.okhttp.**
+
+#andPermission
+#1.If you use Listener to accept callback results, do not have any configuration.
+#2.Use the annotation of the way callback results, in the proguard add the following configuration:
+#-keepclassmembers class ** {
+#    @com.yanzhenjie.permission.PermissionYes <methods>;
+#}
+#-keepclassmembers class ** {
+#    @com.yanzhenjie.permission.PermissionNo <methods>;
+#}

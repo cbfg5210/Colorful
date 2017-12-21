@@ -177,4 +177,5 @@
     <string name="album">相册</string>
     <string name="color_copied">颜色值 %s 已经复制到粘贴板</string>
     <string name="tap_again_to_exit">再点一次退出应用</string>
+    <string name="no_read_storage_perm">无法选择图片：没有外部读取权限</string>
 </resources>

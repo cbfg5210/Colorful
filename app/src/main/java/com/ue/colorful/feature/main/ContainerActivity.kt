@@ -1,5 +1,6 @@
 package com.ue.colorful.feature.main
 
+import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -32,8 +33,12 @@ import com.ue.colorful.feature.test.ColorVisionTestFragment
 import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.GsonHolder
 import com.ue.colorful.util.SPUtils
+import com.yanzhenjie.permission.AndPermission
+import com.yanzhenjie.permission.PermissionListener
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+
+
 
 class ContainerActivity : AppCompatActivity(), ContainerCallback {
     private lateinit var paletteColors: ArrayList<Int>
@@ -46,6 +51,7 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
 
     companion object {
         private val ARG_COLOR_FUNCTION = "arg_frag_flag"
+        private val REQ_PERM_EXTERNAL = 200
 
         fun start(context: Context, colorFunction: ColorFunction) {
             val intent = Intent(context, ContainerActivity::class.java)
@@ -116,7 +122,7 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
         when (item.itemId) {
             android.R.id.home -> finish()
             R.id.menuPalette -> showPalette()
-            R.id.menuAlbum -> startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), Constants.REQ_PICK_PHOTO)
+            R.id.menuAlbum -> pickPhoto()
 
             R.id.menuClassicMode -> if (fragment !is ClassicModeFragment) {
                 supportActionBar?.title = "${colorFunction.funName}-${getString(R.string.mode_classic)}"
@@ -140,6 +146,33 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
             }
         }
         return true
+    }
+
+    private fun pickPhoto() {
+        if (AndPermission.hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), Constants.REQ_PICK_PHOTO)
+            return
+        }
+
+        AndPermission.with(this)
+                .requestCode(REQ_PERM_EXTERNAL)
+                .permission(Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .rationale { requestCode, rationale ->
+                    AndPermission.rationaleDialog(this@ContainerActivity, rationale).show()
+                }
+                .callback(object : PermissionListener {
+                    override fun onSucceed(requestCode: Int, grantPermissions: MutableList<String>) {
+                        if (requestCode == REQ_PERM_EXTERNAL)
+                            startActivityForResult(Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT).setType("image/*"), getString(R.string.choose_photo)), Constants.REQ_PICK_PHOTO)
+                    }
+
+                    override fun onFailed(requestCode: Int, deniedPermissions: MutableList<String>) {
+                        if (requestCode == REQ_PERM_EXTERNAL)
+                            Toast.makeText(this@ContainerActivity, R.string.no_read_storage_perm, Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .start()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

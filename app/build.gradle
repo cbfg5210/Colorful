@@ -86,6 +86,7 @@ dependencies {
     implementation deps.bugly
     implementation deps.recommendApp
     implementation deps.support.design
+    implementation deps.andPermission
     /*rxjava*/
     implementation deps.rxjava2
     implementation deps.rxAndroid
