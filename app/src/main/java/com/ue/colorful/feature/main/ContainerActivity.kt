@@ -158,7 +158,7 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
                 .requestCode(REQ_PERM_EXTERNAL)
                 .permission(Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .rationale { requestCode, rationale ->
+                .rationale { _, rationale ->
                     AndPermission.rationaleDialog(this@ContainerActivity, rationale).show()
                 }
                 .callback(object : PermissionListener {

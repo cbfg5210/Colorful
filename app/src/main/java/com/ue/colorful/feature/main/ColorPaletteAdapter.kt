@@ -69,7 +69,7 @@ class ColorPaletteAdapter(private val activity: Activity, private val colors: Ar
 
         holder.ivState.visibility = if (selection == position) View.VISIBLE else View.INVISIBLE
 
-        holder.vgColorPalette.setOnClickListener({ v ->
+        holder.vgColorPalette.setOnClickListener({ _ ->
             lastSelection = selection
             selection = holder.adapterPosition
             notifyItemChanged(lastSelection)

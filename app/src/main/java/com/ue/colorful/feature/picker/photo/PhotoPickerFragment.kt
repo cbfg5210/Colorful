@@ -45,7 +45,7 @@ class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker, R.menu.
         if (resultCode != Activity.RESULT_OK || data == null) {
             return
         }
-        val photoPath = if (TextUtils.isEmpty(data?.dataString)) "" else data!!.dataString
+        val photoPath = if (TextUtils.isEmpty(data.dataString)) "" else data.dataString
         SPUtils.putString(SPKeys.PICKER_PHOTO_PATH, photoPath)
 
         loadPhoto(photoPath)
