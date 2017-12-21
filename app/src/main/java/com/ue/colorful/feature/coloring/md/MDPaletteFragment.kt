@@ -19,11 +19,11 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
     private lateinit var paletteSections: List<PaletteSection>
 
     override fun initViews() {
-        val lastColorOption = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
-        paletteSections = getPaletteSections(lastColorOption)
+        val lastSelection = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
+        paletteSections = getPaletteSections(lastSelection)
 
         rootView.rvColorList.setHasFixedSize(true)
-        rootView.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastColorOption].paletteColors,
+        rootView.rvColorList.adapter = MDPaletteColorAdapter(activity, paletteSections[lastSelection].paletteColors,
                 object : MDPaletteListener {
                     override fun copyColor(color: Int) {
                         containerCallback?.copyColor(color)
@@ -32,19 +32,18 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
                     override fun addPaletteColor(color: Int) {
                         containerCallback?.addPaletteColor(color)
                     }
-
                 })
 
         rootView.rvColorOptions.setHasFixedSize(true)
         rootView.rvColorOptions.adapter = MDPaletteSectionAdapter(activity, paletteSections,
-                OnDelegateClickListener { view, i ->
+                OnDelegateClickListener { _, i ->
                     val adapter = rvColorList.adapter as MDPaletteColorAdapter
                     adapter.items.clear()
                     adapter.items.addAll(paletteSections[i].paletteColors)
                     adapter.notifyDataSetChanged()
                 })
         //移动到指定位置，可以置顶则置顶
-        (rootView.rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastColorOption, 0)
+        (rootView.rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastSelection, 0)
     }
 
     private fun getPaletteSections(lastColorOption: Int): List<PaletteSection> {
@@ -57,7 +56,7 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
         val paletteSections = ArrayList<PaletteSection>()
         var i = 0
         while (i < colorSectionsNames.size) {
-            val paletteColors = java.util.ArrayList<PaletteColor>()
+            val paletteColors = ArrayList<PaletteColor>()
             val paletteSectionNames = resources.getStringArray(baseColorNamesArray.getResourceId(i, -1))
             val paletteColorValues = resources.getIntArray(colorValuesArray.getResourceId(i, -1))
 

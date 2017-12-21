@@ -18,7 +18,9 @@ import kotlinx.android.synthetic.main.item_md_palette_color.view.*
 internal class MDPaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?, private val mdPaletteListener: MDPaletteListener) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
 
     init {
-        this.items = items ?: ArrayList()
+        //通过以下方式初始化items，避免在调用clear()时清空了原数据
+        this.items = ArrayList()
+        if (items != null) this.items.addAll(items)
 
         val delegate = PaletteColorDelegate(activity)
         delegate.setOnDelegateClickListener(this)

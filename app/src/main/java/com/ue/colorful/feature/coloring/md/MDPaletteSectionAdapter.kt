@@ -22,7 +22,10 @@ internal class MDPaletteSectionAdapter(private val activity: Activity, items: Li
     private var selection: Int
 
     init {
-        this.items = items ?: ArrayList()
+        //通过以下方式初始化items，避免在调用clear()时清空了原数据
+        this.items = ArrayList()
+        if (items != null) this.items.addAll(items)
+
         selection = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
 
         val delegate = PaletteColorSectionDelegate(activity)
@@ -30,14 +33,15 @@ internal class MDPaletteSectionAdapter(private val activity: Activity, items: Li
         this.addDelegate(delegate)
     }
 
-    override fun onClick(view: View, position: Int) {
+    override fun onClick(view: View?, position: Int) {
         if (position < 0 || position >= itemCount) {
             return
         }
+
         if (selection == position) return
 
-        items.get(selection).isSelected = false
-        items.get(position).isSelected = true
+        items[selection].isSelected = false
+        items[position].isSelected = true
         notifyItemChanged(selection)
         notifyItemChanged(position)
 
@@ -66,7 +70,7 @@ internal class MDPaletteSectionAdapter(private val activity: Activity, items: Li
     }
 
     private class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ctvColorName = itemView.ctvColorName
+        val ctvColorName = itemView.ctvColorName!!
 
         fun setPaletteSection(paletteSection: PaletteSection) {
             ctvColorName.text = paletteSection.colorSectionName
