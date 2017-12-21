@@ -87,6 +87,7 @@ dependencies {
     implementation deps.recommendApp
     implementation deps.support.design
     implementation deps.andPermission
+    implementation deps.aboutPage
     /*rxjava*/
     implementation deps.rxjava2
     implementation deps.rxAndroid

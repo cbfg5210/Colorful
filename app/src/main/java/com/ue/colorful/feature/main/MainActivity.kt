@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken
 import com.ue.colorful.R
 import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.constant.SPKeys
+import com.ue.colorful.feature.about.AboutActivity
 import com.ue.colorful.model.ColorFunCategory
 import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.BackPressedUtils
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuPalette -> showPalette()
-//            R.id.menuAbout -> Toast.makeText(this, "about", Toast.LENGTH_SHORT).show()
+            R.id.menuAbout -> AboutActivity.start(this)
         }
         return true
     }

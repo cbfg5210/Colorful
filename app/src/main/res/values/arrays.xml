@@ -53,4 +53,11 @@
         <item>@mipmap/vst23</item>
         <item>@mipmap/vst24</item>
     </array>
+
+    <string-array name="faqQues">
+        <item>@string/faq_que1</item>
+    </string-array>
+    <string-array name="faqAnss">
+        <item>@string/faq_ans1</item>
+    </string-array>
 </resources>
