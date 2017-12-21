@@ -28,7 +28,6 @@ import com.ue.colorful.feature.game.ltcolor.HardGameFragment
 import com.ue.colorful.feature.picker.argb.ARGBPickerFragment
 import com.ue.colorful.feature.picker.palette.PalettePickerFragment
 import com.ue.colorful.feature.picker.photo.PhotoPickerFragment
-import com.ue.colorful.feature.picker.screen.ScreenPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
 import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.GsonHolder
@@ -75,7 +74,6 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
             FunFlags.PICKER_COLOR_PALETTE -> showFragment(PalettePickerFragment())
             FunFlags.PICKER_PHOTO -> showFragment(PhotoPickerFragment())
             FunFlags.PICKER_ARGB -> showFragment(ARGBPickerFragment())
-            FunFlags.PICKER_SCREEN -> showFragment(ScreenPickerFragment())
             FunFlags.GAME_DIFF_COLOR -> {
                 val mode = SPUtils.getInt(SPKeys.GAME_DIFF_MODE, Constants.GAME_DIFF_CLASSIC)
                 if (mode == Constants.GAME_DIFF_CLASSIC) {
