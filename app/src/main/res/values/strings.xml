@@ -1,115 +1,25 @@
 <resources>
     <string name="app_name">颜值</string>
 
-    <!-- navigation drawer sections 19-->
-    <string-array name="color_sections_names">
-        <item>@string/red</item>
-        <item>@string/pink</item>
-        <item>@string/purple</item>
-        <item>@string/deep_purple</item>
-        <item>@string/indigo</item>
-        <item>@string/blue</item>
-        <item>@string/light_blue</item>
-        <item>@string/cyan</item>
-        <item>@string/teal</item>
-        <item>@string/green</item>
-        <item>@string/light_green</item>
-        <item>@string/lime</item>
-        <item>@string/yellow</item>
-        <item>@string/amber</item>
-        <item>@string/orange</item>
-        <item>@string/deep_orange</item>
-        <item>@string/brown</item>
-        <item>@string/grey</item>
-        <item>@string/blue_grey</item>
-    </string-array>
-
-    <array name="all_color_names">
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/full_base_color_list</item>
-        <item>@array/base_color_list_to_900</item>
-        <item>@array/base_color_list_greys</item>
-        <item>@array/base_color_list_to_900</item>
-    </array>
-
-    <array name="all_color_list">
-        <item>@array/reds</item>
-        <item>@array/pinks</item>
-        <item>@array/purples</item>
-        <item>@array/deep_purples</item>
-        <item>@array/indigos</item>
-        <item>@array/blues</item>
-        <item>@array/light_blues</item>
-        <item>@array/cyans</item>
-        <item>@array/teals</item>
-        <item>@array/greens</item>
-        <item>@array/light_greens</item>
-        <item>@array/limes</item>
-        <item>@array/yellows</item>
-        <item>@array/ambers</item>
-        <item>@array/oranges</item>
-        <item>@array/deep_oranges</item>
-        <item>@array/browns</item>
-        <item>@array/greys</item>
-        <item>@array/blue_greys</item>
-    </array>
-
-    <!-- section colors 19-->
-    <array name="color_sections_colors">
-        <item>@color/md_red_500</item>
-        <item>@color/md_pink_500</item>
-        <item>@color/md_purple_500</item>
-        <item>@color/md_deep_purple_500</item>
-        <item>@color/md_indigo_500</item>
-        <item>@color/md_blue_500</item>
-        <item>@color/md_light_blue_500</item>
-        <item>@color/md_cyan_500</item>
-        <item>@color/md_teal_500</item>
-        <item>@color/md_green_500</item>
-        <item>@color/md_light_green_500</item>
-        <item>@color/md_lime_500</item>
-        <item>@color/md_yellow_500</item>
-        <item>@color/md_amber_500</item>
-        <item>@color/md_orange_500</item>
-        <item>@color/md_deep_orange_500</item>
-        <item>@color/md_brown_500</item>
-        <item>@color/md_grey_500</item>
-        <item>@color/md_blue_grey_500</item>
-    </array>
-
-    <string name="red">Red</string>
-    <string name="pink">Pink</string>
-    <string name="purple">Purple</string>
-    <string name="deep_purple">Dp. purple</string>
-    <string name="indigo">Indigo</string>
-    <string name="blue">Blue</string>
-    <string name="light_blue">L. blue</string>
-    <string name="cyan">Cyan</string>
-    <string name="teal">Teal</string>
-    <string name="green">Green</string>
-    <string name="light_green">L. green</string>
-    <string name="lime">Lime</string>
-    <string name="yellow">Yellow</string>
-    <string name="amber">Amber</string>
-    <string name="orange">Orange</string>
-    <string name="deep_orange">Dp. orange</string>
-    <string name="brown">Brown</string>
-    <string name="grey">Grey</string>
-    <string name="blue_grey">Blue grey</string>
+    <string name="red">红色</string>
+    <string name="pink">粉红色</string>
+    <string name="purple">紫色</string>
+    <string name="deep_purple">深紫色</string>
+    <string name="indigo">靛蓝色</string>
+    <string name="blue">蓝色</string>
+    <string name="light_blue">浅蓝色</string>
+    <string name="cyan">青色</string>
+    <string name="teal">蓝绿色</string>
+    <string name="green">绿色</string>
+    <string name="light_green">浅绿色</string>
+    <string name="lime">绿黄色</string>
+    <string name="yellow">黄色</string>
+    <string name="amber">琥珀色</string>
+    <string name="orange">橙色</string>
+    <string name="deep_orange">深橙色</string>
+    <string name="brown">棕色</string>
+    <string name="grey">灰色</string>
+    <string name="blue_grey">蓝灰色</string>
 
     <string-array name="full_base_color_list">
         <item>500</item>
