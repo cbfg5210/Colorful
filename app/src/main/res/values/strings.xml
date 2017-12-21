@@ -188,6 +188,24 @@
     <string name="faq_que1">反馈</string>
     <string name="faq_ans1">如果发现其它问题，可以通过反馈功能或第三方邮箱发送邮件到客服邮箱，我们会尽快进行处理。感谢您的支持!</string>
 
+    <string name="im1">柔和、明亮、温柔</string>
+    <string name="im2">柔和、洁净、爽朗</string>
+    <string name="im3">可爱、快乐、有趣</string>
+    <string name="im4">活泼、快乐、有趣</string>
+    <string name="im5">运动型、轻快</string>
+    <string name="im6">轻快、华丽、动感</string>
+    <string name="im7">狂野、充沛、动感</string>
+    <string name="im8">华丽、花哨、女性化</string>
+    <string name="im9">回味、女性化、优雅</string>
+    <string name="im10">高尚、自然、安稳</string>
+    <string name="im11">冷静、自然</string>
+    <string name="im12">传统、高雅、优雅</string>
+    <string name="im13">传统、稳重、古典</string>
+    <string name="im14">忠厚、稳重、有品位</string>
+    <string name="im15">简单、洁净、进步</string>
+    <string name="im16">简单、时尚、高雅</string>
+    <string name="im17">简单、进步、时尚</string>
+
     <string name="verNote_0d5">
         完成应用基础功能模块：配色、取色、小游戏、计算、色觉测试
     </string>
@@ -200,4 +218,5 @@
     <string name="ver_0d5" translatable="false">v0.5  2017/12/21</string>
 
     <string name="myEmail" translatable="false">tomhawk_ht@foxmail.com</string>
+    <string name="impression_colors">按印象搭配</string>
 </resources>

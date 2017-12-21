@@ -6,7 +6,7 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.feature.coloring.md.MDPaletteColorAdapter.MDPaletteListener
 import com.ue.colorful.feature.main.BaseFragment
-import com.ue.colorful.model.PaletteColor
+import com.ue.colorful.model.MDColor
 import com.ue.colorful.model.PaletteSection
 import com.ue.colorful.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_mdpalette.*
@@ -56,13 +56,13 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
         val paletteSections = ArrayList<PaletteSection>()
         var i = 0
         while (i < colorSectionsNames.size) {
-            val paletteColors = ArrayList<PaletteColor>()
+            val paletteColors = ArrayList<MDColor>()
             val paletteSectionNames = resources.getStringArray(baseColorNamesArray.getResourceId(i, -1))
             val paletteColorValues = resources.getIntArray(colorValuesArray.getResourceId(i, -1))
 
             var j = 0
             while (j < paletteSectionNames.size) {
-                paletteColors.add(PaletteColor(paletteColorValues[j], paletteSectionNames[j]))
+                paletteColors.add(MDColor(paletteColorValues[j], paletteSectionNames[j]))
                 j++
             }
             paletteSections.add(PaletteSection(colorSectionsNames[i], colorSectionsValues[i], paletteColors))

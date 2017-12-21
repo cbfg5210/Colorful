@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
             val colorCats = ArrayList<ColorFunCategory>()
             //配色
             var colorFuns = ArrayList<ColorFunction>()
-            colorFuns.add(ColorFunction(getString(R.string.md_colors), FunFlags.PICKER_MD_PALETTE))
+            colorFuns.add(ColorFunction(getString(R.string.md_colors), FunFlags.MD_PALETTE))
+            colorFuns.add(ColorFunction(getString(R.string.impression_colors), FunFlags.IM_PALETTE))
             colorCats.add(ColorFunCategory(getString(R.string.harmonize_colors), colorFuns, "bbdefb"))
             //取色
             colorFuns = ArrayList<ColorFunction>()

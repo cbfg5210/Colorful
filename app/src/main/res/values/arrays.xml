@@ -60,4 +60,24 @@
     <string-array name="faqAnss">
         <item>@string/faq_ans1</item>
     </string-array>
+
+    <string-array name="impressions">
+        <item>@string/im1</item>
+        <item>@string/im2</item>
+        <item>@string/im3</item>
+        <item>@string/im4</item>
+        <item>@string/im5</item>
+        <item>@string/im6</item>
+        <item>@string/im7</item>
+        <item>@string/im8</item>
+        <item>@string/im9</item>
+        <item>@string/im10</item>
+        <item>@string/im11</item>
+        <item>@string/im12</item>
+        <item>@string/im13</item>
+        <item>@string/im14</item>
+        <item>@string/im15</item>
+        <item>@string/im16</item>
+        <item>@string/im17</item>
+    </string-array>
 </resources>

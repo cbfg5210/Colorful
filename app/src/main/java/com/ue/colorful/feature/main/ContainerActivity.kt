@@ -21,6 +21,7 @@ import com.ue.colorful.event.ContainerCallback
 import com.ue.colorful.event.RemoveColorEvent
 import com.ue.colorful.feature.calculate.CalcARGBFragment
 import com.ue.colorful.feature.calculate.CalcAlphaFragment
+import com.ue.colorful.feature.coloring.impression.IMPaletteFragment
 import com.ue.colorful.feature.coloring.md.MDPaletteFragment
 import com.ue.colorful.feature.game.diffcolor.ClassicModeFragment
 import com.ue.colorful.feature.game.diffcolor.TenTimesModeFragment
@@ -37,7 +38,6 @@ import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.PermissionListener
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-
 
 
 class ContainerActivity : AppCompatActivity(), ContainerCallback {
@@ -76,7 +76,8 @@ class ContainerActivity : AppCompatActivity(), ContainerCallback {
         supportActionBar?.title = colorFunction.funName
 
         when (colorFunction.funFlag) {
-            FunFlags.PICKER_MD_PALETTE -> showFragment(MDPaletteFragment())
+            FunFlags.MD_PALETTE -> showFragment(MDPaletteFragment())
+            FunFlags.IM_PALETTE -> showFragment(IMPaletteFragment())
             FunFlags.PICKER_COLOR_PALETTE -> showFragment(PalettePickerFragment())
             FunFlags.PICKER_PHOTO -> showFragment(PhotoPickerFragment())
             FunFlags.PICKER_ARGB -> showFragment(ARGBPickerFragment())

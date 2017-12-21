@@ -1,0 +1,1263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="im_all">
+        <item>@array/im1</item>
+        <item>@array/im2</item>
+        <item>@array/im3</item>
+        <item>@array/im4</item>
+        <item>@array/im5</item>
+        <item>@array/im6</item>
+        <item>@array/im7</item>
+        <item>@array/im8</item>
+        <item>@array/im9</item>
+        <item>@array/im10</item>
+        <item>@array/im11</item>
+        <item>@array/im12</item>
+        <item>@array/im13</item>
+        <item>@array/im14</item>
+        <item>@array/im15</item>
+        <item>@array/im16</item>
+        <item>@array/im17</item>
+    </array>
+
+    <array name="im17">
+        <item>@array/im_170</item>
+        <item>@array/im_171</item>
+        <item>@array/im_172</item>
+        <item>@array/im_173</item>
+        <item>@array/im_174</item>
+        <item>@array/im_175</item>
+        <item>@array/im_176</item>
+        <item>@array/im_177</item>
+        <item>@array/im_178</item>
+        <item>@array/im_179</item>
+    </array>
+
+    <array name="im_170">
+        <item>@color/col_333366</item>
+        <item>@color/col_99cc33</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_171">
+        <item>@color/col_999999</item>
+        <item>@color/col_003366</item>
+        <item>@color/col_669999</item>
+    </array>
+    ,
+    <array name="im_172">
+        <item>@color/col_003399</item>
+        <item>@color/col_ccff99</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_173">
+        <item>@color/col_999933</item>
+        <item>@color/col_336699</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_174">
+        <item>@color/col_666666</item>
+        <item>@color/col_99cc33</item>
+        <item>@color/col_003366</item>
+    </array>
+    ,
+    <array name="im_175">
+        <item>@color/col_999999</item>
+        <item>@color/col_336699</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_176">
+        <item>@color/col_3366cc</item>
+        <item>@color/col_cccc66</item>
+        <item>@color/col_333300</item>
+    </array>
+    ,
+    <array name="im_177">
+        <item>@color/col_6699cc</item>
+        <item>@color/col_006699</item>
+        <item>@color/black</item>
+    </array>
+    ,
+    <array name="im_178">
+        <item>@color/col_003366</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_006699</item>
+    </array>
+    ,
+    <array name="im_179">
+        <item>@color/black</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_003366</item>
+    </array>
+
+    <array name="im16">
+        <item>@array/im_160</item>
+        <item>@array/im_161</item>
+        <item>@array/im_162</item>
+        <item>@array/im_163</item>
+        <item>@array/im_164</item>
+        <item>@array/im_165</item>
+        <item>@array/im_166</item>
+        <item>@array/im_167</item>
+        <item>@array/im_168</item>
+        <item>@array/im_169</item>
+    </array>
+
+    <array name="im_160">
+        <item>@color/col_99ccff</item>
+        <item>@color/col_ffff66</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_161">
+        <item>@color/col_336666</item>
+        <item>@color/black</item>
+        <item>@color/col_999999</item>
+    </array>
+    ,
+    <array name="im_162">
+        <item>@color/col_0099cc</item>
+        <item>@color/black</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_163">
+        <item>@color/col_999999</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_336666</item>
+    </array>
+    ,
+    <array name="im_164">
+        <item>@color/col_cccccc</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_663366</item>
+    </array>
+    ,
+    <array name="im_165">
+        <item>@color/col_666666</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_6699cc</item>
+    </array>
+    ,
+    <array name="im_166">
+        <item>@color/col_999999</item>
+        <item>@color/black</item>
+        <item>@color/col_333366</item>
+    </array>
+    ,
+    <array name="im_167">
+        <item>@color/col_669999</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_168">
+        <item>@color/col_999999</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_169">
+        <item>@color/col_abcdef</item>
+        <item>@color/col_abcdef</item>
+        <item>@color/col_abcdef</item>
+    </array>
+
+    <array name="im15">
+        <item>@array/im_150</item>
+        <item>@array/im_151</item>
+        <item>@array/im_152</item>
+        <item>@array/im_153</item>
+        <item>@array/im_154</item>
+        <item>@array/im_155</item>
+        <item>@array/im_156</item>
+        <item>@array/im_157</item>
+        <item>@array/im_158</item>
+        <item>@array/im_159</item>
+    </array>
+
+    <array name="im_150">
+        <item>@color/col_cccccc</item>
+        <item>@color/black</item>
+        <item>@color/col_666699</item>
+    </array>
+    ,
+    <array name="im_151">
+        <item>@color/col_ccff66</item>
+        <item>@color/black</item>
+        <item>@color/col_003366</item>
+    </array>
+    ,
+    <array name="im_152">
+        <item>@color/col_99ccff</item>
+        <item>@color/black</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_153">
+        <item>@color/col_cccc33</item>
+        <item>@color/black</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_154">
+        <item>@color/col_0099ff</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_666699</item>
+    </array>
+    ,
+    <array name="im_155">
+        <item>@color/col_99cc33</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/black</item>
+    </array>
+    ,
+    <array name="im_156">
+        <item>@color/col_cccccc</item>
+        <item>@color/col_003366</item>
+        <item>@color/col_99ccff</item>
+    </array>
+    ,
+    <array name="im_157">
+        <item>@color/col_0099cc</item>
+        <item>@color/col_ccff66</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_158">
+        <item>@color/col_3399cc</item>
+        <item>@color/col_003366</item>
+        <item>@color/col_cccccc</item>
+    </array>
+    ,
+    <array name="im_159">
+        <item>@color/col_abcdef</item>
+        <item>@color/col_abcdef</item>
+        <item>@color/col_abcdef</item>
+    </array>
+
+    <array name="im14">
+        <item>@array/im_140</item>
+        <item>@array/im_141</item>
+        <item>@array/im_142</item>
+        <item>@array/im_143</item>
+        <item>@array/im_144</item>
+        <item>@array/im_145</item>
+        <item>@array/im_146</item>
+        <item>@array/im_147</item>
+        <item>@array/im_148</item>
+        <item>@array/im_149</item>
+    </array>
+
+    <array name="im_140">
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_cc9933</item>
+        <item>@color/col_336666</item>
+    </array>
+    ,
+    <array name="im_141">
+        <item>@color/col_336666</item>
+        <item>@color/col_996633</item>
+        <item>@color/col_cccc33</item>
+    </array>
+    ,
+    <array name="im_142">
+        <item>@color/col_336633</item>
+        <item>@color/col_990033</item>
+        <item>@color/col_ffcc99</item>
+    </array>
+    ,
+    <array name="im_143">
+        <item>@color/col_333366</item>
+        <item>@color/col_669999</item>
+        <item>@color/col_996600</item>
+    </array>
+    ,
+    <array name="im_144">
+        <item>@color/col_993333</item>
+        <item>@color/col_cc9966</item>
+        <item>@color/col_003300</item>
+    </array>
+    ,
+    <array name="im_145">
+        <item>@color/col_336633</item>
+        <item>@color/col_cccc99</item>
+        <item>@color/col_333366</item>
+    </array>
+    ,
+    <array name="im_146">
+        <item>@color/col_663300</item>
+        <item>@color/col_999933</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_147">
+        <item>@color/col_663366</item>
+        <item>@color/col_666666</item>
+        <item>@color/col_333366</item>
+    </array>
+    ,
+    <array name="im_148">
+        <item>@color/col_999900</item>
+        <item>@color/col_990033</item>
+        <item>@color/col_cc99cc</item>
+    </array>
+    ,
+    <array name="im_149">
+        <item>@color/col_333366</item>
+        <item>@color/col_990033</item>
+        <item>@color/col_cccccc</item>
+    </array>
+
+    <array name="im13">
+        <item>@array/im_130</item>
+        <item>@array/im_131</item>
+        <item>@array/im_132</item>
+        <item>@array/im_133</item>
+        <item>@array/im_134</item>
+        <item>@array/im_135</item>
+        <item>@array/im_136</item>
+        <item>@array/im_137</item>
+        <item>@array/im_138</item>
+        <item>@array/im_139</item>
+    </array>
+
+    <array name="im_130">
+        <item>@color/col_6699cc</item>
+        <item>@color/col_663366</item>
+        <item>@color/col_cccc99</item>
+    </array>
+    ,
+    <array name="im_131">
+        <item>@color/col_990033</item>
+        <item>@color/col_ccff66</item>
+        <item>@color/col_ff9900</item>
+    </array>
+    ,
+    <array name="im_132">
+        <item>@color/col_666699</item>
+        <item>@color/col_660033</item>
+        <item>@color/col_99cc99</item>
+    </array>
+    ,
+    <array name="im_133">
+        <item>@color/col_663300</item>
+        <item>@color/col_ff9933</item>
+        <item>@color/col_ffff66</item>
+    </array>
+    ,
+    <array name="im_134">
+        <item>@color/col_990033</item>
+        <item>@color/col_006633</item>
+        <item>@color/col_cccc00</item>
+    </array>
+    ,
+    <array name="im_135">
+        <item>@color/col_660033</item>
+        <item>@color/col_999933</item>
+        <item>@color/col_660099</item>
+    </array>
+    ,
+    <array name="im_136">
+        <item>@color/col_993366</item>
+        <item>@color/col_cccc33</item>
+        <item>@color/col_666633</item>
+    </array>
+    ,
+    <array name="im_137">
+        <item>@color/col_996600</item>
+        <item>@color/col_cccc66</item>
+        <item>@color/col_666600</item>
+    </array>
+    ,
+    <array name="im_138">
+        <item>@color/col_009933</item>
+        <item>@color/col_cc9900</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_139">
+        <item>@color/col_666633</item>
+        <item>@color/col_cccc33</item>
+        <item>@color/col_cc3366</item>
+    </array>
+
+    <array name="im12">
+        <item>@array/im_120</item>
+        <item>@array/im_121</item>
+        <item>@array/im_122</item>
+        <item>@array/im_123</item>
+        <item>@array/im_124</item>
+        <item>@array/im_125</item>
+        <item>@array/im_126</item>
+        <item>@array/im_127</item>
+        <item>@array/im_128</item>
+        <item>@array/im_129</item>
+    </array>
+
+    <array name="im_120">
+        <item>@color/col_999933</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_cc99cc</item>
+    </array>
+    ,
+    <array name="im_121">
+        <item>@color/col_cc9966</item>
+        <item>@color/col_666666</item>
+        <item>@color/col_cc9999</item>
+    </array>
+
+    <array name="im_122">
+        <item>@color/col_cccc99</item>
+        <item>@color/col_333333</item>
+        <item>@color/col_9966cc</item>
+    </array>
+    ,
+    <array name="im_123">
+        <item>@color/col_cccc99</item>
+        <item>@color/col_666666</item>
+        <item>@color/col_cc9999</item>
+    </array>
+    ,
+    <array name="im_124">
+        <item>@color/col_996699</item>
+        <item>@color/col_cccc99</item>
+        <item>@color/col_669999</item>
+    </array>
+    ,
+    <array name="im_125">
+        <item>@color/col_cc9966</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_666666</item>
+    </array>
+    ,
+    <array name="im_126">
+        <item>@color/col_339966</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_996699</item>
+    </array>
+    ,
+    <array name="im_127">
+        <item>@color/col_663366</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    ,
+    <array name="im_128">
+        <item>@color/col_996699</item>
+        <item>@color/col_9999cc</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    ,
+    <array name="im_129">
+        <item>@color/col_cccc99</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_663300</item>
+    </array>
+
+    <array name="im11">
+        <item>@array/im_110</item>
+        <item>@array/im_111</item>
+        <item>@array/im_112</item>
+        <item>@array/im_113</item>
+        <item>@array/im_114</item>
+        <item>@array/im_115</item>
+        <item>@array/im_116</item>
+        <item>@array/im_117</item>
+        <item>@array/im_118</item>
+        <item>@array/im_119</item>
+    </array>
+
+    <array name="im_110">
+        <item>@color/col_ffff99</item>
+        <item>@color/col_99cc99</item>
+        <item>@color/col_666600</item>
+    </array>
+    ,
+    <array name="im_111">
+        <item>@color/col_996633</item>
+        <item>@color/col_ffff99</item>
+        <item>@color/col_99cc66</item>
+    </array>
+    ,
+    <array name="im_112">
+        <item>@color/col_006600</item>
+        <item>@color/col_66cc66</item>
+        <item>@color/col_ccff99</item>
+    </array>
+    ,
+    <array name="im_113">
+        <item>@color/col_666600</item>
+        <item>@color/col_cccc66</item>
+        <item>@color/col_ccffcc</item>
+    </array>
+    ,
+    <array name="im_114">
+        <item>@color/col_669933</item>
+        <item>@color/col_cccc33</item>
+        <item>@color/col_663300</item>
+    </array>
+    ,
+    <array name="im_115">
+        <item>@color/col_666633</item>
+        <item>@color/col_999933</item>
+        <item>@color/col_cc9966</item>
+    </array>
+    ,
+    <array name="im_116">
+        <item>@color/col_003300</item>
+        <item>@color/col_669933</item>
+        <item>@color/col_cccc99</item>
+    </array>
+    ,
+    <array name="im_117">
+        <item>@color/col_006633</item>
+        <item>@color/col_663300</item>
+        <item>@color/col_cccc66</item>
+    </array>
+    ,
+    <array name="im_118">
+        <item>@color/col_666600</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_999999</item>
+    </array>
+    ,
+    <array name="im_119">
+        <item>@color/col_006633</item>
+        <item>@color/col_333300</item>
+        <item>@color/col_cccc99</item>
+    </array>
+
+    <array name="im10">
+        <item>@array/im_100</item>
+        <item>@array/im_101</item>
+        <item>@array/im_102</item>
+        <item>@array/im_103</item>
+        <item>@array/im_104</item>
+        <item>@array/im_105</item>
+        <item>@array/im_106</item>
+        <item>@array/im_107</item>
+        <item>@array/im_108</item>
+        <item>@array/im_109</item>
+    </array>
+
+    <array name="im_100">
+        <item>@color/col_cccc33</item>
+        <item>@color/col_ffff99</item>
+        <item>@color/col_cc9933</item>
+    </array>
+    ,
+    <array name="im_101">
+        <item>@color/col_cc9966</item>
+        <item>@color/col_cccc66</item>
+        <item>@color/col_669999</item>
+    </array>
+    ,
+    <array name="im_102">
+        <item>@color/col_ff9966</item>
+        <item>@color/col_996600</item>
+        <item>@color/col_cccc00</item>
+    </array>
+    ,
+    <array name="im_103">
+        <item>@color/col_cccc66</item>
+        <item>@color/col_660033</item>
+        <item>@color/col_cc6600</item>
+    </array>
+    ,
+    <array name="im_104">
+        <item>@color/col_cccc00</item>
+        <item>@color/col_666600</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    ,
+    <array name="im_105">
+        <item>@color/col_cc9933</item>
+        <item>@color/col_009999</item>
+        <item>@color/col_ffcc33</item>
+    </array>
+    ,
+    <array name="im_106">
+        <item>@color/col_999966</item>
+        <item>@color/col_cccc99</item>
+        <item>@color/col_339999</item>
+    </array>
+    ,
+    <array name="im_107">
+        <item>@color/col_99cc99</item>
+        <item>@color/col_669933</item>
+        <item>@color/col_336633</item>
+    </array>
+    ,
+    <array name="im_108">
+        <item>@color/col_666633</item>
+        <item>@color/col_999933</item>
+        <item>@color/col_cc9966</item>
+    </array>
+    ,
+    <array name="im_109">
+        <item>@color/col_660000</item>
+        <item>@color/col_cc9900</item>
+        <item>@color/col_cccc99</item>
+    </array>
+
+    <array name="im9">
+        <item>@array/im_90</item>
+        <item>@array/im_91</item>
+        <item>@array/im_92</item>
+        <item>@array/im_93</item>
+        <item>@array/im_94</item>
+        <item>@array/im_95</item>
+        <item>@array/im_96</item>
+        <item>@array/im_97</item>
+        <item>@array/im_98</item>
+        <item>@array/im_99</item>
+    </array>
+
+    <array name="im_90">
+        <item>@color/col_cccccc</item>
+        <item>@color/col_cc99cc</item>
+        <item>@color/col_cc3399</item>
+    </array>
+    ,
+    <array name="im_91">
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_ff99cc</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    ,
+    <array name="im_92">
+        <item>@color/col_cc3399</item>
+        <item>@color/col_9933cc</item>
+        <item>@color/col_cc99cc</item>
+    </array>
+    ,
+    <array name="im_93">
+        <item>@color/col_9999cc</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    ,
+    <array name="im_94">
+        <item>@color/col_663366</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_cc99cc</item>
+    </array>
+    ,
+    <array name="im_95">
+        <item>@color/col_ff9999</item>
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_ff99cc</item>
+    </array>
+    ,
+    <array name="im_96">
+        <item>@color/col_996666</item>
+        <item>@color/col_cc99cc</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    ,
+    <array name="im_97">
+        <item>@color/col_cc9999</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    ,
+    <array name="im_98">
+        <item>@color/col_ff9999</item>
+        <item>@color/col_996699</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    ,
+    <array name="im_99">
+        <item>@color/col_996699</item>
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_cc99cc</item>
+    </array>
+
+    <array name="im8">
+        <item>@array/im_80</item>
+        <item>@array/im_81</item>
+        <item>@array/im_82</item>
+        <item>@array/im_83</item>
+        <item>@array/im_84</item>
+        <item>@array/im_85</item>
+        <item>@array/im_86</item>
+        <item>@array/im_87</item>
+        <item>@array/im_88</item>
+        <item>@array/im_89</item>
+    </array>
+
+    <array name="im_80">
+        <item>@color/col_ffff99</item>
+        <item>@color/col_993399</item>
+        <item>@color/col_ff99cc</item>
+    </array>
+    ,
+    <array name="im_81">
+        <item>@color/col_ff6666</item>
+        <item>@color/black</item>
+        <item>@color/col_339999</item>
+    </array>
+    ,
+    <array name="im_82">
+        <item>@color/col_ff99cc</item>
+        <item>@color/col_003399</item>
+        <item>@color/col_ccff00</item>
+    </array>
+    ,
+    <array name="im_83">
+        <item>@color/col_66cc99</item>
+        <item>@color/black</item>
+        <item>@color/col_cc6699</item>
+    </array>
+    ,
+    <array name="im_84">
+        <item>@color/col_cc3399</item>
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_ff6666</item>
+    </array>
+    ,
+    <array name="im_85">
+        <item>@color/col_ffcccc</item>
+        <item>@color/black</item>
+        <item>@color/col_993366</item>
+    </array>
+    ,
+    <array name="im_86">
+        <item>@color/col_cc6699</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_666699</item>
+    </array>
+    ,
+    <array name="im_87">
+        <item>@color/col_cc6699</item>
+        <item>@color/col_99cc66</item>
+        <item>@color/col_663366</item>
+    </array>
+    ,
+    <array name="im_88">
+        <item>@color/col_ff33cc</item>
+        <item>@color/col_cccc99</item>
+        <item>@color/col_663366</item>
+    </array>
+    ,
+    <array name="im_89">
+        <item>@color/col_cc3399</item>
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_ff6666</item>
+    </array>
+
+    <array name="im7">
+        <item>@array/im_70</item>
+        <item>@array/im_71</item>
+        <item>@array/im_72</item>
+        <item>@array/im_73</item>
+        <item>@array/im_74</item>
+        <item>@array/im_75</item>
+        <item>@array/im_76</item>
+        <item>@array/im_77</item>
+        <item>@array/im_78</item>
+        <item>@array/im_79</item>
+    </array>
+
+    <array name="im_70">
+        <item>@color/col_990066</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_003399</item>
+    </array>
+    ,
+    <array name="im_71">
+        <item>@color/col_cc0033</item>
+        <item>@color/black</item>
+        <item>@color/col_003399</item>
+    </array>
+    ,
+    <array name="im_72">
+        <item>@color/col_003399</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_f00000</item>
+    </array>
+    ,
+    <array name="im_73">
+        <item>@color/col_cc3333</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_003366</item>
+    </array>
+    ,
+    <array name="im_74">
+        <item>@color/col_cc0033</item>
+        <item>@color/col_333333</item>
+        <item>@color/col_cccc00</item>
+    </array>
+    ,
+    <array name="im_75">
+        <item>@color/black</item>
+        <item>@color/col_99cc00</item>
+        <item>@color/col_cc0033</item>
+    </array>
+    ,
+    <array name="im_76">
+        <item>@color/col_ff0033</item>
+        <item>@color/col_333333</item>
+        <item>@color/col_ff9900</item>
+    </array>
+    ,
+    <array name="im_77">
+        <item>@color/col_990066</item>
+        <item>@color/black</item>
+        <item>@color/col_009966</item>
+    </array>
+    ,
+    <array name="im_78">
+        <item>@color/col_666666</item>
+        <item>@color/col_ff6600</item>
+        <item>@color/col_333333</item>
+    </array>
+    ,
+    <array name="im_79">
+        <item>@color/col_993333</item>
+        <item>@color/col_cccc00</item>
+        <item>@color/col_663366</item>
+    </array>
+
+    <array name="im6">
+        <item>@array/im_60</item>
+        <item>@array/im_61</item>
+        <item>@array/im_62</item>
+        <item>@array/im_63</item>
+        <item>@array/im_64</item>
+        <item>@array/im_65</item>
+        <item>@array/im_66</item>
+        <item>@array/im_67</item>
+        <item>@array/im_68</item>
+        <item>@array/im_69</item>
+    </array>
+
+    <array name="im_60">
+        <item>@color/col_990066</item>
+        <item>@color/col_ffcc00</item>
+        <item>@color/col_cc0033</item>
+    </array>
+    ,
+    <array name="im_61">
+        <item>@color/col_ffcc33</item>
+        <item>@color/col_333399</item>
+        <item>@color/col_ff0033</item>
+    </array>
+    ,
+    <array name="im_62">
+        <item>@color/col_666699</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_ff0033</item>
+    </array>
+    ,
+    <array name="im_63">
+        <item>@color/col_ff0033</item>
+        <item>@color/col_006699</item>
+        <item>@color/col_ffff33</item>
+    </array>
+    ,
+    <array name="im_64">
+        <item>@color/col_ffcc00</item>
+        <item>@color/col_009999</item>
+        <item>@color/col_cc3366</item>
+    </array>
+    ,
+    <array name="im_65">
+        <item>@color/col_ff0033</item>
+        <item>@color/col_cccc00</item>
+        <item>@color/col_006699</item>
+    </array>
+    ,
+    <array name="im_66">
+        <item>@color/col_cccc00</item>
+        <item>@color/col_ff9933</item>
+        <item>@color/col_663399</item>
+    </array>
+    ,
+    <array name="im_67">
+        <item>@color/col_ff9933</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_68">
+        <item>@color/col_cc3333</item>
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_99cc00</item>
+    </array>
+    ,
+    <array name="im_69">
+        <item>@color/col_003399</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_ff6600</item>
+    </array>
+
+    <array name="im5">
+        <item>@array/im_50</item>
+        <item>@array/im_51</item>
+        <item>@array/im_52</item>
+        <item>@array/im_53</item>
+        <item>@array/im_54</item>
+        <item>@array/im_55</item>
+        <item>@array/im_56</item>
+        <item>@array/im_57</item>
+        <item>@array/im_58</item>
+        <item>@array/im_59</item>
+    </array>
+
+    <array name="im_50">
+        <item>@color/col_ff6666</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_006699</item>
+    </array>
+    ,
+    <array name="im_51">
+        <item>@color/col_ff9966</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_0066cc</item>
+    </array>
+    ,
+    <array name="im_52">
+        <item>@color/col_339933</item>
+        <item>@color/col_ffcc33</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_53">
+        <item>@color/col_ff9900</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_54">
+        <item>@color/col_cc6600</item>
+        <item>@color/col_cccc44</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_55">
+        <item>@color/col_99cc33</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_0099cc</item>
+    </array>
+    ,
+    <array name="im_56">
+        <item>@color/col_99cc33</item>
+        <item>@color/col_ff6666</item>
+        <item>@color/col_336699</item>
+    </array>
+    ,
+    <array name="im_57">
+        <item>@color/col_336699</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99cccc</item>
+    </array>
+    ,
+    <array name="im_58">
+        <item>@color/col_ff0033</item>
+        <item>@color/col_333399</item>
+        <item>@color/col_cccc00</item>
+    </array>
+    ,
+    <array name="im_59">
+        <item>@color/col_33cc99</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_336699</item>
+    </array>
+
+    <array name="im4">
+        <item>@array/im_40</item>
+        <item>@array/im_41</item>
+        <item>@array/im_42</item>
+        <item>@array/im_43</item>
+        <item>@array/im_44</item>
+        <item>@array/im_45</item>
+        <item>@array/im_46</item>
+        <item>@array/im_47</item>
+        <item>@array/im_48</item>
+        <item>@array/im_49</item>
+    </array>
+
+    <array name="im_40">
+        <item>@color/col_cc9999</item>
+        <item>@color/col_ffff99</item>
+        <item>@color/col_666699</item>
+    </array>
+    ,
+    <array name="im_41">
+        <item>@color/col_ff9900</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_0099cc</item>
+    </array>
+    ,
+    <array name="im_42">
+        <item>@color/col_cccc99</item>
+        <item>@color/col_cc3399</item>
+        <item>@color/col_99cc00</item>
+    </array>
+    ,
+    <array name="im_43">
+        <item>@color/col_ff6666</item>
+        <item>@color/col_ffff00</item>
+        <item>@color/col_3399cc</item>
+    </array>
+    ,
+    <array name="im_44">
+        <item>@color/col_cc6600</item>
+        <item>@color/col_999999</item>
+        <item>@color/col_cccc33</item>
+    </array>
+    ,
+    <array name="im_45">
+        <item>@color/col_ff9933</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_009933</item>
+    </array>
+    ,
+    <array name="im_46">
+        <item>@color/col_0099cc</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_ff6666</item>
+    </array>
+    ,
+    <array name="im_47">
+        <item>@color/col_ff6600</item>
+        <item>@color/col_ffff66</item>
+        <item>@color/col_009966</item>
+    </array>
+    ,
+    <array name="im_48">
+        <item>@color/col_cc6633</item>
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_cc6600</item>
+    </array>
+    ,
+    <array name="im_49">
+        <item>@color/col_cc0066</item>
+        <item>@color/col_009999</item>
+        <item>@color/col_ffcc33</item>
+    </array>
+
+    <array name="im3">
+        <item>@array/im_30</item>
+        <item>@array/im_31</item>
+        <item>@array/im_32</item>
+        <item>@array/im_33</item>
+        <item>@array/im_34</item>
+        <item>@array/im_35</item>
+        <item>@array/im_36</item>
+        <item>@array/im_37</item>
+        <item>@array/im_38</item>
+        <item>@array/im_39</item>
+    </array>
+
+    <array name="im_30">
+        <item>@color/col_66cccc</item>
+        <item>@color/col_ccff66</item>
+        <item>@color/col_ff99cc</item>
+    </array>
+    ,
+    <array name="im_31">
+        <item>@color/col_ff9999</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ffcc99</item>
+    </array>
+    ,
+    <array name="im_32">
+        <item>@color/col_ff6666</item>
+        <item>@color/col_ffff66</item>
+        <item>@color/col_99cc66</item>
+    </array>
+    ,
+    <array name="im_33">
+        <item>@color/col_666699</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ff9999</item>
+    </array>
+    ,
+    <array name="im_34">
+        <item>@color/col_99cc33</item>
+        <item>@color/col_ff9900</item>
+        <item>@color/col_ffcc00</item>
+    </array>
+    ,
+    <array name="im_35">
+        <item>@color/col_ff0033</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ff9966</item>
+    </array>
+    ,
+    <array name="im_36">
+        <item>@color/col_ff9900</item>
+        <item>@color/col_ccff00</item>
+        <item>@color/col_cc3399</item>
+    </array>
+    ,
+    <array name="im_37">
+        <item>@color/col_99cc33</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ff6600</item>
+    </array>
+    ,
+    <array name="im_38">
+        <item>@color/col_993366</item>
+        <item>@color/col_cccc33</item>
+        <item>@color/col_666633</item>
+    </array>
+    ,
+    <array name="im_39">
+        <item>@color/col_66cccc</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_666699</item>
+    </array>
+
+    <array name="im2">
+        <item>@array/im_20</item>
+        <item>@array/im_21</item>
+        <item>@array/im_22</item>
+        <item>@array/im_23</item>
+        <item>@array/im_24</item>
+        <item>@array/im_25</item>
+        <item>@array/im_26</item>
+        <item>@array/im_27</item>
+        <item>@array/im_28</item>
+        <item>@array/im_29</item>
+    </array>
+
+    <array name="im_20">
+        <item>@color/col_ccff99</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99ccff</item>
+    </array>
+    <array name="im_21">
+        <item>@color/col_99cccc</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ccff99</item>
+    </array>
+    <array name="im_22">
+        <item>@color/col_ccffcc</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_66cccc</item>
+    </array>
+    <array name="im_23">
+        <item>@color/col_ccccff</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99cccc</item>
+    </array>
+    <array name="im_24">
+        <item>@color/col_ccffcc</item>
+        <item>@color/col_99cccc</item>
+        <item>@color/col_ffffcc</item>
+    </array>
+    <array name="im_25">
+        <item>@color/col_ccffff</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    <array name="im_26">
+        <item>@color/col_ccffff</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99ccff</item>
+    </array>
+    <array name="im_27">
+        <item>@color/col_66ccff</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_ccffff</item>
+    </array>
+    <array name="im_28">
+        <item>@color/col_6699cc</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99ccff</item>
+    </array>
+    <array name="im_29">
+        <item>@color/col_ccccff</item>
+        <item>@color/col_ffffff</item>
+        <item>@color/col_99ccff</item>
+    </array>
+    <color name="col_ffffff">#ffffff</color>
+    <color name="col_99ccff">#99ccff</color>
+    <color name="col_66cccc">#66cccc</color>
+    <color name="col_66ccff">#66ccff</color>
+    <color name="col_6699cc">#6699cc</color>
+
+    <array name="im1">
+        <item>@array/im_10</item>
+        <item>@array/im_11</item>
+        <item>@array/im_12</item>
+        <item>@array/im_13</item>
+        <item>@array/im_14</item>
+        <item>@array/im_15</item>
+        <item>@array/im_16</item>
+        <item>@array/im_17</item>
+        <item>@array/im_18</item>
+        <item>@array/im_19</item>
+    </array>
+
+    <array name="im_10">
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_ccffff</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    <array name="im_11">
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_ffff99</item>
+        <item>@color/col_ccccff</item>
+    </array>
+    <array name="im_12">
+        <item>@color/col_ff9966</item>
+        <item>@color/col_ff6666</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    <array name="im_13">
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_ccff99</item>
+        <item>@color/col_cccccc</item>
+    </array>
+    <array name="im_14">
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_ccccff</item>
+        <item>@color/col_ccffcc</item>
+    </array>
+    <array name="im_15">
+        <item>@color/col_ccffff</item>
+        <item>@color/col_cccccc</item>
+        <item>@color/col_ccff99</item>
+    </array>
+    <array name="im_16">
+        <item>@color/col_ffcccc</item>
+        <item>@color/white</item>
+        <item>@color/col_99cc99</item>
+    </array>
+    <array name="im_17">
+        <item>@color/col_99cccc</item>
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_ffcccc</item>
+    </array>
+    <array name="im_18">
+        <item>@color/col_ccccff</item>
+        <item>@color/col_ffcccc</item>
+        <item>@color/col_ccffff</item>
+    </array>
+    <array name="im_19">
+        <item>@color/col_ffcc99</item>
+        <item>@color/col_ffffcc</item>
+        <item>@color/col_99cccc</item>
+    </array>
+
+    <color name="col_ffffcc">#ffffcc</color>
+    <color name="col_ccffff">#ccffff</color>
+    <color name="col_ffcccc">#ffcccc</color>
+    <color name="col_ffff99">#ffff99</color>
+    <color name="col_ccccff">#ccccff</color>
+    <color name="col_ff9966">#ff9966</color>
+    <color name="col_ff6666">#ff6666</color>
+    <color name="col_ffcc99">#ffcc99</color>
+    <color name="col_ccff99">#ccff99</color>
+    <color name="col_ccffcc">#ccffcc</color>
+    <color name="col_99cc99">#99cc99</color>
+    <color name="col_99cccc">#99cccc</color>
+</resources>

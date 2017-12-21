@@ -9,13 +9,13 @@ import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
-import com.ue.colorful.model.PaletteColor
+import com.ue.colorful.model.MDColor
 import kotlinx.android.synthetic.main.item_md_palette_color.view.*
 
 /**
  * Created by hawk on 2017/12/9.
  */
-internal class MDPaletteColorAdapter(private val activity: Activity, items: List<PaletteColor>?, private val mdPaletteListener: MDPaletteListener) : DelegationAdapter<PaletteColor>(), OnDelegateClickListener {
+class MDPaletteColorAdapter(activity: Activity, items: List<MDColor>?, private val mdPaletteListener: MDPaletteListener) : DelegationAdapter<MDColor>(), OnDelegateClickListener {
 
     init {
         //通过以下方式初始化items，避免在调用clear()时清空了原数据
@@ -40,7 +40,7 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
     /**
      * Delegate
      */
-    private class PaletteColorDelegate(private val activity: Activity) : BaseAdapterDelegate<PaletteColor>(activity, R.layout.item_md_palette_color) {
+    private class PaletteColorDelegate(private val activity: Activity) : BaseAdapterDelegate<MDColor>(activity, R.layout.item_md_palette_color) {
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             val holder = ViewHolder(itemView)
@@ -54,11 +54,11 @@ internal class MDPaletteColorAdapter(private val activity: Activity, items: List
             return holder
         }
 
-        override fun isForViewType(item: PaletteColor): Boolean {
+        override fun isForViewType(item: MDColor): Boolean {
             return true
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteColor: PaletteColor, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteColor: MDColor, payloads: List<*>) {
             holder as ViewHolder
             holder.coloredZone.setBackgroundColor(paletteColor.hex)
             holder.colorTitle.text = paletteColor.baseName

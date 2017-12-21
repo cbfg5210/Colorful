@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menuPalette"
         android:icon="@drawable/svg_palette"
-        android:title="色板"
+        android:title="@string/color_collections"
         app:showAsAction="always"/>
 </menu>
