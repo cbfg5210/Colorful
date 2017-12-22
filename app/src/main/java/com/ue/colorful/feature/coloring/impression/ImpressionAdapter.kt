@@ -30,16 +30,18 @@ class ImpressionAdapter(private val activity: Activity, mItems: List<ImpressionI
         holder.tvTitle.text = item.title
         holder.rvImpressions.setHasFixedSize(true)
         holder.rvImpressions.adapter = ImpressionSubAdapter(activity, item.colors)
-
-        holder.ivToggle.setOnClickListener {
-            holder.rvImpressions.visibility = if (holder.ivToggle.isSelected) View.VISIBLE else View.GONE
-            holder.ivToggle.isSelected = !holder.ivToggle.isSelected
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_impression, null)
-        return ViewHolder(itemView)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_impression, parent, false)
+        val holder = ViewHolder(itemView)
+
+        holder.ivToggle.setOnClickListener { v ->
+            holder.rvImpressions.visibility = if (holder.ivToggle.isSelected) View.VISIBLE else View.GONE
+            holder.ivToggle.isSelected = !holder.ivToggle.isSelected
+        }
+
+        return holder
     }
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -283,7 +283,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="?attr/selectableItemBackground"
-            app:srcCompat="@drawable/svg_palette_black"/>
+            app:srcCompat="@drawable/svg_palette_b"/>
 
         <ImageView
             android:id="@+id/ivCopy"
@@ -291,6 +291,6 @@
             android:layout_height="30dp"
             android:layout_marginLeft="35dp"
             android:background="?attr/selectableItemBackground"
-            app:srcCompat="@drawable/svg_copy"/>
+            app:srcCompat="@drawable/svg_copy_b"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -2,57 +2,57 @@ package com.ue.colorful.feature.coloring.impression
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
-import com.ue.adapterdelegate.BaseAdapterDelegate
-import com.ue.adapterdelegate.DelegationAdapter
-import com.ue.adapterdelegate.OnDelegateClickListener
+import android.view.ViewGroup
 import com.ue.colorful.R
+import com.ue.colorful.event.SnackBarEvent
 import kotlinx.android.synthetic.main.item_sub_impression.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by hawk on 2017/12/21.
  */
-class ImpressionSubAdapter(activity: Activity, items: List<IntArray>) : DelegationAdapter<IntArray>(), OnDelegateClickListener {
+class ImpressionSubAdapter(activity: Activity, items: List<IntArray>) : RecyclerView.Adapter<ImpressionSubAdapter.ViewHolder>() {
+    private val items = ArrayList<IntArray>()
 
     init {
-        this.items = ArrayList<IntArray>()
         if (items != null) this.items.addAll(items)
-
-        this.addDelegate(ImpressionItemDelegate(activity))
     }
 
-    override fun onClick(view: View, position: Int) {
-        if (position < 0 || position >= itemCount) {
-            return
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        holder as ViewHolder
+        val item = items[position]
+
+        for (i in holder.ivColors.indices) {
+            holder.ivColors[i].setBackgroundColor(item[i])
+            holder.ivSelections[i].visibility = View.INVISIBLE
         }
     }
 
-    /**
-     * Delegate
-     */
-    private class ImpressionItemDelegate(activity: Activity) : BaseAdapterDelegate<IntArray>(activity, R.layout.item_sub_impression) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sub_impression, parent, false)
+        val holder = ViewHolder(itemView)
 
-        override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
-            return ViewHolder(itemView)
+        val listener = View.OnClickListener { v ->
+            val tag = v.tag as Int
+            EventBus.getDefault().post(SnackBarEvent(items[holder.adapterPosition][tag]))
         }
 
-        override fun isForViewType(item: IntArray): Boolean {
-            return true
+        for (i in holder.ivColors.indices) {
+            holder.ivColors[i].tag = i
+            holder.ivColors[i].setOnClickListener(listener)
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: IntArray, payloads: List<*>) {
-            holder as ViewHolder
+        return holder
+    }
 
-            holder.color1.setBackgroundColor(item[0])
-            holder.color2.setBackgroundColor(item[1])
-            holder.color3.setBackgroundColor(item[2])
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-        }
-
-        class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val color1 = itemView.ivColor1!!
-            val color2 = itemView.ivColor2!!
-            val color3 = itemView.ivColor3!!
-        }
+    class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivColors = arrayOf(itemView.ivColor1!!, itemView.ivColor2!!, itemView.ivColor3!!)
+        val ivSelections = arrayOf(itemView.ivSelected1!!, itemView.ivSelected2!!, itemView.ivSelected3!!)
     }
 }

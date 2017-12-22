@@ -15,7 +15,9 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:padding="10dp"
+            android:textSize="16sp"
             tools:text="title"/>
 
         <ImageView
@@ -31,7 +33,8 @@
         android:id="@+id/rvImpressions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:nestedScrollingEnabled="false"
         android:scrollbars="none"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="2"/>
 </LinearLayout>
