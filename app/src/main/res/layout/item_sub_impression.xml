@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="5dp">
 
     <com.ue.colorful.widget.SquareImageView
         android:id="@+id/ivColor1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/ivColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_weight="1"
         tools:background="@color/black"/>
-
-    <ImageView
-        android:id="@+id/ivSelected1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ivColor1"
-        app:layout_constraintEnd_toEndOf="@+id/ivColor1"
-        app:layout_constraintStart_toStartOf="@+id/ivColor1"
-        app:layout_constraintTop_toTopOf="@+id/ivColor1"
-        app:srcCompat="@drawable/svg_selected_w"/>
 
     <com.ue.colorful.widget.SquareImageView
         android:id="@+id/ivColor2"
@@ -32,20 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="1dp"
         android:layout_marginStart="1dp"
-        app:layout_constraintEnd_toStartOf="@+id/ivColor3"
-        app:layout_constraintStart_toEndOf="@+id/ivColor1"
-        app:layout_constraintTop_toTopOf="@+id/ivColor1"
+        android:layout_weight="1"
         tools:background="@color/black"/>
-
-    <ImageView
-        android:id="@+id/ivSelected2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ivColor2"
-        app:layout_constraintEnd_toEndOf="@+id/ivColor2"
-        app:layout_constraintStart_toStartOf="@+id/ivColor2"
-        app:layout_constraintTop_toTopOf="@+id/ivColor2"
-        app:srcCompat="@drawable/svg_selected_w"/>
 
     <com.ue.colorful.widget.SquareImageView
         android:id="@+id/ivColor3"
@@ -53,19 +30,32 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="1dp"
         android:layout_marginStart="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
-        app:layout_constraintStart_toEndOf="@+id/ivColor2"
-        app:layout_constraintTop_toTopOf="@+id/ivColor2"
+        android:layout_weight="1"
         tools:background="@color/black"/>
 
-    <ImageView
-        android:id="@+id/ivSelected3"
-        android:layout_width="wrap_content"
+    <com.ue.colorful.widget.SquareImageView
+        android:id="@+id/ivColor4"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ivColor3"
-        app:layout_constraintEnd_toEndOf="@+id/ivColor3"
-        app:layout_constraintStart_toStartOf="@+id/ivColor3"
-        app:layout_constraintTop_toTopOf="@+id/ivColor3"
-        app:srcCompat="@drawable/svg_selected_w"/>
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        tools:background="@color/black"/>
+
+    <com.ue.colorful.widget.SquareImageView
+        android:id="@+id/ivColor5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        tools:background="@color/black"/>
+
+    <com.ue.colorful.widget.SquareImageView
+        android:id="@+id/ivColor6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        tools:background="@color/black"/>
+</LinearLayout>

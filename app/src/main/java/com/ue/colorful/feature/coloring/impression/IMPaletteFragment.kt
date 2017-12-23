@@ -5,10 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.View
+import com.ue.adapterdelegate.Item
 import com.ue.colorful.R
 import com.ue.colorful.event.SnackBarEvent
 import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.model.ImpressionItem
+import com.ue.colorful.model.ImpressionTitle
 import com.ue.colorful.util.SnackBarUtils
 import kotlinx.android.synthetic.main.fragment_im_palette.view.*
 import org.greenrobot.eventbus.EventBus
@@ -32,23 +34,29 @@ class IMPaletteFragment : BaseFragment(R.layout.fragment_im_palette, R.menu.menu
         SnackBarUtils.setAction(snackBar, R.id.ivSnackCopy, View.OnClickListener { containerCallback?.copyColor(snackColor) })
     }
 
-    private val impressionItems: List<ImpressionItem>
+    private val impressionItems: List<Item>
         get() {
-            val items = ArrayList<ImpressionItem>()
-            var colors: ArrayList<IntArray>
+            val items = ArrayList<Item>()
 
             val impressions = resources.getStringArray(R.array.impressions)
             val ims = resources.obtainTypedArray(R.array.im_all)
             for (a in impressions.indices) {
-                colors = ArrayList()
+                items.add(ImpressionTitle(impressions[a]))
 
                 val imTa = resources.obtainTypedArray(ims.getResourceId(a, -1))
 
                 var i = 0
-                while (i < imTa.length()) colors.add(resources.getIntArray(imTa.getResourceId(i++, -1)))
+                while (i < imTa.length()) {
+                    val color1 = resources.getIntArray(imTa.getResourceId(i, -1))
+                    val color2Res = imTa.getResourceId(i + 1, -1)
+
+                    if (color2Res == -1) items.add(ImpressionItem(color1, null))
+                    else items.add(ImpressionItem(color1, resources.getIntArray(color2Res)))
+
+                    i += 2
+                }
 
                 imTa.recycle()
-                items.add(ImpressionItem(impressions[a], colors))
             }
             ims.recycle()
 

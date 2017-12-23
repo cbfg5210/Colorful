@@ -1,3 +1,4 @@
+/*
 package com.ue.colorful.feature.coloring.impression
 
 import android.app.Activity
@@ -10,9 +11,11 @@ import com.ue.colorful.event.SnackBarEvent
 import kotlinx.android.synthetic.main.item_sub_impression.view.*
 import org.greenrobot.eventbus.EventBus
 
+*/
 /**
  * Created by hawk on 2017/12/21.
- */
+ *//*
+
 class ImpressionSubAdapter(activity: Activity, items: List<IntArray>) : RecyclerView.Adapter<ImpressionSubAdapter.ViewHolder>() {
     private val items = ArrayList<IntArray>()
 
@@ -55,4 +58,4 @@ class ImpressionSubAdapter(activity: Activity, items: List<IntArray>) : Recycler
         val ivColors = arrayOf(itemView.ivColor1!!, itemView.ivColor2!!, itemView.ivColor3!!)
         val ivSelections = arrayOf(itemView.ivSelected1!!, itemView.ivSelected2!!, itemView.ivSelected3!!)
     }
-}
+}*/
