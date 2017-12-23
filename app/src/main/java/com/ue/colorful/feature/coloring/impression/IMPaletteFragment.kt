@@ -4,6 +4,8 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
 import android.view.View
 import com.ue.adapterdelegate.Item
 import com.ue.colorful.R
@@ -26,7 +28,17 @@ class IMPaletteFragment : BaseFragment(R.layout.fragment_im_palette, R.menu.menu
 
     override fun initViews() {
         rootView.rvColorList.setHasFixedSize(true)
-        rootView.rvColorList.adapter = ImpressionAdapter(activity as Activity, impressionItems)
+        val adapter = ImpressionAdapter(activity as Activity, impressionItems)
+
+        val layoutManager = GridLayoutManager(context, 10)
+        layoutManager.spanSizeLookup = object : SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return adapter.getSpanSize(position)
+            }
+        }
+
+        rootView.rvColorList.layoutManager = layoutManager
+        rootView.rvColorList.adapter = adapter
 
         snackBar = Snackbar.make(rootView, "", Snackbar.LENGTH_LONG)
         SnackBarUtils.setView(snackBar, R.layout.layout_snack_bar)
@@ -46,15 +58,8 @@ class IMPaletteFragment : BaseFragment(R.layout.fragment_im_palette, R.menu.menu
                 val imTa = resources.obtainTypedArray(ims.getResourceId(a, -1))
 
                 var i = 0
-                while (i < imTa.length()) {
-                    val color1 = resources.getIntArray(imTa.getResourceId(i, -1))
-                    val color2Res = imTa.getResourceId(i + 1, -1)
-
-                    if (color2Res == -1) items.add(ImpressionItem(color1, null))
-                    else items.add(ImpressionItem(color1, resources.getIntArray(color2Res)))
-
-                    i += 2
-                }
+                while (i < imTa.length())
+                    items.add(ImpressionItem(resources.getIntArray(imTa.getResourceId(i++, -1))))
 
                 imTa.recycle()
             }

@@ -214,9 +214,11 @@
         2、T_T：添加了广告
     </string>
 
+    <string name="impression_colors">按印象配色</string>
+
+
     <string name="ver_0d6" translatable="false">v0.6  2017/12/22</string>
     <string name="ver_0d5" translatable="false">v0.5  2017/12/21</string>
 
     <string name="myEmail" translatable="false">tomhawk_ht@foxmail.com</string>
-    <string name="impression_colors">按印象搭配</string>
 </resources>

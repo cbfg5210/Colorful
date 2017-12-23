@@ -34,7 +34,7 @@ class ImpressionSubAdapter(activity: Activity, items: List<IntArray>) : Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sub_impression, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_impression, parent, false)
         val holder = ViewHolder(itemView)
 
         val listener = View.OnClickListener { v ->

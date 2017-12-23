@@ -5,4 +5,6 @@ import com.ue.adapterdelegate.Item
 /**
  * Created by hawk on 2017/12/22.
  */
-class ImpressionTitle(val title: String) : Item
+class ImpressionTitle(val title: String) : Item {
+    var expandable = false
+}

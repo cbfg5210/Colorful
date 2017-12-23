@@ -12,7 +12,7 @@ import com.ue.colorful.event.SnackBarEvent
 import com.ue.colorful.model.ImpressionItem
 import com.ue.colorful.model.ImpressionTitle
 import kotlinx.android.synthetic.main.item_impression.view.*
-import kotlinx.android.synthetic.main.item_sub_impression.view.*
+import kotlinx.android.synthetic.main.item_impression_title.view.*
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -32,21 +32,37 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
         this.addDelegate(impressionDelegate)
     }
 
+    fun getSpanSize(position: Int): Int {
+        if (items[position] is ImpressionTitle) return 10
+        if ((items[position] as ImpressionItem).hidden) return 1
+        return 5
+    }
+
     override fun onClick(view: View, position: Int) {
         if (position < 0 || position >= itemCount) {
             return
         }
         when (view.id) {
-            R.id.ivColor1,
-            R.id.ivColor2,
-            R.id.ivColor3,
-            R.id.ivColor4,
-            R.id.ivColor5,
-            R.id.ivColor6 -> {
+            R.id.vColor1,
+            R.id.vColor2,
+            R.id.vColor3 -> {
                 val tag = view.tag as Int
                 val item = items[position] as ImpressionItem
-                if (tag < 3) EventBus.getDefault().post(SnackBarEvent(item.colors1[tag]))
-                else EventBus.getDefault().post(SnackBarEvent(item.colors2!![tag - 3]))
+                EventBus.getDefault().post(SnackBarEvent(item.colors[tag]))
+            }
+            R.id.ivToggle -> {
+                val titleItem = items[position] as ImpressionTitle
+                (items[position] as ImpressionTitle).expandable = !titleItem.expandable
+
+                val item = items[position + 1] as ImpressionItem
+                val hidden = !item.hidden
+
+                var i = 1
+                while ((position + i < itemCount) && (items[position + i] !is ImpressionTitle))
+                    (items[position + i++] as ImpressionItem).hidden = hidden
+
+                notifyItemChanged(position, Object())
+                notifyItemRangeChanged(position + 1, i - 1)
             }
         }
     }
@@ -55,9 +71,7 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             val holder = ViewHolder(itemView)
-            holder.ivToggle.setOnClickListener { v ->
-                holder.ivToggle.isSelected = !holder.ivToggle.isSelected
-            }
+            holder.ivToggle.setOnClickListener { v -> onDelegateClickListener?.onClick(v, holder.adapterPosition) }
             return holder
         }
 
@@ -70,6 +84,7 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
             item as ImpressionTitle
 
             holder.tvTitle.text = item.title
+            holder.ivToggle.isSelected = item.expandable
         }
 
         class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -78,16 +93,15 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
         }
     }
 
-    private class ImpressionDelegate(activity: Activity) : BaseAdapterDelegate<Item>(activity, R.layout.item_sub_impression) {
+    private class ImpressionDelegate(activity: Activity) : BaseAdapterDelegate<Item>(activity, R.layout.item_impression) {
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             val holder = ViewHolder(itemView)
 
-            for (i in holder.ivColors.indices) {
-                holder.ivColors[i].tag = i
-                holder.ivColors[i].setOnClickListener({ v ->
-                    onDelegateClickListener?.onClick(v, holder.adapterPosition)
-                })
+            val listener = View.OnClickListener { v -> onDelegateClickListener?.onClick(v, holder.adapterPosition) }
+            for (i in holder.vColors.indices) {
+                holder.vColors[i].tag = i
+                holder.vColors[i].setOnClickListener(listener)
             }
 
             return holder
@@ -101,27 +115,14 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
             holder as ViewHolder
             item as ImpressionItem
 
-            holder.ivColors[0].setBackgroundColor(item.colors1[0])
-            holder.ivColors[1].setBackgroundColor(item.colors1[1])
-            holder.ivColors[2].setBackgroundColor(item.colors1[2])
-            if (item.colors2 == null) {
-                holder.ivColors[3].visibility = View.INVISIBLE
-                holder.ivColors[4].visibility = View.INVISIBLE
-                holder.ivColors[5].visibility = View.INVISIBLE
-            } else {
-                holder.ivColors[3].visibility = View.VISIBLE
-                holder.ivColors[4].visibility = View.VISIBLE
-                holder.ivColors[5].visibility = View.VISIBLE
-                holder.ivColors[3].setBackgroundColor(item.colors2[0])
-                holder.ivColors[4].setBackgroundColor(item.colors2[1])
-                holder.ivColors[5].setBackgroundColor(item.colors2[2])
+            for (i in holder.vColors.indices) {
+                holder.vColors[i].setBackgroundColor(item.colors[i])
+                holder.vColors[i].isEnabled = !item.hidden
             }
         }
 
         class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val ivColors = arrayOf(
-                    itemView.ivColor1!!, itemView.ivColor2!!, itemView.ivColor3!!,
-                    itemView.ivColor4!!, itemView.ivColor5!!, itemView.ivColor6!!)
+            val vColors = arrayOf(itemView.vColor1!!, itemView.vColor2!!, itemView.vColor3!!)
         }
     }
 }
