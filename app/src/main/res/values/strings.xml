@@ -179,7 +179,7 @@
     <string name="tap_again_to_exit">再点一次退出应用</string>
     <string name="no_read_storage_perm">无法选择图片：没有外部读取权限</string>
 
-    <string name="appDesc">颜值是一款简单实用的颜色类工具，致力于满足用户对颜色的大部分需要。</string>
+    <string name="appDesc">颜色集是一款简单实用的颜色类工具，致力于满足用户对颜色的大部分需要。</string>
     <string name="support">支持</string>
     <string name="support_tip">广告展示是本应用的唯一收入来源，您可以通过点击观看广告的方式来支持本应用。感谢您的支持！</string>
     <string name="sure">确定</string>
