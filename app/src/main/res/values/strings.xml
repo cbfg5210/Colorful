@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">颜值</string>
+    <string name="app_name">颜色集</string>
 
     <string name="red">红色</string>
     <string name="pink">粉红色</string>
@@ -210,12 +210,12 @@
         完成应用基础功能模块：配色、取色、小游戏、计算、色觉测试
     </string>
     <string name="verNote_0d6">
-        1、添加关于页;\n
-        2、T_T：添加了广告
+        1、添加按印象搭配的配色方案;\n
+        2、添加关于页;\n
+        3、修改应用名称;\n
     </string>
 
     <string name="impression_colors">按印象配色</string>
-
 
     <string name="ver_0d6" translatable="false">v0.6  2017/12/22</string>
     <string name="ver_0d5" translatable="false">v0.5  2017/12/21</string>
