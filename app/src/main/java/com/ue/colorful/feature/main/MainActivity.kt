@@ -1,6 +1,5 @@
 package com.ue.colorful.feature.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
@@ -16,7 +15,6 @@ import com.ue.colorful.model.ColorFunCategory
 import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.BackPressedUtils
 import com.ue.colorful.util.GsonHolder
-import com.ue.fingercoloring.feature.main.FingerColoringActivity
 import com.ue.fingercoloring.util.SPUtils
 import com.ue.recommend.widget.NBottomSheetBehavior.STATE_EXPANDED
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         rvFunctions.setHasFixedSize(true)
         rvFunctions.adapter = ColorFunCategoryAdapter(this, funCategories)
-
-        startActivity(Intent(this, FingerColoringActivity::class.java))
     }
 
     private val funCategories: List<ColorFunCategory>

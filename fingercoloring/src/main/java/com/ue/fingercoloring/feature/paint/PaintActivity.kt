@@ -275,7 +275,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun saveImageLocally(listener: PaintPresenter.OnSaveImageListener) {
         val picName = if (isFromThemes) pictureName.replace(".png", "_") + System.currentTimeMillis() + ".png" else pictureName
-        presenter.saveImageLocally(fillImageview.getmBitmap()!!, picName, listener)
+        presenter.saveImageLocally(fillImageview.getBitmap()!!, picName, listener)
     }
 
     private fun shareImage() {
@@ -371,10 +371,14 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun resetIVColor(iv: ImageView, key: String, defColorRes: Int) {
-        iv.setImageDrawable(ColorDrawable(SPUtils.getInt(key, resources.getColor(defColorRes))))
+        iv.setImageDrawable(ColorDrawable(SPUtils.getInt(key, ContextCompat.getColor(this, defColorRes))))
     }
 
     override fun onBackPressed() {
+        if (!fillImageview.isUndoable()) {
+            super.onBackPressed()
+            return;
+        }
         myDialogFactory.FinishSaveImageDialog(
                 View.OnClickListener { saveToLocalAndExit() },
                 View.OnClickListener {

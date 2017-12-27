@@ -5,7 +5,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".feature.main.FingerColoringActivity"
+            android:name=".feature.main.MainListActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".feature.paint.PaintActivity"

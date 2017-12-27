@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.ue.fingercoloring.constant.SPKeys
 import com.ue.fingercoloring.listener.OnDrawLineListener
+import com.ue.fingercoloring.util.RxJavaUtils
 import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.util.SizedStack
 import io.reactivex.Observable
@@ -60,13 +61,15 @@ class ColourImageView : AppCompatImageView {
         attacher = MPhotoViewAttacher(this)
     }
 
+    fun isUndoable(): Boolean {
+        return !bmstackundo.isEmpty()
+    }
+
     override fun setImageBitmap(bm: Bitmap?) {
         super.setImageBitmap(bm)
 
         mBitmap = bm!!.copy(bm.config, true)
-        if (attacher != null) {
-            attacher!!.update()
-        }
+        attacher?.update()
     }
 
     fun pickColor(x: Int, y: Int) {
@@ -80,14 +83,12 @@ class ColourImageView : AppCompatImageView {
 
         if (status) color = mBitmap!!.getPixel(x, y)
 
-        if (onColorPickListener != null) {
-            onColorPickListener!!.onColorPick(status, color)
-        }
+        onColorPickListener?.onColorPick(status, color)
     }
 
     fun clearPoints() {
-        undopoints!!.clear()
-        redopoints!!.clear()
+        undopoints.clear()
+        redopoints.clear()
     }
 
     /**
@@ -105,7 +106,7 @@ class ColourImageView : AppCompatImageView {
         if (isOk) {
             ProgressLoading.show(context, true)
             ProgressLoading.setOndismissListener(DialogInterface.OnDismissListener {
-                dispose(mDisposable)
+                RxJavaUtils.dispose(mDisposable)
             })
 
             doFillColorAction(x, y)
@@ -113,12 +114,12 @@ class ColourImageView : AppCompatImageView {
     }
 
     private fun doFillColorAction(x: Int, y: Int) {
-        dispose(mDisposable)
+        RxJavaUtils.dispose(mDisposable)
         mDisposable = Observable
                 .create(ObservableOnSubscribe<Bitmap> { e ->
                     val bm = mBitmap!!
                     try {
-                        pushUndoStack(bm!!.copy(bm.config, true))
+                        pushUndoStack(bm.copy(bm.config, true))
                         val pixel = bm.getPixel(x, y)
                         val w = bm.width
                         val h = bm.height
@@ -130,7 +131,7 @@ class ColourImageView : AppCompatImageView {
                         //????????bitmap
                         bm.setPixels(pixels, 0, w, 0, 0, w, h)
                     } catch (exp: Exception) {
-                        bmstackundo!!.pop()
+                        bmstackundo.pop()
                     }
 
                     e.onNext(bm)
@@ -141,16 +142,8 @@ class ColourImageView : AppCompatImageView {
                 .subscribe { bm ->
                     ProgressLoading.DismissDialog()
                     setImageDrawable(BitmapDrawable(resources, bm))
-                    if (onRedoUndoListener != null) {
-                        onRedoUndoListener!!.onRedoUndo(bmstackundo!!.size, bmstackredo!!.size)
-                    }
+                    onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
                 }
-    }
-
-    private fun dispose(mDisposable: Disposable?) {
-        if (mDisposable != null && !mDisposable.isDisposed) {
-            mDisposable.dispose()
-        }
     }
 
     private fun isBorderColor(color: Int): Boolean {
@@ -158,8 +151,8 @@ class ColourImageView : AppCompatImageView {
     }
 
     private fun pushUndoStack(bm: Bitmap) {
-        bmstackundo!!.push(bm)
-        bmstackredo!!.clear()
+        bmstackundo.push(bm)
+        bmstackredo.clear()
     }
 
     /**
@@ -280,9 +273,8 @@ class ColourImageView : AppCompatImageView {
     }
 
     fun update() {
-        if (drawable != null) {
+        if (drawable != null)
             setMeasuredDimension(measuredWidth, drawable.intrinsicHeight * measuredWidth / drawable.intrinsicWidth)
-        }
     }
 
     fun setColor(color: Int) {
@@ -293,19 +285,18 @@ class ColourImageView : AppCompatImageView {
      * @return true: has element can undo;
      */
     fun undo(): Boolean {
-        if (bmstackundo!!.empty()) return false
+        if (bmstackundo.empty()) return false
 
         try {
-            bmstackredo!!.push(mBitmap!!.copy(mBitmap!!.config, true))
-            mBitmap = bmstackundo!!.pop()
+            bmstackredo.push(mBitmap!!.copy(mBitmap!!.config, true))
+            mBitmap = bmstackundo.pop()
             setImageDrawable(BitmapDrawable(resources, mBitmap))
-            if (onRedoUndoListener != null) {
-                onRedoUndoListener!!.onRedoUndo(bmstackundo!!.size, bmstackredo!!.size)
+            onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
+
+            if (!undopoints.empty()) {
+                redopoints.push(undopoints.pop())
             }
-            if (undopoints != null && !undopoints!!.empty()) {
-                redopoints!!.push(undopoints!!.pop())
-            }
-            return !bmstackundo!!.empty()
+            return !bmstackundo.empty()
 
         } catch (e: Exception) {
         }
@@ -317,19 +308,18 @@ class ColourImageView : AppCompatImageView {
      * @return true: has element ,can redo;
      */
     fun redo(): Boolean {
-        if (bmstackredo!!.empty()) return false
+        if (bmstackredo.empty()) return false
 
         try {
-            bmstackundo!!.push(mBitmap!!.copy(mBitmap!!.config, true))
-            mBitmap = bmstackredo!!.pop()
+            bmstackundo.push(mBitmap!!.copy(mBitmap!!.config, true))
+            mBitmap = bmstackredo.pop()
             setImageDrawable(BitmapDrawable(resources, mBitmap))
-            if (onRedoUndoListener != null) {
-                onRedoUndoListener!!.onRedoUndo(bmstackundo!!.size, bmstackredo!!.size)
+            onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
+
+            if (!redopoints.empty()) {
+                undopoints.push(redopoints.pop())
             }
-            if (redopoints != null && !redopoints!!.empty()) {
-                undopoints!!.push(redopoints!!.pop())
-            }
-            return !bmstackredo!!.empty()
+            return !bmstackredo.empty()
         } catch (e: Exception) {
         }
 
@@ -342,9 +332,9 @@ class ColourImageView : AppCompatImageView {
 
     //clear stack and the current image
     fun clearStack() {
-        bmstackredo!!.clear()
-        bmstackundo!!.clear()
-        onRedoUndoListener!!.onRedoUndo(bmstackundo!!.size, bmstackredo!!.size)
+        bmstackredo.clear()
+        bmstackundo.clear()
+        onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
         mBitmap = null
     }
 
@@ -352,7 +342,7 @@ class ColourImageView : AppCompatImageView {
         this.onColorPickListener = onColorPickListener
     }
 
-    fun getmBitmap(): Bitmap? {
+    fun getBitmap(): Bitmap? {
         return mBitmap
     }
 
@@ -360,30 +350,27 @@ class ColourImageView : AppCompatImageView {
      * call only for activity destroyed
      */
     fun onRecycleBitmaps() {
-        while (bmstackundo != null && !bmstackundo!!.empty()) {
-            bmstackundo!!.pop().recycle()
-            bmstackundo!!.clear()
+        while (!bmstackundo.empty()) {
+            bmstackundo.pop().recycle()
+            bmstackundo.clear()
         }
 
-        while (bmstackredo != null && !bmstackredo!!.empty()) {
-            bmstackredo!!.pop().recycle()
-            bmstackredo!!.clear()
+        while (!bmstackredo.empty()) {
+            bmstackredo.pop().recycle()
+            bmstackredo.clear()
         }
-        if (mBitmap != null) {
-            mBitmap!!.recycle()
-        }
+
+        mBitmap?.recycle()
     }
 
     fun drawLine(x: Int, y: Int) {
-        if (undopoints != null && !undopoints!!.empty()) {
-            drawBlackLine(undopoints!!.peek().x, undopoints!!.peek().y, x, y)
-            undopoints!!.push(Point(x, y))
-            if (onDrawLineListener != null)
-                onDrawLineListener!!.OnGivenNextPointListener(x, y)
+        if (!undopoints.empty()) {
+            drawBlackLine(undopoints.peek().x, undopoints.peek().y, x, y)
+            undopoints.push(Point(x, y))
+            onDrawLineListener?.OnGivenNextPointListener(x, y)
         } else {
-            undopoints!!.push(Point(x, y))
-            if (onDrawLineListener != null)
-                onDrawLineListener!!.OnGivenFirstPointListener(x, y)
+            undopoints.push(Point(x, y))
+            onDrawLineListener?.OnGivenFirstPointListener(x, y)
         }
     }
 
@@ -409,15 +396,12 @@ class ColourImageView : AppCompatImageView {
             pushUndoStack(bm.copy(bm.config, true))
             doingDrawLine(bm, startX, startY, endX, endY)
             setImageDrawable(BitmapDrawable(resources, bm))
-            if (onRedoUndoListener != null) {
-                onRedoUndoListener!!.onRedoUndo(bmstackundo!!.size, bmstackredo!!.size)
-            }
-            if (onDrawLineListener != null)
-                onDrawLineListener!!.OnDrawFinishedListener(true, startX, startY, endX, endY)
+
+            onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
+            onDrawLineListener?.OnDrawFinishedListener(true, startX, startY, endX, endY)
         } catch (e: Exception) {
-            bmstackundo!!.pop()
-            if (onDrawLineListener != null)
-                onDrawLineListener!!.OnDrawFinishedListener(false, startX, startY, endX, endY)
+            bmstackundo.pop()
+            onDrawLineListener?.OnDrawFinishedListener(false, startX, startY, endX, endY)
         }
 
     }

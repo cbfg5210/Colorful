@@ -5,15 +5,15 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
 import com.ue.fingercoloring.R
-import kotlinx.android.synthetic.main.activity_finger_coloring.*
+import kotlinx.android.synthetic.main.activity_main_list.*
 
 /**
  * Created by Swifty.Wang on 2015/7/31.
  */
-class FingerColoringActivity : AppCompatActivity() {
+class MainListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finger_coloring)
+        setContentView(R.layout.activity_main_list)
 
         viewpager.adapter = pagerAdapter
         vgTabs.setupWithViewPager(viewpager)
