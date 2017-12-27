@@ -88,6 +88,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         myDialogFactory = MyDialogFactory(this)
 
         undo.isEnabled = false
+        redo.isEnabled = false
 
         initPens()
         initBottomColorPanel()

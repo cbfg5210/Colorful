@@ -27,7 +27,7 @@ class FingerColoringActivity : AppCompatActivity() {
                 }
 
                 override fun getPageTitle(position: Int): CharSequence {
-                    return if (position == 0) getString(R.string.themelist) else getString(R.string.userlogin)
+                    return if (position == 0) getString(R.string.themelist) else getString(R.string.my_works)
                 }
 
                 override fun getCount(): Int {

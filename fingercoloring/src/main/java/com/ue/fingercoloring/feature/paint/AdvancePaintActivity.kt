@@ -90,9 +90,9 @@ class AdvancePaintActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun addBorderDialog() {
         myDialogFactory.showAddBorderDialog(object : OnChangeBorderListener {
-            override fun changeBorder(drawableid: Int, pt: Int, pd: Int, pl: Int, pr: Int) {
-                if (drawableid != 0) {
-                    border.setBackgroundResource(drawableid)
+            override fun changeBorder(drawableId: Int, pt: Int, pd: Int, pl: Int, pr: Int) {
+                if (drawableId != 0) {
+                    border.setBackgroundResource(drawableId)
                     current_image.setPadding(pl, pt, pr, pd)
                     current_image.requestLayout()
                 }
