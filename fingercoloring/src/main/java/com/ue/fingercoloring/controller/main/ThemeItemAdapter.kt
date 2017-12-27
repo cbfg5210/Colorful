@@ -60,11 +60,10 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
                 (items[position + i++] as ThemeItem).visible = visible
 
             //notifyItemRangeChanged(position + 1, i - 1);//会有异常
-            if (visible) {
+            if (visible)
                 notifyItemRangeInserted(position + 1, i - 1)
-            } else {
+            else
                 notifyItemRangeRemoved(position + 1, i - 1)
-            }
         }
     }
 
@@ -84,19 +83,13 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
             val title = item as ThemeTitle
             val context = holder.itemView.context
 
-            val lp = holder.itemView.layoutParams
-            if (lp is FlexboxLayoutManager.LayoutParams) {
-                val flexboxLp = holder.itemView.layoutParams as FlexboxLayoutManager.LayoutParams
-                flexboxLp.flexGrow = 1.0f
-            }
-
             vHolder.ivThemeName.text = title.name
             PicassoUtils.displayImage(context, vHolder.ivThemeImage, title.imgUrl)
         }
 
         private class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val ivThemeImage=itemView.ivThemeImage!!
-            val ivThemeName=itemView.ivThemeName!!
+            val ivThemeImage = itemView.ivThemeImage!!
+            val ivThemeName = itemView.ivThemeName!!
         }
     }
 
@@ -105,7 +98,6 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
         private val margin: Int
 
         init {
-
             val screenWidth = activity.resources.displayMetrics.widthPixels
             imgSize = (screenWidth * 0.32f).toInt()
             margin = (screenWidth - imgSize * 3) / 6
@@ -130,10 +122,9 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
             }
 
             if (lp is FlexboxLayoutManager.LayoutParams) {
-                val flexboxLp = holder.itemView.layoutParams as FlexboxLayoutManager.LayoutParams
-                flexboxLp.width = imgSize
-                flexboxLp.height = imgSize
-                flexboxLp.setMargins(margin, margin, margin, margin)
+                lp.width = imgSize
+                lp.height = imgSize
+                lp.setMargins(margin, margin, margin, margin)
             }
 
             Picasso.with(holder.itemView.context)

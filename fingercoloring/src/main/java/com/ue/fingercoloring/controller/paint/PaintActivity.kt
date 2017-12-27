@@ -72,11 +72,11 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private fun loadPicture() {
         tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
         PicassoUtils.displayImage(this, fillImageview, picturePath, object : SimpleTarget() {
-            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
                 tipDialog.dismiss()
             }
 
-            override fun onBitmapFailed(errorDrawable: Drawable) {
+            override fun onBitmapFailed(errorDrawable: Drawable?) {
                 tipDialog.dismiss()
                 Toast.makeText(this@PaintActivity, getString(R.string.loadpicturefailed), Toast.LENGTH_SHORT).show()
                 finish()
@@ -338,11 +338,11 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             fillImageview.clearStack()
 
             PicassoUtils.displayImage(this, fillImageview, picturePath, object : SimpleTarget() {
-                override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
                     tipDialog.dismiss()
                 }
 
-                override fun onBitmapFailed(errorDrawable: Drawable) {
+                override fun onBitmapFailed(errorDrawable: Drawable?) {
                     tipDialog.dismiss()
                     Toast.makeText(this@PaintActivity, getString(R.string.loadpicturefailed), Toast.LENGTH_SHORT).show()
                     finish()
