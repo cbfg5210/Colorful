@@ -31,7 +31,6 @@ import com.ue.fingercoloring.view.ColourImageView
 import com.ue.fingercoloring.view.TipDialog
 import kotlinx.android.synthetic.main.activity_paint.*
 import kotlinx.android.synthetic.main.dialog_coloradvance.*
-import kotlinx.android.synthetic.main.view_colorpicker.*
 import kotlinx.android.synthetic.main.view_dialog_secondlay.*
 
 
@@ -102,8 +101,9 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         share.setOnClickListener(this)
         delete.setOnClickListener(this)
         more.setOnClickListener(this)
+        cpvTogglePalette.setOnClickListener(this)
 
-        pickcolor.setOnCheckedChangeListener(this)
+        rbPickColor.setOnCheckedChangeListener(this)
         drawline.setOnCheckedChangeListener(this)
         jianbian_color.setOnCheckedChangeListener(this)
 
@@ -155,7 +155,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             override fun onColorPick(status: Boolean, color: Int) {
                 if (status == true) {
                     changeCurrentColor(color)
-                    pickcolor.isChecked = false
+                    rbPickColor.isChecked = false
                 } else {
                     Toast.makeText(this@PaintActivity, getString(R.string.pickcolorerror), Toast.LENGTH_SHORT).show()
                 }
@@ -170,7 +170,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             return
         }
 
-        pickcolor.isChecked = false
+        rbPickColor.isChecked = false
         myDialogFactory.showBuxianButtonClickDialog()
         fillImageview.model = ColourImageView.Model.DRAW_LINE
         fillImageview.setOnDrawLineListener(object : OnDrawLineListener {
@@ -203,7 +203,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     override fun onCheckedChanged(view: CompoundButton, checked: Boolean) {
         val viewId = view.id
         when (viewId) {
-            R.id.pickcolor -> onPickColorCheckChanged(checked)
+            R.id.rbPickColor -> onPickColorCheckChanged(checked)
             R.id.drawline -> onDrawLineCheckChanged(checked)
             R.id.jianbian_color -> onJianBianColorCheckChanged(checked)
         }
@@ -217,6 +217,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.save -> onSaveClicked()
             R.id.share -> shareImage()
             R.id.more -> gotoAdvancePaintActivity()
+            R.id.cpvTogglePalette -> seekcolorpicker.visibility = if (seekcolorpicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
             R.id.delete -> myDialogFactory.showRepaintDialog(object : View.OnClickListener {
                 override fun onClick(v: View?) {
@@ -304,7 +305,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun setFillColorModel() {
-        pickcolor.isChecked = false
+        rbPickColor.isChecked = false
         drawline.isChecked = false
     }
 

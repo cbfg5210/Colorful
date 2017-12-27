@@ -1,8 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/lightgray">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightgray">
+
+    <include
+        android:id="@+id/topfirstlay"
+        layout="@layout/dialog_coloradvance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <include
+        android:id="@+id/topsecondlay"
+        layout="@layout/view_dialog_secondlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/topfirstlay"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomlay"
+        android:layout_below="@id/topsecondlay">
+
+        <com.ue.fingercoloring.view.ColourImageView
+            android:id="@+id/fillImageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitEnd"/>
+    </FrameLayout>
+
+    <com.ue.fingercoloring.view.ColorPicker
+        android:id="@+id/seekcolorpicker"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/bottomlay"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/bottomlay"
@@ -12,6 +52,38 @@
         android:background="@drawable/maincolor_border"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="2dp"
+            android:paddingTop="2dp">
+
+            <com.ue.fingercoloring.view.ColorPaletteView
+                android:id="@+id/cpvTogglePalette"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/rbPickColor"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="top|left"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/checked_pickcolor"
+                android:button="@null"
+                android:padding="2dp"/>
+
+        </LinearLayout>
+
+        <!--4种选定的颜色-->
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -71,42 +143,4 @@
             app:spanCount="2"/>
 
     </LinearLayout>
-
-    <include
-        android:id="@+id/topfirstlay"
-        layout="@layout/dialog_coloradvance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
-
-    <include
-        android:id="@+id/topsecondlay"
-        layout="@layout/view_dialog_secondlay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/topfirstlay"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomlay"
-        android:layout_below="@id/topsecondlay">
-
-        <com.ue.fingercoloring.view.ColourImageView
-            android:id="@+id/fillImageview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitEnd"/>
-    </FrameLayout>
-
-    <include
-        android:id="@+id/colorpicklay"
-        layout="@layout/view_colorpicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/topfirstlay"/>
 </RelativeLayout>
