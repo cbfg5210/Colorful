@@ -7,7 +7,7 @@ import android.view.View
 /**
  * Created by hawk on 2017/12/21.
  */
-class SquareImageView : View {
+class SquareView : View {
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)

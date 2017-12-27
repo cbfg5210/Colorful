@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="maincolor">#FF00bcd4</color>
     <color name="maindarkcolor">#FF0097a7</color>
     <color name="white">#ffffffff</color>
@@ -420,5 +419,24 @@
     <color name="navy">#ff000080</color>
     <!-- 海军色 -->
 
-
+    <color name="col_be0472">#be0472</color>
+    <color name="col_ed008c">#ed008c</color>
+    <color name="col_f94cb2">#f94cb2</color>
+    <color name="col_0154a4">#0154a4</color>
+    <color name="col_0083cb">#0083cb</color>
+    <color name="col_19c1f2">#19c1f2</color>
+    <color name="col_4cb848">#4cb848</color>
+    <color name="col_a3f345">#a3f345</color>
+    <color name="col_c4d72d">#c4d72d</color>
+    <color name="col_ff7e00">#ff7e00</color>
+    <color name="col_ffae00">#ffae00</color>
+    <color name="col_ffcc00">#ffcc00</color>
+    <color name="col_cdc527">#cdc527</color>
+    <color name="col_f8de2c">#f8de2c</color>
+    <color name="col_fdf87c">#fdf87c</color>
+    <color name="col_cc0000">#cc0000</color>
+    <color name="col_ff2a2a">#ff2a2a</color>
+    <color name="col_fc637c">#fc637c</color>
+    <color name="col_f7aec2">#fc637c</color>
+    <color name="col_fac9c4">#fac9c4</color>
 </resources>

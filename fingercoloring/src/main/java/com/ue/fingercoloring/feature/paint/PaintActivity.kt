@@ -3,6 +3,7 @@ package com.ue.fingercoloring.feature.paint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -10,8 +11,11 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.widget.*
+import android.widget.CompoundButton
+import android.widget.ImageView
+import android.widget.Toast
 import com.squareup.picasso.Picasso
+import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.Constants
 import com.ue.fingercoloring.constant.SPKeys
@@ -32,7 +36,6 @@ import kotlinx.android.synthetic.main.view_dialog_secondlay.*
 
 
 class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-
     private var isFromThemes: Boolean = false
     private var picturePath: String = ""
     private var pictureName: String = ""
@@ -91,7 +94,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         redo.isEnabled = false
 
         initPens()
-        initBottomColorPanel()
+        initPaintColors()
 
         undo.setOnClickListener(this)
         redo.setOnClickListener(this)
@@ -121,6 +124,22 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                 redo.isEnabled = redoSize != 0
             }
         })
+    }
+
+    private fun initPaintColors() {
+        val paintColorsTa = resources.obtainTypedArray(R.array.paintColors)
+        val paintColors = ArrayList<Int>(paintColorsTa.length())
+        for (i in 0 until paintColorsTa.length()) {
+            paintColors.add(paintColorsTa.getColor(i, Color.BLACK))
+        }
+        paintColorsTa.recycle()
+
+        val adapter = PaintColorAdapter(this, paintColors)
+        adapter.setColorSelectedListener(OnDelegateClickListener { _, color ->
+            seekcolorpicker.color = color
+            changeCurrentColor(color)
+        })
+        rvColors.adapter = adapter
     }
 
     private fun onPickColorCheckChanged(isChecked: Boolean) {
@@ -239,22 +258,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         current_pen2.setOnClickListener(checkCurrentColor)
         current_pen3.setOnClickListener(checkCurrentColor)
         current_pen4.setOnClickListener(checkCurrentColor)
-    }
-
-    private fun initBottomColorPanel() {
-        val colorListener = View.OnClickListener { view ->
-            val color = (view.background as ColorDrawable).color
-            seekcolorpicker.color = color
-            changeCurrentColor(color)
-        }
-
-        for (i in 0 until colortable.childCount) {
-            for (j in 0 until (colortable.getChildAt(i) as TableRow).childCount) {
-                if ((colortable.getChildAt(i) as TableRow).getChildAt(j) is Button) {
-                    (colortable.getChildAt(i) as TableRow).getChildAt(j).setOnClickListener(colorListener)
-                }
-            }
-        }
     }
 
     private fun backToColorModel() {
