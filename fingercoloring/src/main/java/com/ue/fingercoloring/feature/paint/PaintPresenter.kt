@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.controller.paint
+package com.ue.fingercoloring.feature.paint
 
 import android.graphics.Bitmap
 import android.os.Environment

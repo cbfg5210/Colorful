@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.controller.main
+package com.ue.fingercoloring.feature.main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

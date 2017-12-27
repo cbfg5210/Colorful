@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.controller.main
+package com.ue.fingercoloring.feature.main
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
@@ -10,7 +10,7 @@ import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.Item
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.controller.paint.PaintActivity
+import com.ue.fingercoloring.feature.paint.PaintActivity
 import com.ue.fingercoloring.model.ThemeItem
 import com.ue.fingercoloring.model.ThemeTitle
 import com.ue.fingercoloring.util.PicassoUtils

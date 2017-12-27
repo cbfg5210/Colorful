@@ -5,14 +5,14 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.main.FingerColoringActivity"
+            android:name=".feature.main.FingerColoringActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".controller.paint.PaintActivity"
+            android:name=".feature.paint.PaintActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity
-            android:name=".controller.paint.AdvancePaintActivity"
+            android:name=".feature.paint.AdvancePaintActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.Dialog.NoActionBar"/>
     </application>

@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.controller.main
+package com.ue.fingercoloring.feature.main
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.controller.paint.PaintActivity
+import com.ue.fingercoloring.feature.paint.PaintActivity
 import com.ue.fingercoloring.model.LocalWork
 import com.ue.fingercoloring.util.PicassoUtils
 import kotlinx.android.synthetic.main.view_localimage_item.view.*
