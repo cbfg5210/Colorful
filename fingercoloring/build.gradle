@@ -1,18 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion buildVersions.targetSdk
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion buildVersions.minSdk
+        targetSdkVersion buildVersions.targetSdk
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -21,14 +18,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compileOnly deps.kotlinJre
+    compileOnly deps.support.app_compat
+    compileOnly deps.support.design
+    compileOnly deps.support.recyclerview
+    compileOnly deps.recyclerAdapterDelegate
+    compileOnly deps.gson
+    compileOnly deps.picasso
+    compileOnly deps.flexbox
+    compileOnly deps.rxjava2
+    compileOnly deps.rxAndroid
+    compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
+    compileOnly deps.support.core
+}
+repositories {
+    mavenCentral()
 }

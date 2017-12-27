@@ -1,2 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ue.fingercoloring"/>
+          package="com.ue.fingercoloring">
+
+    <application
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".controller.main.FingerColoringActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".controller.paint.PaintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity
+            android:name=".controller.paint.AdvancePaintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.NoActionBar"/>
+    </application>
+</manifest>

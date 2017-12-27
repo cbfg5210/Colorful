@@ -12,7 +12,7 @@ import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.model.PaletteSection
-import com.ue.colorful.util.SPUtils
+import com.ue.fingercoloring.util.SPUtils
 import kotlinx.android.synthetic.main.item_palette_section.view.*
 
 /**

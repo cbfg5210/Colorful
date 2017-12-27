@@ -221,4 +221,5 @@
     <string name="ver_0d5" translatable="false">v0.5  2017/12/21</string>
 
     <string name="myEmail" translatable="false">tomhawk_ht@foxmail.com</string>
+    <string name="score">颜值</string>
 </resources>

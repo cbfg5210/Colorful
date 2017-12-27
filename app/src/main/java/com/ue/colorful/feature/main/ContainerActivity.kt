@@ -33,7 +33,7 @@ import com.ue.colorful.feature.picker.photo.PhotoPickerFragment
 import com.ue.colorful.feature.test.ColorVisionTestFragment
 import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.GsonHolder
-import com.ue.colorful.util.SPUtils
+import com.ue.fingercoloring.util.SPUtils
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.PermissionListener
 import org.greenrobot.eventbus.EventBus

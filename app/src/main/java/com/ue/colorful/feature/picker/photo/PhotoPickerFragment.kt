@@ -14,7 +14,7 @@ import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.event.ColorListener
 import com.ue.colorful.feature.main.BaseFragment
-import com.ue.colorful.util.SPUtils
+import com.ue.fingercoloring.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_photo_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 
@@ -35,7 +35,7 @@ class PhotoPickerFragment : BaseFragment(R.layout.fragment_photo_picker, R.menu.
 
         val pickerPhotoPath = SPUtils.getString(SPKeys.PICKER_PHOTO_PATH, "")
         if (TextUtils.isEmpty(pickerPhotoPath)) Toast.makeText(activity, R.string.pick_photo, Toast.LENGTH_LONG).show()
-        else loadPhoto(pickerPhotoPath)
+        else loadPhoto(pickerPhotoPath!!)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

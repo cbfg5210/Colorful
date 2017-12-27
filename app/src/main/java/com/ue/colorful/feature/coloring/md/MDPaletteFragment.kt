@@ -8,7 +8,7 @@ import com.ue.colorful.feature.coloring.md.MDPaletteColorAdapter.MDPaletteListen
 import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.model.MDColor
 import com.ue.colorful.model.PaletteSection
-import com.ue.colorful.util.SPUtils
+import com.ue.fingercoloring.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_mdpalette.*
 import kotlinx.android.synthetic.main.fragment_mdpalette.view.*
 

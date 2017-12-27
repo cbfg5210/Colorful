@@ -21,15 +21,15 @@ class SnackBarUtils {
         }
 
         fun setAction(snackBar: Snackbar, btnId: Int, onClickListener: View.OnClickListener) {
-            snackBar.view?.findViewById<View>(btnId)?.setOnClickListener(onClickListener)
+            snackBar.view.findViewById<View>(btnId)?.setOnClickListener(onClickListener)
         }
 
         fun setMessage(snackBar: Snackbar, msgTVId: Int, msg: String) {
-            snackBar.view?.findViewById<TextView>(msgTVId)?.text = msg
+            snackBar.view.findViewById<TextView>(msgTVId)?.text = msg
         }
 
         fun setColor(snackBar: Snackbar, colorViewId: Int, color: Int) {
-            snackBar.view?.findViewById<View>(colorViewId)?.setBackgroundColor(color)
+            snackBar.view.findViewById<View>(colorViewId)?.setBackgroundColor(color)
         }
     }
 }
