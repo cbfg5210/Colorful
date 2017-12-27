@@ -1,4 +1,10 @@
-apply plugin: 'com.android.library'
+println isRunAlone.toBoolean()
+if (isRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -18,19 +24,50 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            if (isRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                java.srcDirs += "src/main/debug/java/";
+            }else{
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDirs = "src/main/java/";
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    compileOnly deps.kotlinJre
-    compileOnly deps.support.app_compat
-    compileOnly deps.support.design
-    compileOnly deps.support.recyclerview
-    compileOnly deps.recyclerAdapterDelegate
-    compileOnly deps.gson
-    compileOnly deps.picasso
-    compileOnly deps.flexbox
-    compileOnly deps.rxjava2
-    compileOnly deps.rxAndroid
-    compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
-    compileOnly deps.support.core
+    if (isRunAlone.toBoolean()) {
+        implementation deps.kotlinJre
+        implementation deps.support.app_compat
+        implementation deps.support.design
+        implementation deps.support.recyclerview
+        implementation deps.recyclerAdapterDelegate
+        implementation deps.gson
+        implementation deps.picasso
+        implementation deps.flexbox
+        implementation deps.rxjava2
+        implementation deps.rxAndroid
+        implementation 'com.github.cbfg5210:PhotoView:1.0.2'
+        implementation deps.support.core
+    } else {
+        compileOnly deps.kotlinJre
+        compileOnly deps.support.app_compat
+        compileOnly deps.support.design
+        compileOnly deps.support.recyclerview
+        compileOnly deps.recyclerAdapterDelegate
+        compileOnly deps.gson
+        compileOnly deps.picasso
+        compileOnly deps.flexbox
+        compileOnly deps.rxjava2
+        compileOnly deps.rxAndroid
+        compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
+        compileOnly deps.support.core
+    }
 }

@@ -91,7 +91,9 @@ dependencies {
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
 
-    implementation project(':fingercoloring')
-    implementation deps.flexbox
     implementation 'com.github.cbfg5210:PhotoView:1.0.2'
+    if (!isRunAlone.toBoolean()) {
+        implementation project(':fingercoloring')
+        implementation deps.flexbox
+    }
 }
