@@ -82,6 +82,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private fun initViews() {
         undo.isEnabled = false
         redo.isEnabled = false
+        ivToggleActionBar.isSelected = true
 
         initBottomColors()
 
@@ -92,6 +93,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         delete.setOnClickListener(this)
         more.setOnClickListener(this)
         cpvTogglePalette.setOnClickListener(this)
+        ivToggleActionBar.setOnClickListener(this)
 
         rbPickColor.setOnCheckedChangeListener(this)
         drawline.setOnCheckedChangeListener(this)
@@ -123,13 +125,13 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         //如果直接paintColors.subList(0, 8)的话，由于Int是对象类型会造成数据影响
         pickedColorAdapter = PickedColorAdapter(this)
-        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { view, newColor -> changePickedColor(newColor) })
+        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { view, newColor -> changeCurrentColor(newColor) })
 
         rvPickedColors.setHasFixedSize(true)
         rvPickedColors.adapter = pickedColorAdapter
 
         //初始化选中的颜色,especial for picker palette
-        changePickedColor(pickedColorAdapter.getPickedColor())
+        changeCurrentColor(pickedColorAdapter.getPickedColor())
     }
 
     private fun onPickColorCheckChanged(isChecked: Boolean) {
@@ -209,6 +211,13 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.more -> gotoAdvancePaintActivity()
             R.id.cpvTogglePalette -> cpPaletteColorPicker.visibility = if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
+            R.id.ivToggleActionBar -> {
+                if (supportActionBar == null) return
+                ivToggleActionBar.isSelected = !supportActionBar!!.isShowing
+                if (ivToggleActionBar.isSelected) supportActionBar!!.show()
+                else supportActionBar!!.hide()
+            }
+
             R.id.delete -> myDialogFactory.showRepaintDialog(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     myDialogFactory.dismissDialog()
@@ -270,19 +279,11 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         })
     }
 
-    private fun changeCurrentColor(color: Int) {
-        setFillColorModel()
-        civColoring.setColor(color)
-        pickedColorAdapter.updateColor(color)
-    }
-
-    private fun setFillColorModel() {
+    private fun changeCurrentColor(newColor: Int) {
         rbPickColor.isChecked = false
         drawline.isChecked = false
-    }
+        pickedColorAdapter.updateColor(newColor)
 
-    private fun changePickedColor(newColor: Int) {
-        setFillColorModel()
         cpPaletteColorPicker.color = newColor
         civColoring.setColor(newColor)
     }

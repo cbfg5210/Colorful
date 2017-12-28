@@ -60,6 +60,12 @@
             style="@style/PaintSecondTvStyle"
             android:drawableTop="@drawable/blueframe"
             android:text="@string/addborder"/>
+
+        <ImageView
+            android:id="@+id/ivToggleActionBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_toggle_action_bar"/>
     </LinearLayout>
 
     <!--上色图片-->
