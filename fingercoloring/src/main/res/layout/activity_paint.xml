@@ -12,40 +12,80 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:visibility="gone"/>
 
-    <include
-        android:id="@+id/topsecondlay"
-        layout="@layout/view_dialog_secondlay"
+    <!--操作菜单-->
+    <LinearLayout
+        android:id="@+id/vgActionsPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/topfirstlay"/>
+        android:layout_below="@id/topfirstlay"
+        android:background="@drawable/bg2"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-    <FrameLayout
+        <TextView
+            android:id="@+id/undo"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/sel_undo"
+            android:text="@string/undo"/>
+
+        <TextView
+            android:id="@+id/redo"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/sel_redo"
+            android:text="@string/redo"/>
+
+        <RadioButton
+            android:id="@+id/drawline"
+            style="@style/PaintRadioBtnStyle"
+            android:drawableTop="@drawable/checked_drawline"
+            android:text="@string/drawLine"/>
+
+        <RadioButton
+            android:id="@+id/jianbian_color"
+            style="@style/PaintRadioBtnStyle"
+            android:drawableTop="@drawable/checked_gradual"
+            android:text="@string/normal_color"/>
+
+        <TextView
+            android:id="@+id/addwords"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/bluetext"
+            android:text="@string/addtext"/>
+
+        <TextView
+            android:id="@+id/addborder"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/blueframe"
+            android:text="@string/addborder"/>
+    </LinearLayout>
+
+    <!--上色图片-->
+    <com.ue.fingercoloring.view.ColourImageView
+        android:id="@+id/civColoring"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomlay"
-        android:layout_below="@id/topsecondlay">
+        android:layout_above="@id/vgColorsPanel"
+        android:layout_below="@id/vgActionsPanel"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitEnd"/>
 
-        <com.ue.fingercoloring.view.ColourImageView
-            android:id="@+id/fillImageview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitEnd"/>
-    </FrameLayout>
-
+    <!--取色板-->
     <com.ue.fingercoloring.view.ColorPicker
-        android:id="@+id/seekcolorpicker"
+        android:id="@+id/cpPaletteColorPicker"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_above="@+id/bottomlay"
+        android:layout_above="@+id/vgColorsPanel"
         android:visibility="gone"
         tools:visibility="visible"/>
 
+    <!--底部颜色列表-->
     <LinearLayout
-        android:id="@+id/bottomlay"
+        android:id="@+id/vgColorsPanel"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"

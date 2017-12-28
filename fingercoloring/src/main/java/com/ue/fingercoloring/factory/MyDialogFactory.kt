@@ -50,7 +50,7 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
                 R.id.huge -> editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, DragTextViewFactory.getInstance().HugeSize.toFloat())
             }
         }
-        val colorPicker = layout.findViewById<View>(R.id.seekcolorpicker) as ColorPickerSeekBar
+        val colorPicker = layout.findViewById<View>(R.id.cpPaletteColorPicker) as ColorPickerSeekBar
         colorPicker.setOnColorSeekbarChangeListener(object : ColorPickerSeekBar.OnColorSeekBarChangeListener {
             override fun onColorChanged(seekBar: SeekBar, color: Int, b: Boolean) {
                 editText.setTextColor(color)

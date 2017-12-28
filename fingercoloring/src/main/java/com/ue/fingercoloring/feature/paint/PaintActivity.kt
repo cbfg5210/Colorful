@@ -25,7 +25,6 @@ import com.ue.fingercoloring.view.ColourImageView
 import com.ue.fingercoloring.view.TipDialog
 import kotlinx.android.synthetic.main.activity_paint.*
 import kotlinx.android.synthetic.main.dialog_coloradvance.*
-import kotlinx.android.synthetic.main.view_dialog_secondlay.*
 
 
 class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -58,12 +57,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     override fun onDestroy() {
         super.onDestroy()
-        fillImageview.onRecycleBitmaps()
+        civColoring.onRecycleBitmaps()
     }
 
     private fun loadPicture() {
         tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
-        PicassoUtils.displayImage(this, fillImageview, picturePath, object : SimpleTarget() {
+        PicassoUtils.displayImage(this, civColoring, picturePath, object : SimpleTarget() {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
                 tipDialog.dismiss()
             }
@@ -94,13 +93,13 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         drawline.setOnCheckedChangeListener(this)
         jianbian_color.setOnCheckedChangeListener(this)
 
-        seekcolorpicker.setOnChangedListener(object : ColorPicker.OnColorChangedListener {
+        cpPaletteColorPicker.setOnChangedListener(object : ColorPicker.OnColorChangedListener {
             override fun colorChangedListener(color: Int) {
                 changeCurrentColor(color)
             }
         })
 
-        fillImageview.setOnRedoUndoListener(object : ColourImageView.OnRedoUndoListener {
+        civColoring.setOnRedoUndoListener(object : ColourImageView.OnRedoUndoListener {
             override fun onRedoUndo(undoSize: Int, redoSize: Int) {
                 undo.isEnabled = undoSize != 0
                 redo.isEnabled = redoSize != 0
@@ -112,7 +111,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         //paintColors
         val adapter = ColorOptionAdapter(this)
         adapter.setColorSelectedListener(OnDelegateClickListener { _, color ->
-            seekcolorpicker.color = color
+            cpPaletteColorPicker.color = color
             changeCurrentColor(color)
         })
         rvColors.setHasFixedSize(true)
@@ -137,8 +136,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         drawline.isChecked = false
         myDialogFactory.showPickColorHintDialog()
-        fillImageview.model = ColourImageView.Model.PICKCOLOR
-        fillImageview.setOnColorPickListener(object : ColourImageView.OnColorPickListener {
+        civColoring.model = ColourImageView.Model.PICKCOLOR
+        civColoring.setOnColorPickListener(object : ColourImageView.OnColorPickListener {
             override fun onColorPick(status: Boolean, color: Int) {
                 if (status == true) {
                     changeCurrentColor(color)
@@ -152,15 +151,15 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun onDrawLineCheckChanged(checked: Boolean) {
         if (!checked) {
-            fillImageview.clearPoints()
+            civColoring.clearPoints()
             backToColorModel()
             return
         }
 
         rbPickColor.isChecked = false
         myDialogFactory.showBuxianButtonClickDialog()
-        fillImageview.model = ColourImageView.Model.DRAW_LINE
-        fillImageview.setOnDrawLineListener(object : OnDrawLineListener {
+        civColoring.model = ColourImageView.Model.DRAW_LINE
+        civColoring.setOnDrawLineListener(object : OnDrawLineListener {
             override fun OnDrawFinishedListener(drawed: Boolean, startX: Int, startY: Int, endX: Int, endY: Int) {
                 if (drawed)
                     myDialogFactory.showBuxianNextPointSetDialog()
@@ -179,10 +178,10 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private fun onJianBianColorCheckChanged(checked: Boolean) {
         if (checked) {
             myDialogFactory.showGradualHintDialog()
-            fillImageview.model = ColourImageView.Model.FILLGRADUALCOLOR
+            civColoring.model = ColourImageView.Model.FILLGRADUALCOLOR
             jianbian_color.setText(R.string.jianbian_color)
         } else {
-            fillImageview.model = ColourImageView.Model.FILLCOLOR
+            civColoring.model = ColourImageView.Model.FILLCOLOR
             jianbian_color.setText(R.string.normal_color)
         }
     }
@@ -199,12 +198,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     override fun onClick(view: View) {
         val viewId = view.id
         when (viewId) {
-            R.id.undo -> fillImageview.undo()
-            R.id.redo -> fillImageview.redo()
+            R.id.undo -> civColoring.undo()
+            R.id.redo -> civColoring.redo()
             R.id.save -> onSaveClicked()
             R.id.share -> shareImage()
             R.id.more -> gotoAdvancePaintActivity()
-            R.id.cpvTogglePalette -> seekcolorpicker.visibility = if (seekcolorpicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            R.id.cpvTogglePalette -> cpPaletteColorPicker.visibility = if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
             R.id.delete -> myDialogFactory.showRepaintDialog(object : View.OnClickListener {
                 override fun onClick(v: View?) {
@@ -231,7 +230,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun backToColorModel() {
-        fillImageview.model = ColourImageView.Model.FILLCOLOR
+        civColoring.model = ColourImageView.Model.FILLCOLOR
         jianbian_color.isChecked = false
     }
 
@@ -248,7 +247,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun saveImageLocally(listener: PaintPresenter.OnSaveImageListener) {
         val picName = if (isFromThemes) pictureName.replace(".png", "_") + System.currentTimeMillis() + ".png" else pictureName
-        presenter.saveImageLocally(fillImageview.getBitmap()!!, picName, listener)
+        presenter.saveImageLocally(civColoring.getBitmap()!!, picName, listener)
     }
 
     private fun shareImage() {
@@ -269,7 +268,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun changeCurrentColor(color: Int) {
         setFillColorModel()
-        fillImageview.setColor(color)
+        civColoring.setColor(color)
         pickedColorAdapter.updateColor(color)
     }
 
@@ -280,8 +279,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun changePickedColor(newColor: Int) {
         setFillColorModel()
-        seekcolorpicker.color = newColor
-        fillImageview.setColor(newColor)
+        cpPaletteColorPicker.color = newColor
+        civColoring.setColor(newColor)
     }
 
     private fun saveToLocalAndExit() {
@@ -309,9 +308,9 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             }
         } else {
             tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
-            fillImageview.clearStack()
+            civColoring.clearStack()
 
-            PicassoUtils.displayImage(this, fillImageview, picturePath, object : SimpleTarget() {
+            PicassoUtils.displayImage(this, civColoring, picturePath, object : SimpleTarget() {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
                     tipDialog.dismiss()
                 }
@@ -331,7 +330,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     override fun onBackPressed() {
-        if (!fillImageview.isUndoable()) {
+        if (!civColoring.isUndoable()) {
             super.onBackPressed()
             return;
         }
