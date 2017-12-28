@@ -131,4 +131,5 @@
     <string name="loginFailed">登录失败</string>
     <string name="normal_color">正常色</string>
     <string name="gradualModel">渐变功能</string>
+    <string name="help">帮助</string>
 </resources>

@@ -11,9 +11,15 @@
         android:icon="@drawable/ic_save"
         android:title="@string/save"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/menuShare"
         android:icon="@drawable/whiteshare"
         android:title="@string/share"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menuHelp"
+        android:icon="@drawable/whiteshare"
+        android:title="@string/help"
+        app:showAsAction="never"/>
 </menu>
