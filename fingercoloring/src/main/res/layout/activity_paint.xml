@@ -49,15 +49,15 @@
         <TextView
             android:id="@+id/tvAfterEffect"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/bluetext"
+            android:drawableTop="@drawable/svg_effect"
             android:text="@string/after_effect"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ivToggleActionBar"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
             app:srcCompat="@drawable/bg_toggle_action_bar"/>

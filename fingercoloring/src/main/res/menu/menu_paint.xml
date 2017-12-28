@@ -3,23 +3,23 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuDelete"
-        android:icon="@drawable/whitedelete"
+        android:icon="@drawable/svg_delete"
         android:title="@string/delete"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menuSave"
-        android:icon="@drawable/ic_save"
+        android:icon="@drawable/svg_save"
         android:title="@string/save"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menuShare"
-        android:icon="@drawable/whiteshare"
+        android:icon="@drawable/svg_share"
         android:title="@string/share"
         app:showAsAction="collapseActionView"/>
     <item
         android:id="@+id/menuHelp"
-        android:icon="@drawable/whiteshare"
+        android:icon="@drawable/svg_help"
         android:title="@string/help"
         app:showAsAction="collapseActionView"/>
 </menu>
