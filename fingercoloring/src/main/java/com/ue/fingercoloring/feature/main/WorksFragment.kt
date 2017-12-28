@@ -2,6 +2,7 @@ package com.ue.fingercoloring.feature.main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,9 +22,11 @@ import kotlinx.android.synthetic.main.view_emptylist.view.*
  * Created by Swifty.Wang on 2015/8/18.
  */
 class WorksFragment : Fragment() {
-    private var adapter: LocalPaintAdapter? = null
+    private lateinit var adapter: LocalPaintAdapter
     private var localWorks: List<LocalWork>? = null
     private var disposable: Disposable? = null
+    private var newWorkPath = ""
+    private var pickedWorkPos = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_works, container, false)
@@ -35,7 +38,7 @@ class WorksFragment : Fragment() {
         return rootView
     }
 
-    private fun loadLocalPaints() {
+    private fun loadLocalWorks() {
         disposable = Observable
                 .create(ObservableOnSubscribe<List<LocalWork>> { e ->
                     val results = FileUtils.obtainLocalImages()
@@ -45,9 +48,9 @@ class WorksFragment : Fragment() {
                 .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ mLocalWorks ->
-                    adapter!!.items.clear()
-                    adapter!!.items.addAll(mLocalWorks)
-                    adapter!!.notifyDataSetChanged()
+                    adapter.items.clear()
+                    adapter.items.addAll(mLocalWorks)
+                    adapter.notifyDataSetChanged()
 
                     localWorks = mLocalWorks
                 })
@@ -60,8 +63,18 @@ class WorksFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
         if (localWorks == null) {
-            loadLocalPaints()
+            loadLocalWorks()
+            return
+        }
+        if (!TextUtils.isEmpty(newWorkPath)) {
+            //添加了新作品
+            return
+        }
+        if (pickedWorkPos >= 0) {
+            //从作品列表进入了编辑页，更新该项
+            return
         }
     }
 

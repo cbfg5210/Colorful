@@ -58,6 +58,8 @@ dependencies {
         implementation deps.rxAndroid
         implementation 'com.github.cbfg5210:PhotoView:1.0.2'
         implementation deps.support.core
+        implementation deps.andPermission
+        implementation deps.eventbus
     } else {
         compileOnly deps.kotlinJre
         compileOnly deps.support.app_compat
@@ -71,5 +73,7 @@ dependencies {
         compileOnly deps.rxAndroid
         compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
         compileOnly deps.support.core
+        compileOnly deps.andPermission
+        compileOnly deps.eventbus
     }
 }
