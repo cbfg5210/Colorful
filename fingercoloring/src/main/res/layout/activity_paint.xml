@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg2"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:paddingBottom="10dp"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/undo"
@@ -28,10 +29,22 @@
             android:text="@string/redo"/>
 
         <RadioButton
+            android:id="@+id/rbPickColor"
+            style="@style/PaintRadioBtnStyle"
+            android:drawableTop="@drawable/checked_pickcolor"
+            android:text="@string/pickcolor"/>
+
+        <RadioButton
             android:id="@+id/jianbian_color"
             style="@style/PaintRadioBtnStyle"
             android:drawableTop="@drawable/checked_gradual"
             android:text="@string/normal_color"/>
+
+        <TextView
+            android:id="@+id/tvTogglePalette"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/svg_palette"
+            android:text="@string/palette"/>
 
         <TextView
             android:id="@+id/tvAfterEffect"
@@ -39,24 +52,26 @@
             android:drawableTop="@drawable/bluetext"
             android:text="@string/after_effect"/>
 
-        <!--<TextView
-            android:id="@+id/addwords"
-            style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/bluetext"
-            android:text="@string/addtext"/>
-
-        <TextView
-            android:id="@+id/addborder"
-            style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/blueframe"
-            android:text="@string/addborder"/>-->
-
-        <ImageView
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/ivToggleActionBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_toggle_action_bar"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            app:backgroundTint="@color/white"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/bg_toggle_action_bar"/>
     </LinearLayout>
+
+    <!--取色板-->
+    <com.ue.fingercoloring.view.ColorPicker
+        android:id="@+id/cpPaletteColorPicker"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/vgActionsPanel"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <!--上色图片-->
     <com.ue.fingercoloring.view.ColourImageView
@@ -70,15 +85,6 @@
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"/>
 
-    <!--取色板-->
-    <com.ue.fingercoloring.view.ColorPicker
-        android:id="@+id/cpPaletteColorPicker"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_above="@+id/vgColorsPanel"
-        android:visibility="gone"
-        tools:visibility="visible"/>
-
     <!--底部颜色列表-->
     <LinearLayout
         android:id="@+id/vgColorsPanel"
@@ -87,38 +93,6 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/maincolor_border"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="2dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="4dp"
-            android:paddingTop="2dp">
-
-            <com.ue.fingercoloring.view.ColorPaletteView
-                android:id="@+id/cpvTogglePalette"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="right|bottom"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1"/>
-
-            <RadioButton
-                android:id="@+id/rbPickColor"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|left"
-                android:layout_marginTop="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/checked_pickcolor"
-                android:button="@null"
-                android:padding="2dp"/>
-
-        </LinearLayout>
-
         <!--8种选定的颜色-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPickedColors"
@@ -142,6 +116,5 @@
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:reverseLayout="false"
             app:spanCount="2"/>
-
     </LinearLayout>
 </RelativeLayout>

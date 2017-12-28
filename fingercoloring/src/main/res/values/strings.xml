@@ -132,5 +132,6 @@
     <string name="normal_color">正常色</string>
     <string name="gradualModel">渐变功能</string>
     <string name="help">帮助</string>
-    <string name="after_effect">后期效果</string>
+    <string name="after_effect">特效</string>
+    <string name="palette">色板</string>
 </resources>

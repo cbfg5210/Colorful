@@ -85,7 +85,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         undo.setOnClickListener(this)
         redo.setOnClickListener(this)
-        cpvTogglePalette.setOnClickListener(this)
+        tvTogglePalette.setOnClickListener(this)
         ivToggleActionBar.setOnClickListener(this)
         tvAfterEffect.setOnClickListener(this)
 
@@ -173,7 +173,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.redo -> civColoring.redo()
             R.id.tvAfterEffect -> saveToLocal(FLAG_EFFECT)
 
-            R.id.cpvTogglePalette ->
+            R.id.tvTogglePalette ->
                 cpPaletteColorPicker.visibility =
                         if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE
                         else View.VISIBLE
