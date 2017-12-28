@@ -48,8 +48,6 @@ class AdvancePaintActivity : AppCompatActivity(), View.OnClickListener {
 
         addwords.setOnClickListener(this)
         addborder.setOnClickListener(this)
-        share.setOnClickListener(this)
-        repaint.setOnClickListener(this)
         cancel.setOnClickListener(this)
     }
 
@@ -106,9 +104,7 @@ class AdvancePaintActivity : AppCompatActivity(), View.OnClickListener {
         when (viewId) {
             R.id.addwords -> addWordsDialog()
             R.id.addborder -> addBorderDialog()
-            R.id.repaint -> repaintPictureDialog()
             R.id.cancel -> finish()
-            R.id.share -> shareDrawable()
         }
     }
 

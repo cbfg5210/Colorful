@@ -40,6 +40,12 @@
             android:text="@string/normal_color"/>
 
         <TextView
+            android:id="@+id/tvAfterEffect"
+            style="@style/PaintSecondTvStyle"
+            android:drawableTop="@drawable/bluetext"
+            android:text="@string/after_effect"/>
+
+        <!--<TextView
             android:id="@+id/addwords"
             style="@style/PaintSecondTvStyle"
             android:drawableTop="@drawable/bluetext"
@@ -49,7 +55,7 @@
             android:id="@+id/addborder"
             style="@style/PaintSecondTvStyle"
             android:drawableTop="@drawable/blueframe"
-            android:text="@string/addborder"/>
+            android:text="@string/addborder"/>-->
 
         <ImageView
             android:id="@+id/ivToggleActionBar"

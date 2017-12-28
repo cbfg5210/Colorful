@@ -15,7 +15,6 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.constant.Constants
 import com.ue.fingercoloring.factory.MyDialogFactory
 import com.ue.fingercoloring.listener.OnDrawLineListener
 import com.ue.fingercoloring.listener.SimpleTarget
@@ -89,6 +88,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         redo.setOnClickListener(this)
         cpvTogglePalette.setOnClickListener(this)
         ivToggleActionBar.setOnClickListener(this)
+        tvAfterEffect.setOnClickListener(this)
 
         rbPickColor.setOnCheckedChangeListener(this)
         drawline.setOnCheckedChangeListener(this)
@@ -201,7 +201,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         when (viewId) {
             R.id.undo -> civColoring.undo()
             R.id.redo -> civColoring.redo()
-            R.id.cpvTogglePalette -> cpPaletteColorPicker.visibility = if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            R.id.tvAfterEffect -> saveToLocal(FLAG_EFFECT)
+
+            R.id.cpvTogglePalette ->
+                cpPaletteColorPicker.visibility =
+                        if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE
+                        else View.VISIBLE
 
             R.id.ivToggleActionBar -> {
                 if (supportActionBar == null) return
@@ -242,8 +247,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                             return
                         }
                         Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
-                        if (saveFlag == FLAG_EXIT) finish()
-                        else if (saveFlag == FLAG_SHARE) ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
+                        if (saveFlag == FLAG_EXIT)
+                            finish()
+                        else if (saveFlag == FLAG_SHARE)
+                            ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
+                        else if (saveFlag == FLAG_EFFECT)
+                            AdvancePaintActivity.startForResult(this@PaintActivity, path)
                     }
                 })
     }
@@ -308,12 +317,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                 })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.REQ_ADVANCED_PAINT && resultCode == Constants.REPAINT_RESULT) {
-            repaint()
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == Constants.REQ_ADVANCED_PAINT && resultCode == Constants.REPAINT_RESULT) {
+//            repaint()
+//        }
+//    }
 
     companion object {
         private val ARG_IS_FROM_THEMES = "arg_is_from_themes"
@@ -322,6 +331,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         private val FLAG_SAVE = 0
         private val FLAG_EXIT = 1
         private val FLAG_SHARE = 2
+        private val FLAG_EFFECT = 3
 
         fun start(context: Context, isFromThemes: Boolean, pictureName: String, picturePath: String) {
             val intent = Intent(context, PaintActivity::class.java)
