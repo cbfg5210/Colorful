@@ -19,4 +19,5 @@ object SPKeys {
     val GradualModel = "gradual_model"
     val STACK_MAX_SIZE = "stack_max_size"
     val PICKED_COLORS: String="picked_colors"
+    val SHOW_EFFECT_HINT: String="show_effect_hint"
 }

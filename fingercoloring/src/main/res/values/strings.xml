@@ -135,4 +135,7 @@
     <string name="after_effect">特效</string>
     <string name="palette">色板</string>
     <string name="delete_completed">已删除保存的作品</string>
+    <string name="effect_hint">添加特效后会清除原来的操作记录，建议在完成作品后再添加特效内容</string>
+    <string name="go_on">继续</string>
+    <string name="cancel_not_alert">取消并不再提醒</string>
 </resources>

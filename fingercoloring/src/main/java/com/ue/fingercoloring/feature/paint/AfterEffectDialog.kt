@@ -1,10 +1,8 @@
 package com.ue.fingercoloring.feature.paint
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +28,7 @@ class AfterEffectDialog : DialogFragment() {
     private lateinit var tipDialog: TipDialog
 
     private var effectListener: PaintPresenter.OnSaveImageListener? = null
+    private var hasEffectAdded = false
 
     fun setEffectListener(listener: PaintPresenter.OnSaveImageListener) {
         effectListener = listener
@@ -42,7 +41,6 @@ class AfterEffectDialog : DialogFragment() {
             val dialog = AfterEffectDialog()
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, 0)
             dialog.isCancelable = false
-
 
             val arguments = Bundle()
             arguments.putString(ARG_PICTURE_PATH, picturePath)
@@ -81,11 +79,13 @@ class AfterEffectDialog : DialogFragment() {
                 R.id.tvAeCancel -> dismiss()
 
                 R.id.tvAeOk -> {
+                    if (!hasEffectAdded) {
+                        dismiss()
+                        return@OnClickListener
+                    }
                     rootView.paintview.isDrawingCacheEnabled = true
                     rootView.paintview.destroyDrawingCache()
                     rootView.paintview.buildDrawingCache()
-
-                    Log.e("AfterEffectDialog", "onCreateView: cache=${rootView.paintview.drawingCache}")
 
                     tipDialog.showTip(childFragmentManager, getString(R.string.savingimage))
                     presenter.saveImageLocally(
@@ -103,6 +103,7 @@ class AfterEffectDialog : DialogFragment() {
                     myDialogFactory.showAddWordsDialog(object : OnAddWordsSuccessListener {
                         override fun addWordsSuccess(dragedTextView: DragedTextView) {
                             (rootView.current_image.parent as ViewGroup).addView(dragedTextView)
+                            hasEffectAdded = true
                         }
                     })
 
@@ -113,6 +114,7 @@ class AfterEffectDialog : DialogFragment() {
                                 rootView.border.setBackgroundResource(drawableId)
                                 rootView.current_image.setPadding(pl, pt, pr, pd)
                                 rootView.current_image.requestLayout()
+                                hasEffectAdded = true
                             }
                             rootView.paintview.requestLayout()
                         }
@@ -133,9 +135,5 @@ class AfterEffectDialog : DialogFragment() {
         var name = path.substring(startIndex)
         name = name.replace(".png", "_bd.png")
         return name
-    }
-
-    interface OnCompleteEffectListener {
-        fun onEffectCompleted(effectBitmap: Bitmap)
     }
 }

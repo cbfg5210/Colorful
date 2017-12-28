@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,6 +32,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private var picturePath: String = ""
     private var pictureName: String = ""
     private var savedPicturePath: String = ""
+    private var savedBorderPicturePath: String = ""
 
     private lateinit var myDialogFactory: MyDialogFactory
     private lateinit var presenter: PaintPresenter
@@ -46,6 +48,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         isFromThemes = intent.getBooleanExtra(ARG_IS_FROM_THEMES, true)
         pictureName = intent.getStringExtra(ARG_PICTURE_NAME)
         picturePath = intent.getStringExtra(ARG_PICTURE_PATH)
+
+        Log.e("PaintActivity", "onCreate: pictureName=$pictureName,picturePath=$picturePath")
 
         presenter = PaintPresenter(this)
         tipDialog = TipDialog.newInstance()
@@ -138,7 +142,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         civColoring.model = ColourImageView.Model.PICKCOLOR
         civColoring.setOnColorPickListener(object : ColourImageView.OnColorPickListener {
             override fun onColorPick(status: Boolean, color: Int) {
-                if (status == true) {
+                if (status) {
                     changeCurrentColor(color)
                     rbPickColor.isChecked = false
                 } else {
@@ -172,7 +176,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         when (viewId) {
             R.id.undo -> civColoring.undo()
             R.id.redo -> civColoring.redo()
-            R.id.tvAfterEffect -> saveToLocal(FLAG_EFFECT)
+            R.id.tvAfterEffect -> myDialogFactory.showEffectHintDialog(View.OnClickListener { saveToLocal(FLAG_EFFECT) })
 
             R.id.tvTogglePalette ->
                 cpPaletteColorPicker.visibility =
@@ -244,7 +248,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         val dialog = AfterEffectDialog.newInstance(path)
         dialog.setEffectListener(object : PaintPresenter.OnSaveImageListener {
             override fun onSaved(path: String) {
-                repaint(false, "file://$path")
+                savedBorderPicturePath = "file://$path"
+                repaint(false, savedBorderPicturePath)
             }
         })
         dialog.show(supportFragmentManager, "")

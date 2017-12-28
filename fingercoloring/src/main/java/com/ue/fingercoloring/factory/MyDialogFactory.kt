@@ -1,6 +1,7 @@
 package com.ue.fingercoloring.factory
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.ue.fingercoloring.util.DensityUtil
 import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.view.ColorPickerSeekBar
 import com.ue.fingercoloring.view.MyDialogStyle
+import kotlinx.android.synthetic.main.layout_check_box.view.*
 
 /**
  * Created by Swifty.Wang on 2015/6/12.
@@ -29,13 +31,13 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
     fun showPaintFirstOpenDialog() {
         val buffer = StringBuffer()
         buffer.append(context.getString(R.string.paintHint))
-        showOnceTimesContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint)
+        showOnceContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint)
     }
 
     fun showPaintFirstOpenSaveDialog() {
         val buffer = StringBuffer()
         buffer.append(context.getString(R.string.paintHint2))
-        showOnceTimesContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint2)
+        showOnceContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint2)
     }
 
     fun showAddWordsDialog(onAddWordsSuccessListener: OnAddWordsSuccessListener) {
@@ -112,35 +114,47 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
     }
 
     fun showBuxianButtonClickDialog() {
-        showOnceTimesContentDialog(context.getString(R.string.buxianfunction), context.getString(R.string.buxianfunctionhint), SPKeys.BuXianButtonClickDialogEnable)
+        showOnceContentDialog(context.getString(R.string.buxianfunction), context.getString(R.string.buxianfunctionhint), SPKeys.BuXianButtonClickDialogEnable)
     }
 
-    fun showBuxianFirstPointSetDialog() {
-        showOnceTimesContentDialog(context.getString(R.string.buxianfunction), context.getString(R.string.buxianfirstpointsethint), SPKeys.BuXianFirstPointDialogEnable)
-    }
+    fun showEffectHintDialog(listener: View.OnClickListener?) {
+        val showEffectHint = SPUtils.getBoolean(SPKeys.SHOW_EFFECT_HINT, true)
+        if (!showEffectHint) {
+            listener?.onClick(null)
+            return
+        }
 
-    fun showBuxianNextPointSetDialog() {
-        showOnceTimesContentDialog(context.getString(R.string.buxianfunction), context.getString(R.string.buxiannextpointsethint), SPKeys.BuXianNextPointDialogEnable)
+        val checkBoxLayout = LayoutInflater.from(context).inflate(R.layout.layout_check_box, null)
+
+        AlertDialog.Builder(context)
+                .setTitle(R.string.after_effect)
+                .setMessage(R.string.effect_hint)
+                .setPositiveButton(R.string.go_on) { _, which ->
+                    if (checkBoxLayout.cbCheck.isChecked) SPUtils.putBoolean(SPKeys.SHOW_EFFECT_HINT, false)
+                    listener?.onClick(null)
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .setView(checkBoxLayout)
+                .create()
+                .show()
     }
 
     fun showPickColorHintDialog() {
-        showOnceTimesContentDialog(context.getString(R.string.pickcolor), context.getString(R.string.pickcolorhint), SPKeys.PickColorDialogEnable)
+        showOnceContentDialog(context.getString(R.string.pickcolor), context.getString(R.string.pickcolorhint), SPKeys.PickColorDialogEnable)
     }
 
-    private fun showOnceTimesContentDialog(title: String, contentstr: CharSequence, whichDialog: String) {
-        if (SPUtils.getBoolean(whichDialog, true)) {
-            val layout = LayoutInflater.from(context).inflate(R.layout.view_dialog_with_checkbox, null)
-            val content = layout.findViewById<View>(R.id.content) as TextView
-            val checkBox = layout.findViewById<View>(R.id.checkbox_dontshow) as CheckBox
-            content.text = contentstr
-            val listener = View.OnClickListener {
-                if (checkBox.isChecked) {
-                    SPUtils.putBoolean(whichDialog, false)
-                }
-                dismissDialog()
-            }
-            showBlankDialog(title, layout, listener)
-        }
+    private fun showOnceContentDialog(title: String, contentStr: CharSequence, whichDialog: String) {
+        if (!SPUtils.getBoolean(whichDialog, true)) return
+
+        val layout = LayoutInflater.from(context).inflate(R.layout.view_dialog_with_checkbox, null)
+        val content = layout.findViewById<View>(R.id.content) as TextView
+        val checkBox = layout.findViewById<View>(R.id.checkbox_dontshow) as CheckBox
+        content.text = contentStr
+
+        showBlankDialog(title, layout, View.OnClickListener {
+            if (checkBox.isChecked) SPUtils.putBoolean(whichDialog, false)
+            dismissDialog()
+        })
     }
 
     fun showPaintHintDialog() {
@@ -151,6 +165,6 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
     }
 
     fun showGradualHintDialog() {
-        showOnceTimesContentDialog(context.getString(R.string.gradualModel), context.getString(R.string.gradualModelHint), SPKeys.GradualModel)
+        showOnceContentDialog(context.getString(R.string.gradualModel), context.getString(R.string.gradualModelHint), SPKeys.GradualModel)
     }
 }
