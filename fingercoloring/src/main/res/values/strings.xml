@@ -66,7 +66,7 @@
     <string name="network_notconnet">请先连接网络</string>
     <string name="comment">评论</string>
     <string name="logout">登出</string>
-    <string name="addtext">添加文字</string>
+    <string name="addtext">文字</string>
     <string name="addvoice">添加声音</string>
     <string name="delete">删除</string>
     <string name="repaint">删除作品</string>
@@ -90,7 +90,7 @@
     <string name="onlyupdateinwifi">没有wifi连接， 只在wifi下更新</string>
     <string name="timeout">连接超时，请重试</string>
     <string name="checkupdateing">检测更新中</string>
-    <string name="addborder">添加相框</string>
+    <string name="addborder">相框</string>
     <string name="pleaselogin">即将推出，敬请期待</string>
     <string name="comingsoon">即将推出，敬请期待</string>
     <string name="localPaint">本机作品</string>

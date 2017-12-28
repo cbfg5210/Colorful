@@ -22,7 +22,7 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
     //just for add border
     internal var drawableid: Int = 0
 
-    fun FinishSaveImageDialog(savelistener: View.OnClickListener, quitlistener: View.OnClickListener) {
+    fun showExitPaintDialog(savelistener: View.OnClickListener, quitlistener: View.OnClickListener) {
         showTwoButtonDialog(context.getString(R.string.quitorsave), context.getString(R.string.save), context.getString(R.string.quit), savelistener, quitlistener, true)
     }
 

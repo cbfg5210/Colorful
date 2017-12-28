@@ -26,7 +26,6 @@ import com.ue.fingercoloring.view.ColorPicker
 import com.ue.fingercoloring.view.ColourImageView
 import com.ue.fingercoloring.view.TipDialog
 import kotlinx.android.synthetic.main.activity_paint.*
-import kotlinx.android.synthetic.main.dialog_coloradvance.*
 
 
 class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -88,10 +87,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         undo.setOnClickListener(this)
         redo.setOnClickListener(this)
-        save.setOnClickListener(this)
-        share.setOnClickListener(this)
-        delete.setOnClickListener(this)
-        more.setOnClickListener(this)
         cpvTogglePalette.setOnClickListener(this)
         ivToggleActionBar.setOnClickListener(this)
 
@@ -206,9 +201,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         when (viewId) {
             R.id.undo -> civColoring.undo()
             R.id.redo -> civColoring.redo()
-            R.id.save -> onSaveClicked()
-            R.id.share -> shareImage()
-            R.id.more -> gotoAdvancePaintActivity()
             R.id.cpvTogglePalette -> cpPaletteColorPicker.visibility = if (cpPaletteColorPicker.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
             R.id.ivToggleActionBar -> {
@@ -217,66 +209,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                 if (ivToggleActionBar.isSelected) supportActionBar!!.show()
                 else supportActionBar!!.hide()
             }
-
-            R.id.delete -> myDialogFactory.showRepaintDialog(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    myDialogFactory.dismissDialog()
-                    repaint()
-                }
-            })
         }
-    }
-
-    private fun onSaveClicked() {
-        tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
-
-        saveImageLocally(object : PaintPresenter.OnSaveImageListener {
-            override fun onSaved(path: String) {
-                tipDialog.dismiss()
-                if (TextUtils.isEmpty(path)) {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
     }
 
     private fun backToColorModel() {
         civColoring.model = ColourImageView.Model.FILLCOLOR
         jianbian_color.isChecked = false
-    }
-
-    private fun gotoAdvancePaintActivity() {
-        tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
-
-        saveImageLocally(object : PaintPresenter.OnSaveImageListener {
-            override fun onSaved(path: String) {
-                tipDialog.dismiss()
-                AdvancePaintActivity.startForResult(this@PaintActivity, path)
-            }
-        })
-    }
-
-    private fun saveImageLocally(listener: PaintPresenter.OnSaveImageListener) {
-        val picName = if (isFromThemes) pictureName.replace(".png", "_") + System.currentTimeMillis() + ".png" else pictureName
-        presenter.saveImageLocally(civColoring.getBitmap()!!, picName, listener)
-    }
-
-    private fun shareImage() {
-        tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
-
-        saveImageLocally(object : PaintPresenter.OnSaveImageListener {
-            override fun onSaved(path: String) {
-                tipDialog.dismiss()
-                if (TextUtils.isEmpty(path)) {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
-                    ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
-                }
-            }
-        })
     }
 
     private fun changeCurrentColor(newColor: Int) {
@@ -288,45 +226,48 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         civColoring.setColor(newColor)
     }
 
-    private fun saveToLocalAndExit() {
+    private fun saveToLocal(saveFlag: Int) {
         tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
 
-        saveImageLocally(object : PaintPresenter.OnSaveImageListener {
-            override fun onSaved(path: String) {
-                tipDialog.dismiss()
-                if (TextUtils.isEmpty(path)) {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            }
-        })
+        val picName =
+                if (isFromThemes) pictureName.replace(".png", "_") + System.currentTimeMillis() + ".png"
+                else pictureName
+
+        presenter.saveImageLocally(civColoring.getBitmap()!!, picName,
+                object : PaintPresenter.OnSaveImageListener {
+                    override fun onSaved(path: String) {
+                        tipDialog.dismiss()
+                        if (TextUtils.isEmpty(path)) {
+                            Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
+                            return
+                        }
+                        Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
+                        if (saveFlag == FLAG_EXIT) finish()
+                        else if (saveFlag == FLAG_SHARE) ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
+                    }
+                })
     }
 
     private fun repaint() {
         if (isFromThemes) {
-            if (FileUtils.deleteFile(picturePath)) {
-                finish()
-            } else {
-                Toast.makeText(this, getString(R.string.deletePaintFailed), Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
-            civColoring.clearStack()
-
-            PicassoUtils.displayImage(this, civColoring, picturePath, object : SimpleTarget() {
-                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
-                    tipDialog.dismiss()
-                }
-
-                override fun onBitmapFailed(errorDrawable: Drawable?) {
-                    tipDialog.dismiss()
-                    Toast.makeText(this@PaintActivity, getString(R.string.loadpicturefailed), Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            })
+            if (FileUtils.deleteFile(picturePath)) finish()
+            else Toast.makeText(this, getString(R.string.deletePaintFailed), Toast.LENGTH_SHORT).show()
+            return
         }
+        tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
+        civColoring.clearStack()
+
+        PicassoUtils.displayImage(this, civColoring, picturePath, object : SimpleTarget() {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
+                tipDialog.dismiss()
+            }
+
+            override fun onBitmapFailed(errorDrawable: Drawable?) {
+                tipDialog.dismiss()
+                Toast.makeText(this@PaintActivity, getString(R.string.loadpicturefailed), Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -336,15 +277,14 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-            }
-            R.id.menuDelete -> {
-            }
-            R.id.menuSave -> {
-            }
-            R.id.menuSave -> {
-            }
+            android.R.id.home -> onBackPressed()
+            R.id.menuSave -> saveToLocal(FLAG_SAVE)
+            R.id.menuShare -> saveToLocal(FLAG_SHARE)
+            R.id.menuDelete ->
+                myDialogFactory.showRepaintDialog(View.OnClickListener {
+                    myDialogFactory.dismissDialog()
+                    repaint()
+                })
         }
         return true
     }
@@ -357,10 +297,10 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     override fun onBackPressed() {
         if (!civColoring.isUndoable()) {
             super.onBackPressed()
-            return;
+            return
         }
-        myDialogFactory.FinishSaveImageDialog(
-                View.OnClickListener { saveToLocalAndExit() },
+        myDialogFactory.showExitPaintDialog(
+                View.OnClickListener { saveToLocal(FLAG_EXIT) },
                 View.OnClickListener {
                     myDialogFactory.dismissDialog()
                     finish()
@@ -378,6 +318,9 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         private val ARG_IS_FROM_THEMES = "arg_is_from_themes"
         private val ARG_PICTURE_NAME = "arg_picture_name"
         private val ARG_PICTURE_PATH = "arg_picture_path"
+        private val FLAG_SAVE = 0
+        private val FLAG_EXIT = 1
+        private val FLAG_SHARE = 2
 
         fun start(context: Context, isFromThemes: Boolean, pictureName: String, picturePath: String) {
             val intent = Intent(context, PaintActivity::class.java)

@@ -6,21 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray">
 
-    <include
-        android:id="@+id/topfirstlay"
-        layout="@layout/dialog_coloradvance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"/>
-
     <!--操作菜单-->
     <LinearLayout
         android:id="@+id/vgActionsPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topfirstlay"
         android:background="@drawable/bg2"
         android:orientation="horizontal"
         android:padding="5dp">
