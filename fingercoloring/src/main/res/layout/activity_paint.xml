@@ -63,16 +63,6 @@
             app:srcCompat="@drawable/bg_toggle_action_bar"/>
     </LinearLayout>
 
-    <!--取色板-->
-    <com.ue.fingercoloring.view.ColorPicker
-        android:id="@+id/cpPaletteColorPicker"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/vgActionsPanel"
-        android:visibility="gone"
-        tools:visibility="visible"/>
-
     <!--上色图片-->
     <com.ue.fingercoloring.view.ColourImageView
         android:id="@+id/civColoring"
@@ -84,6 +74,16 @@
         android:layout_marginTop="2dp"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"/>
+
+    <!--取色板-->
+    <com.ue.fingercoloring.view.ColorPicker
+        android:id="@+id/cpPaletteColorPicker"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/vgActionsPanel"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <!--底部颜色列表-->
     <LinearLayout

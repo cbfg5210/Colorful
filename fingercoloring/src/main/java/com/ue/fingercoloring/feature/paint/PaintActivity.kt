@@ -221,9 +221,19 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                         else if (saveFlag == FLAG_SHARE)
                             ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
                         else if (saveFlag == FLAG_EFFECT)
-                            AdvancePaintActivity.startForResult(this@PaintActivity, path)
+                            showEffectDialog(path)
                     }
                 })
+    }
+
+    private fun showEffectDialog(path: String) {
+        val dialog = AfterEffectDialog.newInstance(path)
+        dialog.setEffectListener(object : AfterEffectDialog.OnCompleteEffectListener {
+            override fun onEffectCompleted(effectBitmap: Bitmap) {
+                Toast.makeText(this@PaintActivity, "ok", Toast.LENGTH_SHORT).show()
+            }
+        })
+        AfterEffectDialog.newInstance(path).show(supportFragmentManager, "")
     }
 
     private fun repaint() {
