@@ -12,23 +12,25 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/after_effect"
+        android:textColor="@color/black"
         android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/addwords"
+            android:id="@+id/addWords"
             style="@style/AdvancePaintTvStyle"
             android:drawableTop="@drawable/bluetext"
             android:text="@string/addtext"/>
 
         <TextView
-            android:id="@+id/addborder"
+            android:id="@+id/addBorder"
             style="@style/AdvancePaintTvStyle"
+            android:layout_marginLeft="10dp"
             android:drawableTop="@drawable/blueframe"
             android:text="@string/addborder"/>
     </LinearLayout>
@@ -72,7 +74,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/tvAECancel"
+            android:id="@+id/tvAeCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -81,7 +83,7 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tvAEOk"
+            android:id="@+id/tvAeOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"

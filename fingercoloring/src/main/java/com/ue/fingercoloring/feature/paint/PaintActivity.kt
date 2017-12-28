@@ -202,44 +202,60 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun saveToLocal(saveFlag: Int) {
+        saveToLocal(saveFlag, null, null)
+    }
+
+    private fun saveToLocal(saveFlag: Int, bitmap: Bitmap?, listener: PaintPresenter.OnSaveImageListener?) {
         tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
 
         val picName =
                 if (isFromThemes) pictureName.replace(".png", "_") + "fc.png"
                 else pictureName
 
-        presenter.saveImageLocally(civColoring.getBitmap()!!, picName,
-                object : PaintPresenter.OnSaveImageListener {
-                    override fun onSaved(path: String) {
-                        tipDialog.dismiss()
-                        if (TextUtils.isEmpty(path)) {
-                            Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
-                            return
-                        }
-                        savedPicturePath = path
-                        Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
-                        if (saveFlag == FLAG_EXIT)
-                            finish()
-                        else if (saveFlag == FLAG_SHARE)
-                            ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
-                        else if (saveFlag == FLAG_EFFECT)
-                            showEffectDialog(path)
-                    }
-                })
+        val bitmapToSave = bitmap ?: civColoring.getBitmap()!!
+        val saveListener = object : PaintPresenter.OnSaveImageListener {
+            override fun onSaved(path: String) {
+                tipDialog.dismiss()
+                if (TextUtils.isEmpty(path)) {
+                    Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
+                    return
+                }
+                savedPicturePath = path
+                Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
+
+                if (listener != null) {
+                    listener.onSaved(path)
+                    return
+                }
+
+                if (saveFlag == FLAG_EXIT)
+                    finish()
+                else if (saveFlag == FLAG_SHARE)
+                    ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
+                else if (saveFlag == FLAG_EFFECT)
+                    showEffectDialog(path)
+            }
+        }
+
+        presenter.saveImageLocally(bitmapToSave, picName, saveListener)
     }
 
     private fun showEffectDialog(path: String) {
         val dialog = AfterEffectDialog.newInstance(path)
-        dialog.setEffectListener(object : AfterEffectDialog.OnCompleteEffectListener {
-            override fun onEffectCompleted(effectBitmap: Bitmap) {
-                Toast.makeText(this@PaintActivity, "ok", Toast.LENGTH_SHORT).show()
+        dialog.setEffectListener(object : PaintPresenter.OnSaveImageListener {
+            override fun onSaved(path: String) {
+                repaint(false, "file://$path")
             }
         })
-        AfterEffectDialog.newInstance(path).show(supportFragmentManager, "")
+        dialog.show(supportFragmentManager, "")
     }
 
-    private fun repaint() {
-        if (isFromThemes) {
+    private fun repaint(isDelete: Boolean) {
+        repaint(isDelete, null)
+    }
+
+    private fun repaint(isDelete: Boolean, path: String?) {
+        if (isDelete && isFromThemes) {
             if (!TextUtils.isEmpty(savedPicturePath)) {
                 if (FileUtils.deleteFile(savedPicturePath)) {
                     savedPicturePath = ""
@@ -252,7 +268,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
         civColoring.clearStack()
 
-        PicassoUtils.displayImage(this, civColoring, picturePath, object : SimpleTarget() {
+        PicassoUtils.displayImage(this, civColoring, path ?: picturePath, object : SimpleTarget() {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
                 tipDialog.dismiss()
             }
@@ -279,7 +295,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.menuDelete -> {
                 myDialogFactory.showRepaintDialog(View.OnClickListener {
                     myDialogFactory.dismissDialog()
-                    repaint()
+                    repaint(true)
                 })
             }
         }
@@ -303,13 +319,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                     finish()
                 })
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == Constants.REQ_ADVANCED_PAINT && resultCode == Constants.REPAINT_RESULT) {
-//            repaint()
-//        }
-//    }
 
     companion object {
         private val ARG_IS_FROM_THEMES = "arg_is_from_themes"
