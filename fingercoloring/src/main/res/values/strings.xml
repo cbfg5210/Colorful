@@ -134,4 +134,5 @@
     <string name="help">帮助</string>
     <string name="after_effect">特效</string>
     <string name="palette">色板</string>
+    <string name="delete_completed">已删除保存的作品</string>
 </resources>

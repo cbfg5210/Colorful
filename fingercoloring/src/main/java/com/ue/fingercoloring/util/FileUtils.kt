@@ -29,9 +29,9 @@ object FileUtils {
         return localWorks
     }
 
-    fun deleteFile(url: String): Boolean {
-        val file = File(url.replace("file://", ""))
-        return file?.delete() ?: false
+    fun deleteFile(savedPicturePath: String): Boolean {
+        val file = File(savedPicturePath)
+        return if (file.exists()) file.delete() else false
     }
 
     private fun getDropboxIMGSize(file: File): Float {

@@ -30,6 +30,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private var isFromThemes: Boolean = false
     private var picturePath: String = ""
     private var pictureName: String = ""
+    private var savedPicturePath: String = ""
 
     private lateinit var myDialogFactory: MyDialogFactory
     private lateinit var presenter: PaintPresenter
@@ -204,7 +205,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         tipDialog.showTip(supportFragmentManager, getString(R.string.savingimage))
 
         val picName =
-                if (isFromThemes) pictureName.replace(".png", "_") + System.currentTimeMillis() + ".png"
+                if (isFromThemes) pictureName.replace(".png", "_") + "fc.png"
                 else pictureName
 
         presenter.saveImageLocally(civColoring.getBitmap()!!, picName,
@@ -215,6 +216,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                             Toast.makeText(this@PaintActivity, getString(R.string.saveFailed), Toast.LENGTH_SHORT).show()
                             return
                         }
+                        savedPicturePath = path
                         Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
                         if (saveFlag == FLAG_EXIT)
                             finish()
@@ -238,9 +240,14 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun repaint() {
         if (isFromThemes) {
-            if (FileUtils.deleteFile(picturePath)) finish()
-            else Toast.makeText(this, getString(R.string.deletePaintFailed), Toast.LENGTH_SHORT).show()
-            return
+            if (!TextUtils.isEmpty(savedPicturePath)) {
+                if (FileUtils.deleteFile(savedPicturePath)) {
+                    savedPicturePath = ""
+                    Toast.makeText(this, getString(R.string.delete_completed), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, getString(R.string.deletePaintFailed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
         civColoring.clearStack()
@@ -269,11 +276,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.menuSave -> saveToLocal(FLAG_SAVE)
             R.id.menuShare -> saveToLocal(FLAG_SHARE)
             R.id.menuHelp -> Toast.makeText(this, "help", Toast.LENGTH_SHORT).show()
-            R.id.menuDelete ->
+            R.id.menuDelete -> {
                 myDialogFactory.showRepaintDialog(View.OnClickListener {
                     myDialogFactory.dismissDialog()
                     repaint()
                 })
+            }
         }
         return true
     }

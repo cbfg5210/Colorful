@@ -10,9 +10,5 @@
         <activity
             android:name=".feature.paint.PaintActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".feature.paint.AdvancePaintActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.NoActionBar"/>
     </application>
 </manifest>
