@@ -69,8 +69,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/vgColorsPanel"
         android:layout_below="@id/vgActionsPanel"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"/>
 

@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
@@ -50,6 +52,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         presenter = PaintPresenter(this)
         tipDialog = TipDialog.newInstance()
         myDialogFactory = MyDialogFactory(this)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()
         loadPicture()
@@ -322,6 +326,26 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                 }
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_paint, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+            R.id.menuDelete -> {
+            }
+            R.id.menuSave -> {
+            }
+            R.id.menuSave -> {
+            }
+        }
+        return true
     }
 
     override fun onPause() {
