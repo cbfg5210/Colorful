@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ue.fingercoloring.view.SquareImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ivPickedColor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:background="@drawable/bg_picked_color"
+    android:padding="2dp"/>

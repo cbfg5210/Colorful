@@ -58,8 +58,8 @@
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="2dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="4dp"
             android:paddingTop="2dp">
 
             <com.ue.fingercoloring.view.ColorPaletteView
@@ -83,61 +83,26 @@
 
         </LinearLayout>
 
-        <!--4种选定的颜色-->
-        <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="0dp"
+        <!--8种选定的颜色-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPickedColors"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="2dp"
-            app:flexWrap="wrap">
-
-            <ImageView
-                android:id="@+id/current_pen1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/main_bg"
-                android:padding="2dp"
-                app:layout_flexBasisPercent="25%"
-                app:layout_flexGrow="1"/>
-
-            <ImageView
-                android:id="@+id/current_pen2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/white_bg"
-                android:padding="2dp"
-                app:layout_flexBasisPercent="25%"
-                app:layout_flexGrow="1"/>
-
-            <ImageView
-                android:id="@+id/current_pen3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/white_bg"
-                android:padding="2dp"
-                app:layout_flexBasisPercent="25%"
-                app:layout_flexGrow="1"/>
-
-            <ImageView
-                android:id="@+id/current_pen4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/white_bg"
-                android:padding="2dp"
-                app:layout_flexBasisPercent="25%"
-                app:layout_flexGrow="1"/>
-        </com.google.android.flexbox.FlexboxLayout>
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:reverseLayout="false"
+            app:spanCount="2"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvColors"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
+            android:scrollbars="none"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:reverseLayout="false"
             app:spanCount="2"/>

@@ -3,28 +3,22 @@ package com.ue.fingercoloring.feature.paint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.ImageView
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.Constants
-import com.ue.fingercoloring.constant.SPKeys
 import com.ue.fingercoloring.factory.MyDialogFactory
 import com.ue.fingercoloring.listener.OnDrawLineListener
 import com.ue.fingercoloring.listener.SimpleTarget
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.PicassoUtils
-import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.util.ShareImageUtil
 import com.ue.fingercoloring.view.ColorPicker
 import com.ue.fingercoloring.view.ColourImageView
@@ -43,7 +37,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private lateinit var presenter: PaintPresenter
     private lateinit var tipDialog: TipDialog
 
-    private var currentColor: ImageView? = null
+    private lateinit var pickedColorAdapter: PickedColorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +50,10 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         presenter = PaintPresenter(this)
         tipDialog = TipDialog.newInstance()
+        myDialogFactory = MyDialogFactory(this)
 
         initViews()
         loadPicture()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        saveIVColors()
     }
 
     override fun onDestroy() {
@@ -87,13 +77,10 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun initViews() {
-        myDialogFactory = MyDialogFactory(this)
-
         undo.isEnabled = false
         redo.isEnabled = false
 
-        initPens()
-        initPaintColors()
+        initBottomColors()
 
         undo.setOnClickListener(this)
         redo.setOnClickListener(this)
@@ -107,17 +94,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         drawline.setOnCheckedChangeListener(this)
         jianbian_color.setOnCheckedChangeListener(this)
 
-        currentColor = current_pen1
-        resetIVColors()
-
-        changeCurrentColor(currentColor!!)
         seekcolorpicker.setOnChangedListener(object : ColorPicker.OnColorChangedListener {
             override fun colorChangedListener(color: Int) {
                 changeCurrentColor(color)
             }
         })
 
-        seekcolorpicker.color = ContextCompat.getColor(this, R.color.maincolor)
         fillImageview.setOnRedoUndoListener(object : ColourImageView.OnRedoUndoListener {
             override fun onRedoUndo(undoSize: Int, redoSize: Int) {
                 undo.isEnabled = undoSize != 0
@@ -126,20 +108,25 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         })
     }
 
-    private fun initPaintColors() {
-        val paintColorsTa = resources.obtainTypedArray(R.array.paintColors)
-        val paintColors = ArrayList<Int>(paintColorsTa.length())
-        for (i in 0 until paintColorsTa.length()) {
-            paintColors.add(paintColorsTa.getColor(i, Color.BLACK))
-        }
-        paintColorsTa.recycle()
-
-        val adapter = PaintColorAdapter(this, paintColors)
+    private fun initBottomColors() {
+        //paintColors
+        val adapter = ColorOptionAdapter(this)
         adapter.setColorSelectedListener(OnDelegateClickListener { _, color ->
             seekcolorpicker.color = color
             changeCurrentColor(color)
         })
+        rvColors.setHasFixedSize(true)
         rvColors.adapter = adapter
+
+        //如果直接paintColors.subList(0, 8)的话，由于Int是对象类型会造成数据影响
+        pickedColorAdapter = PickedColorAdapter(this)
+        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { view, newColor -> changePickedColor(newColor) })
+
+        rvPickedColors.setHasFixedSize(true)
+        rvPickedColors.adapter = pickedColorAdapter
+
+        //初始化选中的颜色,especial for picker palette
+        changePickedColor(pickedColorAdapter.getPickedColor())
     }
 
     private fun onPickColorCheckChanged(isChecked: Boolean) {
@@ -243,24 +230,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         })
     }
 
-    private fun initPens() {
-        val checkCurrentColor = View.OnClickListener { view ->
-            current_pen1.setBackgroundResource(R.drawable.white_bg)
-            current_pen2.setBackgroundResource(R.drawable.white_bg)
-            current_pen3.setBackgroundResource(R.drawable.white_bg)
-            current_pen4.setBackgroundResource(R.drawable.white_bg)
-            view.setBackgroundResource(R.drawable.main_bg)
-
-            currentColor = view as ImageView
-            changeCurrentColor(view)
-        }
-
-        current_pen1.setOnClickListener(checkCurrentColor)
-        current_pen2.setOnClickListener(checkCurrentColor)
-        current_pen3.setOnClickListener(checkCurrentColor)
-        current_pen4.setOnClickListener(checkCurrentColor)
-    }
-
     private fun backToColorModel() {
         fillImageview.model = ColourImageView.Model.FILLCOLOR
         jianbian_color.isChecked = false
@@ -301,7 +270,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private fun changeCurrentColor(color: Int) {
         setFillColorModel()
         fillImageview.setColor(color)
-        currentColor!!.setImageDrawable(ColorDrawable(color))
+        pickedColorAdapter.updateColor(color)
     }
 
     private fun setFillColorModel() {
@@ -309,10 +278,10 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         drawline.isChecked = false
     }
 
-    private fun changeCurrentColor(currentColor: ImageView) {
+    private fun changePickedColor(newColor: Int) {
         setFillColorModel()
-        seekcolorpicker.color = (currentColor.drawable as ColorDrawable).color
-        fillImageview.setColor((currentColor.drawable as ColorDrawable).color)
+        seekcolorpicker.color = newColor
+        fillImageview.setColor(newColor)
     }
 
     private fun saveToLocalAndExit() {
@@ -356,26 +325,9 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         }
     }
 
-    private fun saveIVColors() {
-        saveIVColor(current_pen1, SPKeys.SavedColor1)
-        saveIVColor(current_pen2, SPKeys.SavedColor2)
-        saveIVColor(current_pen3, SPKeys.SavedColor3)
-        saveIVColor(current_pen4, SPKeys.SavedColor4)
-    }
-
-    private fun saveIVColor(iv: ImageView, key: String) {
-        SPUtils.putInt(key, (iv.drawable as ColorDrawable).color)
-    }
-
-    private fun resetIVColors() {
-        resetIVColor(current_pen1, SPKeys.SavedColor1, R.color.red)
-        resetIVColor(current_pen2, SPKeys.SavedColor2, R.color.yellow)
-        resetIVColor(current_pen3, SPKeys.SavedColor3, R.color.skyblue)
-        resetIVColor(current_pen4, SPKeys.SavedColor4, R.color.green)
-    }
-
-    private fun resetIVColor(iv: ImageView, key: String, defColorRes: Int) {
-        iv.setImageDrawable(ColorDrawable(SPUtils.getInt(key, ContextCompat.getColor(this, defColorRes))))
+    override fun onPause() {
+        super.onPause()
+        pickedColorAdapter.savePickedColors()
     }
 
     override fun onBackPressed() {

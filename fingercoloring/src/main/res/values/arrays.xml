@@ -22,4 +22,15 @@
         <item>@color/col_f7aec2</item>
         <item>@color/col_fac9c4</item>
     </array>
+
+    <array name="defPickedColors">
+        <item>@color/col_cdc527</item>
+        <item>@color/col_f8de2c</item>
+        <item>@color/col_fdf87c</item>
+        <item>@color/col_cc0000</item>
+        <item>@color/col_ff2a2a</item>
+        <item>@color/col_fc637c</item>
+        <item>@color/col_f7aec2</item>
+        <item>@color/col_fac9c4</item>
+    </array>
 </resources>

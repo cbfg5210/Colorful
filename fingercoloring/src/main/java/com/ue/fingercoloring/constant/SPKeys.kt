@@ -18,4 +18,5 @@ object SPKeys {
     val PickColorDialogEnable = "pick_color_dialog_enable"
     val GradualModel = "gradual_model"
     val STACK_MAX_SIZE = "stack_max_size"
+    val PICKED_COLORS: String="picked_colors"
 }
