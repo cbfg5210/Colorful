@@ -6,7 +6,7 @@ package com.ue.fingercoloring.constant
 
 object SPKeys {
     val CommentEnableKey = "comment_enable_key"
-    val PaintHint = "paint_hint1"
+    val SHOW_ENTER_HINT = "show_enter_hint"
     val PaintHint2 = "paint_hint2"
     val SavedColor1 = "saved_color1"
     val SavedColor2 = "saved_color2"

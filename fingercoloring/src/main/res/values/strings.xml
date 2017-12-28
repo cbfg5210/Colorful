@@ -53,7 +53,7 @@
     <string name="loading">加载中...</string>
     <string name="secretGarden">秘密花园</string>
     <string name="welcomeusethis">欢迎使用Finger Coloring</string>
-    <string name="paintHint">选中喜欢的颜色轻触图片空白区域即可\n双指可放大缩小图片\n左下角可以保存四个喜欢的颜料，快来着色吧！</string>
+    <string name="paintHint">1、选中喜欢的颜色轻触图片空白区域即可\n2、双指可放大缩小图片\n3、左下角可以保存八个喜欢的颜料</string>
     <string name="paintHint2">打开已经保存的图片后，按撤消即可返回原图，重新做图！\n快来试试吧！</string>
     <string name="qqgroup">QQ玩家交流群</string>
     <string name="qqgroupnumber">104368068</string>
@@ -126,7 +126,7 @@
     <string name="logincontent">Login As...</string>
     <string name="logincontentfirst">Login and use Cloud upload function!\nLogin now!</string>
     <string name="loginbg">Login in background..</string>
-    <string name="gradualModelHint">高级功能-渐变颜色。请注意：渐变颜色后不能覆盖成其他颜色，如要修改请先撤销！</string>
+    <string name="gradualModelHint">渐变颜色后不能覆盖成其他颜色，如要修改请先撤销！</string>
     <string name="jianbian_color">渐变色</string>
     <string name="loginFailed">登录失败</string>
     <string name="normal_color">正常色</string>
@@ -138,4 +138,9 @@
     <string name="effect_hint">添加特效后会清除原来的操作记录，建议在完成作品后再添加特效内容</string>
     <string name="go_on">继续</string>
     <string name="cancel_not_alert">取消并不再提醒</string>
+    <string name="got_it">知道了</string>
+    <string name="finger_coloring">指尖填图</string>
+    <string name="is_exit">确定退出吗?</string>
+    <string name="save_exit">保存并退出</string>
+    <string name="quit_exit">不保存并退出</string>
 </resources>

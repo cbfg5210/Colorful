@@ -19,26 +19,10 @@ import kotlinx.android.synthetic.main.layout_check_box.view.*
 /**
  * Created by Swifty.Wang on 2015/6/12.
  */
-class MyDialogFactory(context: Context) : MyDialogStyle(context) {
+class DialogHelper(context: Context) : MyDialogStyle(context) {
 
     //just for add border
     internal var drawableid: Int = 0
-
-    fun showExitPaintDialog(savelistener: View.OnClickListener, quitlistener: View.OnClickListener) {
-        showTwoButtonDialog(context.getString(R.string.quitorsave), context.getString(R.string.save), context.getString(R.string.quit), savelistener, quitlistener, true)
-    }
-
-    fun showPaintFirstOpenDialog() {
-        val buffer = StringBuffer()
-        buffer.append(context.getString(R.string.paintHint))
-        showOnceContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint)
-    }
-
-    fun showPaintFirstOpenSaveDialog() {
-        val buffer = StringBuffer()
-        buffer.append(context.getString(R.string.paintHint2))
-        showOnceContentDialog(context.getString(R.string.welcomeusethis), buffer, SPKeys.PaintHint2)
-    }
 
     fun showAddWordsDialog(onAddWordsSuccessListener: OnAddWordsSuccessListener) {
         val layout = LayoutInflater.from(context).inflate(R.layout.view_addwords, null)
@@ -113,58 +97,52 @@ class MyDialogFactory(context: Context) : MyDialogStyle(context) {
         showBlankDialog(context.getString(R.string.addborder), layout, listener)
     }
 
-    fun showBuxianButtonClickDialog() {
-        showOnceContentDialog(context.getString(R.string.buxianfunction), context.getString(R.string.buxianfunctionhint), SPKeys.BuXianButtonClickDialogEnable)
-    }
-
-    fun showEffectHintDialog(listener: View.OnClickListener?) {
-        val showEffectHint = SPUtils.getBoolean(SPKeys.SHOW_EFFECT_HINT, true)
-        if (!showEffectHint) {
-            listener?.onClick(null)
+    private fun showOnceHintDialog(titleRes: Int, hintRes: Int, positiveRes: Int, positiveListener: View.OnClickListener?, negativeRes: Int, checkedSpKey: String) {
+        val showHint = SPUtils.getBoolean(checkedSpKey, true)
+        if (!showHint) {
+            positiveListener?.onClick(null)
             return
         }
-
         val checkBoxLayout = LayoutInflater.from(context).inflate(R.layout.layout_check_box, null)
+        val negativeBtnTxt = if (negativeRes == 0) null else context.getString(negativeRes)
 
         AlertDialog.Builder(context)
-                .setTitle(R.string.after_effect)
-                .setMessage(R.string.effect_hint)
-                .setPositiveButton(R.string.go_on) { _, which ->
-                    if (checkBoxLayout.cbCheck.isChecked) SPUtils.putBoolean(SPKeys.SHOW_EFFECT_HINT, false)
-                    listener?.onClick(null)
+                .setTitle(titleRes)
+                .setMessage(hintRes)
+                .setPositiveButton(positiveRes) { _, which ->
+                    if (checkBoxLayout.cbCheck.isChecked) SPUtils.putBoolean(checkedSpKey, false)
+                    positiveListener?.onClick(null)
                 }
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(negativeBtnTxt, null)
                 .setView(checkBoxLayout)
                 .create()
                 .show()
     }
 
+    fun showEffectHintDialog(listener: View.OnClickListener?) {
+        showOnceHintDialog(R.string.after_effect, R.string.effect_hint, R.string.go_on, listener, R.string.cancel, SPKeys.SHOW_EFFECT_HINT)
+    }
+
     fun showPickColorHintDialog() {
-        showOnceContentDialog(context.getString(R.string.pickcolor), context.getString(R.string.pickcolorhint), SPKeys.PickColorDialogEnable)
-    }
-
-    private fun showOnceContentDialog(title: String, contentStr: CharSequence, whichDialog: String) {
-        if (!SPUtils.getBoolean(whichDialog, true)) return
-
-        val layout = LayoutInflater.from(context).inflate(R.layout.view_dialog_with_checkbox, null)
-        val content = layout.findViewById<View>(R.id.content) as TextView
-        val checkBox = layout.findViewById<View>(R.id.checkbox_dontshow) as CheckBox
-        content.text = contentStr
-
-        showBlankDialog(title, layout, View.OnClickListener {
-            if (checkBox.isChecked) SPUtils.putBoolean(whichDialog, false)
-            dismissDialog()
-        })
-    }
-
-    fun showPaintHintDialog() {
-        showPaintFirstOpenDialog()
-        if (!dialog.isShowing) {
-            showPaintFirstOpenSaveDialog()
-        }
+        showOnceHintDialog(R.string.pickcolor, R.string.pickcolorhint, R.string.got_it, null, 0, SPKeys.PickColorDialogEnable)
     }
 
     fun showGradualHintDialog() {
-        showOnceContentDialog(context.getString(R.string.gradualModel), context.getString(R.string.gradualModelHint), SPKeys.GradualModel)
+        showOnceHintDialog(R.string.gradualModel, R.string.gradualModelHint, R.string.got_it, null, 0, SPKeys.GradualModel)
+    }
+
+    fun showEnterHintDialog() {
+        showOnceHintDialog(R.string.finger_coloring, R.string.paintHint, R.string.got_it, null, 0, SPKeys.SHOW_ENTER_HINT)
+    }
+
+    fun showExitPaintDialog(saveListener: View.OnClickListener?, quitListener: View.OnClickListener?) {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.is_exit)
+                .setMessage(R.string.quitorsave)
+                .setPositiveButton(R.string.cancel, null)
+                .setNegativeButton(R.string.save_exit) { _, _ -> saveListener?.onClick(null) }
+                .setNeutralButton(R.string.quit_exit) { _, _ -> quitListener?.onClick(null) }
+                .create()
+                .show()
     }
 }

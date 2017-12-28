@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.factory.MyDialogFactory
+import com.ue.fingercoloring.factory.DialogHelper
 import com.ue.fingercoloring.listener.OnAddWordsSuccessListener
 import com.ue.fingercoloring.listener.OnChangeBorderListener
 import com.ue.fingercoloring.util.PicassoUtils
@@ -23,7 +23,7 @@ class AfterEffectDialog : DialogFragment() {
 
     private lateinit var rootView: View
     private lateinit var imageUri: String
-    private lateinit var myDialogFactory: MyDialogFactory
+    private lateinit var mDialogHelper: DialogHelper
     private lateinit var presenter: PaintPresenter
     private lateinit var tipDialog: TipDialog
 
@@ -54,7 +54,7 @@ class AfterEffectDialog : DialogFragment() {
 
         presenter = PaintPresenter(context as AppCompatActivity)
         tipDialog = TipDialog.newInstance()
-        myDialogFactory = MyDialogFactory(context)
+        mDialogHelper = DialogHelper(context)
 
         imageUri = arguments.getString(ARG_PICTURE_PATH)
     }
@@ -100,7 +100,7 @@ class AfterEffectDialog : DialogFragment() {
                 }
 
                 R.id.addWords ->
-                    myDialogFactory.showAddWordsDialog(object : OnAddWordsSuccessListener {
+                    mDialogHelper.showAddWordsDialog(object : OnAddWordsSuccessListener {
                         override fun addWordsSuccess(dragedTextView: DragedTextView) {
                             (rootView.current_image.parent as ViewGroup).addView(dragedTextView)
                             hasEffectAdded = true
@@ -108,7 +108,7 @@ class AfterEffectDialog : DialogFragment() {
                     })
 
                 R.id.addBorder ->
-                    myDialogFactory.showAddBorderDialog(object : OnChangeBorderListener {
+                    mDialogHelper.showAddBorderDialog(object : OnChangeBorderListener {
                         override fun changeBorder(drawableId: Int, pt: Int, pd: Int, pl: Int, pr: Int) {
                             if (drawableId != 0) {
                                 rootView.border.setBackgroundResource(drawableId)

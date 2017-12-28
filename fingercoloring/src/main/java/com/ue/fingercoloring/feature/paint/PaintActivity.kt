@@ -16,7 +16,7 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.factory.MyDialogFactory
+import com.ue.fingercoloring.factory.DialogHelper
 import com.ue.fingercoloring.listener.SimpleTarget
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.PicassoUtils
@@ -34,7 +34,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     private var savedPicturePath: String = ""
     private var savedBorderPicturePath: String = ""
 
-    private lateinit var myDialogFactory: MyDialogFactory
+    private lateinit var mDialogHelper: DialogHelper
     private lateinit var presenter: PaintPresenter
     private lateinit var tipDialog: TipDialog
 
@@ -53,9 +53,11 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
         presenter = PaintPresenter(this)
         tipDialog = TipDialog.newInstance()
-        myDialogFactory = MyDialogFactory(this)
+        mDialogHelper = DialogHelper(this)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        mDialogHelper.showEnterHintDialog()
 
         initViews()
         loadPicture()
@@ -138,7 +140,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             return
         }
 
-        myDialogFactory.showPickColorHintDialog()
+        mDialogHelper.showPickColorHintDialog()
         civColoring.model = ColourImageView.Model.PICKCOLOR
         civColoring.setOnColorPickListener(object : ColourImageView.OnColorPickListener {
             override fun onColorPick(status: Boolean, color: Int) {
@@ -154,7 +156,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun onJianBianColorCheckChanged(checked: Boolean) {
         if (checked) {
-            myDialogFactory.showGradualHintDialog()
+            mDialogHelper.showGradualHintDialog()
             civColoring.model = ColourImageView.Model.FILLGRADUALCOLOR
             jianbian_color.setText(R.string.jianbian_color)
         } else {
@@ -176,7 +178,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         when (viewId) {
             R.id.undo -> civColoring.undo()
             R.id.redo -> civColoring.redo()
-            R.id.tvAfterEffect -> myDialogFactory.showEffectHintDialog(View.OnClickListener { saveToLocal(FLAG_EFFECT) })
+            R.id.tvAfterEffect -> mDialogHelper.showEffectHintDialog(View.OnClickListener { saveToLocal(FLAG_EFFECT) })
 
             R.id.tvTogglePalette ->
                 cpPaletteColorPicker.visibility =
@@ -298,8 +300,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.menuShare -> saveToLocal(FLAG_SHARE)
             R.id.menuHelp -> Toast.makeText(this, "help", Toast.LENGTH_SHORT).show()
             R.id.menuDelete -> {
-                myDialogFactory.showRepaintDialog(View.OnClickListener {
-                    myDialogFactory.dismissDialog()
+                mDialogHelper.showRepaintDialog(View.OnClickListener {
+                    mDialogHelper.dismissDialog()
                     repaint(true)
                 })
             }
@@ -317,12 +319,9 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             super.onBackPressed()
             return
         }
-        myDialogFactory.showExitPaintDialog(
+        mDialogHelper.showExitPaintDialog(
                 View.OnClickListener { saveToLocal(FLAG_EXIT) },
-                View.OnClickListener {
-                    myDialogFactory.dismissDialog()
-                    finish()
-                })
+                View.OnClickListener { finish() })
     }
 
     companion object {
