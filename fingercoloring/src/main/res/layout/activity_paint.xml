@@ -28,12 +28,6 @@
             android:text="@string/redo"/>
 
         <RadioButton
-            android:id="@+id/drawline"
-            style="@style/PaintRadioBtnStyle"
-            android:drawableTop="@drawable/checked_drawline"
-            android:text="@string/drawLine"/>
-
-        <RadioButton
             android:id="@+id/jianbian_color"
             style="@style/PaintRadioBtnStyle"
             android:drawableTop="@drawable/checked_gradual"

@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.factory.MyDialogFactory
-import com.ue.fingercoloring.listener.OnDrawLineListener
 import com.ue.fingercoloring.listener.SimpleTarget
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.PicassoUtils
@@ -91,7 +90,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         tvAfterEffect.setOnClickListener(this)
 
         rbPickColor.setOnCheckedChangeListener(this)
-        drawline.setOnCheckedChangeListener(this)
         jianbian_color.setOnCheckedChangeListener(this)
 
         cpPaletteColorPicker.setOnChangedListener(object : ColorPicker.OnColorChangedListener {
@@ -135,7 +133,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             return
         }
 
-        drawline.isChecked = false
         myDialogFactory.showPickColorHintDialog()
         civColoring.model = ColourImageView.Model.PICKCOLOR
         civColoring.setOnColorPickListener(object : ColourImageView.OnColorPickListener {
@@ -147,32 +144,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
                     Toast.makeText(this@PaintActivity, getString(R.string.pickcolorerror), Toast.LENGTH_SHORT).show()
                 }
             }
-        })
-    }
-
-    private fun onDrawLineCheckChanged(checked: Boolean) {
-        if (!checked) {
-            civColoring.clearPoints()
-            backToColorModel()
-            return
-        }
-
-        rbPickColor.isChecked = false
-        myDialogFactory.showBuxianButtonClickDialog()
-        civColoring.model = ColourImageView.Model.DRAW_LINE
-        civColoring.setOnDrawLineListener(object : OnDrawLineListener {
-            override fun OnDrawFinishedListener(drawed: Boolean, startX: Int, startY: Int, endX: Int, endY: Int) {
-                if (drawed)
-                    myDialogFactory.showBuxianNextPointSetDialog()
-                else
-                    Toast.makeText(this@PaintActivity, getString(R.string.drawLineHint_finish), Toast.LENGTH_SHORT).show()
-            }
-
-            override fun OnGivenFirstPointListener(startX: Int, startY: Int) {
-                myDialogFactory.showBuxianFirstPointSetDialog()
-            }
-
-            override fun OnGivenNextPointListener(endX: Int, endY: Int) {}
         })
     }
 
@@ -191,7 +162,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         val viewId = view.id
         when (viewId) {
             R.id.rbPickColor -> onPickColorCheckChanged(checked)
-            R.id.drawline -> onDrawLineCheckChanged(checked)
             R.id.jianbian_color -> onJianBianColorCheckChanged(checked)
         }
     }
@@ -224,7 +194,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun changeCurrentColor(newColor: Int) {
         rbPickColor.isChecked = false
-        drawline.isChecked = false
         pickedColorAdapter.updateColor(newColor)
 
         cpPaletteColorPicker.color = newColor
