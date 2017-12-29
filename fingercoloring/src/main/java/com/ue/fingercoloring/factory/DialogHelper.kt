@@ -5,7 +5,9 @@ import android.support.v7.app.AlertDialog
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.SeekBar
+import android.widget.Toast
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.SPKeys
 import com.ue.fingercoloring.event.OnAddWordsSuccessListener
@@ -15,6 +17,7 @@ import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.view.ColorPickerSeekBar
 import com.ue.fingercoloring.view.MyDialogStyle
 import kotlinx.android.synthetic.main.layout_check_box.view.*
+import kotlinx.android.synthetic.main.view_addwords.view.*
 
 /**
  * Created by Swifty.Wang on 2015/6/12.
@@ -26,39 +29,37 @@ class DialogHelper(context: Context) : MyDialogStyle(context) {
 
     fun showAddWordsDialog(onAddWordsSuccessListener: OnAddWordsSuccessListener) {
         val layout = LayoutInflater.from(context).inflate(R.layout.view_addwords, null)
-        val editText = layout.findViewById<View>(R.id.addeditwords) as EditText
-        val radioGroup = layout.findViewById<View>(R.id.radiogroup) as RadioGroup
-        radioGroup.setOnCheckedChangeListener { _, i ->
-            when (i) {
-                R.id.small -> editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, DragTextViewFactory.getInstance().SmallTextSize.toFloat())
-                R.id.middle -> editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, DragTextViewFactory.getInstance().MiddleTextSize.toFloat())
-                R.id.large -> editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, DragTextViewFactory.getInstance().BigTextSize.toFloat())
-                R.id.huge -> editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, DragTextViewFactory.getInstance().HugeSize.toFloat())
-            }
+
+        layout.radiogroup.setOnCheckedChangeListener { _, i ->
+            layout.addeditwords.setTextSize(TypedValue.COMPLEX_UNIT_SP,
+                    when (i) {
+                        R.id.middle -> DragTextViewFactory.getInstance().MiddleTextSize.toFloat()
+                        R.id.large -> DragTextViewFactory.getInstance().BigTextSize.toFloat()
+                        R.id.huge -> DragTextViewFactory.getInstance().HugeSize.toFloat()
+                        else -> DragTextViewFactory.getInstance().SmallTextSize.toFloat()
+                    })
         }
-        val colorPicker = layout.findViewById<View>(R.id.cpPaletteColorPicker) as ColorPickerSeekBar
-        colorPicker.setOnColorSeekbarChangeListener(object : ColorPickerSeekBar.OnColorSeekBarChangeListener {
+
+        layout.cpPaletteColorPicker.setOnColorSeekbarChangeListener(object : ColorPickerSeekBar.SimpleColorSeekBarChangeListener() {
             override fun onColorChanged(seekBar: SeekBar, color: Int, b: Boolean) {
-                editText.setTextColor(color)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-
+                layout.addeditwords.setTextColor(color)
             }
         })
-        val listener = View.OnClickListener {
-            if (!editText.text.toString().trim { it <= ' ' }.isEmpty()) {
-                dismissDialog()
-                onAddWordsSuccessListener.addWordsSuccess(DragTextViewFactory.getInstance().createUserWordTextView(context, editText.text.toString(), editText.currentTextColor, editText.textSize.toInt()))
-            } else {
-                Toast.makeText(context, context.getString(R.string.nowords), Toast.LENGTH_SHORT).show()
-            }
-        }
-        showBlankDialog(context.getString(R.string.addtext), layout, listener)
+
+        AlertDialog.Builder(context)
+                .setTitle(R.string.addtext)
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    if (layout.addeditwords.text.toString().trim { it <= ' ' }.isEmpty()) {
+                        Toast.makeText(context, context.getString(R.string.nowords), Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    dismissDialog()
+                    onAddWordsSuccessListener.addWordsSuccess(DragTextViewFactory.getInstance().createUserWordTextView(context, layout.addeditwords.text.toString(), layout.addeditwords.currentTextColor, layout.addeditwords.textSize.toInt()))
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .setView(layout)
+                .create()
+                .show()
     }
 
     fun showRepaintDialog(confirm: View.OnClickListener) {

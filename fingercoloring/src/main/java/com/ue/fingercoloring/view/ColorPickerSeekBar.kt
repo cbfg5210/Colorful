@@ -72,33 +72,15 @@ class ColorPickerSeekBar : SeekBar, SeekBar.OnSeekBarChangeListener {
      * touch gesture or arrow key/trackball as well as changes that were initiated programmatically.
      */
     interface OnColorSeekBarChangeListener {
-
-        /**
-         * Notification that the color has changed. Clients can use the fromUser parameter
-         * to distinguish user-initiated changes from those that occurred programmatically.
-         * Parameters:
-         *
-         * @param seekBar The SeekBar whose progress has changed
-         * @param color   The current color-int from alpha, red, green, blue components.
-         * @param b       True if the progress change was initiated by the user.
-         */
         fun onColorChanged(seekBar: SeekBar, color: Int, b: Boolean)
-
-        /**
-         * Notification that the user has started a touch gesture.
-         * Clients may want to use this to disable advancing the seekbar.
-         *
-         * @param seekBar The SeekBar in which the touch gesture began
-         */
         fun onStartTrackingTouch(seekBar: SeekBar)
-
-        /**
-         * Notification that the user has finished a touch gesture.
-         * Clients may want to use this to re-enable advancing the seekbar.
-         *
-         * @param seekBar The SeekBar in which the touch gesture finished
-         */
         fun onStopTrackingTouch(seekBar: SeekBar)
+    }
+
+    abstract class SimpleColorSeekBarChangeListener : OnColorSeekBarChangeListener {
+        override fun onColorChanged(seekBar: SeekBar, color: Int, b: Boolean) {}
+        override fun onStartTrackingTouch(seekBar: SeekBar) {}
+        override fun onStopTrackingTouch(seekBar: SeekBar) {}
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -134,24 +116,14 @@ class ColorPickerSeekBar : SeekBar, SeekBar.OnSeekBarChangeListener {
         }
 
         color = Color.argb(255, r, g, b)
-        if (null != mOnColorSeekbarChangeListener) {
-            mOnColorSeekbarChangeListener!!.onColorChanged(seekBar, color, fromUser)
-        }
-
+        mOnColorSeekbarChangeListener?.onColorChanged(seekBar, color, fromUser)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar) {
-        if (null == mOnColorSeekbarChangeListener) {
-            return
-        }
-        mOnColorSeekbarChangeListener!!.onStartTrackingTouch(seekBar)
+        mOnColorSeekbarChangeListener?.onStartTrackingTouch(seekBar)
     }
 
     override fun onStopTrackingTouch(seekBar: SeekBar) {
-        if (null == mOnColorSeekbarChangeListener) {
-            return
-        }
-        mOnColorSeekbarChangeListener!!.onStopTrackingTouch(seekBar)
+        mOnColorSeekbarChangeListener?.onStopTrackingTouch(seekBar)
     }
 }
-

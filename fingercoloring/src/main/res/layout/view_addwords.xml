@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="330dp"
@@ -12,19 +13,20 @@
         android:layout_height="wrap_content"
         android:hint="@string/addeditwords_hint"
         android:maxEms="20"
-        android:textSize="@dimen/small_textsize"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textSize="@dimen/small_textsize"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/textsize" />
+        android:text="@string/textsize"/>
 
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:checkedButton="@+id/small"
         android:orientation="horizontal">
 
@@ -37,7 +39,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="@string/small"
-            android:textColor="@drawable/textsize_textcolor" />
+            android:textColor="@drawable/textsize_textcolor"/>
 
         <RadioButton
             android:id="@+id/middle"
@@ -49,7 +51,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="@string/middle"
-            android:textColor="@drawable/textsize_textcolor" />
+            android:textColor="@drawable/textsize_textcolor"/>
 
         <RadioButton
             android:id="@+id/large"
@@ -61,7 +63,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="@string/large"
-            android:textColor="@drawable/textsize_textcolor" />
+            android:textColor="@drawable/textsize_textcolor"/>
 
         <RadioButton
             android:id="@+id/huge"
@@ -74,7 +76,7 @@
             android:gravity="center"
             android:minHeight="40sp"
             android:text="@string/huge"
-            android:textColor="@drawable/textsize_textcolor" />
+            android:textColor="@drawable/textsize_textcolor"/>
 
     </RadioGroup>
 
@@ -82,11 +84,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/textcolor" />
+        android:text="@string/textcolor"/>
 
     <com.ue.fingercoloring.view.ColorPickerSeekBar
         android:id="@+id/cpPaletteColorPicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"/>
 
 </LinearLayout>
