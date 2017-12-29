@@ -1,6 +1,6 @@
 package com.ue.fingercoloring.model
 
-import com.ue.fingercoloring.util.GsonHolder
+import com.ue.library.util.GsonHolder
 
 /**
  * Created by Swifty.Wang on 2015/9/1.

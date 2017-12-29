@@ -12,8 +12,8 @@ import com.google.gson.reflect.TypeToken
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.SPKeys
-import com.ue.fingercoloring.util.GsonHolder
-import com.ue.fingercoloring.util.SPUtils
+import com.ue.library.util.GsonHolder
+import com.ue.library.util.SPUtils
 import kotlinx.android.synthetic.main.item_picked_color.view.*
 
 /**

@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.util
+package com.ue.library.util
 
 import io.reactivex.disposables.Disposable
 

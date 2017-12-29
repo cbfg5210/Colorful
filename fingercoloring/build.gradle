@@ -59,7 +59,7 @@ dependencies {
         implementation 'com.github.cbfg5210:PhotoView:1.0.2'
         implementation deps.support.core
         implementation deps.andPermission
-        implementation deps.eventbus
+        implementation project(':library')
     } else {
         compileOnly deps.kotlinJre
         compileOnly deps.support.app_compat
@@ -74,6 +74,6 @@ dependencies {
         compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
         compileOnly deps.support.core
         compileOnly deps.andPermission
-        compileOnly deps.eventbus
+        compileOnly project(':library')
     }
 }

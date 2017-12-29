@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.model.LocalWork
 import com.ue.fingercoloring.util.FileUtils
-import com.ue.fingercoloring.util.RxJavaUtils
 import com.ue.fingercoloring.widget.TimeLineDecoration
+import com.ue.library.util.RxJavaUtils
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -70,7 +70,7 @@ class WorksFragment : Fragment() {
         disposable = Observable
                 .create(ObservableOnSubscribe<List<LocalWork>> { e ->
                     val results = FileUtils.obtainLocalImages()
-                    if (results != null) e.onNext(results)
+                    e.onNext(results)
                     e.onComplete()
                 })
                 .subscribeOn(Schedulers.single())

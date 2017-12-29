@@ -11,9 +11,9 @@ import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.SPKeys
 import com.ue.fingercoloring.event.OnAddWordsSuccessListener
 import com.ue.fingercoloring.event.OnChangeBorderListener
-import com.ue.fingercoloring.util.DensityUtil
-import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.widget.ColorPickerSeekBar
+import com.ue.library.util.DensityUtil
+import com.ue.library.util.SPUtils
 import kotlinx.android.synthetic.main.layout_check_box.view.*
 import kotlinx.android.synthetic.main.view_addborder.view.*
 import kotlinx.android.synthetic.main.view_addwords.view.*
@@ -110,7 +110,7 @@ class DialogHelper(private val context: Context) {
         AlertDialog.Builder(context)
                 .setTitle(titleRes)
                 .setMessage(hintRes)
-                .setPositiveButton(positiveRes) { _, which ->
+                .setPositiveButton(positiveRes) { _, _ ->
                     if (checkBoxLayout.cbCheck.isChecked) SPUtils.putBoolean(checkedSpKey, false)
                     positiveListener?.onClick(null)
                 }

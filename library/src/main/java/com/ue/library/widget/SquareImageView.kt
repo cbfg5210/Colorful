@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.widget
+package com.ue.library.widget
 
 import android.content.Context
 import android.support.v7.widget.AppCompatImageView

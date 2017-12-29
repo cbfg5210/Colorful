@@ -16,7 +16,7 @@ object FileUtils {
         val localWorks = ArrayList<LocalWork>()
         val path = Environment.getExternalStorageDirectory().path + Constants.FOLDER_WORKS
         val f = File(path)
-        if (f != null && f.listFiles() != null) {
+        if (f.listFiles() != null) {
             val file = f.listFiles()
             for (i in file.indices) {
                 localWorks.add(LocalWork(file[i].name, "file://" + path + "/" + file[i].name, DateTimeUtil.formatTimeStamp(file[i].lastModified()), file[i].lastModified(), getDropboxIMGSize(file[i])))

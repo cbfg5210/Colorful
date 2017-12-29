@@ -45,7 +45,7 @@ class PaintPresenter(private val mPaintActivity: AppCompatActivity) {
                 .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ s ->
-                    if (mPaintActivity != null && !mPaintActivity.isFinishing){
+                    if (!mPaintActivity.isFinishing){
                         listener.onSaved(s)
                     }
                 })

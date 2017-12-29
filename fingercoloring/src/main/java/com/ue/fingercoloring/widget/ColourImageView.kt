@@ -8,9 +8,9 @@ import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.ue.fingercoloring.constant.SPKeys
 import com.ue.fingercoloring.event.OnDrawLineListener
-import com.ue.fingercoloring.util.RxJavaUtils
-import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.util.SizedStack
+import com.ue.library.util.RxJavaUtils
+import com.ue.library.util.SPUtils
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -14,14 +14,14 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
-import com.ue.fingercoloring.event.SimpleTarget
 import com.ue.fingercoloring.factory.DialogHelper
 import com.ue.fingercoloring.util.FileUtils
-import com.ue.fingercoloring.util.PicassoUtils
-import com.ue.fingercoloring.util.ShareImageUtil
 import com.ue.fingercoloring.widget.ColorPicker
 import com.ue.fingercoloring.widget.ColourImageView
 import com.ue.fingercoloring.widget.TipDialog
+import com.ue.library.event.SimpleTarget
+import com.ue.library.util.PicassoUtils
+import com.ue.library.util.ShareImageUtil
 import kotlinx.android.synthetic.main.activity_paint.*
 
 
@@ -124,7 +124,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
 
         //如果直接paintColors.subList(0, 8)的话，由于Int是对象类型会造成数据影响
         pickedColorAdapter = PickedColorAdapter(this)
-        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { view, newColor -> changeCurrentColor(newColor) })
+        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { _, newColor -> changeCurrentColor(newColor) })
 
         rvPickedColors.setHasFixedSize(true)
         rvPickedColors.adapter = pickedColorAdapter
@@ -235,7 +235,12 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
                 if (saveFlag == FLAG_EXIT)
                     finish()
                 else if (saveFlag == FLAG_SHARE)
-                    ShareImageUtil.shareImg(this@PaintActivity, path)
+                    ShareImageUtil.shareImg(
+                            this@PaintActivity,
+                            getString(R.string.app_name),
+                            getString(R.string.sharemywork) + getString(R.string.sharecontent),
+                            path,
+                            getString(R.string.pleaseselect))
                 else if (saveFlag == FLAG_EFFECT)
                     showEffectDialog(path)
             }

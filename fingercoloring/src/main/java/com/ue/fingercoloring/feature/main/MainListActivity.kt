@@ -76,7 +76,7 @@ class MainListActivity : AppCompatActivity() {
             }
         }
 
-        rgTabs.setOnCheckedChangeListener { group, checkedId ->
+        rgTabs.setOnCheckedChangeListener { _, checkedId ->
             viewpager.currentItem = if (checkedId == R.id.rbTabWorks) 1 else 0
         }
         rgTabs.check(R.id.rbTabThemes)

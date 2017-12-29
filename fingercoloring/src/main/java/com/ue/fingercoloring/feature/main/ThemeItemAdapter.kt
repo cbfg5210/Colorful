@@ -13,7 +13,7 @@ import com.ue.fingercoloring.R
 import com.ue.fingercoloring.feature.paint.PaintActivity
 import com.ue.fingercoloring.model.ThemeItem
 import com.ue.fingercoloring.model.ThemeTitle
-import com.ue.fingercoloring.util.PicassoUtils
+import com.ue.library.util.PicassoUtils
 import kotlinx.android.synthetic.main.item_theme.view.*
 import kotlinx.android.synthetic.main.item_theme_title.view.*
 import java.util.*

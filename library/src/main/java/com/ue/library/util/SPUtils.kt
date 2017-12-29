@@ -1,9 +1,8 @@
-package com.ue.fingercoloring.util
+package com.ue.library.util
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
 import android.preference.PreferenceManager
 
 class SPUtils private constructor() {

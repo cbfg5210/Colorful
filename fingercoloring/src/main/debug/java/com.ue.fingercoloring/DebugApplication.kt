@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Process
 import android.support.v7.app.AppCompatDelegate
-import com.ue.fingercoloring.util.SPUtils
+import com.ue.library.util.SPUtils
 
 /**
  * Created by hawk on 2017/8/23.

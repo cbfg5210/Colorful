@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.util
+package com.ue.library.util
 
 /**
  * Created by hawk on 2017/4/9.
