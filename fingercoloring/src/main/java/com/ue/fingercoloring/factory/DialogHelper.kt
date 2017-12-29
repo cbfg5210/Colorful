@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.Toast
 import com.ue.fingercoloring.R
@@ -17,15 +16,13 @@ import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.view.ColorPickerSeekBar
 import com.ue.fingercoloring.view.MyDialogStyle
 import kotlinx.android.synthetic.main.layout_check_box.view.*
+import kotlinx.android.synthetic.main.view_addborder.view.*
 import kotlinx.android.synthetic.main.view_addwords.view.*
 
 /**
  * Created by Swifty.Wang on 2015/6/12.
  */
 class DialogHelper(context: Context) : MyDialogStyle(context) {
-
-    //just for add border
-    internal var drawableid: Int = 0
 
     fun showAddWordsDialog(onAddWordsSuccessListener: OnAddWordsSuccessListener) {
         val layout = LayoutInflater.from(context).inflate(R.layout.view_addwords, null)
@@ -69,33 +66,37 @@ class DialogHelper(context: Context) : MyDialogStyle(context) {
         showTwoButtonDialog(buffer, context.getString(R.string.repaint), context.getString(R.string.cancel), confirm, listener2, true)
     }
 
-    fun showAddBorderDialog(onChangeBorderListener: OnChangeBorderListener) {
+    fun showAddBorderDialog(listener: OnChangeBorderListener) {
         val layout = LayoutInflater.from(context).inflate(R.layout.view_addborder, null)
-        val border1 = layout.findViewById<View>(R.id.xiangkuang1) as ImageView
-        val border2 = layout.findViewById<View>(R.id.xiangkuang2) as ImageView
-        drawableid = 1
+        var drawableId = 1
+
         val changeBorderOnclickListener = View.OnClickListener { view ->
-            if (view.id == border1.id) {
-                border1.setBackgroundResource(R.drawable.maincolor_border_bg)
-                drawableid = 1
-                border2.setBackgroundResource(0)
+            if (view.id == layout.xiangkuang1.id) {
+                layout.xiangkuang1.setBackgroundResource(R.drawable.maincolor_border_bg)
+                drawableId = 1
+                layout.xiangkuang2.setBackgroundResource(0)
             } else {
-                border2.setBackgroundResource(R.drawable.maincolor_border_bg)
-                drawableid = 2
-                border1.setBackgroundResource(0)
+                layout.xiangkuang2.setBackgroundResource(R.drawable.maincolor_border_bg)
+                drawableId = 2
+                layout.xiangkuang1.setBackgroundResource(0)
             }
         }
-        border1.setOnClickListener(changeBorderOnclickListener)
-        border2.setOnClickListener(changeBorderOnclickListener)
-        val listener = View.OnClickListener {
-            dismissDialog()
-            if (drawableid == 1) {
-                onChangeBorderListener.changeBorder(R.drawable.xiangkuang, DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 21f), DensityUtil.dip2px(context, 21f))
-            } else {
-                onChangeBorderListener.changeBorder(R.drawable.xiangkuang2, DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f))
-            }
-        }
-        showBlankDialog(context.getString(R.string.addborder), layout, listener)
+        layout.xiangkuang1.setOnClickListener(changeBorderOnclickListener)
+        layout.xiangkuang2.setOnClickListener(changeBorderOnclickListener)
+
+        AlertDialog.Builder(context)
+                .setTitle(R.string.addborder)
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    dismissDialog()
+                    if (drawableId == 1)
+                        listener.changeBorder(R.drawable.xiangkuang, DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 21f), DensityUtil.dip2px(context, 21f))
+                    else
+                        listener.changeBorder(R.drawable.xiangkuang2, DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f), DensityUtil.dip2px(context, 16f))
+                }
+                .setNegativeButton(R.string.cancel, null)
+                .setView(layout)
+                .create()
+                .show()
     }
 
     private fun showOnceHintDialog(titleRes: Int, hintRes: Int, positiveRes: Int, positiveListener: View.OnClickListener?, negativeRes: Int, checkedSpKey: String) {

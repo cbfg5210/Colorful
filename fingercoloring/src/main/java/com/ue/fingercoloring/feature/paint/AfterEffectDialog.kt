@@ -1,12 +1,13 @@
 package com.ue.fingercoloring.feature.paint
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.event.OnAddWordsSuccessListener
 import com.ue.fingercoloring.event.OnChangeBorderListener
@@ -40,7 +41,6 @@ class AfterEffectDialog : DialogFragment() {
         fun newInstance(picturePath: String): AfterEffectDialog {
             val dialog = AfterEffectDialog()
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, 0)
-            dialog.isCancelable = false
 
             val arguments = Bundle()
             arguments.putString(ARG_PICTURE_PATH, picturePath)
@@ -59,46 +59,13 @@ class AfterEffectDialog : DialogFragment() {
         imageUri = arguments.getString(ARG_PICTURE_PATH)
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (dialog == null || dialog.window == null) return
-
-        val params = dialog.window.attributes
-        params.width = WindowManager.LayoutParams.MATCH_PARENT
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT
-        dialog.window.attributes = params
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.dialog_after_effect, null)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        rootView = LayoutInflater.from(context).inflate(R.layout.dialog_after_effect, null)
 
         PicassoUtils.displayImage(context, rootView.current_image, "file://$imageUri")
 
         val listener = View.OnClickListener { v ->
             when (v.id) {
-                R.id.tvAeCancel -> dismiss()
-
-                R.id.tvAeOk -> {
-                    if (!hasEffectAdded) {
-                        dismiss()
-                        return@OnClickListener
-                    }
-                    rootView.paintview.isDrawingCacheEnabled = true
-                    rootView.paintview.destroyDrawingCache()
-                    rootView.paintview.buildDrawingCache()
-
-                    tipDialog.showTip(childFragmentManager, getString(R.string.savingimage))
-                    presenter.saveImageLocally(
-                            rootView.paintview.drawingCache,
-                            getBorderWorkName(imageUri),
-                            object : PaintPresenter.OnSaveImageListener {
-                                override fun onSaved(path: String) {
-                                    effectListener?.onSaved(path)
-                                    dismiss()
-                                }
-                            })
-                }
-
                 R.id.addWords ->
                     mDialogHelper.showAddWordsDialog(object : OnAddWordsSuccessListener {
                         override fun addWordsSuccess(dragedTextView: DragedTextView) {
@@ -124,16 +91,38 @@ class AfterEffectDialog : DialogFragment() {
 
         rootView.addWords.setOnClickListener(listener)
         rootView.addBorder.setOnClickListener(listener)
-        rootView.tvAeCancel.setOnClickListener(listener)
-        rootView.tvAeOk.setOnClickListener(listener)
 
-        return rootView
+        return AlertDialog.Builder(context)
+                .setTitle(R.string.after_effect)
+                .setView(rootView)
+                .setPositiveButton(R.string.ok) { _, _ -> saveEffectWork() }
+                .setNegativeButton(R.string.cancel, null)
+                .setCancelable(false)
+                .create()
+    }
+
+    private fun saveEffectWork() {
+        if (!hasEffectAdded) {
+            dismiss()
+            return
+        }
+        rootView.paintview.isDrawingCacheEnabled = true
+        rootView.paintview.destroyDrawingCache()
+        rootView.paintview.buildDrawingCache()
+
+        tipDialog.showTip(childFragmentManager, getString(R.string.savingimage))
+        presenter.saveImageLocally(
+                rootView.paintview.drawingCache,
+                getBorderWorkName(imageUri),
+                object : PaintPresenter.OnSaveImageListener {
+                    override fun onSaved(path: String) {
+                        effectListener?.onSaved(path)
+                        dismiss()
+                    }
+                })
     }
 
     private fun getBorderWorkName(path: String): String {
-        val startIndex = path.lastIndexOf("/") + 1
-        var name = path.substring(startIndex)
-        name = name.replace(".png", "_bd.png")
-        return name
+        return path.substring(path.lastIndexOf("/") + 1).replace(".png", "_bd.png")
     }
 }
