@@ -28,15 +28,15 @@
             android:drawableTop="@drawable/sel_redo"
             android:text="@string/redo"/>
 
-        <RadioButton
-            android:id="@+id/rbPickColor"
-            style="@style/PaintRadioBtnStyle"
+        <TextView
+            android:id="@+id/tvPickColor"
+            style="@style/PaintSecondTvStyle"
             android:drawableTop="@drawable/checked_pickcolor"
             android:text="@string/pickcolor"/>
 
-        <RadioButton
-            android:id="@+id/jianbian_color"
-            style="@style/PaintRadioBtnStyle"
+        <TextView
+            android:id="@+id/tvGradient"
+            style="@style/PaintSecondTvStyle"
             android:drawableTop="@drawable/checked_gradual"
             android:text="@string/normal_color"/>
 

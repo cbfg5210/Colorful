@@ -10,7 +10,6 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
@@ -26,7 +25,7 @@ import com.ue.fingercoloring.view.TipDialog
 import kotlinx.android.synthetic.main.activity_paint.*
 
 
-class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+class PaintActivity : AppCompatActivity(), View.OnClickListener {
     private var isFromThemes: Boolean = false
     private var picturePath: String = ""
     private var pictureName: String = ""
@@ -93,8 +92,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         ivToggleActionBar.setOnClickListener(this)
         tvAfterEffect.setOnClickListener(this)
 
-        rbPickColor.setOnCheckedChangeListener(this)
-        jianbian_color.setOnCheckedChangeListener(this)
+        tvPickColor.setOnClickListener(this)
+        tvGradient.setOnClickListener(this)
 
         cpPaletteColorPicker.setOnChangedListener(object : ColorPicker.OnColorChangedListener {
             override fun colorChangedListener(color: Int) {
@@ -132,6 +131,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun onPickColorCheckChanged(isChecked: Boolean) {
+        tvPickColor.isSelected = isChecked
+
         if (!isChecked) {
             backToColorModel()
             return
@@ -143,7 +144,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             override fun onColorPick(status: Boolean, color: Int) {
                 if (status) {
                     changeCurrentColor(color)
-                    rbPickColor.isChecked = false
+                    onPickColorCheckChanged(false)
                 } else {
                     Toast.makeText(this@PaintActivity, getString(R.string.pickcolorerror), Toast.LENGTH_SHORT).show()
                 }
@@ -152,21 +153,15 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
     }
 
     private fun onJianBianColorCheckChanged(checked: Boolean) {
+        tvGradient.isSelected = checked
+
         if (checked) {
             mDialogHelper.showGradualHintDialog()
             civColoring.model = ColourImageView.Model.FILLGRADUALCOLOR
-            jianbian_color.setText(R.string.jianbian_color)
+            tvGradient.setText(R.string.jianbian_color)
         } else {
             civColoring.model = ColourImageView.Model.FILLCOLOR
-            jianbian_color.setText(R.string.normal_color)
-        }
-    }
-
-    override fun onCheckedChanged(view: CompoundButton, checked: Boolean) {
-        val viewId = view.id
-        when (viewId) {
-            R.id.rbPickColor -> onPickColorCheckChanged(checked)
-            R.id.jianbian_color -> onJianBianColorCheckChanged(checked)
+            tvGradient.setText(R.string.normal_color)
         }
     }
 
@@ -176,6 +171,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
             R.id.undo -> civColoring.undo()
             R.id.redo -> civColoring.redo()
             R.id.tvAfterEffect -> mDialogHelper.showEffectHintDialog(View.OnClickListener { saveToLocal(FLAG_EFFECT) })
+            R.id.tvPickColor -> onPickColorCheckChanged(!tvPickColor.isSelected)
+            R.id.tvGradient -> onJianBianColorCheckChanged(!tvGradient.isSelected)
 
             R.id.tvTogglePalette ->
                 cpPaletteColorPicker.visibility =
@@ -193,11 +190,11 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
 
     private fun backToColorModel() {
         civColoring.model = ColourImageView.Model.FILLCOLOR
-        jianbian_color.isChecked = false
+        onJianBianColorCheckChanged(false)
     }
 
     private fun changeCurrentColor(newColor: Int) {
-        rbPickColor.isChecked = false
+        onPickColorCheckChanged(false)
         pickedColorAdapter.updateColor(newColor)
 
         cpPaletteColorPicker.color = newColor
