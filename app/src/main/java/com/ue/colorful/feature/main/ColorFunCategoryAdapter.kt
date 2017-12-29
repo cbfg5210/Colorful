@@ -47,6 +47,9 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
      * Delegate
      */
     private class ColorFunCategoryDelegate(private val activity: Activity) : BaseAdapterDelegate<ColorFunCategory>(activity, R.layout.item_color_fun_category) {
+        private val padding5 = activity.resources.getDimension(R.dimen.widget_size_5).toInt()
+        private val padding10 = activity.resources.getDimension(R.dimen.widget_size_10).toInt()
+        private val textSize = activity.resources.getDimension(R.dimen.font_size_8)
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             return ViewHolder(itemView)
@@ -63,13 +66,12 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             holder.tvCatName.setBackgroundColor(Color.parseColor("#${item.colorHex}"))
 
             var count = 0
-            val funs = item.funs
             var func: ColorFunction
-            for (i in funs.indices) {
-                func = funs.get(i)
+            for (i in item.funs.indices) {
+                func = item.funs[i]
                 val textView = AppCompatTextView(activity)
-                textView.setPadding(20, 40, 20, 40)
-                textView.textSize = 17F
+                textView.setPadding(padding5, padding10, padding5, padding10)
+                textView.textSize = textSize
                 val drawable = StateListDrawable()
                 drawable.addState(intArrayOf(android.R.attr.state_pressed), ColorDrawable(Color.parseColor("#99${item.colorHex}")))
                 drawable.addState(intArrayOf(), ColorDrawable(Color.parseColor("#CC${item.colorHex}")))
@@ -82,7 +84,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
 
                 count++
 
-                if (count < funs.size) {
+                if (count < item.funs.size) {
                     val divider = View(activity)
                     divider.setBackgroundColor(Color.parseColor("#${item.colorHex}"))
                     holder.vgCatContainer.addView(divider, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2))

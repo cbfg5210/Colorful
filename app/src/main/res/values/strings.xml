@@ -155,9 +155,9 @@
     <string name="game_color_diff">色差找找看</string>
     <string name="game_color_light">哪个颜色浅</string>
     <string name="games">小游戏</string>
-    <string name="transparency">透明度</string>
-    <string name="cal_argb" formatted="false">颜色值&#038;ARGB</string>
-    <string name="calculate">计算</string>
+    <string name="transparency">计算透明度</string>
+    <string name="cal_argb" formatted="false">计算颜色值&#038;ARGB</string>
+    <string name="classroom">小课堂</string>
     <string name="vision_test">色觉测试</string>
     <string name="other">其它</string>
     <string name="mode_classic">经典模式</string>

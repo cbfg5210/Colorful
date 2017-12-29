@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             colorFuns = ArrayList<ColorFunction>()
             colorFuns.add(ColorFunction(getString(R.string.transparency), FunFlags.CALC_ALPHA))
             colorFuns.add(ColorFunction(getString(R.string.cal_argb), FunFlags.CALC_ARGB))
-            colorCats.add(ColorFunCategory(getString(R.string.calculate), colorFuns, "c8e6c9"))
+            colorCats.add(ColorFunCategory(getString(R.string.classroom), colorFuns, "c8e6c9"))
             //其它
             colorFuns = ArrayList<ColorFunction>()
             colorFuns.add(ColorFunction(getString(R.string.vision_test), FunFlags.VISION_TEST))
