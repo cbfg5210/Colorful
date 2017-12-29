@@ -29,5 +29,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/svg_delete_work"/>
+        app:srcCompat="@drawable/fc_svg_delete_work"/>
 </LinearLayout>

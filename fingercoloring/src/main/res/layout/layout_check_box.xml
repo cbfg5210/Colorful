@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:button="@drawable/checkbox_bg"
-        android:paddingLeft="5dp"
+        android:gravity="center"
         android:text="@string/dontshownexttime"/>
 </FrameLayout>

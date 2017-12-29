@@ -19,31 +19,31 @@
         <TextView
             android:id="@+id/undo"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/sel_undo"
+            android:drawableTop="@drawable/fc_sel_undo"
             android:text="@string/undo"/>
 
         <TextView
             android:id="@+id/redo"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/sel_redo"
+            android:drawableTop="@drawable/fc_sel_redo"
             android:text="@string/redo"/>
 
         <TextView
             android:id="@+id/tvPickColor"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/checked_pickcolor"
+            android:drawableTop="@drawable/sel_pick_color"
             android:text="@string/pickcolor"/>
 
         <TextView
             android:id="@+id/tvGradient"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/checked_gradual"
+            android:drawableTop="@drawable/sel_gradient_color"
             android:text="@string/normal_color"/>
 
         <TextView
             android:id="@+id/tvTogglePalette"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/svg_palette"
+            android:drawableTop="@drawable/fc_svg_palette"
             android:text="@string/palette"/>
 
         <TextView

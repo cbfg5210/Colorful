@@ -8,13 +8,13 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/menuSave"
-        android:icon="@drawable/svg_save"
+        android:icon="@drawable/fc_svg_save"
         android:title="@string/save"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menuShare"
-        android:icon="@drawable/svg_share"
+        android:icon="@drawable/fc_svg_share"
         android:title="@string/share"
         app:showAsAction="always"/>
 </menu>

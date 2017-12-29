@@ -29,7 +29,6 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.ue.fingercoloring.util.L
 
 class ColorPicker : View {
 
@@ -319,7 +318,6 @@ class ColorPicker : View {
                     }
                     invalidate()
                 }
-                L.e("color2", colorHSV[0].toString() + ";" + colorHSV[1] + ";" + colorHSV[2])
                 return true
             }
         }
