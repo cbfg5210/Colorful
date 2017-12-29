@@ -231,7 +231,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
                 if (saveFlag == FLAG_EXIT)
                     finish()
                 else if (saveFlag == FLAG_SHARE)
-                    ShareImageUtil.getInstance(this@PaintActivity).shareImg(path)
+                    ShareImageUtil.shareImg(this@PaintActivity, path)
                 else if (saveFlag == FLAG_EFFECT)
                     showEffectDialog(path)
             }
