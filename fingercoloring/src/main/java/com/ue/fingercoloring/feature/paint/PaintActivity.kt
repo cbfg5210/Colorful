@@ -292,7 +292,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
             android.R.id.home -> onBackPressed()
             R.id.menuSave -> saveToLocal(FLAG_SAVE)
             R.id.menuShare -> saveToLocal(FLAG_SHARE)
-            R.id.menuHelp -> Toast.makeText(this, "help", Toast.LENGTH_SHORT).show()
             R.id.menuDelete -> {
                 mDialogHelper.showRepaintDialog(View.OnClickListener {
                     mDialogHelper.dismissDialog()

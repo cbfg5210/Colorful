@@ -3,7 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuDelete"
-        android:icon="@drawable/svg_delete"
+        android:icon="@drawable/svg_fc_delete"
         android:title="@string/delete"
         app:showAsAction="always"/>
     <item
@@ -16,10 +16,5 @@
         android:id="@+id/menuShare"
         android:icon="@drawable/svg_share"
         android:title="@string/share"
-        app:showAsAction="collapseActionView"/>
-    <item
-        android:id="@+id/menuHelp"
-        android:icon="@drawable/svg_help"
-        android:title="@string/help"
-        app:showAsAction="collapseActionView"/>
+        app:showAsAction="always"/>
 </menu>
