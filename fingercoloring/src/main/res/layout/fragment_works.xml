@@ -10,9 +10,7 @@
         android:id="@+id/userpaintlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbars="none"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        android:scrollbars="none"/>
 
     <include
         layout="@layout/view_emptylist"

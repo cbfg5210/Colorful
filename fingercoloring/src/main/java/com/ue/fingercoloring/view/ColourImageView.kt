@@ -330,7 +330,7 @@ class ColourImageView : AppCompatImageView {
         this.onRedoUndoListener = onRedoUndoListener
     }
 
-    //clear stack and the current image
+    //clear stack and the current ivThemeImage
     fun clearStack() {
         bmstackredo.clear()
         bmstackundo.clear()

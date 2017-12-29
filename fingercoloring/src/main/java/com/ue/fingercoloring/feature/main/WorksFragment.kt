@@ -3,6 +3,7 @@ package com.ue.fingercoloring.feature.main
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.ue.fingercoloring.R
 import com.ue.fingercoloring.model.LocalWork
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.RxJavaUtils
+import com.ue.fingercoloring.view.TimeLineDecoration
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,6 +41,9 @@ class WorksFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_works, container, false)
+
+        rootView.userpaintlist.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rootView.userpaintlist.addItemDecoration(TimeLineDecoration(context, 100))
 
         adapter = LocalPaintAdapter(activity, localWorks)
         rootView.userpaintlist.adapter = adapter

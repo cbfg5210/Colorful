@@ -18,7 +18,7 @@ class ShareImageUtil private constructor() {
         val uri = Uri.fromFile(file)
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
-        intent.type = "image/*"
+        intent.type = "ivThemeImage/*"
         intent.putExtra(Intent.EXTRA_SUBJECT, context!!.getString(R.string.app_name))
         intent.putExtra(Intent.EXTRA_TEXT, context!!.getString(R.string.sharemywork) + context!!.getString(R.string.sharecontent))
         intent.putExtra(Intent.EXTRA_STREAM, uri)
