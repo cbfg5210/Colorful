@@ -52,11 +52,6 @@ class MainListActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        initPager()
-        vgTabs.setupWithViewPager(viewpager)
-    }
-
-    private fun initPager() {
         val titles = arrayOf(
                 getString(R.string.themelist),
                 getString(R.string.my_works)
@@ -79,5 +74,10 @@ class MainListActivity : AppCompatActivity() {
                 return titles.size
             }
         }
+
+        rgTabs.setOnCheckedChangeListener { group, checkedId ->
+            viewpager.currentItem = if (checkedId == R.id.rbTabWorks) 1 else 0
+        }
+        rgTabs.check(R.id.rbTabThemes)
     }
 }
