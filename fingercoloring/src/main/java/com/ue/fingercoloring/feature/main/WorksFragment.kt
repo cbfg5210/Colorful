@@ -20,7 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_works.view.*
-import kotlinx.android.synthetic.main.view_emptylist.view.*
+import kotlinx.android.synthetic.main.layout_empty.view.*
 
 class WorksFragment : Fragment() {
     private lateinit var adapter: LocalPaintAdapter
@@ -33,7 +33,7 @@ class WorksFragment : Fragment() {
     //status--end
 
     companion object {
-        val TAG_WORKS="works"
+        val TAG_WORKS = "works"
         fun newInstance(): WorksFragment {
             return WorksFragment()
         }
@@ -42,14 +42,14 @@ class WorksFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_works, container, false)
 
-        rootView.userpaintlist.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        rootView.userpaintlist.addItemDecoration(TimeLineDecoration(context, 100))
+        rootView.ervWorks.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rootView.ervWorks.addItemDecoration(TimeLineDecoration(context, (resources.displayMetrics.widthPixels * 0.085f).toInt()))
 
         adapter = LocalPaintAdapter(activity, localWorks)
-        rootView.userpaintlist.adapter = adapter
-        rootView.userpaintlist.setEmptyView(rootView.emptylay_paintlist)
+        rootView.ervWorks.adapter = adapter
+        rootView.ervWorks.setEmptyView(rootView.vgEmptyPanel)
 
-        rootView.userpaintlist.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        rootView.ervWorks.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {

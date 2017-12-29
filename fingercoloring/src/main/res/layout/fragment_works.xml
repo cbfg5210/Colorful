@@ -7,13 +7,15 @@
     android:layout_height="match_parent">
 
     <com.ue.fingercoloring.view.ERecyclerView
-        android:id="@+id/userpaintlist"
+        android:id="@+id/ervWorks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:clipToPadding="false"
         android:scrollbars="none"/>
 
     <include
-        layout="@layout/view_emptylist"
+        layout="@layout/layout_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>

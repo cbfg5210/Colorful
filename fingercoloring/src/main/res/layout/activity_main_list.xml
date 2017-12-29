@@ -25,7 +25,7 @@
             android:button="@null"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Themes"
+            android:text="@string/themelist"
             android:textColor="@color/white"
             android:textSize="16sp"/>
 
@@ -38,7 +38,7 @@
             android:button="@null"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Works"
+            android:text="@string/my_works"
             android:textColor="@color/white"
             android:textSize="16sp"/>
     </RadioGroup>
@@ -46,6 +46,5 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

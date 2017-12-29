@@ -12,10 +12,12 @@ import com.ue.fingercoloring.feature.paint.PaintActivity
 import com.ue.fingercoloring.model.LocalWork
 import com.ue.fingercoloring.util.FileUtils
 import kotlinx.android.synthetic.main.item_work.view.*
+import java.text.SimpleDateFormat
 
 internal class LocalPaintAdapter(var context: Context, localImageListBean: List<LocalWork>?) : RecyclerView.Adapter<LocalPaintAdapter.ViewHolder>() {
     private val imgWidth = (context.resources.displayMetrics.widthPixels * 0.45f).toInt()
     val items = ArrayList<LocalWork>()
+    val dateFormatter = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
     init {
         if (localImageListBean != null) items.addAll(localImageListBean)
@@ -46,13 +48,15 @@ internal class LocalPaintAdapter(var context: Context, localImageListBean: List<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = items[position]
+
         Picasso.with(context)
-                .load(items[position].imageUrl)
-                .resize(imgWidth, (imgWidth / items[position].wvHRadio).toInt())
+                .load(item.imageUrl)
+                .resize(imgWidth, (imgWidth / item.wvHRadio).toInt())
                 .tag(WorksFragment.TAG_WORKS)
                 .into(holder.ivThemeImage)
 
-        holder.tvLastModify.text = context.getString(R.string.lastModifty, items[position].lastModDate)
+        holder.tvLastModify.text = dateFormatter.format(item.lastModTimeStamp)
     }
 
     override fun getItemCount(): Int {
