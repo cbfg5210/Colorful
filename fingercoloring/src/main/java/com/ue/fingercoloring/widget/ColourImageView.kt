@@ -61,10 +61,6 @@ class ColourImageView : AppCompatImageView {
         attacher = MPhotoViewAttacher(this)
     }
 
-    fun isUndoable(): Boolean {
-        return !bmstackundo.isEmpty()
-    }
-
     override fun setImageBitmap(bm: Bitmap?) {
         super.setImageBitmap(bm)
 
@@ -84,6 +80,10 @@ class ColourImageView : AppCompatImageView {
         if (status) color = mBitmap!!.getPixel(x, y)
 
         onColorPickListener?.onColorPick(status, color)
+    }
+
+    fun isUndoable(): Boolean {
+        return bmstackundo.size != 0
     }
 
     fun clearPoints() {

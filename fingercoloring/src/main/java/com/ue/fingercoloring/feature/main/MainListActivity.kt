@@ -24,6 +24,7 @@ class MainListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_list)
 
+        rgTabs.check(R.id.rbTabWorks)
         checkExternalPermissions()
     }
 

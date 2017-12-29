@@ -37,6 +37,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tipDialog: TipDialog
 
     private lateinit var pickedColorAdapter: PickedColorAdapter
+    private var hasSaved = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +106,8 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
             override fun onRedoUndo(undoSize: Int, redoSize: Int) {
                 undo.isEnabled = undoSize != 0
                 redo.isEnabled = redoSize != 0
+
+                hasSaved = false
             }
         })
     }
@@ -221,6 +224,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
                     return
                 }
                 savedPicturePath = path
+                hasSaved = true
                 Toast.makeText(this@PaintActivity, getString(R.string.saveSuccess) + path, Toast.LENGTH_SHORT).show()
 
                 if (listener != null) {
@@ -268,6 +272,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
         }
         tipDialog.showTip(supportFragmentManager, getString(R.string.loadpicture))
         civColoring.clearStack()
+        hasSaved = true
 
         PicassoUtils.displayImage(this, civColoring, path ?: picturePath, object : SimpleTarget() {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom) {
@@ -307,7 +312,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        if (!civColoring.isUndoable()) {
+        if (hasSaved || !civColoring.isUndoable()) {
             super.onBackPressed()
             return
         }
