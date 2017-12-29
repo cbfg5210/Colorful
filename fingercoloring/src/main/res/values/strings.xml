@@ -143,4 +143,6 @@
     <string name="is_exit">确定退出吗?</string>
     <string name="save_exit">保存并退出</string>
     <string name="quit_exit">不保存并退出</string>
+    <string name="no_external_permission">读取文件失败：应用没有被授予外部存储权限</string>
+    <string name="read_data_error">读取数据出错:%s</string>
 </resources>

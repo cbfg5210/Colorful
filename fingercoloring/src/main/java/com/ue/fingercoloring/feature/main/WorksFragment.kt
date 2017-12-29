@@ -1,15 +1,19 @@
 package com.ue.fingercoloring.feature.main
 
+import android.Manifest
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.model.LocalWork
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.RxJavaUtils
+import com.yanzhenjie.permission.AndPermission
+import com.yanzhenjie.permission.PermissionListener
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,6 +31,14 @@ class WorksFragment : Fragment() {
     private var disposable: Disposable? = null
     private var newWorkPath = ""
     private var pickedWorkPos = -1
+    private var hasExternalPermissions = false
+
+    companion object {
+        private val REQ_PERMISSION = 10
+        fun newInstance(): WorksFragment {
+            return WorksFragment()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_works, container, false)
@@ -36,6 +48,33 @@ class WorksFragment : Fragment() {
         rootView.userpaintlist.setEmptyView(rootView.emptylay_paintlist)
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        checkExternalPermissions()
+    }
+
+    private fun checkExternalPermissions() {
+        AndPermission.with(this)
+                .requestCode(REQ_PERMISSION)
+                .permission(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .rationale { requestCode, rationale -> AndPermission.rationaleDialog(context, rationale).show() }
+                .callback(object : PermissionListener {
+                    override fun onSucceed(requestCode: Int, grantPermissions: MutableList<String>) {
+                        if (requestCode == REQ_PERMISSION) {
+                            hasExternalPermissions = true
+                            onResume()
+                        }
+                    }
+
+                    override fun onFailed(requestCode: Int, deniedPermissions: MutableList<String>) {
+                        Toast.makeText(context, R.string.no_external_permission, Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .start()
     }
 
     private fun loadLocalWorks() {
@@ -53,6 +92,8 @@ class WorksFragment : Fragment() {
                     adapter.notifyDataSetChanged()
 
                     localWorks = mLocalWorks
+                }, { t ->
+                    Toast.makeText(context, getString(R.string.read_data_error, t.message), Toast.LENGTH_SHORT).show()
                 })
     }
 
@@ -63,6 +104,8 @@ class WorksFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        if (!hasExternalPermissions) return
 
         if (localWorks == null) {
             loadLocalWorks()
@@ -75,13 +118,6 @@ class WorksFragment : Fragment() {
         if (pickedWorkPos >= 0) {
             //从作品列表进入了编辑页，更新该项
             return
-        }
-    }
-
-    companion object {
-
-        fun newInstance(): WorksFragment {
-            return WorksFragment()
         }
     }
 }

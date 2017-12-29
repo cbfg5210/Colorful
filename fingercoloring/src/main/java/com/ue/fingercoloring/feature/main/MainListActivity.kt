@@ -15,24 +15,23 @@ class MainListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_list)
 
-        viewpager.adapter = pagerAdapter
+        initPager()
         vgTabs.setupWithViewPager(viewpager)
     }
 
-    private val pagerAdapter: FragmentStatePagerAdapter
-        get() {
-            return object : FragmentStatePagerAdapter(supportFragmentManager) {
-                override fun getItem(position: Int): Fragment {
-                    return if (position == 0) ThemesFragment.newInstance() else WorksFragment.newInstance()
-                }
+    private fun initPager() {
+        viewpager.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
+            override fun getItem(position: Int): Fragment {
+                return if (position == 0) ThemesFragment.newInstance() else WorksFragment.newInstance()
+            }
 
-                override fun getPageTitle(position: Int): CharSequence {
-                    return if (position == 0) getString(R.string.themelist) else getString(R.string.my_works)
-                }
+            override fun getPageTitle(position: Int): CharSequence {
+                return if (position == 0) getString(R.string.themelist) else getString(R.string.my_works)
+            }
 
-                override fun getCount(): Int {
-                    return 2
-                }
+            override fun getCount(): Int {
+                return 2
             }
         }
+    }
 }
