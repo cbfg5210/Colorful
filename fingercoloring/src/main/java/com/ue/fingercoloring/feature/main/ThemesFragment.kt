@@ -25,6 +25,14 @@ class ThemesFragment : Fragment() {
     private var items: List<Item>? = null
     private var adapter: ThemeItemAdapter? = null
 
+    companion object {
+        val TAG_THEMES = "themes"
+
+        fun newInstance(): ThemesFragment {
+            return ThemesFragment()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_themes, container, false)
 
@@ -39,9 +47,9 @@ class ThemesFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Picasso.with(context).resumeTag(PICASSO_TAG)
+                    Picasso.with(context).resumeTag(TAG_THEMES)
                 } else if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
-                    Picasso.with(context).pauseTag(PICASSO_TAG)
+                    Picasso.with(context).pauseTag(TAG_THEMES)
                 }
             }
         })
@@ -108,14 +116,6 @@ class ThemesFragment : Fragment() {
         if (items == null) {
             loadData()
             //loadTestData();
-        }
-    }
-
-    companion object {
-        val PICASSO_TAG = "themeList"
-
-        fun newInstance(): ThemesFragment {
-            return ThemesFragment()
         }
     }
 }

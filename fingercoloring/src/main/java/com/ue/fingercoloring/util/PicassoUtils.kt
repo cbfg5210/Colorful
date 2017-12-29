@@ -8,7 +8,7 @@ import android.widget.ImageView
 
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import com.ue.fingercoloring.listener.SimpleTarget
+import com.ue.fingercoloring.event.SimpleTarget
 
 /**
  * Created by hawk on 2017/12/24.

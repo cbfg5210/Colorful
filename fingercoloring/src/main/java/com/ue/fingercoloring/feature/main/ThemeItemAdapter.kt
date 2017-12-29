@@ -130,7 +130,7 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
             Picasso.with(holder.itemView.context)
                     .load(themeTerm.imageUrl)
                     .resize(imgSize, imgSize)//有效减少内存、加快速度
-                    .tag(ThemesFragment.PICASSO_TAG)
+                    .tag(ThemesFragment.TAG_THEMES)
                     .into(vHolder.ivThemeItem)
         }
 

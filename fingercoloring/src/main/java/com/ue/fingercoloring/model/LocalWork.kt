@@ -1,5 +1,7 @@
 package com.ue.fingercoloring.model
 
+import com.ue.fingercoloring.util.GsonHolder
+
 /**
  * Created by Swifty.Wang on 2015/9/1.
  */
@@ -9,5 +11,9 @@ class LocalWork(val imageName: String, val imageUrl: String, var lastModDate: St
 
     init {
         this.wvHRadio = wvHRadio
+    }
+
+    override fun toString():String{
+        return GsonHolder.gson.toJson(this)
     }
 }

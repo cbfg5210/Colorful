@@ -38,11 +38,9 @@ class ERecyclerView : RecyclerView {
     }
 
     private fun checkIfEmpty() {
-        if (emptyView == null) {
-            return
-        }
-        val adapter = adapter
-        if (adapter != null && adapter.itemCount > 0 && visibility == View.GONE) {
+        if (emptyView == null) return
+
+        if (adapter != null && adapter.itemCount > 0) {
             emptyView!!.visibility = View.GONE
             visibility = View.VISIBLE
             return

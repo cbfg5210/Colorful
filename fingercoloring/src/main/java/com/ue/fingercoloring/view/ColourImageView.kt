@@ -7,7 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.ue.fingercoloring.constant.SPKeys
-import com.ue.fingercoloring.listener.OnDrawLineListener
+import com.ue.fingercoloring.event.OnDrawLineListener
 import com.ue.fingercoloring.util.RxJavaUtils
 import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.util.SizedStack

@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.*
 import com.ue.fingercoloring.R
 import com.ue.fingercoloring.constant.SPKeys
-import com.ue.fingercoloring.listener.OnAddWordsSuccessListener
-import com.ue.fingercoloring.listener.OnChangeBorderListener
+import com.ue.fingercoloring.event.OnAddWordsSuccessListener
+import com.ue.fingercoloring.event.OnChangeBorderListener
 import com.ue.fingercoloring.util.DensityUtil
 import com.ue.fingercoloring.util.SPUtils
 import com.ue.fingercoloring.view.ColorPickerSeekBar

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,8 +15,8 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.fingercoloring.R
+import com.ue.fingercoloring.event.SimpleTarget
 import com.ue.fingercoloring.factory.DialogHelper
-import com.ue.fingercoloring.listener.SimpleTarget
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.PicassoUtils
 import com.ue.fingercoloring.util.ShareImageUtil
@@ -48,8 +47,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.
         isFromThemes = intent.getBooleanExtra(ARG_IS_FROM_THEMES, true)
         pictureName = intent.getStringExtra(ARG_PICTURE_NAME)
         picturePath = intent.getStringExtra(ARG_PICTURE_PATH)
-
-        Log.e("PaintActivity", "onCreate: pictureName=$pictureName,picturePath=$picturePath")
 
         presenter = PaintPresenter(this)
         tipDialog = TipDialog.newInstance()

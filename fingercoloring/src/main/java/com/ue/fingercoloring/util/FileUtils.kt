@@ -29,6 +29,12 @@ object FileUtils {
         return localWorks
     }
 
+    fun obtainLocalImage(path: String): LocalWork? {
+        val f = File(path)
+        return if (f.exists()) LocalWork(f.name, "file://" + path + "/" + f.name, DateTimeUtil.formatTimeStamp(f.lastModified()), f.lastModified(), getDropboxIMGSize(f))
+        else null
+    }
+
     fun deleteFile(savedPicturePath: String): Boolean {
         val file = File(savedPicturePath)
         return if (file.exists()) file.delete() else false

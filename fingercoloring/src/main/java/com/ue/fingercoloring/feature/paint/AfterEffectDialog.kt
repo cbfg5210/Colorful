@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.ue.fingercoloring.R
+import com.ue.fingercoloring.event.OnAddWordsSuccessListener
+import com.ue.fingercoloring.event.OnChangeBorderListener
 import com.ue.fingercoloring.factory.DialogHelper
-import com.ue.fingercoloring.listener.OnAddWordsSuccessListener
-import com.ue.fingercoloring.listener.OnChangeBorderListener
 import com.ue.fingercoloring.util.PicassoUtils
 import com.ue.fingercoloring.view.DragedTextView
 import com.ue.fingercoloring.view.TipDialog

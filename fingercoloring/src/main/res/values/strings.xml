@@ -100,7 +100,7 @@
     <string name="deleteAllPaints">删除所有作品</string>
     <string name="confirmDeleteAllPaints">确认删除所有您的作品吗？删除后无法找回的哦！</string>
     <string name="deleteAllPaintsSuccess">所有作品删除完成！</string>
-    <string name="lastModifty">最后修改时间</string>
+    <string name="lastModifty">最后修改时间 %s</string>
     <string name="aboutImage">线稿来源：本软件线稿来自网络抓取并自己算法处理，如您有疑问或有线稿想投放请通过以下的联系方式。</string>
     <string name="addQQgroup">加入QQ玩家群</string>
     <string name="addQQgroupContent">需要现在加入QQ玩家讨论群吗?加入之后可以和大家一起玩游戏哦！</string>
