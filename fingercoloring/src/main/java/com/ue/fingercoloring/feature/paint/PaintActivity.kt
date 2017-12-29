@@ -19,9 +19,9 @@ import com.ue.fingercoloring.factory.DialogHelper
 import com.ue.fingercoloring.util.FileUtils
 import com.ue.fingercoloring.util.PicassoUtils
 import com.ue.fingercoloring.util.ShareImageUtil
-import com.ue.fingercoloring.view.ColorPicker
-import com.ue.fingercoloring.view.ColourImageView
-import com.ue.fingercoloring.view.TipDialog
+import com.ue.fingercoloring.widget.ColorPicker
+import com.ue.fingercoloring.widget.ColourImageView
+import com.ue.fingercoloring.widget.TipDialog
 import kotlinx.android.synthetic.main.activity_paint.*
 
 
@@ -294,7 +294,6 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
             R.id.menuShare -> saveToLocal(FLAG_SHARE)
             R.id.menuDelete -> {
                 mDialogHelper.showRepaintDialog(View.OnClickListener {
-                    mDialogHelper.dismissDialog()
                     repaint(true)
                 })
             }

@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.view
+package com.ue.fingercoloring.widget
 
 /*
  * Copyright 2013 Piotr Adamus

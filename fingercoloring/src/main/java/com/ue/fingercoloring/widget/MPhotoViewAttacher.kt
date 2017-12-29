@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.view
+package com.ue.fingercoloring.widget
 
 import android.graphics.Matrix
 import android.view.MotionEvent

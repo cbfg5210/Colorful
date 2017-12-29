@@ -1,4 +1,4 @@
-package com.ue.fingercoloring.view
+package com.ue.fingercoloring.widget
 
 import android.content.Context
 import android.content.DialogInterface
@@ -105,7 +105,7 @@ class ColourImageView : AppCompatImageView {
 
         if (isOk) {
             ProgressLoading.show(context, true)
-            ProgressLoading.setOndismissListener(DialogInterface.OnDismissListener {
+            ProgressLoading.setOnDismissListener(DialogInterface.OnDismissListener {
                 RxJavaUtils.dispose(mDisposable)
             })
 
@@ -140,7 +140,7 @@ class ColourImageView : AppCompatImageView {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { bm ->
-                    ProgressLoading.DismissDialog()
+                    ProgressLoading.dismiss()
                     setImageDrawable(BitmapDrawable(resources, bm))
                     onRedoUndoListener?.onRedoUndo(bmstackundo.size, bmstackredo.size)
                 }

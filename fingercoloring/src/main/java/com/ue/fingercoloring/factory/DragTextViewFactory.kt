@@ -6,7 +6,7 @@ import android.text.Editable
 import android.util.TypedValue
 import android.widget.FrameLayout
 
-import com.ue.fingercoloring.view.DragedTextView
+import com.ue.fingercoloring.widget.DragedTextView
 
 /**
  * Created by macpro001 on 20/8/15.

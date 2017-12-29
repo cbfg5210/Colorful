@@ -13,8 +13,8 @@ import com.ue.fingercoloring.event.OnAddWordsSuccessListener
 import com.ue.fingercoloring.event.OnChangeBorderListener
 import com.ue.fingercoloring.factory.DialogHelper
 import com.ue.fingercoloring.util.PicassoUtils
-import com.ue.fingercoloring.view.DragedTextView
-import com.ue.fingercoloring.view.TipDialog
+import com.ue.fingercoloring.widget.DragedTextView
+import com.ue.fingercoloring.widget.TipDialog
 import kotlinx.android.synthetic.main.dialog_after_effect.view.*
 
 /**

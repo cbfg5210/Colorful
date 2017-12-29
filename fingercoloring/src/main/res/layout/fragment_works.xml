@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ue.fingercoloring.view.ERecyclerView
+    <com.ue.fingercoloring.widget.ERecyclerView
         android:id="@+id/ervWorks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

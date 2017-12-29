@@ -13,8 +13,7 @@ import com.ue.fingercoloring.event.OnAddWordsSuccessListener
 import com.ue.fingercoloring.event.OnChangeBorderListener
 import com.ue.fingercoloring.util.DensityUtil
 import com.ue.fingercoloring.util.SPUtils
-import com.ue.fingercoloring.view.ColorPickerSeekBar
-import com.ue.fingercoloring.view.MyDialogStyle
+import com.ue.fingercoloring.widget.ColorPickerSeekBar
 import kotlinx.android.synthetic.main.layout_check_box.view.*
 import kotlinx.android.synthetic.main.view_addborder.view.*
 import kotlinx.android.synthetic.main.view_addwords.view.*
@@ -22,7 +21,7 @@ import kotlinx.android.synthetic.main.view_addwords.view.*
 /**
  * Created by Swifty.Wang on 2015/6/12.
  */
-class DialogHelper(context: Context) : MyDialogStyle(context) {
+class DialogHelper(private val context: Context) {
 
     fun showAddWordsDialog(onAddWordsSuccessListener: OnAddWordsSuccessListener) {
         val layout = LayoutInflater.from(context).inflate(R.layout.view_addwords, null)
@@ -50,7 +49,6 @@ class DialogHelper(context: Context) : MyDialogStyle(context) {
                         Toast.makeText(context, context.getString(R.string.nowords), Toast.LENGTH_SHORT).show()
                         return@setPositiveButton
                     }
-                    dismissDialog()
                     onAddWordsSuccessListener.addWordsSuccess(DragTextViewFactory.getInstance().createUserWordTextView(context, layout.addeditwords.text.toString(), layout.addeditwords.currentTextColor, layout.addeditwords.textSize.toInt()))
                 }
                 .setNegativeButton(R.string.cancel, null)
@@ -59,11 +57,13 @@ class DialogHelper(context: Context) : MyDialogStyle(context) {
                 .show()
     }
 
-    fun showRepaintDialog(confirm: View.OnClickListener) {
-        val buffer = StringBuffer()
-        buffer.append(context.getString(R.string.confirmRepaint) + "\n")
-        val listener2 = View.OnClickListener { dismissDialog() }
-        showTwoButtonDialog(buffer, context.getString(R.string.repaint), context.getString(R.string.cancel), confirm, listener2, true)
+    fun showRepaintDialog(confirm: View.OnClickListener?) {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.confirmRepaint)
+                .setPositiveButton(R.string.cancel, null)
+                .setNegativeButton(R.string.ok) { _, _ -> confirm?.onClick(null) }
+                .create()
+                .show()
     }
 
     fun showAddBorderDialog(listener: OnChangeBorderListener) {
@@ -87,7 +87,6 @@ class DialogHelper(context: Context) : MyDialogStyle(context) {
         AlertDialog.Builder(context)
                 .setTitle(R.string.addborder)
                 .setPositiveButton(R.string.ok) { _, _ ->
-                    dismissDialog()
                     if (drawableId == 1)
                         listener.changeBorder(R.drawable.xiangkuang, DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 36f), DensityUtil.dip2px(context, 21f), DensityUtil.dip2px(context, 21f))
                     else

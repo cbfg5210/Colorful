@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <!--上色图片-->
-    <com.ue.fingercoloring.view.ColourImageView
+    <com.ue.fingercoloring.widget.ColourImageView
         android:id="@+id/civColoring"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,7 +76,7 @@
         android:scaleType="fitEnd"/>
 
     <!--取色板-->
-    <com.ue.fingercoloring.view.ColorPicker
+    <com.ue.fingercoloring.widget.ColorPicker
         android:id="@+id/cpPaletteColorPicker"
         android:layout_width="150dp"
         android:layout_height="150dp"

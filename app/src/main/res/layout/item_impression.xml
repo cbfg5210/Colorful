@@ -7,14 +7,14 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
-    <com.ue.fingercoloring.view.SquareView
+    <com.ue.fingercoloring.widget.SquareView
         android:id="@+id/vColor1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:background="@color/black"/>
 
-    <com.ue.fingercoloring.view.SquareView
+    <com.ue.fingercoloring.widget.SquareView
         android:id="@+id/vColor2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
         android:layout_weight="1"
         tools:background="@color/black"/>
 
-    <com.ue.fingercoloring.view.SquareView
+    <com.ue.fingercoloring.widget.SquareView
         android:id="@+id/vColor3"
         android:layout_width="0dp"
         android:layout_height="match_parent"

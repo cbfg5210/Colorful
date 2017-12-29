@@ -86,7 +86,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/textcolor"/>
 
-    <com.ue.fingercoloring.view.ColorPickerSeekBar
+    <com.ue.fingercoloring.widget.ColorPickerSeekBar
         android:id="@+id/cpPaletteColorPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
