@@ -11,7 +11,7 @@ import android.view.View
 import com.ue.colorful.R
 import com.ue.colorful.constant.Constants
 import com.ue.colorful.constant.SPKeys
-import com.ue.fingercoloring.util.SPUtils
+import com.ue.library.util.SPUtils
 import kotlinx.android.synthetic.main.dialog_game_result.view.*
 import java.text.SimpleDateFormat
 

@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Process
 import android.support.v7.app.AppCompatDelegate
 import com.tencent.bugly.Bugly
-import com.ue.fingercoloring.util.SPUtils
+import com.ue.library.util.SPUtils
 import com.ue.recommend.util.BmobUtils
 
 /**

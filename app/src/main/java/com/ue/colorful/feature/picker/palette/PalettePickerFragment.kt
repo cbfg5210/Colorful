@@ -5,7 +5,7 @@ import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
 import com.ue.colorful.feature.main.BaseFragment
 import com.ue.colorful.widget.PaletteColorPickerView
-import com.ue.fingercoloring.util.SPUtils
+import com.ue.library.util.SPUtils
 import kotlinx.android.synthetic.main.fragment_palette_picker.view.*
 import kotlinx.android.synthetic.main.layout_common_picker.view.*
 

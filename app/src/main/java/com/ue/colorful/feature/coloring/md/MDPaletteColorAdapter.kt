@@ -32,8 +32,8 @@ class MDPaletteColorAdapter(activity: Activity, items: List<MDColor>?, private v
             return
         }
         when (view.id) {
-            R.id.ivCopy -> mdPaletteListener?.copyColor(items[position].hex)
-            R.id.ivAddColor -> mdPaletteListener?.addPaletteColor(items[position].hex)
+            R.id.ivCopy -> mdPaletteListener.copyColor(items[position].hex)
+            R.id.ivAddColor -> mdPaletteListener.addPaletteColor(items[position].hex)
         }
     }
 
