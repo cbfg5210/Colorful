@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivCapture"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/widget_size_50"
+        android:layout_height="@dimen/widget_size_50"
         android:src="@drawable/bg_picker"/>
 
     <TextView

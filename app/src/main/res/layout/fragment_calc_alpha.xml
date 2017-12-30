@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="5dp"
+            android:lineSpacingExtra="@dimen/widget_size_5"
             android:text="@string/cal_alpha"
             android:textColor="@color/col_normal_txt"
             android:textSize="15sp"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="4dp" />
+    <corners android:radius="@dimen/widget_size_4" />
     <padding
-        android:top="2dp"
-        android:left="2dp"
-        android:bottom="2dp"
-        android:right="2dp" />
+        android:top="@dimen/widget_size_2"
+        android:left="@dimen/widget_size_2"
+        android:bottom="@dimen/widget_size_2"
+        android:right="@dimen/widget_size_2" />
 
 </shape>

@@ -5,10 +5,10 @@
             <solid android:color="#425666" />
         </shape>
     </item>
-    <item android:left="2dp"
-        android:right="2dp"
-        android:top="2dp"
-        android:bottom="2dp" >
+    <item android:left="@dimen/widget_size_2"
+        android:right="@dimen/widget_size_2"
+        android:top="@dimen/widget_size_2"
+        android:bottom="@dimen/widget_size_2" >
         <shape android:shape="rectangle">
             <solid android:color="#ffffff" />
         </shape>

@@ -5,30 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="@dimen/widget_size_5">
 
     <com.ue.library.widget.SquareView
         android:id="@+id/vColor1"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         tools:background="@color/black"/>
 
     <com.ue.library.widget.SquareView
         android:id="@+id/vColor2"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_1"
+        android:layout_marginStart="@dimen/widget_size_1"
         android:layout_weight="1"
         tools:background="@color/black"/>
 
     <com.ue.library.widget.SquareView
         android:id="@+id/vColor3"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="1dp"
-        android:layout_marginStart="1dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_1"
+        android:layout_marginStart="@dimen/widget_size_1"
         android:layout_weight="1"
         tools:background="@color/black"/>
 </LinearLayout>

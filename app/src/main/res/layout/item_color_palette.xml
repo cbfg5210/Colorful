@@ -9,7 +9,7 @@
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="@dimen/widget_size_5">
 
     <TextView
         android:id="@+id/tvHex"

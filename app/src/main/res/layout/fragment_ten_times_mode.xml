@@ -16,8 +16,8 @@
             android:background="#37474F"
             android:gravity="center"
             android:minWidth="80dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
+            android:paddingBottom="@dimen/widget_size_5"
+            android:paddingTop="@dimen/widget_size_5"
             android:textColor="#FFFFFF"
             android:textSize="20sp"/>
 
@@ -38,8 +38,8 @@
             android:background="#37474F"
             android:gravity="center"
             android:minWidth="100dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
+            android:paddingBottom="@dimen/widget_size_5"
+            android:paddingTop="@dimen/widget_size_5"
             android:text="@string/start_game"
             android:textColor="#FFFFFF"
             android:textSize="20sp"/>

@@ -20,35 +20,35 @@
 
     <FrameLayout
         android:id="@+id/vgDirection"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="@dimen/widget_size_90"
+        android:layout_height="@dimen/widget_size_90"
         android:layout_gravity="right|bottom">
 
         <ImageView
             android:id="@+id/ivMoveRight"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="@dimen/widget_size_30"
             android:layout_gravity="right|center_vertical"
             app:srcCompat="@drawable/sel_arrow_r"/>
 
         <ImageView
             android:id="@+id/ivMoveUp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="@dimen/widget_size_30"
             android:layout_gravity="top|center_horizontal"
             app:srcCompat="@drawable/sel_arrow_u"/>
 
         <ImageView
             android:id="@+id/ivMoveLeft"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="@dimen/widget_size_30"
             android:layout_gravity="left|center_vertical"
             app:srcCompat="@drawable/sel_arrow_l"/>
 
         <ImageView
             android:id="@+id/ivMoveDown"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="@dimen/widget_size_30"
             android:layout_alignLeft="@+id/ivMoveUp"
             android:layout_gravity="bottom|center_horizontal"
             app:srcCompat="@drawable/sel_arrow_d"/>

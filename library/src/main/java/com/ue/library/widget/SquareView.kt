@@ -16,7 +16,8 @@ class SquareView : View {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec)
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val height = MeasureSpec.getSize(heightMeasureSpec)
-        val size = Math.min(width, height)
+        var size = Math.min(width, height)
+        if (size == 0) size = Math.max(width, height)
         setMeasuredDimension(size, size)
     }
 }

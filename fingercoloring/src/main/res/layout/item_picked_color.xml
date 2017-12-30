@@ -4,6 +4,6 @@
     android:id="@+id/ivPickedColor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
+    android:layout_margin="@dimen/widget_size_2"
     android:background="@drawable/bg_picked_color"
-    android:padding="2dp"/>
+    android:padding="@dimen/widget_size_2"/>

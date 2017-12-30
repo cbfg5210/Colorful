@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:lineSpacingExtra="8dp"
+    android:lineSpacingExtra="@dimen/widget_size_8"
     android:textColor="@color/black"
-    android:textSize="16sp"
+    android:textSize="@dimen/font_size_16"
     tools:text="@string/answer01"/>

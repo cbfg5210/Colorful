@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="15dp"
+        android:padding="@dimen/widget_size_15"
         android:text="@string/nopaint"
-        android:textSize="18sp"/>
+        android:textSize="@dimen/font_size_18"/>
 </FrameLayout>

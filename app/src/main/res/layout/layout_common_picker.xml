@@ -10,32 +10,32 @@
 
     <ImageView
         android:id="@+id/ivColorEffect"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/widget_size_100"
+        android:layout_height="@dimen/widget_size_40"
         tools:background="@color/black"/>
 
     <TextView
         android:id="@+id/tvColorHex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/widget_size_10"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_size_16"
         tools:text="#ffffff"/>
 
     <ImageView
         android:id="@+id/ivAddColor"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="@dimen/widget_size_30"
+        android:layout_height="@dimen/widget_size_30"
+        android:layout_marginLeft="@dimen/widget_size_20"
         android:background="?attr/selectableItemBackground"
         app:srcCompat="@drawable/svg_palette_b"/>
 
     <ImageView
         android:id="@+id/ivCopy"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/widget_size_30"
+        android:layout_height="@dimen/widget_size_30"
         android:layout_marginLeft="15dp"
         android:background="?attr/selectableItemBackground"
         app:srcCompat="@drawable/svg_copy_b"/>

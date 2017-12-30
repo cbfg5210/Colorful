@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="330dp"
+    android:minWidth="@dimen/widget_size_330"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="@dimen/widget_size_15">
 
     <EditText
         android:id="@+id/addeditwords"
@@ -14,19 +14,19 @@
         android:hint="@string/addeditwords_hint"
         android:maxEms="20"
         android:singleLine="true"
-        android:textSize="@dimen/small_textsize"/>
+        android:textSize="@dimen/font_size_12"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/widget_size_15"
         android:text="@string/textsize"/>
 
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/widget_size_2"
         android:checkedButton="@+id/small"
         android:orientation="horizontal">
 
@@ -45,7 +45,7 @@
             android:id="@+id/middle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/widget_size_10"
             android:layout_weight="1"
             android:background="@drawable/textsize_box"
             android:button="@null"
@@ -57,7 +57,7 @@
             android:id="@+id/large"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/widget_size_10"
             android:layout_weight="1"
             android:background="@drawable/textsize_box"
             android:button="@null"
@@ -69,7 +69,7 @@
             android:id="@+id/huge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/widget_size_10"
             android:layout_weight="1"
             android:background="@drawable/textsize_box"
             android:button="@null"
@@ -83,13 +83,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/widget_size_15"
         android:text="@string/textcolor"/>
 
     <com.ue.fingercoloring.widget.ColorPickerSeekBar
         android:id="@+id/cpPaletteColorPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"/>
+        android:layout_marginTop="@dimen/widget_size_2"/>
 
 </LinearLayout>

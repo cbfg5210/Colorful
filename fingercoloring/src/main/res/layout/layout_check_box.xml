@@ -8,7 +8,7 @@
         android:id="@+id/cbCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/widget_size_30"
         android:gravity="center"
         android:text="@string/dontshownexttime"/>
 </FrameLayout>

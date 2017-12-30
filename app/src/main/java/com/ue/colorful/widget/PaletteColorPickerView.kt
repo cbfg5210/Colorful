@@ -18,7 +18,6 @@ import com.ue.colorful.R
  * Enable it by setting setAlphaSliderVisible(boolean) to true.
  */
 class PaletteColorPickerView : View {
-
     /**
      * The width in px of the hue panel.
      */
@@ -116,15 +115,23 @@ class PaletteColorPickerView : View {
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    init {
-        huePanelWidthPx = dpToPx(context, HUE_PANEL_WDITH_DP.toFloat())
-        alphaPanelHeightPx = dpToPx(context, ALPHA_PANEL_HEIGH_DP.toFloat())
-        panelSpacingPx = dpToPx(context, PANEL_SPACING_DP.toFloat())
-        circleTrackerRadiusPx = dpToPx(context, CIRCLE_TRACKER_RADIUS_DP.toFloat())
-        sliderTrackerSizePx = dpToPx(context, SLIDER_TRACKER_SIZE_DP.toFloat())
-        sliderTrackerOffsetPx = dpToPx(context, SLIDER_TRACKER_OFFSET_DP.toFloat())
+    companion object {
+        /**
+         * The width in pixels of the border
+         * surrounding all color panels.
+         */
+        private val BORDER_WIDTH_PX = 1
+    }
 
-        mRequiredPadding = resources.getDimensionPixelSize(R.dimen.cpv_required_padding)
+    init {
+        huePanelWidthPx = resources.getDimensionPixelSize(R.dimen.widget_size_30)
+        alphaPanelHeightPx = resources.getDimensionPixelSize(R.dimen.widget_size_20)
+        panelSpacingPx = resources.getDimensionPixelSize(R.dimen.widget_size_10)
+        circleTrackerRadiusPx = resources.getDimensionPixelSize(R.dimen.widget_size_5)
+        sliderTrackerSizePx = resources.getDimensionPixelSize(R.dimen.widget_size_4)
+        sliderTrackerOffsetPx = resources.getDimensionPixelSize(R.dimen.widget_size_2)
+
+        mRequiredPadding = resources.getDimensionPixelSize(R.dimen.widget_size_6)
 
         initPaintTools()
 
@@ -731,20 +738,5 @@ class PaletteColorPickerView : View {
 
     interface OnColorChangedListener {
         fun onColorChanged(newColor: Int)
-    }
-
-    companion object {
-        private val HUE_PANEL_WDITH_DP = 30
-        private val ALPHA_PANEL_HEIGH_DP = 20
-        private val PANEL_SPACING_DP = 10
-        private val CIRCLE_TRACKER_RADIUS_DP = 5
-        private val SLIDER_TRACKER_SIZE_DP = 4
-        private val SLIDER_TRACKER_OFFSET_DP = 2
-
-        /**
-         * The width in pixels of the border
-         * surrounding all color panels.
-         */
-        private val BORDER_WIDTH_PX = 1
     }
 }

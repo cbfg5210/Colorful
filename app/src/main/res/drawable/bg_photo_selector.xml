@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:innerRadius="6dp"
+       android:innerRadius="@dimen/widget_size_6"
        android:shape="ring"
-       android:thickness="3dp"
+       android:thickness="@dimen/widget_size_3"
        android:useLevel="false">
     <size
-        android:width="20dp"
-        android:height="20dp"/>
+        android:width="@dimen/widget_size_22"
+        android:height="@dimen/widget_size_22"/>
     <solid
         android:color="@color/white"/>
     <stroke
-        android:width="2dp"
+        android:width="@dimen/widget_size_2"
         android:color="@color/black"/>
 </shape>

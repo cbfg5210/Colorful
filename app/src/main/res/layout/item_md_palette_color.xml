@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="125dp"
-    android:layout_marginBottom="8dp">
+    android:layout_height="@dimen/widget_size_125"
+    android:layout_marginBottom="@dimen/widget_size_8">
 
     <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/widget_size_16">
 
             <TextView
                 android:id="@+id/colorTitle"
@@ -30,14 +30,14 @@
                 android:id="@+id/colorContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/widget_size_10"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/color_card_content_dark_color"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/vgMenuContainer"
-            android:layout_width="50dp"
+            android:layout_width="@dimen/widget_size_50"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -48,7 +48,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
-                android:padding="10dp"
+                android:padding="@dimen/widget_size_10"
                 app:srcCompat="@drawable/svg_palette_b"/>
 
             <View
@@ -62,7 +62,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
-                android:padding="10dp"
+                android:padding="@dimen/widget_size_10"
                 app:srcCompat="@drawable/svg_copy_b"/>
         </LinearLayout>
     </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>

@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg2"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="@dimen/widget_size_10"
+        android:paddingTop="@dimen/widget_size_5">
 
         <TextView
             android:id="@+id/undo"
@@ -54,10 +54,10 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ivToggleActionBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="@dimen/widget_size_30"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/widget_size_5"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
             app:srcCompat="@drawable/bg_toggle_action_bar"/>
@@ -70,8 +70,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/vgColorsPanel"
         android:layout_below="@id/vgActionsPanel"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="@dimen/widget_size_2"
+        android:layout_marginTop="@dimen/widget_size_2"
         android:adjustViewBounds="true"
         android:scaleType="fitEnd"/>
 
@@ -109,7 +109,7 @@
             android:id="@+id/rvColors"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="@dimen/widget_size_2"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:scrollbars="none"

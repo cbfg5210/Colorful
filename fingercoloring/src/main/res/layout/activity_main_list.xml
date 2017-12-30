@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/widget_size_10"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingLeft="@dimen/widget_size_20"
+        android:paddingRight="@dimen/widget_size_20">
 
         <RadioButton
             android:id="@+id/rbTabThemes"
@@ -24,10 +24,10 @@
             android:background="@drawable/bg_tab_left"
             android:button="@null"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="@dimen/widget_size_10"
             android:text="@string/themelist"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/font_size_16"/>
 
         <RadioButton
             android:id="@+id/rbTabWorks"
@@ -37,10 +37,10 @@
             android:background="@drawable/bg_tab_right"
             android:button="@null"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="@dimen/widget_size_10"
             android:text="@string/my_works"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/font_size_16"/>
     </RadioGroup>
 
     <android.support.v4.view.ViewPager

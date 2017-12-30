@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="@dimen/widget_size_5">
 
     <include layout="@layout/progress_area_layout"/>
 
