@@ -21,9 +21,9 @@ import kotlinx.android.synthetic.main.item_picked_color.view.*
  */
 class PickedColorAdapter(context: Context) : RecyclerView.Adapter<PickedColorAdapter.ViewHolder>() {
     private val colors: MutableList<Int>
-    private var listener: OnDelegateClickListener? = null
     private var lastPickedPos = 0
     private var pickedPos = 0
+    var pickColorListener: OnDelegateClickListener? = null
 
     init {
         val pickedColorsStr = SPUtils.getString(SPKeys.PICKED_COLORS, "")
@@ -34,10 +34,6 @@ class PickedColorAdapter(context: Context) : RecyclerView.Adapter<PickedColorAda
         } else {
             colors = GsonHolder.gson.fromJson(pickedColorsStr, object : TypeToken<MutableList<Int>>() {}.type)
         }
-    }
-
-    fun setPickColorListener(listener: OnDelegateClickListener) {
-        this.listener = listener
     }
 
     fun getPickedColor(): Int {
@@ -67,7 +63,7 @@ class PickedColorAdapter(context: Context) : RecyclerView.Adapter<PickedColorAda
             notifyItemChanged(lastPickedPos)
             notifyItemChanged(pickedPos)
 
-            listener?.onClick(v, colors[pickedPos])
+            pickColorListener?.onClick(v, colors[pickedPos])
         }
         return holder
     }

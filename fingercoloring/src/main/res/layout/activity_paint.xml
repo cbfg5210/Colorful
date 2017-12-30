@@ -89,7 +89,7 @@
     <LinearLayout
         android:id="@+id/vgColorsPanel"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/widget_size_75"
         android:layout_alignParentBottom="true"
         android:background="@drawable/maincolor_border"
         android:orientation="horizontal">
@@ -101,6 +101,7 @@
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
+            android:background="@color/white"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:reverseLayout="false"
             app:spanCount="2"/>
@@ -109,7 +110,6 @@
             android:id="@+id/rvColors"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/widget_size_2"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:scrollbars="none"

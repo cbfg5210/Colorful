@@ -124,7 +124,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
 
         //如果直接paintColors.subList(0, 8)的话，由于Int是对象类型会造成数据影响
         pickedColorAdapter = PickedColorAdapter(this)
-        pickedColorAdapter.setPickColorListener(OnDelegateClickListener { _, newColor -> changeCurrentColor(newColor) })
+        pickedColorAdapter.pickColorListener = OnDelegateClickListener { p0, newColor -> changeCurrentColor(newColor) }
 
         rvPickedColors.setHasFixedSize(true)
         rvPickedColors.adapter = pickedColorAdapter
