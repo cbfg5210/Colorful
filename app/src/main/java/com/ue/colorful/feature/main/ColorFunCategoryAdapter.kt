@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
 import com.ue.adapterdelegate.BaseAdapterDelegate
@@ -49,7 +50,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
     private class ColorFunCategoryDelegate(private val activity: Activity) : BaseAdapterDelegate<ColorFunCategory>(activity, R.layout.item_color_fun_category) {
         private val padding5 = activity.resources.getDimension(R.dimen.widget_size_5).toInt()
         private val padding10 = activity.resources.getDimension(R.dimen.widget_size_10).toInt()
-        private val textSize = activity.resources.getDimension(R.dimen.font_size_8)
+        private val textSize = activity.resources.getDimension(R.dimen.font_size_18)
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             return ViewHolder(itemView)
@@ -71,7 +72,8 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
                 func = item.funs[i]
                 val textView = AppCompatTextView(activity)
                 textView.setPadding(padding5, padding10, padding5, padding10)
-                textView.textSize = textSize
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
                 val drawable = StateListDrawable()
                 drawable.addState(intArrayOf(android.R.attr.state_pressed), ColorDrawable(Color.parseColor("#99${item.colorHex}")))
                 drawable.addState(intArrayOf(), ColorDrawable(Color.parseColor("#CC${item.colorHex}")))

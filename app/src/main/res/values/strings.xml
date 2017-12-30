@@ -150,7 +150,7 @@
     <string name="pick_photo_color">图片取色</string>
     <string name="pick_palette_color">色板取色</string>
     <string name="pick_screen_color">屏幕取色</string>
-    <string name="pick_argb_color">argb取色</string>
+    <string name="pick_argb_color">ARGB取色</string>
     <string name="pick_color">取色</string>
     <string name="game_color_diff">色差找找看</string>
     <string name="game_color_light">哪个颜色浅</string>
