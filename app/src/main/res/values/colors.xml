@@ -122,4 +122,6 @@
     <color name="col_abcdef">#abcdef</color>
     <color name="col_3366cc">#3366cc</color>
     <color name="col_6d6d6d">#6d6d6d</color>
+    <color name="col_e24f32">#E24F32</color>
+    <color name="col_231c1c">#231C1C</color>
 </resources>

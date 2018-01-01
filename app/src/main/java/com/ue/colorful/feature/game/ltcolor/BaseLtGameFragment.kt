@@ -2,6 +2,7 @@ package com.ue.colorful.feature.game.ltcolor
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -19,11 +20,12 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
     private var level: Int = 0
     private var points: Int = 0
     private var restTime: Int = 0
+    private var paused = false
 
     protected lateinit var handler: Handler
     private var timer: Timer? = null
-    
-    protected lateinit var ivStartGame:View
+
+    protected lateinit var ivStartGame: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +34,10 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
 
     protected fun setupProgressView() {
         // setting up animations
-        pointAnim = AnimatorInflater.loadAnimator(activity, R.animator.points_animations) as AnimatorSet
+        pointAnim = AnimatorInflater.loadAnimator(activity as Context, R.animator.points_animations) as AnimatorSet
         pointAnim.setTarget(rootView.tvPointsValue)
         levelAnim = AnimatorInflater.loadAnimator(activity, R.animator.level_animations) as AnimatorSet
         levelAnim.setTarget(rootView.tvLevelValue)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        gameStart = false
-        timer?.cancel()
     }
 
     protected fun resetGame() {
@@ -66,6 +62,8 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
         timer = Timer()
         timer!!.schedule(object : TimerTask() {
             override fun run() {
+                if (paused) return
+
                 handler.post { rootView.pbTimerProgress.progress = restTime }
                 restTime--
                 if (restTime < 0) {
@@ -94,6 +92,21 @@ abstract class BaseLtGameFragment(private val layoutRes: Int, private val menuRe
             rootView.tvLevelValue.text = level.toString()
             levelAnim.start()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        paused = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        paused = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
     }
 
     // ABSTRACT METHODS

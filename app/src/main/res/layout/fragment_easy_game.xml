@@ -32,11 +32,18 @@
                 android:layout_weight="1"/>
         </LinearLayout>
 
-        <ImageView
+        <TextView
             android:id="@+id/ivStartGame"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/svg_start_game"/>
+            android:background="@drawable/sp_bg_start_game"
+            android:gravity="center"
+            android:paddingBottom="@dimen/widget_size_10"
+            android:paddingLeft="@dimen/widget_size_20"
+            android:paddingRight="@dimen/widget_size_20"
+            android:paddingTop="@dimen/widget_size_10"
+            android:text="@string/start_game"
+            android:textColor="@color/white"/>
     </FrameLayout>
 </LinearLayout>

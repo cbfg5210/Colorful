@@ -33,7 +33,7 @@
         custom:max="100"
         custom:min="0"
         custom:progress_color="@color/colorPrimary"
-        custom:progress_icon="@mipmap/star">
+        custom:progress_icon="@mipmap/ic_star">
 
         <LinearLayout
             android:layout_width="wrap_content"
