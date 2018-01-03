@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -13,8 +14,10 @@ import com.ue.adapterdelegate.BaseAdapterDelegate
 import com.ue.adapterdelegate.DelegationAdapter
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
+import com.ue.colorful.constant.FunFlags
 import com.ue.colorful.model.ColorFunCategory
 import com.ue.colorful.model.ColorFunction
+import com.ue.fingercoloring.feature.main.MainListActivity
 import kotlinx.android.synthetic.main.item_color_fun_category.view.*
 
 /**
@@ -34,14 +37,10 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
         if (position < 0 || position >= itemCount) {
             return
         }
-        if (view.tag == null) {
-            return
-        }
-        val tag = view.tag
-        if (!(tag is Int)) {
-            return;
-        }
-        ContainerActivity.start(activity, items[position].funs[tag])
+        val tag = view.tag as? Int ?: return
+        Log.e("ColorFunCategoryAdapter", "onClick: tag=$tag")
+        if (tag == FunFlags.GAME_FG_COLORING) MainListActivity.start(activity)
+        else ContainerActivity.start(activity, items[position].funs[tag])
     }
 
     /**
@@ -80,7 +79,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
                 textView.setBackgroundDrawable(drawable)
 
                 textView.text = func.funName
-                textView.tag = i
+                textView.tag = func.funFlag
                 textView.setOnClickListener { onDelegateClickListener?.onClick(textView, holder.adapterPosition) }
                 holder.vgCatContainer.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
 
@@ -95,8 +94,8 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
         }
 
         private class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val vgCatContainer = itemView.vgCatContainer
-            val tvCatName = itemView.tvCatName
+            val vgCatContainer = itemView.vgCatContainer!!
+            val tvCatName = itemView.tvCatName!!
         }
     }
 }

@@ -32,9 +32,9 @@ android {
             if (isRunAlone.toBoolean()) {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
                 java.srcDirs += "src/main/debug/java/";
-            }else{
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-                java.srcDirs = "src/main/java/";
+                java.srcDirs += "src/main/java/";
             }
         }
     }

@@ -190,7 +190,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
                         else View.VISIBLE
 
             R.id.ivToggleActionBar -> {
-                if (supportActionBar == null) return
+                supportActionBar ?: return
                 ivToggleActionBar.isSelected = !supportActionBar!!.isShowing
                 if (ivToggleActionBar.isSelected) supportActionBar!!.show()
                 else supportActionBar!!.hide()

@@ -1,6 +1,8 @@
 package com.ue.fingercoloring.feature.main
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -18,11 +20,15 @@ class MainListActivity : AppCompatActivity() {
 
     companion object {
         private val REQ_PERMISSION = 10
+        fun start(context: Context) {
+            context.startActivity(Intent(context, MainListActivity::class.java))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_list)
+        setTitle(R.string.finger_coloring)
 
         rgTabs.check(R.id.rbTabWorks)
         checkExternalPermissions()
