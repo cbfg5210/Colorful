@@ -13,26 +13,10 @@ import java.lang.reflect.Modifier
 
 class GsonHolder private constructor() {
 
-    init {
-        throw UnsupportedOperationException()
-    }
-
     companion object {
+        val gson: Gson =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Gson()
+                else GsonBuilder().excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC).create()
 
-        val gson: Gson
-
-        init {
-            val sdk = Build.VERSION.SDK_INT
-            if (sdk >= Build.VERSION_CODES.M) {
-                val gsonBuilder = GsonBuilder()
-                        .excludeFieldsWithModifiers(
-                                Modifier.FINAL,
-                                Modifier.TRANSIENT,
-                                Modifier.STATIC)
-                gson = gsonBuilder.create()
-            } else {
-                gson = Gson()
-            }
-        }
     }
 }
