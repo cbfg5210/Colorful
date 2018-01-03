@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
+
+import android.view.MenuItem
 import android.widget.Toast
 import com.ue.fingercoloring.R
 import com.yanzhenjie.permission.AndPermission
@@ -28,6 +30,8 @@ class MainListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_list)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setTitle(R.string.finger_coloring)
 
         rgTabs.check(R.id.rbTabWorks)
@@ -86,5 +90,13 @@ class MainListActivity : AppCompatActivity() {
             viewpager.currentItem = if (checkedId == R.id.rbTabWorks) 1 else 0
         }
         rgTabs.check(R.id.rbTabThemes)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
