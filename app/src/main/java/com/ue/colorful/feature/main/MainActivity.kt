@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             colorFuns = ArrayList<ColorFunction>()
             colorFuns.add(ColorFunction(getString(R.string.game_color_diff), FunFlags.GAME_DIFF_COLOR))
             colorFuns.add(ColorFunction(getString(R.string.game_color_light), FunFlags.GAME_LT_COLOR))
+            colorFuns.add(ColorFunction(getString(R.string.game_finger_coloring), FunFlags.GAME_FG_COLORING))
             colorCats.add(ColorFunCategory(getString(R.string.games), colorFuns, "e1bee7"))
             //计算
             colorFuns = ArrayList<ColorFunction>()

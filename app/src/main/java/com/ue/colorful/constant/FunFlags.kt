@@ -16,5 +16,6 @@ class FunFlags {
         val CALC_ALPHA = 8
         val CALC_ARGB = 9
         val VISION_TEST = 10
+        val GAME_FG_COLORING = 11
     }
 }

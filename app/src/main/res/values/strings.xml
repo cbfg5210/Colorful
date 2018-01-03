@@ -207,19 +207,26 @@
     <string name="im17">简单、进步、时尚</string>
 
     <string name="verNote_0d5">
-        完成应用基础功能模块：配色、取色、小游戏、计算、色觉测试
+        完成应用基础功能模块：配色、取色、小游戏、计算、色觉测试;
     </string>
     <string name="verNote_0d6">
         1、添加按印象搭配的配色方案;\n
         2、添加关于页;\n
-        3、修改应用名称;\n
+        3、修改应用名称;
+    </string>
+    <string name="verNote_0d7">
+        1、屏幕适配;\n
+        2、移除应用搜索功能;\n
+        3、添加指尖填图游戏;
     </string>
 
     <string name="impression_colors">按印象配色</string>
+    <string name="score">颜值</string>
+    <string name="game_finger_coloring">指尖填图</string>
 
+    <string name="ver_0d7" translatable="false">v0.7  2018/1/3</string>
     <string name="ver_0d6" translatable="false">v0.6  2017/12/22</string>
     <string name="ver_0d5" translatable="false">v0.5  2017/12/21</string>
 
     <string name="myEmail" translatable="false">tomhawk_ht@foxmail.com</string>
-    <string name="score">颜值</string>
 </resources>

@@ -46,6 +46,7 @@ class AboutActivity : AppCompatActivity() {
     private val verNoteItems: List<DetailItem>
         get() {
             val items = ArrayList<DetailItem>()
+            items.add(DetailItem(getString(R.string.ver_0d7), getString(R.string.verNote_0d7)))
             items.add(DetailItem(getString(R.string.ver_0d6), getString(R.string.verNote_0d6)))
             items.add(DetailItem(getString(R.string.ver_0d5), getString(R.string.verNote_0d5)))
             return items
