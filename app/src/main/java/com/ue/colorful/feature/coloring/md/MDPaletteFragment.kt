@@ -1,6 +1,7 @@
 package com.ue.colorful.feature.coloring.md
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.ue.adapterdelegate.OnDelegateClickListener
 import com.ue.colorful.R
 import com.ue.colorful.constant.SPKeys
@@ -35,12 +36,15 @@ class MDPaletteFragment : BaseFragment(R.layout.fragment_mdpalette, R.menu.menu_
                 })
 
         rootView.rvColorOptions.setHasFixedSize(true)
+
         rootView.rvColorOptions.adapter = MDPaletteSectionAdapter(activity, paletteSections,
-                OnDelegateClickListener { _, i ->
-                    val adapter = rvColorList.adapter as MDPaletteColorAdapter
-                    adapter.items.clear()
-                    adapter.items.addAll(paletteSections[i].paletteColors)
-                    adapter.notifyDataSetChanged()
+                object : OnDelegateClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        val adapter = rvColorList.adapter as MDPaletteColorAdapter
+                        adapter.items.clear()
+                        adapter.items.addAll(paletteSections[position].paletteColors)
+                        adapter.notifyDataSetChanged()
+                    }
                 })
         //移动到指定位置，可以置顶则置顶
         (rootView.rvColorOptions.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(lastSelection, 0)

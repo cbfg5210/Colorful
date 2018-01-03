@@ -23,17 +23,16 @@ internal class MDPaletteSectionAdapter(private val activity: Activity, items: Li
 
     init {
         //通过以下方式初始化items，避免在调用clear()时清空了原数据
-        this.items = ArrayList()
         if (items != null) this.items.addAll(items)
 
         selection = SPUtils.getInt(SPKeys.LAST_MD_COLOR, 0)
 
         val delegate = PaletteColorSectionDelegate(activity)
-        delegate.setOnDelegateClickListener(this)
+        delegate.onDelegateClickListener=this
         this.addDelegate(delegate)
     }
 
-    override fun onClick(view: View?, position: Int) {
+    override fun onClick(view: View, position: Int) {
         if (position < 0 || position >= itemCount) {
             return
         }
@@ -63,7 +62,7 @@ internal class MDPaletteSectionAdapter(private val activity: Activity, items: Li
             return true
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteSection: PaletteSection, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteSection: PaletteSection, payloads: List<Any>) {
             holder as ViewHolder
             holder.setPaletteSection(paletteSection)
         }

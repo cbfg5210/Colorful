@@ -16,7 +16,6 @@ import com.ue.fingercoloring.model.ThemeTitle
 import com.ue.library.util.PicassoUtils
 import kotlinx.android.synthetic.main.item_theme.view.*
 import kotlinx.android.synthetic.main.item_theme_title.view.*
-import java.util.*
 
 /**
  * Created by hawk on 2017/12/24.
@@ -24,17 +23,14 @@ import java.util.*
 internal class ThemeItemAdapter(private val activity: Activity, items: List<Item>?) : DelegationAdapter<Item>(), OnDelegateClickListener {
 
     init {
-        this.items = ArrayList()
-        if (items != null) {
-            this.items.addAll(items)
-        }
+        if (items != null) this.items.addAll(items)
 
         val titleItemDelegate = TitleItemDelegate(activity)
-        titleItemDelegate.setOnDelegateClickListener(this)
+        titleItemDelegate.onDelegateClickListener = this
         this.addDelegate(titleItemDelegate)
 
         val themeItemDelegate = ThemeItemDelegate(activity)
-        themeItemDelegate.setOnDelegateClickListener(this)
+        themeItemDelegate.onDelegateClickListener = this
         this.addDelegate(themeItemDelegate)
     }
 
@@ -78,7 +74,7 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
             return item is ThemeTitle
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             val vHolder = holder as ViewHolder
             val title = item as ThemeTitle
             val context = holder.itemView.context
@@ -111,7 +107,7 @@ internal class ThemeItemAdapter(private val activity: Activity, items: List<Item
             return item is ThemeItem
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             val vHolder = holder as ViewHolder
             val themeTerm = item as ThemeItem
             val lp = holder.itemView.layoutParams

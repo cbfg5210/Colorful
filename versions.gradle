@@ -12,26 +12,28 @@ versions.rxAndroid = "2.0.1"
 versions.glide = "3.8.0"
 versions.picasso = "2.5.2"
 versions.gson = "2.8.2"
-versions.recyclerAdapterDelegate = "v0.7"
+versions.recyclerAdapterDelegate = "0.8"
 versions.androidGradlePlugin = "3.0.1"
 versions.kotlin = "1.2.10"
-versions.anko = "0.10.3"
 versions.androidMavenPlugin = "1.5"
 versions.butterknife = "8.5.1"
 versions.eventbus = "3.0.0"
 versions.andPermission = "1.1.2"
 versions.permissionUtil = "1.1.3"
 versions.aboutPage = "v1.2.6"
-versions.recommendApp = "v0.6"
+versions.recommendApp = "0.71"
 versions.debugDb = "1.0.1"
 versions.leakCanary = "1.5"
 versions.playServiceAd = "11.4.2"
 versions.rxLifecycle = "2.1.0"
 versions.transitionsEverywhere = "1.7.8"
-versions.flexbox = "0.3.1"
 versions.easySwipeMenuLayout = "1.1.2"
 versions.oneDrawable = "1.1.0"
 versions.smartMenu = "v0.1"
+versions.flexbox = "0.3.1"
+versions.photoview = "2.0.0"
+versions.myPhotoview = "1.0.2"
+versions.dashedCircularProgress = "1.0@aar"
 
 def deps = [:]
 
@@ -43,7 +45,7 @@ support.cardview = "com.android.support:cardview-v7:$versions.support"
 support.design = "com.android.support:design:$versions.support"
 support.v4 = "com.android.support:support-v4:$versions.support"
 support.constraintLayout = "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
-support.core="com.android.support:support-core-utils:$versions.support"
+support.core = "com.android.support:support-core-utils:$versions.support"
 deps.support = support
 
 def room = [:]
@@ -80,9 +82,6 @@ deps.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGrad
 //kotlin
 deps.kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlinJre = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
-// Anko Layouts
-deps.ankoSdk = "org.jetbrains.anko:anko-sdk25:$versions.anko" // sdk15, sdk19, sdk21, sdk23 are also available
-deps.ankoAppcompatV7 = "org.jetbrains.anko:anko-appcompat-v7:$versions.anko"
 //
 deps.androidMavenPlugin = "com.github.dcendents:android-maven-gradle-plugin:$versions.androidMavenPlugin"
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
@@ -96,9 +95,12 @@ deps.leakCanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakCana
 deps.playServiceAd = "com.google.android.gms:play-services-ads:$versions.playServiceAd"
 deps.oneDrawable = "com.github.maoruibin:OneDrawable:$versions.oneDrawable"
 deps.transitionsEverywhere = "com.andkulikov:transitionseverywhere:$versions.transitionsEverywhere"
-deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.easySwipeMenuLayout = "com.github.anzaizai:EasySwipeMenuLayout:$versions.easySwipeMenuLayout"
 deps.smartMenu = "com.github.cbfg5210:SmartMenu:$versions.smartMenu"
+deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
+deps.photoview = "com.github.chrisbanes:PhotoView:$versions.photoview"
+deps.myPhotoview = "com.github.cbfg5210:PhotoView:$versions.myPhotoview"
+deps.dashedCircularProgress = "com.github.glomadrian:DashedCircularProgress:$versions.dashedCircularProgress"
 
 ext.deps = deps
 
@@ -113,7 +115,7 @@ def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.maven { url 'https://jitpack.io' }
-    handler.maven { url 'http://dl.bintray.com/glomadrian/maven' }
+    handler.maven { url "http://dl.bintray.com/glomadrian/maven" }//for DashedCircularProgress
 }
 
 ext.addRepos = this.&addRepos

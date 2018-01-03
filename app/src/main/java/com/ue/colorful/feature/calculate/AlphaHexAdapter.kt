@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_alpha_hex.view.*
 class AlphaHexAdapter(private val activity: Activity, items: List<Item>) : DelegationAdapter<Item>(), OnDelegateClickListener {
 
     init {
-        this.items = items
+        if (items != null) this.items.addAll(items)
 
         this.addDelegate(AlphaHexDelegate(activity))
         this.addDelegate(AlphaHexTitleDelegate(activity))
@@ -40,7 +40,7 @@ class AlphaHexAdapter(private val activity: Activity, items: List<Item>) : Deleg
             return item is AlphaHexTitle
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             holder as ViewHolder
             val alphaHex = item as AlphaHexTitle
             holder.tvAlpha.text = alphaHex.alphaTitle
@@ -58,7 +58,7 @@ class AlphaHexAdapter(private val activity: Activity, items: List<Item>) : Deleg
             return item is AlphaHex
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             holder as ViewHolder
             item as AlphaHex
             holder.tvAlpha.text = item.alpha

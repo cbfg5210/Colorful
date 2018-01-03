@@ -16,7 +16,7 @@ import com.ue.colorful.model.ColorFunction
 import com.ue.colorful.util.BackPressedUtils
 import com.ue.colorful.util.GsonHolder
 import com.ue.library.util.SPUtils
-import com.ue.recommend.widget.NBottomSheetBehavior.STATE_EXPANDED
+import com.ue.recommend.widget.NBottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (mbsRecommendSheet.state == STATE_EXPANDED) {
+        if (mbsRecommendSheet.state == NBottomSheetBehavior.STATE_EXPANDED) {
             mbsRecommendSheet.hideBottomSheet();
             return
         }

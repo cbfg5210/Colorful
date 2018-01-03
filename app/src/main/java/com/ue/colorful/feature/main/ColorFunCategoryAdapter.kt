@@ -23,10 +23,10 @@ import kotlinx.android.synthetic.main.item_color_fun_category.view.*
 internal class ColorFunCategoryAdapter(private val activity: Activity, items: List<ColorFunCategory>) : DelegationAdapter<ColorFunCategory>(), OnDelegateClickListener {
 
     init {
-        this.items = items
+        if (items != null) this.items.addAll(items)
 
         val delegate = ColorFunCategoryDelegate(activity)
-        delegate.setOnDelegateClickListener(this)
+        delegate.onDelegateClickListener = this
         this.addDelegate(delegate)
     }
 
@@ -60,7 +60,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             return true
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ColorFunCategory, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ColorFunCategory, payloads: List<Any>) {
             holder as ViewHolder
 
             holder.tvCatName.text = item.catName

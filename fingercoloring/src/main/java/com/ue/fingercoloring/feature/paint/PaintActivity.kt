@@ -115,16 +115,23 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
     private fun initBottomColors() {
         //paintColors
         val adapter = ColorOptionAdapter(this)
-        adapter.setColorSelectedListener(OnDelegateClickListener { _, color ->
-            cpPaletteColorPicker.color = color
-            changeCurrentColor(color)
+
+        adapter.setColorSelectedListener(object : OnDelegateClickListener {
+            override fun onClick(view: View, color: Int) {
+                cpPaletteColorPicker.color = color
+                changeCurrentColor(color)
+            }
         })
         rvColors.setHasFixedSize(true)
         rvColors.adapter = adapter
 
         //如果直接paintColors.subList(0, 8)的话，由于Int是对象类型会造成数据影响
         pickedColorAdapter = PickedColorAdapter(this)
-        pickedColorAdapter.pickColorListener = OnDelegateClickListener { p0, newColor -> changeCurrentColor(newColor) }
+        pickedColorAdapter.pickColorListener = object : OnDelegateClickListener {
+            override fun onClick(view: View, newColor: Int) {
+                changeCurrentColor(newColor)
+            }
+        }
 
         rvPickedColors.setHasFixedSize(true)
         rvPickedColors.adapter = pickedColorAdapter

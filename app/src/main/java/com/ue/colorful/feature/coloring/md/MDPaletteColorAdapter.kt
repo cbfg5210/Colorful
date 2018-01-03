@@ -19,11 +19,10 @@ class MDPaletteColorAdapter(activity: Activity, items: List<MDColor>?, private v
 
     init {
         //通过以下方式初始化items，避免在调用clear()时清空了原数据
-        this.items = ArrayList()
         if (items != null) this.items.addAll(items)
 
         val delegate = PaletteColorDelegate(activity)
-        delegate.setOnDelegateClickListener(this)
+        delegate.onDelegateClickListener = this
         this.addDelegate(delegate)
     }
 
@@ -44,11 +43,7 @@ class MDPaletteColorAdapter(activity: Activity, items: List<MDColor>?, private v
 
         override fun onCreateViewHolder(itemView: View): RecyclerView.ViewHolder {
             val holder = ViewHolder(itemView)
-            val clickListener = object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    onDelegateClickListener?.onClick(v, holder.adapterPosition)
-                }
-            }
+            val clickListener = View.OnClickListener { v -> onDelegateClickListener?.onClick(v, holder.adapterPosition) }
             holder.ivCopy.setOnClickListener(clickListener)
             holder.ivAddColor.setOnClickListener(clickListener)
             return holder
@@ -58,7 +53,7 @@ class MDPaletteColorAdapter(activity: Activity, items: List<MDColor>?, private v
             return true
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteColor: MDColor, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, paletteColor: MDColor, payloads: List<Any>) {
             holder as ViewHolder
             holder.coloredZone.setBackgroundColor(paletteColor.hex)
             holder.colorTitle.text = paletteColor.baseName

@@ -72,13 +72,13 @@ dependencies {
     implementation deps.support.constraintLayout
     implementation deps.support.recyclerview
     implementation deps.support.cardview
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation deps.support.constraintLayout
     implementation deps.recyclerAdapterDelegate
     implementation deps.picasso
     implementation deps.gson
     implementation deps.eventbus
     implementation deps.easySwipeMenuLayout
-    implementation 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
+    implementation deps.dashedCircularProgress
     implementation deps.bugly
     implementation deps.recommendApp
     implementation deps.support.design
@@ -90,7 +90,7 @@ dependencies {
     /*room*/
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
-    implementation 'com.github.cbfg5210:PhotoView:1.0.2'
+    implementation deps.myPhotoview
     if (!isRunAlone.toBoolean()) {
         implementation project(':fingercoloring')
         implementation deps.flexbox

@@ -56,7 +56,7 @@ dependencies {
         implementation deps.flexbox
         implementation deps.rxjava2
         implementation deps.rxAndroid
-        implementation 'com.github.cbfg5210:PhotoView:1.0.2'
+        implementation deps.myPhotoview
         implementation deps.support.core
         implementation deps.andPermission
         implementation project(':library')

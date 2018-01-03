@@ -21,14 +21,14 @@ import org.greenrobot.eventbus.EventBus
 internal class ImpressionAdapter(activity: Activity, items: List<Item>) : DelegationAdapter<Item>(), OnDelegateClickListener {
 
     init {
-        this.items = items
+        if (items != null) this.items.addAll(items)
 
         val titleDelegate = TitleDelegate(activity)
-        titleDelegate.setOnDelegateClickListener(this)
+        titleDelegate.onDelegateClickListener = this
         this.addDelegate(titleDelegate)
 
         val impressionDelegate = ImpressionDelegate(activity)
-        impressionDelegate.setOnDelegateClickListener(this)
+        impressionDelegate.onDelegateClickListener = this
         this.addDelegate(impressionDelegate)
     }
 
@@ -79,7 +79,7 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
             return item is ImpressionTitle
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             holder as ViewHolder
             item as ImpressionTitle
 
@@ -111,7 +111,7 @@ internal class ImpressionAdapter(activity: Activity, items: List<Item>) : Delega
             return item is ImpressionItem
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<*>) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item, payloads: List<Any>) {
             holder as ViewHolder
             item as ImpressionItem
 
