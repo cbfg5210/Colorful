@@ -72,11 +72,11 @@ class DialogHelper(private val context: Context) {
 
         val changeBorderOnclickListener = View.OnClickListener { view ->
             if (view.id == layout.xiangkuang1.id) {
-                layout.xiangkuang1.setBackgroundResource(R.drawable.maincolor_border_bg)
+                layout.xiangkuang1.setBackgroundResource(R.drawable.sp_bg_maincolor_border)
                 drawableId = 1
                 layout.xiangkuang2.setBackgroundResource(0)
             } else {
-                layout.xiangkuang2.setBackgroundResource(R.drawable.maincolor_border_bg)
+                layout.xiangkuang2.setBackgroundResource(R.drawable.sp_bg_maincolor_border)
                 drawableId = 2
                 layout.xiangkuang1.setBackgroundResource(0)
             }

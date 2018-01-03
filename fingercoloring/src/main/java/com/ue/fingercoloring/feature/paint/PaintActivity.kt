@@ -52,6 +52,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
         tipDialog = TipDialog.newInstance()
         mDialogHelper = DialogHelper(this)
 
+        setTitle(R.string.finger_coloring)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mDialogHelper.showEnterHintDialog()

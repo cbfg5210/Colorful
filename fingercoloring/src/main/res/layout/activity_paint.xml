@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgray">
+    android:background="@color/col_efefef">
 
     <!--操作菜单-->
     <LinearLayout
@@ -43,13 +43,13 @@
         <TextView
             android:id="@+id/tvTogglePalette"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/fc_svg_palette"
+            android:drawableTop="@drawable/fc_svg_palette_wrapper"
             android:text="@string/palette"/>
 
         <TextView
             android:id="@+id/tvAfterEffect"
             style="@style/PaintSecondTvStyle"
-            android:drawableTop="@drawable/svg_effect"
+            android:drawableTop="@drawable/svg_effect_wrapper"
             android:text="@string/after_effect"/>
 
         <android.support.design.widget.FloatingActionButton
@@ -60,7 +60,7 @@
             android:layout_marginRight="@dimen/widget_size_5"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
-            app:srcCompat="@drawable/bg_toggle_action_bar"/>
+            app:srcCompat="@drawable/sel_bg_toggle_action_bar"/>
     </LinearLayout>
 
     <!--上色图片-->
@@ -91,17 +91,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_size_75"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/maincolor_border"
+        android:background="@drawable/sp_maincolor_border"
         android:orientation="horizontal">
         <!--8种选定的颜色-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPickedColors"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:scrollbars="none"
-            android:background="@color/white"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:reverseLayout="false"
             app:spanCount="2"/>

@@ -4,5 +4,5 @@
     <solid android:color="@color/white" />
     <stroke
         android:width="@dimen/widget_size_5"
-        android:color="@color/gray" />
+        android:color="@color/col_aaaaaa" />
 </shape>

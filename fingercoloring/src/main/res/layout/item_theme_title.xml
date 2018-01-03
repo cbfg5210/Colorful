@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/widget_size_4"
-    android:background="@drawable/white_round_bg"
+    android:background="@drawable/sp_bg_white_round"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 

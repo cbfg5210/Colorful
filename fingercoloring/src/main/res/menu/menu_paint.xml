@@ -3,18 +3,18 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuDelete"
-        android:icon="@drawable/svg_fc_delete"
+        android:icon="@drawable/fc_svg_delete_wrapper"
         android:title="@string/delete"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menuSave"
-        android:icon="@drawable/fc_svg_save"
+        android:icon="@drawable/fc_svg_save_wrapper"
         android:title="@string/save"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menuShare"
-        android:icon="@drawable/fc_svg_share"
+        android:icon="@drawable/fc_svg_share_wrapper"
         android:title="@string/share"
         app:showAsAction="always"/>
 </menu>

@@ -25,7 +25,7 @@
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:drawablePadding">@dimen/widget_size_5</item>
         <item name="android:padding">@dimen/widget_size_10</item>
-        <item name="android:textColor">@drawable/textcolor_white_gray</item>
+        <item name="android:textColor">@drawable/sel_textcolor_white_gray</item>
         <item name="android:textSize">@dimen/font_size_12</item>
         <item name="android:gravity">center</item>
     </style>
@@ -36,7 +36,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:drawablePadding">@dimen/widget_size_2</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/col_aaaaaa</item>
         <item name="android:textSize">@dimen/font_size_12</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
@@ -48,7 +48,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:drawablePadding">@dimen/widget_size_2</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/col_aaaaaa</item>
         <item name="android:textSize">@dimen/font_size_12</item>
         <item name="android:gravity">center</item>
     </style>

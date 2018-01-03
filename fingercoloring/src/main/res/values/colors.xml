@@ -3,20 +3,20 @@
     <color name="maincolor">#FF00bcd4</color>
     <color name="maindarkcolor">#FF0097a7</color>
     <color name="white">#ffffffff</color>
-    <color name="black">#ff000000</color>
-    <color name="gray">#ffaaaaaa</color>
-    <color name="lightgray">#ffefefef</color>
-    <color name="transparenttotal">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="col_aaaaaa">#aaaaaa</color>
+    <color name="col_efefef">#efefef</color>
+    <color name="transparent">#00000000</color>
 
     <color name="alpha70gray">#aaaaaaaa</color>
-    <color name="addonitem">#fff35a4a</color>
-    <color name="corporatediscount">#fff57773</color>
-    <color name="pannyred">#ff8f1e00</color>
-    <color name="townhealthpurple">#ff6c3f99</color>
-    <color name="discountcolor">#ff6c6c6c</color>
-    <color name="yellow">#ffFFFF00</color>
+    <color name="col_f35a4a">#f35a4a</color>
+    <color name="col_f57773">#f57773</color>
+    <color name="col_8f1e00">#8f1e00</color>
+    <color name="col_6c3f99">#6c3f99</color>
+    <color name="col_6c6c6c">#6c6c6c</color>
+    <color name="col_FFFF00">#FFFF00</color>
     <!-- 黄色 -->
-    <color name="gainsboro">#ffDCDCDC</color>
+    <color name="col_DCDCDC">#DCDCDC</color>
     <!-- 淡灰色 -->
     <color name="graypanny">#ff6c6c6c</color>
     <color name="gray50">#ff505050</color>
