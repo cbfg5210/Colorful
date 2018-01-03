@@ -16,7 +16,7 @@
         android:name=".DebugApplication"
         android:allowBackup="true"
         android:icon="@drawable/svg_effect"
-        android:label="@string/module_name"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
