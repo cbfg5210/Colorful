@@ -71,7 +71,7 @@ dependencies {
         compileOnly deps.flexbox
         compileOnly deps.rxjava2
         compileOnly deps.rxAndroid
-        compileOnly 'com.github.cbfg5210:PhotoView:1.0.2'
+        compileOnly deps.myPhotoview
         compileOnly deps.support.core
         compileOnly deps.andPermission
         compileOnly project(':library')

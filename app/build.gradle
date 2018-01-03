@@ -87,9 +87,6 @@ dependencies {
     /*rxjava*/
     implementation deps.rxjava2
     implementation deps.rxAndroid
-    /*room*/
-    implementation deps.room.runtime
-    annotationProcessor deps.room.compiler
     implementation deps.myPhotoview
     if (!isRunAlone.toBoolean()) {
         implementation project(':fingercoloring')
