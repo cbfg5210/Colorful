@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -38,8 +37,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
             return
         }
         val tag = view.tag as? Int ?: return
-        Log.e("ColorFunCategoryAdapter", "onClick: tag=$tag")
-        if (tag == FunFlags.GAME_FG_COLORING) MainListActivity.start(activity)
+        if (items[position].funs[tag].funFlag == FunFlags.GAME_FG_COLORING) MainListActivity.start(activity)
         else ContainerActivity.start(activity, items[position].funs[tag])
     }
 
@@ -79,7 +77,7 @@ internal class ColorFunCategoryAdapter(private val activity: Activity, items: Li
                 textView.setBackgroundDrawable(drawable)
 
                 textView.text = func.funName
-                textView.tag = func.funFlag
+                textView.tag = i
                 textView.setOnClickListener { onDelegateClickListener?.onClick(textView, holder.adapterPosition) }
                 holder.vgCatContainer.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
 
