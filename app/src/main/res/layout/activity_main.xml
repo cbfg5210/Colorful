@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingBottom="100dp"
+        android:paddingBottom="@dimen/widget_size_100"
         android:scrollbars="none"
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
         app:spanCount="2"/>
