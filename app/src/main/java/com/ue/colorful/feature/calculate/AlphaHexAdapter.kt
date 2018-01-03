@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_alpha_hex.view.*
 class AlphaHexAdapter(private val activity: Activity, items: List<Item>) : DelegationAdapter<Item>(), OnDelegateClickListener {
 
     init {
-        if (items != null) this.items.addAll(items)
+        this.items.addAll(items)
 
         this.addDelegate(AlphaHexDelegate(activity))
         this.addDelegate(AlphaHexTitleDelegate(activity))

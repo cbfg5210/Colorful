@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.EventBus
 internal class ImpressionAdapter(activity: Activity, items: List<Item>) : DelegationAdapter<Item>(), OnDelegateClickListener {
 
     init {
-        if (items != null) this.items.addAll(items)
+        this.items.addAll(items)
 
         val titleDelegate = TitleDelegate(activity)
         titleDelegate.onDelegateClickListener = this

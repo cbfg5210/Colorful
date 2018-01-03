@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.item_color_fun_category.view.*
 internal class ColorFunCategoryAdapter(private val activity: Activity, items: List<ColorFunCategory>) : DelegationAdapter<ColorFunCategory>(), OnDelegateClickListener {
 
     init {
-        if (items != null) this.items.addAll(items)
+        this.items.addAll(items)
 
         val delegate = ColorFunCategoryDelegate(activity)
         delegate.onDelegateClickListener = this
