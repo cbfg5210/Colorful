@@ -14,14 +14,14 @@
         <TextView
             android:id="@+id/addWords"
             style="@style/AdvancePaintTvStyle"
-            android:drawableTop="@drawable/svg_text"
+            android:drawableTop="@drawable/svg_text_wrapper"
             android:text="@string/addtext"/>
 
         <TextView
             android:id="@+id/addBorder"
             style="@style/AdvancePaintTvStyle"
             android:layout_marginLeft="@dimen/widget_size_10"
-            android:drawableTop="@drawable/svg_frame"
+            android:drawableTop="@drawable/svg_frame_wrapper"
             android:text="@string/addborder"/>
     </LinearLayout>
 
