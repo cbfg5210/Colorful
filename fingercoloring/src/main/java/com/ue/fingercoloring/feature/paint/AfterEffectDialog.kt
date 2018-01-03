@@ -1,6 +1,7 @@
 package com.ue.fingercoloring.feature.paint
 
 import android.app.Dialog
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -16,6 +17,7 @@ import com.ue.fingercoloring.widget.DragedTextView
 import com.ue.fingercoloring.widget.TipDialog
 import com.ue.library.util.PicassoUtils
 import kotlinx.android.synthetic.main.dialog_after_effect.view.*
+
 
 /**
  * Created by hawk on 2017/12/28.
@@ -106,13 +108,15 @@ class AfterEffectDialog : DialogFragment() {
             dismiss()
             return
         }
-        rootView.paintview.isDrawingCacheEnabled = true
-        rootView.paintview.destroyDrawingCache()
-        rootView.paintview.buildDrawingCache()
 
         tipDialog.showTip(childFragmentManager, getString(R.string.savingimage))
+
+        rootView.paintview.buildDrawingCache(true)
+        val bitmap = rootView.paintview.getDrawingCache(true).copy(Bitmap.Config.RGB_565, false)
+        rootView.paintview.destroyDrawingCache()
+
         presenter.saveImageLocally(
-                rootView.paintview.drawingCache,
+                bitmap,
                 getBorderWorkName(imageUri),
                 object : PaintPresenter.OnSaveImageListener {
                     override fun onSaved(path: String) {
