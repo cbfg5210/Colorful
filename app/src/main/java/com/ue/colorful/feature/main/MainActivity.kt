@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.google.gson.reflect.TypeToken
 import com.ue.colorful.R
@@ -18,6 +19,7 @@ import com.ue.colorful.util.GsonHolder
 import com.ue.library.util.SPUtils
 import com.ue.recommend.widget.NBottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+//        val date = dateFormatter.parse("2018-1-12 18:30:00")
+//        Log.e("MainActivity", "onCreate:longTimeStamp=${date.time},stringTimeStamp=${dateFormatter.format(date)}")
+
+        mbsRecommendSheet.visibility = if (System.currentTimeMillis() >= 1515753000000L) View.VISIBLE else View.GONE
 
         rvFunctions.setHasFixedSize(true)
         rvFunctions.adapter = ColorFunCategoryAdapter(this, funCategories)

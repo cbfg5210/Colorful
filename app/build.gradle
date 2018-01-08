@@ -18,8 +18,8 @@ android {
         applicationId "com.ue.colorful"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 7
-        versionName "0.7"
+        versionCode 8
+        versionName "0.71"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BUGLY_APP_ID", '"5508a97d4a"'
